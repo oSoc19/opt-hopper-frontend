@@ -1,13 +1,13 @@
 Bike for Brussels Route Planner
 
-Popular routeplanner apps often do not consider bike-friendly routes and therefore are not optimal to use when cycling in the city. We are building a routeplanning app for bikers in Brussels that considers cycling infrastructure, road quality and other criteria to provide the best route to get to where you want to go.
+Popular routeplanner apps often do not consider bike-friendly routes and therefore are not optimal to use when cycling in the city. We are building a routeplanning app for bikers that considers cycling infrastructure, road quality and other criteria to provide the best route to get to where you want to go.
 
-The route planner can be found here: https://bike4brussels.osm.be/
+The route planner can be found here: https://http://cycling-backend.anyways.eu/
 
 
 - Profiles
 
-Bike for Brussels Route Planner offers the user to choose between 4 profiles: Fast, Balanced, Relaxed, Networks.
+The Cycling Planner offers the user to choose between 4 profiles: Fast, Balanced, Relaxed, Networks.
 
 -- Fast
 
@@ -23,22 +23,22 @@ This profile considers street size/categorization, cycle infrastructure, surface
 
 -- Networks
 
-This profile heavily prefers streets that are on the Brussels Mobility Cycle Network. The weight of every line that is part of the network gets divided by 3 and which makes that street highly likely to be part of a given route.
+This profile heavily prefers streets that are on the diverse Cycle Network. The weight of every line that is part of the network gets divided by 3 and which makes that street highly likely to be part of a given route.
 
 
 - Feature list
 
 -- Export
 
-Bike for Brussels Route Planner offers exporting routes as .gpx files. These files can be opened with different navigation applications and used for navigation (e.g. Galileo). Moreover, there is a Print function that enables the user to print out the map with the route and turn-by-turn instructions.
+The Cycling Route Planner offers exporting routes as .gpx files. These files can be opened with different navigation applications and used for navigation (e.g. Galileo). Moreover, there is a Print function that enables the user to print out the map with the route and turn-by-turn instructions.
 
 -- Languages
 
-Bike for Brussels Route Planner is available in English, French and Dutch.
+The Cycling Route Planner is available in English, French and Dutch.
 
 -- Geolocation
 
-Bike for Brussels Route Planner enables the user to see his current location on the map.
+The Cycling Route Planner enables the user to see his current location on the map.
 
 
 

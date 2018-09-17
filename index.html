@@ -16,31 +16,21 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet'/>
     <link href='style/general_style.css' rel='stylesheet'/>
-    <!--<link rel="manifest" href="./manifest.json">-->
     <script src="js/constants.js"></script>
 </head>
 <body style="height: 100vh">
 <div class="container-fluid top-overlay">
-    <!--<div class="row">
-        <div class="col-12">
-            <h1>Bike For Brussels</h1>
-            <h4>Route Planner</h4>
-        </div>
-    </div>-->
     <button class="btn image-button" id="sidebarHamburger" onclick="toggleSidebar()"></button>
-    <!--<div class="center-helper">-->
     <div class="row">
         <div class="col-lg-2 col-md-2" id="top-overlay-center-spacer">
         </div>
         <div class="col-lg-8 col-md-8" id="top-overlay-input">
             <div class="row">
-                <!--<label class="col-lg-1 control-label" for="fromInput">From</label>-->
                 <div class="col-lg-5 col-md-12 col-10 currentLocation right-addon">
                     <input class="form-control typeahead geocoder-input" type="text" id="fromInput" placeholder="From" oninput="fromFieldInputDetected(this)">
                     <img id="useLocationInputFieldButton" src="./assets/img/currentLocation.svg" onclick="useCurrentLocation()"/>
                     <img id="clearInputFieldFromButton" src="./style/icons/ic_clear_black_24px.svg" onclick="clearInputFieldFrom()"/>
                 </div>
-                <!--<label class="col-lg-1 control-label" for="toInput">To</label>-->
                 <div class="col-lg-2 col-md-12 col-1 text-center">
                     <button class="btn btn-warning image-button" id="swap-origin-destination-button"
                             onclick="swapOriginDestination()"></button>
@@ -100,7 +90,7 @@
                     container: 'map',
                     /*style: 'mapbox://styles/danielleterras/cjjr485a40ye22ruo8crgi8m6',*/
                     style: 'mapbox://styles/danielleterras/cjjr40gqx15he2spsygvqf8pd',
-                    center: [4.388443, 50.8486229], // starting position [lng, lat]
+                    center: [5.5261, 50.9605], // starting position [lng, lat]
                     zoom: 11, // starting zoom
                     preserveDrawingBuffer: true
                 });
@@ -388,7 +378,7 @@
                 <h4>Proposed route for you</h4>
                 <h5 class="sub-title">This is the NETWORKS route</h5>
                 <p>
-                    This profile heavily prefers the Brussels cycle network.
+                    This profile heavily prefers the cycling networks.
                 </p>
                 <div class="profile-explanation-icons">
                     <div class="cobblestones">

@@ -204,13 +204,13 @@ function printExport() {
     mapimg.id = "map-pic";
     mapimg.src = document.getElementsByClassName("mapboxgl-canvas")[0].toDataURL();
     let html = "<head>" +
-        "<title>Bike For Brussels - Route export</title>" +
+        "<title>Cycling Route Planner - Route export</title>" +
         '<link href="style/printstyle.css" rel="stylesheet" type="text/css">' +
         '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"\n' +
         '          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">' +
         "</head>" +
         "<body>" +
-        "<h1>Bike For Brussels - Routeplanner</h1>" +
+        "<h1>Cycling Routeplanner</h1>" +
         "<p id='image_for_crop'>" /*+ mapimgHtml */ + "</p>" +
         "<div id='instructionsPrintContainer'>" +
         document.getElementById(profileHtmlId[selectedProfile]).innerHTML +

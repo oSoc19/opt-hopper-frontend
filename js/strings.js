@@ -60,9 +60,9 @@ const dict = {
       nl: "Dit profiel vermijdt grote wegen, geeft de voorkeur aan fietspaden, vermijdt oncomfortabele oppervlakken zoals kasseien en vermijdt straten met parallel geparkeerde auto's."
     },
     profileDescriptionNetworks: {
-      en: "This profile heavily prefers the Brussels cycle network.",
-      fr: "Ce profil privilégie fortement le réseau cyclable Bruxellois.",
-      nl: "Dit profiel verkiest het fietsnetwerk in Brussel."
+      en: "This profile heavily prefers the cycling network.",
+      fr: "Ce profil privilégie fortement les réseaux cyclables.",
+      nl: "Dit profiel verkiest de fietsnetwerken."
     },
     profileTitleFast: {
       en: "This is the FAST route",

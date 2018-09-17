@@ -5,7 +5,7 @@ var location2Marker = undefined;
 var routes = {};
 let routeRequests = {};
 let language = "en";
-const availableProfiles = ["fast", "balanced", "brussels", "relaxed"];
+const availableProfiles = ["fast", "balanced", "networks", "relaxed"];
 let selectedProfile = "fast";
 
 //set the corect language
@@ -25,14 +25,13 @@ if (typeof(Storage) !== "undefined") {
 
 /**
  * Map containing the html instruction elements id's for each profile.
- * @type {{fast: string, relaxed: string, balanced: string, brussels: string}}
+ * @type {{fast: string, relaxed: string, balanced: string, networks: string}}
  */
 const profileHtmlId = {
     "fast": "fast-instruction",
     "relaxed": "relaxed-instruction", // Currently not in use
     "balanced": "balanced-instruction",
-    //"networks": "relaxed-instruction",
-    "brussels": "other-instruction"
+    "networks": "other-instruction",
 };
 
 /**
@@ -43,8 +42,7 @@ const profileButtonIds = {
     "fastest-route": "fast",
     "relaxed-route": "relaxed", // Currently not in use
     "balanced-route": "balanced",
-    //"networks-route": "networks",
-    "other-route": "brussels"
+    "networks-route": "networks",
 };
 
 /**
@@ -392,7 +390,7 @@ function exportCurrentRoute() {
     }
     exported = exportRoute(startpoint, endpoint, routepoints);
     if (exported) {
-        download(exported, "Bike4Brussels-route.gpx", ".gpx");
+        download(exported, "cycling-route.gpx", ".gpx");
     }
 }
 
@@ -421,8 +419,8 @@ function exportRoute(startpoint, endpoint, routepoints) {
         </wpt>`;
         gpx +=
             `\n\t\t<trk>
-            <name>BikeForBrussels Export</name>
-            <desc>Route exported using the Bike For Brussels Routeplaner.</desc>
+            <name>Cycling Export</name>
+            <desc>Route exported using the cycling-backend.anyways.eu Routeplaner.</desc>
             <trkseg>`;
         for (var i in routepoints) {
             gpx +=
