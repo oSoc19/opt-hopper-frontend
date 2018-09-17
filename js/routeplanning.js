@@ -5,7 +5,7 @@ var location2Marker = undefined;
 var routes = {};
 let routeRequests = {};
 let language = "en";
-const availableProfiles = ["fast", "balanced", "networks", "relaxed"];
+const availableProfiles = ["fast", "balanced", "brussels", "relaxed"];
 let selectedProfile = "fast";
 
 //set the corect language
@@ -31,7 +31,7 @@ const profileHtmlId = {
     "fast": "fast-instruction",
     "relaxed": "relaxed-instruction", // Currently not in use
     "balanced": "balanced-instruction",
-    "networks": "brussels-instruction",
+    "brussels": "other-instruction",
 };
 
 /**
@@ -42,7 +42,7 @@ const profileButtonIds = {
     "fastest-route": "fast",
     "relaxed-route": "relaxed", // Currently not in use
     "balanced-route": "balanced",
-    "networks-route": "networks",
+    "other-route": "brussels",
 };
 
 /**
