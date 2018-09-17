@@ -31,7 +31,7 @@ const profileHtmlId = {
     "fast": "fast-instruction",
     "relaxed": "relaxed-instruction", // Currently not in use
     "balanced": "balanced-instruction",
-    "networks": "other-instruction",
+    "networks": "brussels-instruction",
 };
 
 /**
