@@ -1,4 +1,4 @@
-const mapboxAccessCode = "pk.eyJ1IjoiYmVuLWFueXdheXMiLCJhIjoiY2ptN252ZDd1MGcyczN2bnQyZTJ4MzIxMiJ9.YdEXaIMSIkZm0ZdiavnkIA";
+const mapboxAccessCode = "pk.eyJ1IjoiZGFuaWVsbGV0ZXJyYXMiLCJhIjoiY2pqeWJheGxhMGwxODNxbW1sb2UzMGo0aiJ9.Y5HiKm7qjB1vrX7NGTOofA";
 
 const urls = {
     mapStyle: 'https://openmaptiles.github.io/positron-gl-style/style-cdn.json',
