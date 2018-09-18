@@ -11,7 +11,7 @@
                     <circle id="Oval-4" cx="17" cy="17" r="17"></circle>
                 </g>
                 <g id="Group-13" transform="translate(7.000000, 7.000000)">
-                    <g id="Group-9" stroke="#FFD438">
+                    <g id="Group-9" stroke="#2D4959">
                         <path d="M18.25,0 L18.25,20" id="Path-22"></path>
                         <path d="M6,6 L0.5,12.5" id="Path-23"></path>
                         <rect id="Rectangle-4" fill="#F2F2F2" x="5.5" y="1.5" width="9" height="18" rx="2"></rect>
@@ -24,10 +24,10 @@
                         </g>
                     </g>
                     <g id="Group-8" transform="translate(5.000000, 6.000000)"></g>
-                    <polyline id="Path-26" stroke="#FFD438" points="6.8 6 8 10 8 14.8571429 5.6 17.7142857"></polyline>
-                    <path d="M8,15 L12,15" id="Path-30" stroke="#FFD438"></path>
-                    <path d="M8,10 L12,10" id="Path-28" stroke="#FFD438"></path>
-                    <path d="M7.7,11.5714286 L5,11.5714286" id="Path-27" stroke="#FFD438"></path>
+                    <polyline id="Path-26" stroke="#2D4959" points="6.8 6 8 10 8 14.8571429 5.6 17.7142857"></polyline>
+                    <path d="M8,15 L12,15" id="Path-30" stroke="#2D4959"></path>
+                    <path d="M8,10 L12,10" id="Path-28" stroke="#2D4959"></path>
+                    <path d="M7.7,11.5714286 L5,11.5714286" id="Path-27" stroke="#2D4959"></path>
                 </g>
             </g>
         </g>

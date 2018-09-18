@@ -29,7 +29,7 @@ if (typeof(Storage) !== "undefined") {
  */
 const profileHtmlId = {
     "fast": "fast-instruction",
-    "relaxed": "relaxed-instruction", // Currently not in use
+    "relaxed": "relaxed-instruction",
     "balanced": "balanced-instruction",
     "networks": "networks-instruction",
 };
@@ -40,7 +40,7 @@ const profileHtmlId = {
  */
 const profileButtonIds = {
     "fastest-route": "fast",
-    "relaxed-route": "relaxed", // Currently not in use
+    "relaxed-route": "relaxed",
     "balanced-route": "balanced",
     "other-route": "networks",
 };

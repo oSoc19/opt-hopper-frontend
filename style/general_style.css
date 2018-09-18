@@ -89,7 +89,7 @@ body {
     height: 100%;
     padding: 0px 0px 0px 0px;
     z-index: 101;
-    background: #ECB900;
+    background: #2D4959;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -181,12 +181,12 @@ body {
 }
 
 .btn-close {
-    background-color: #ECB900;
+    background-color: #2D4959;
     border: none;
 }
 
 .btn:hover {
-    background-color: #ECB900;
+    background-color: #2D4959;
 }
 
 .form-control {
@@ -197,7 +197,7 @@ body {
 
 .route {
     background-color: white;
-    color: #ECB900;
+    color: #2D4959;
     text-align: center;
     cursor: pointer;
     width: 25%;
@@ -267,12 +267,12 @@ body {
 }
 
 .svg {
-    fill: #ECB900;
+    fill: #2D4959;
 }
 
 .active {
     color: white;
-    background-color: #FFD438;
+    background-color: #00808B;
 }
 
 .active path, .active polyline {
@@ -285,7 +285,7 @@ body {
 }
 
 .route:hover {
-    background-color: #FFD438;
+    background-color: #00808B;
     color: white;
 }
 
@@ -308,13 +308,13 @@ body {
 }
 
 .card, .card-header {
-    background-color: #FFD438;
+    background-color: #00808B;
     border: none;
 }
 
 .route-instructions, .collapse, .collapsing {
     overflow-y: auto;
-    background-color: #FFD438;
+    background-color: #00808B;
     color: white;
     list-style: none;
     overflow-x: hidden;
@@ -322,12 +322,12 @@ body {
 
 .button-collapse-instructions {
     width: 100%;
-    color: #ECB900;
+    color: #2D4959;
     border-radius: 0px;
 }
 
 .lang_label {
-    color: #ECB900;
+    color: #2D4959;
 }
 
 .button-collapse-instructions:hover, .lang_label:hover {
@@ -339,21 +339,28 @@ body {
 }
 
 .bottom-left-floating-buttons button {
-    color: #ECB900;
-    border: 1px solid #ECB900;
+    color: #2D4959;
+    border: 1px solid #2D4959;
     padding: 2px 5px 2px 2px;
 }
 
 .bottom-center-floating-buttons button {
-    color: #ECB900;
-    border: 1px solid #ECB900;
+    color: #2D4959;
+    border: 1px solid #2D4959;
     padding: 2px 5px 2px 2px;
 }
 
 .btn-group-toggle {
-    border: 1px solid #ECB900;
+    border: 1px solid #2D4959;
     border-radius: .25rem;
 }
+
+.btn-warning:not(:disabled):not(.disabled).active {
+    background-color: #2D4959;
+    border-color: #2D4959;
+    color: white;
+}
+
 
 .bottom-left-floating-buttons button img {
     padding: 0px 0px 0px 0px;
@@ -378,7 +385,7 @@ ul {
 input[type="text"], textarea {
     outline: none;
     box-shadow: none !important;
-    border-bottom: 3px solid #ECB900 !important;
+    border-bottom: 3px solid #2D4959 !important;
 }
 
 @media only screen and (min-width: 768px) {

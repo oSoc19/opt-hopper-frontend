@@ -12,17 +12,17 @@
                         <circle id="Oval-4" cx="17" cy="17" r="17"></circle>
                     </g>
                     <g id="Group-7" transform="translate(7.000000, 6.000000)">
-                        <polyline id="Path-19" stroke="#FFD438" fill="#F2F2F2" points="4 14 6.57142857 10 16.2857143 10 18 14"></polyline>
-                        <path d="M10.5,10 L10.5,14" id="Path-20" stroke="#FFD438" fill="#F2F2F2"></path>
-                        <path d="M4.25,14 L4.25,8" id="Path-21" stroke="#FFD438"></path>
-                        <circle id="Oval-7" stroke="#FFD438" fill="#F2F2F2" cx="4" cy="4" r="4"></circle>
-                        <text id="P" font-family="SFProDisplay-Regular, SF Pro Display" font-size="5" font-weight="normal" fill="#FFD438">
+                        <polyline id="Path-19" stroke="#2D4959" fill="#F2F2F2" points="4 14 6.57142857 10 16.2857143 10 18 14"></polyline>
+                        <path d="M10.5,10 L10.5,14" id="Path-20" stroke="#2D4959" fill="#F2F2F2"></path>
+                        <path d="M4.25,14 L4.25,8" id="Path-21" stroke="#2D4959"></path>
+                        <circle id="Oval-7" stroke="#2D4959" fill="#F2F2F2" cx="4" cy="4" r="4"></circle>
+                        <text id="P" font-family="SFProDisplay-Regular, SF Pro Display" font-size="5" font-weight="normal" fill="#2D4959">
                             <tspan x="3" y="6">P</tspan>
                         </text>
                     </g>
-                    <path d="M7.04654846,24 C6.8278296,21.3333333 7.37988718,20 8.7027212,20 C10.6869722,20 21.9986516,20 24.7123911,20 C26.5215507,20 27.2576275,21.3333333 26.9206214,24 L7.04654846,24 Z" id="Path-10" stroke="#FFD438" fill="#F2F2F2"></path>
-                    <circle id="Oval-6" stroke="#FFD438" fill="#F2F2F2" cx="23" cy="24" r="2"></circle>
-                    <circle id="Oval-6" stroke="#FFD438" fill="#F2F2F2" cx="12" cy="24" r="2"></circle>
+                    <path d="M7.04654846,24 C6.8278296,21.3333333 7.37988718,20 8.7027212,20 C10.6869722,20 21.9986516,20 24.7123911,20 C26.5215507,20 27.2576275,21.3333333 26.9206214,24 L7.04654846,24 Z" id="Path-10" stroke="#2D4959" fill="#F2F2F2"></path>
+                    <circle id="Oval-6" stroke="#2D4959" fill="#F2F2F2" cx="23" cy="24" r="2"></circle>
+                    <circle id="Oval-6" stroke="#2D4959" fill="#F2F2F2" cx="12" cy="24" r="2"></circle>
                 </g>
             </g>
         </g>

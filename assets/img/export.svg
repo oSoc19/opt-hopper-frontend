@@ -6,7 +6,7 @@
     <defs></defs>
     <g id="Mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <circle id="Oval" fill="#FFFFFF" cx="12" cy="12" r="12"></circle>
-        <polyline id="Path-2" stroke="#EBB916" points="8 9.5 5.5 9.5 5.5 17.5 16.5 17.5 16.5 16"></polyline>
-        <path d="M15,8 L15,5.5 L19.5,10 L15,14.5 L15,11.5 C11.6666667,11.5 9.5,12.1666667 8.5,13.5 C7.71054684,14.5526042 9,10.5 11.5,9 C12.1822966,8.59062205 13.3489632,8.25728872 15,8 Z" id="Path-5" stroke="#EBB916"></path>
+        <polyline id="Path-2" stroke="#2D4959" points="8 9.5 5.5 9.5 5.5 17.5 16.5 17.5 16.5 16"></polyline>
+        <path d="M15,8 L15,5.5 L19.5,10 L15,14.5 L15,11.5 C11.6666667,11.5 9.5,12.1666667 8.5,13.5 C7.71054684,14.5526042 9,10.5 11.5,9 C12.1822966,8.59062205 13.3489632,8.25728872 15,8 Z" id="Path-5" stroke="#2D4959"></path>
     </g>
 </svg>
