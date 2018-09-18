@@ -361,6 +361,10 @@ body {
     color: white;
 }
 
+.btn:focus,.btn:active {
+   outline: none !important;
+}
+
 
 .bottom-left-floating-buttons button img {
     padding: 0px 0px 0px 0px;
