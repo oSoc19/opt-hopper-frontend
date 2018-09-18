@@ -357,7 +357,7 @@ body {
 
 .btn-group-toggle {
    border: 0.3rem solid #00808B;
-    border-radius: .25rem;
+   border-radius: .3rem;
 }
 
 .btn-warning:not(:disabled):not(.disabled).active {
