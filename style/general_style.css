@@ -330,13 +330,18 @@ body {
     color: #2D4959;
 }
 
+.btn-warning.focus {
+    box-shadow: 0 0 0 0 #00808B;
+}
+
 .button-collapse-instructions:hover, .lang_label:hover {
     color: white;
 }
 
 .btn-group-toggle .active {
-    color: white !important;
+   color: white !important;
 }
+
 
 .bottom-left-floating-buttons button {
     color: #2D4959;
@@ -351,7 +356,7 @@ body {
 }
 
 .btn-group-toggle {
-    border: 1px solid #2D4959;
+   border: 0.3rem solid #00808B;
     border-radius: .25rem;
 }
 
@@ -412,7 +417,7 @@ input[type="text"], textarea {
     }
 
     .top-overlay {
-        background-color: #FFD438;
+        background-color: #00808B;
         padding-bottom: 0px;
     }
 
