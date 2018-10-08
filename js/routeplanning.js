@@ -4,7 +4,7 @@ var location2 = undefined;
 var location2Marker = undefined;
 var routes = {};
 let routeRequests = {};
-let language = "en";
+let language = "nl";
 const availableProfiles = ["fast", "balanced", "networks", "relaxed"];
 let selectedProfile = "fast";
 

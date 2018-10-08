@@ -394,7 +394,7 @@ function toFieldInputDetected(el) {
  */
 window.onload = function () {
     sidebarDisplayProfile(selectedProfile);
-    $(".lang_label").removeClass("active");
+    /*$(".lang_label").removeClass("active");
     switch (language) {
         case "en":
             //English
@@ -408,7 +408,7 @@ window.onload = function () {
             //Dutch
             $("#label-option-NL").addClass("active");
             break;
-    }
+    }*/
     applyLanguage(language);
     let urlparams = getAllUrlParams();
     if (urlparams.loc1) {
