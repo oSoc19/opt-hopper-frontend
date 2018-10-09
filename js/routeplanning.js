@@ -55,11 +55,11 @@ function timeToText(s) {
         return '1min';
     }
     if (s < 3600) {
-        return `${Math.round(s / 60)}min`;
+        return `${Math.round(s / 60)}`;
     }
     var h = Math.floor(s / 3600);
     var m = Math.floor((s % 3600) / 60);
-    return `${h} h ${m}min`;
+    return `${h} uur, ${m}`;
 }
 
 /**
@@ -68,7 +68,7 @@ function timeToText(s) {
  * @returns {number}
  */
 function roundToThree(num) {
-    return +(Math.round(num + "e+3") + "e-3");
+    return +(Math.round(num + "e+2") + "e-2");
 }
 
 /**
@@ -87,6 +87,7 @@ function calculateAllRoutes(origin, destination, profiles = availableProfiles, i
     //$(".route-instructions ul").html("Loading...");
     $(".route-instructions ul").html("");
     $(`.route-instructions  .instructions-resume`).html("");
+    $(`.route-instructions  .instructions-resume-electric`).html("");
     $(`.route-instructions .elevation-info`).html("<img src='./img/Loading.gif' style='width: 100%;'  alt=\"Loading...\" />");
     routes = {};
     removeAllRoutesFromMap();
@@ -165,10 +166,13 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
         routes[profile] = route;
 
         let $instrResume = $(`#${profileHtmlId[profile]} .instructions-resume`);
+	let $instrResumeEl = $(`#${profileHtmlId[profile]} .instructions-resume-electric`);
         if (routeStops.length === 2) {
-            $instrResume.html(`<div>${roundToThree(routeStops[1].properties.distance / 1000)}km</div><div>${timeToText(routeStops[1].properties.time)}</div>`);
+            $instrResume.html(`<div>${roundToThree(routeStops[1].properties.distance / 1000)}km</div><div>${timeToText(routeStops[1].properties.time)}min</div>`);
+	    $instrResumeEl.html(`<div>${timeToText(routeStops[1].properties.time * 15 / 20 )} minuten met een elektrische fiets</div>`);
         } else {
             $instrResume.html("");
+	    $instrResumeEl.html("");
         }
         $(`#${profileHtmlId[profile]} .elevation-info`).html(`<div><canvas id="chart-${profile}" style="width: 100%; height: 100px"></canvas></div>`);
 
