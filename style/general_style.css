@@ -108,12 +108,15 @@ body {
     display: inline;
     flex-grow: 1;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .instructions-resume {
     display: flex;
     flex-direction: row;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 #sidebar-right-container .container-fluid {
