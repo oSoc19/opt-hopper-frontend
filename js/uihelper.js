@@ -1,6 +1,28 @@
 var isSidebarVisible = false;
 let windowLoaded = false;
 
+
+function detectIE(){
+   var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older
+        return true;
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+        // IE 11
+        return true;
+    }
+    return false;
+}
+
+if(detectIE()){
+	alert("This browser is too old. Please remove internet explorer and install a modern browser");
+}
+
 /**
  * Make the sidebar visible/invisible
  */
