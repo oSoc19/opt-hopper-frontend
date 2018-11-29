@@ -329,17 +329,17 @@ function applyLanguage(lang) {
     $("#profile-button-text-relaxed-mobile").html(getString("profileNameRelaxed", lang));
     $("#profile-button-text-networks-mobile").html(getString("profileNameNetworks", lang));
 
-    $("#other-instruction div p").html(getString("profileDescriptionNetworks", lang));
+    $("#networks-instruction div p").html(getString("profileDescriptionNetworks", lang));
     $("#relaxed-instruction div p").html(getString("profileDescriptionRelaxed", lang));
     $("#balanced-instruction div p").html(getString("profileDescriptionBalanced", lang));
     $("#fast-instruction div p").html(getString("profileDescriptionFast", lang));
 
-    $("#other-instruction div .sub-title").html(getString("profileTitleNetwork", lang));
+    $("#networks-instruction div .sub-title").html(getString("profileTitleNetwork", lang));
     $("#relaxed-instruction div .sub-title").html(getString("profileTitleRelaxed", lang));
     $("#balanced-instruction div .sub-title").html(getString("profileTitleBalanced", lang));
     $("#fast-instruction div .sub-title").html(getString("profileTitleFast", lang));
 
-    $("#other-instruction div h4").html(getString("profileProposal", lang));
+    $("#networks-instruction div h4").html(getString("profileProposal", lang));
     $("#relaxed-instruction div h4").html(getString("profileProposal", lang));
     $("#balanced-instruction div h4").html(getString("profileProposal", lang));
     $("#fast-instruction div h4").html(getString("profileProposal", lang));
