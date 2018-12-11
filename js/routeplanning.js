@@ -277,6 +277,8 @@ function removeAllRoutesFromMap() {
  * Method to refresh / set markers on the map. Will also start route calculation if 2 locations are present
  */
 function showLocationsOnMap() {
+    var me = this;
+
     if (location1 === undefined || location2 === undefined) {
         removeAllRoutesFromMap();
     }
@@ -285,12 +287,22 @@ function showLocationsOnMap() {
     }
     if (location1 !== undefined) {
         location1Marker = createMarker(location1, '#47b200');
+        location1Marker.on('dragend', function () {
+            var latLng = location1Marker.getLngLat();
+            me.location1 = [latLng.lng, latLng.lat];
+            me.showLocationsOnMap();
+        });
     }
     if (location2Marker !== undefined) {
         location2Marker.remove();
     }
     if (location2 !== undefined) {
         location2Marker = createMarker(location2, '#b50000');
+        location2Marker.on('dragend', function () {
+            var latLng = location2Marker.getLngLat();
+            me.location2 = [latLng.lng, latLng.lat];
+            me.showLocationsOnMap();
+        });
     }
     if (location1 !== undefined && location2 !== undefined) {
         calculateAllRoutes(location1, location2);
@@ -311,7 +323,10 @@ function showLocationsOnMap() {
  * @returns {*} A marker
  */
 function createMarker(loc, color = '#3FB1CE') {
-    return new mapboxgl.Marker({color: color})
+    return new mapboxgl.Marker({
+        color: color,
+        draggable: true
+    })
         .setLngLat(loc)
         .addTo(map);
 }
