@@ -215,7 +215,8 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
                         'line-width': 6
                     },
                     layout: {
-                        'line-cap': 'round'
+                        'line-cap': 'round',
+                        'line-join': 'round'
                     }
                 });
             } else {
@@ -232,7 +233,8 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
                         'line-width': 6
                     },
                     layout: {
-                        'line-cap': 'round'
+                        'line-cap': 'round',
+                        'line-join': 'round'
                     }
                 });
             }
@@ -340,8 +342,8 @@ map.on('load', function () {
         },
         "paint": {
             'line-color': ['get', 'colour'],
-            "line-opacity": 0.7,
-            "line-width": 4
+            "line-opacity": 0.8,
+            "line-width": 5
         }
     }, "housenum-label");
 });
@@ -611,14 +613,14 @@ function fitToBounds(origin, destination) {
     if (isSidebarVisible) {
         paddingRight += $("#sidebar-right-container").width();
     }
-    map.fitBounds(bounds, {
-        padding: {
-            top: 75,
-            right: paddingRight,
-            bottom: 75,
-            left: 50
-        }
-    });
+    // map.fitBounds(bounds, {
+    //     padding: {
+    //         top: 75,
+    //         right: paddingRight,
+    //         bottom: 75,
+    //         left: 50
+    //     }
+    // });
 }
 
 /**
