@@ -286,7 +286,7 @@ function showLocationsOnMap() {
         location1Marker.remove();
     }
     if (location1 !== undefined) {
-        location1Marker = createMarker(location1, '#47b200');
+        location1Marker = createMarker(location1, '#00808B');
         location1Marker.on('dragend', function () {
             var latLng = location1Marker.getLngLat();
             me.location1 = [latLng.lng, latLng.lat];
@@ -297,7 +297,7 @@ function showLocationsOnMap() {
         location2Marker.remove();
     }
     if (location2 !== undefined) {
-        location2Marker = createMarker(location2, '#b50000');
+        location2Marker = createMarker(location2, '#2D4959');
         location2Marker.on('dragend', function () {
             var latLng = location2Marker.getLngLat();
             me.location2 = [latLng.lng, latLng.lat];
