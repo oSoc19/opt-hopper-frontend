@@ -392,8 +392,9 @@ map.on('load', function () {
         },
         "paint": {
             'line-color': ['get', 'colour'],
-            "line-opacity": 0.8,
-            "line-width": 5
+            "line-opacity": 0.6,
+            "line-width": 7,
+            "line-blur": 1
         }
     }, "housenum-label");
 });

@@ -4,7 +4,7 @@ const routeColor = '#00a4b3';
 const routeWidthMain = 6;
 const routeWidthAlternative = 3;
 const routeOpacityMain = 1;
-const routeOpacityAltnerative = 0.4;
+const routeOpacityAltnerative = 0.3;
 
 const urls = {
     mapStyle: 'https://openmaptiles.github.io/positron-gl-style/style-cdn.json',
