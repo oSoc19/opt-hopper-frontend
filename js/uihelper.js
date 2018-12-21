@@ -434,9 +434,6 @@ window.onload = function () {
         });
         $("#clearInputFieldToButton").show();
     }
-    if (location1 || location2) {
-        showLocationsOnMap();
-    }
     map.addControl(new mapboxgl.GeolocateControl({
         positionOptions: {
             enableHighAccuracy: true

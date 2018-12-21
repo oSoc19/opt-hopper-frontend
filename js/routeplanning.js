@@ -219,7 +219,7 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
                         'line-cap': 'round',
                         'line-join': 'round'
                     }
-                });
+                }, "housenum-label");
                 map.addLayer({
                     id: profile + '-casing',
                     type: 'line',
@@ -233,7 +233,7 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
                         'line-cap': 'round',
                         'line-join': 'round'
                     }
-                });
+                }, "housenum-label");
             } else {
                 map.addLayer({
                     id: profile,
@@ -253,7 +253,7 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
                         'line-cap': 'round',
                         'line-join': 'round'
                     }
-                });
+                }, "housenum-label");
                 map.addLayer({
                     id: profile + '-casing',
                     type: 'line',
@@ -268,7 +268,7 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
                         'line-cap': 'round',
                         'line-join': 'round'
                     }
-                });
+                }, "housenum-label");
             }
         }
         fitToBounds(origin, destination);   //Called again to make sure the start or endpoint are not hidden behind sidebar
@@ -397,6 +397,10 @@ map.on('load', function () {
             "line-blur": 1
         }
     }, "housenum-label");
+
+    if (location1 || location2) {
+        showLocationsOnMap();
+    }
 });
 
 /**
