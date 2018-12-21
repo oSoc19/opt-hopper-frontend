@@ -149,12 +149,12 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
                 routeStops.push(route[i]);
             }
             if (route[i].properties.cyclecolour === undefined) {
-                route[i].properties.cyclecolour = "#979797";
+                route[i].properties.cyclecolour = routeColor;
             } else if (route[i].properties.cyclecolour.length !== 7) {
                 if (route[i].properties.cyclecolour.length > 7) {
                     route[i].properties.cyclecolour = route[i].properties.cyclecolour.substring(0, 7);
                 } else {
-                    route[i].properties.cyclecolour = "#979797";
+                    route[i].properties.cyclecolour = routeColor;
                 }
             }
             try {
@@ -166,13 +166,13 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
         routes[profile] = route;
 
         let $instrResume = $(`#${profileHtmlId[profile]} .instructions-resume`);
-	let $instrResumeEl = $(`#${profileHtmlId[profile]} .instructions-resume-electric`);
+	    let $instrResumeEl = $(`#${profileHtmlId[profile]} .instructions-resume-electric`);
         if (routeStops.length === 2) {
             $instrResume.html(`<div>${roundToThree(routeStops[1].properties.distance / 1000)}km</div><div>${timeToText(routeStops[1].properties.time)}min</div>`);
-	    $instrResumeEl.html(`<div>${timeToText(routeStops[1].properties.time * 15 / 20 )} minuten met een elektrische fiets</div>`);
+	        $instrResumeEl.html(`<div>${timeToText(routeStops[1].properties.time * 15 / 20 )} minuten met een elektrische fiets</div>`);
         } else {
             $instrResume.html("");
-	    $instrResumeEl.html("");
+	        $instrResumeEl.html("");
         }
         $(`#${profileHtmlId[profile]} .elevation-info`).html(`<div><canvas id="chart-${profile}" style="width: 100%; height: 100px"></canvas></div>`);
 
@@ -191,20 +191,21 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
         $profileInstructions.append(`</ul>`);
 
         // Check if profile already exists
-        const calculatedRoute = map.getSource(profile);
+        const calculatedRoute = map.getSource(profile + "-source");
         if (calculatedRoute) {
             // Just set the data
             calculatedRoute.setData(json.route);
         } else {
             // Add a new layer
+                map.addSource(profile + "-source", {   
+                    type: 'geojson',
+                    data: json.route
+                });
             if (profile === selectedProfile) {
                 map.addLayer({
                     id: profile,
                     type: 'line',
-                    source: {
-                        type: 'geojson',
-                        data: json.route
-                    },
+                    source: profile + "-source",
                     paint: {
                         'line-color':
                             {   // always use the colors of the cycling network
@@ -212,7 +213,21 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
                                 property: 'cyclecolour'
                             }
                         ,
-                        'line-width': 6
+                        'line-width': routeWidthMain
+                    },
+                    layout: {
+                        'line-cap': 'round',
+                        'line-join': 'round'
+                    }
+                });
+                map.addLayer({
+                    id: profile + '-casing',
+                    type: 'line',
+                    source: profile + "-source",
+                    paint: {
+                        'line-color': "#222222",
+                        'line-width': 0.5,
+                        'line-gap-width': routeWidthMain
                     },
                     layout: {
                         'line-cap': 'round',
@@ -223,14 +238,31 @@ function calculateRoute(origin, destination, profile = "balanced", instructions 
                 map.addLayer({
                     id: profile,
                     type: 'line',
-                    source: {
-                        type: 'geojson',
-                        data: json.route
-                    },
+                    source: profile + "-source",
                     paint: {
-                        'line-color': "grey",
-                        'line-opacity': 0.25,
-                        'line-width': 6
+                        'line-color':
+                            {   // always use the colors of the cycling network
+                                type: 'identity',
+                                property: 'cyclecolour'
+                            }
+                        ,
+                        'line-width': routeWidthMain,
+                        'line-opacity': 0.25
+                    },
+                    layout: {
+                        'line-cap': 'round',
+                        'line-join': 'round'
+                    }
+                });
+                map.addLayer({
+                    id: profile + '-casing',
+                    type: 'line',
+                    source: profile + "-source",
+                    paint: {
+                        'line-color': "#222222",
+                        'line-width': 0.5,
+                        'line-gap-width': routeWidthMain,
+                        'line-opacity': 0.25
                     },
                     layout: {
                         'line-cap': 'round',
@@ -267,8 +299,11 @@ function removeAllRoutesFromMap() {
         if (map.getLayer(profile)) {
             map.removeLayer(profile);
         }
-        if (map.getSource(profile)) {
-            map.removeSource(profile);
+        if (map.getLayer(profile + "-casing")) {
+            map.removeLayer(profile + "-casing");
+        }
+        if (map.getSource(profile + "-source")) {
+            map.removeSource(profile + "-source");
         }
     }
 }

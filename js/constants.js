@@ -1,5 +1,11 @@
 const mapboxAccessCode = "pk.eyJ1IjoiZGFuaWVsbGV0ZXJyYXMiLCJhIjoiY2pqeWJheGxhMGwxODNxbW1sb2UzMGo0aiJ9.Y5HiKm7qjB1vrX7NGTOofA";
 
+const routeColor = '#00a4b3';
+const routeWidthMain = 6;
+const routeWidthAlternative = 3;
+const routeOpacityMain = 1;
+const routeOpacityAltnerative = 0.4;
+
 const urls = {
     mapStyle: 'https://openmaptiles.github.io/positron-gl-style/style-cdn.json',
     network: 'https://cyclenetworks.osm.be/brumob/data/network.geojson',

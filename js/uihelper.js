@@ -36,19 +36,16 @@ function sidebarDisplayProfile(profile) {
         for (var i in profileHtmlId) {
             try {
                 if (map.getLayer(i)) {
-                    map.setPaintProperty(i, 'line-color', "grey");
-                    map.setPaintProperty(i, 'line-opacity', 0.25);
+                    map.setPaintProperty(i, 'line-opacity', routeOpacityAltnerative);
+                    map.setPaintProperty(i + '-casing', 'line-opacity', routeOpacityAltnerative);
                 }
             } catch (e) {
                 console.warn(e);
             }
         }
         if (map.getLayer(profile)) {
-            map.setPaintProperty(profile, 'line-color', {   // always use the colors of the cycling network
-                type: 'identity',
-                property: 'cyclecolour'
-            });
-            map.setPaintProperty(profile, 'line-opacity', 1);
+            map.setPaintProperty(profile, 'line-opacity', routeOpacityMain);
+            map.setPaintProperty(profile + '-casing', 'line-opacity', routeOpacityMain);
             map.moveLayer(profile);
         }
     }
