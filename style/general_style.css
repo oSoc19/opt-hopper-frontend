@@ -430,6 +430,16 @@ input[type="text"], textarea {
 }
 
 @media only screen and (max-width: 767px) {
+    body {
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    .mapboxgl-ctrl-group > button {
+        width: 40px;
+        height: 40px;
+    }
+
     #swap-origin-destination-button {
         top: 50%;
         position: relative;
@@ -438,6 +448,12 @@ input[type="text"], textarea {
     .top-overlay {
         background-color: #00808B;
         padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    
+    .btn-export {
+        font-size: 0em;
+        padding: 2px 2px 0px 2px;
     }
 
     #top-overlay-input {
@@ -450,6 +466,10 @@ input[type="text"], textarea {
 
     #top-overlay-profile-buttons-mobile {
         display: flex;
+    }
+
+    .form-control {
+        line-height: 1;
     }
 }
 

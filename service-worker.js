@@ -14,7 +14,7 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = 'precache-2018-12-21';
+const PRECACHE = 'precache-2018-12-21-1';
 const RUNTIME = 'runtime';
 //const TILE_SERVER = 'https://a.tiles.mapbox.com/';
 
