@@ -324,6 +324,15 @@ function showLocationsOnMap() {
             var latLng = location1Marker.getLngLat();
             me.location1 = [latLng.lng, latLng.lat];
             me.showLocationsOnMap();
+            // Update 'from'-textfield
+           
+            $.getJSON(urls.reverseGeocoder.format(latLng.lng,latLng.lat), function(data){
+                let address = data.features[0].place_name;
+                let field = document.getElementById('fromInput');
+                field.value = address;
+            });
+            
+            
         });
     }
     if (location2Marker !== undefined) {
@@ -335,6 +344,12 @@ function showLocationsOnMap() {
             var latLng = location2Marker.getLngLat();
             me.location2 = [latLng.lng, latLng.lat];
             me.showLocationsOnMap();
+            // Update 'to'-textfield
+            $.getJSON(urls.reverseGeocoder.format(latLng.lng,latLng.lat), function(data){
+                let address = data.features[0].place_name;
+                let field = document.getElementById('toInput');
+                field.value = address;
+            });
         });
     }
     if (location1 !== undefined && location2 !== undefined) {

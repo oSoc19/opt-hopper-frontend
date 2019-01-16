@@ -58,7 +58,7 @@ function sidebarDisplayProfile(profile) {
 }
 
 /**
- * Helper method to determin the screen size bootstrap-wise
+ * Helper method to determine the screen size bootstrap-wise
  * @returns {*}
  */
 function getBootstrapDeviceSize() {
