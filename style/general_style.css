@@ -97,13 +97,6 @@ body {
     overflow: hidden;
 }
 
-/*.route-instructions {     // Transition animations won't work when animating from height: 0 to flex grow
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}*/
-
 .instructions-resume div {
     display: inline;
     flex-grow: 1;
@@ -217,7 +210,7 @@ body {
     color: #2D4959;
     text-align: center;
     cursor: pointer;
-    width: 25%;
+    width: 33%;
     border-radius: 0px;
     font-size: 90%;
     padding-left: 0px;
