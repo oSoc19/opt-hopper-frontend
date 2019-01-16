@@ -5,7 +5,7 @@ var location2Marker = undefined;
 var routes = {};
 let routeRequests = {};
 let language = "nl";
-const availableProfiles = ["fast", "balanced", "networks", "relaxed"];
+const availableProfiles = ["fast", "networks", "relaxed"];
 let selectedProfile = "fast";
 
 //set the corect language
@@ -25,23 +25,21 @@ if (typeof(Storage) !== "undefined") {
 
 /**
  * Map containing the html instruction elements id's for each profile.
- * @type {{fast: string, relaxed: string, balanced: string, networks: string}}
+ * @type {{fast: string, relaxed: string, networks: string}}
  */
 const profileHtmlId = {
     "fast": "fast-instruction",
     "relaxed": "relaxed-instruction",
-    "balanced": "balanced-instruction",
     "networks": "networks-instruction",
 };
 
 /**
  * Map containing the html id's of the profile buttons
- * @type {{"fastest-route": string, "relaxed-route": string, "balanced-route": string, "other-route": string}}
+ * @type {{"fastest-route": string, "relaxed-route": string, "other-route": string}}
  */
 const profileButtonIds = {
     "fastest-route": "fast",
     "relaxed-route": "relaxed",
-    "balanced-route": "balanced",
     "other-route": "networks",
 };
 
@@ -105,7 +103,7 @@ function calculateAllRoutes(origin, destination, profiles = availableProfiles, i
  * @param {boolean} instructions - Whether or not the route instructions should be requested from the server
  * @param {String} lang - en/nl/fr select the language for the instructions
  */
-function calculateRoute(origin, destination, profile = "balanced", instructions = true, lang = 'en') {
+function calculateRoute(origin, destination, profile = "networks", instructions = false, lang = 'en') {
     // Swap around values for the API
     const originS = swapArrayValues(origin);
     const destinationS = swapArrayValues(destination);
