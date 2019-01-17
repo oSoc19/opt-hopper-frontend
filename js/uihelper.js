@@ -303,7 +303,7 @@ function getAllUrlParams(url) {
  */
 function setCurrentUrl(params) {
     currentUrl = window.location.href;
-    currentUrl = currentUrl.split('?')[0] + '?';  //verwijder huidige parameters (if any)
+    currentUrl = currentUrl.split('?')[0] + '?';  //remove current parameters (if any)
     for (var i in params) {
         currentUrl += i + '=' + params[i] + "&";
     }
@@ -388,7 +388,7 @@ function toFieldInputDetected(el) {
 }
 
 /**
- * Do stuff when the window is done loading
+ * Do stuff when the window is done loading, such as interpreting the URL parameters
  */
 window.onload = function () {
     sidebarDisplayProfile(selectedProfile);
@@ -421,6 +421,7 @@ window.onload = function () {
     if (urlparams.loc2) {
         location2 = urlparams.loc2;
     }
+   
     if (location1) {
         reverseGeocode(location1, function (adress) {
             $("#fromInput").val(adress);
@@ -440,6 +441,15 @@ window.onload = function () {
         },
         trackUserLocation: true
     }), 'top-left');
+    
+     if(urlparams.zoom){
+        map.setZoom(urlparams.zoom);
+    }
+    if(urlparams.lat !== undefined && urlparams.lng !== undefined){
+        map.setCenter({lat:urlparams.lat,lng:urlparams.lng})
+    }
+    
+    
     windowLoaded = true;
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js');

@@ -358,14 +358,24 @@ function showLocationsOnMap() {
     }
     if (location1 !== undefined && location2 !== undefined) {
         calculateAllRoutes(location1, location2);
-        setCurrentUrl({loc1: location1, loc2: location2});
-    } else if (location1) {
-        setCurrentUrl({loc1: location1});
-    } else if (location2) {
-        setCurrentUrl({loc2: location2});
-    } else {
-        setCurrentUrl({});
+    } 
+    updateUrlParams();
+}
+
+// Sets the latitude, longitude, zoom level and router points as params in the url
+function updateUrlParams(){
+    var params = {};
+    if (location1) {
+        params.loc1 = location1;
     }
+    if(location2){
+        params.loc2 = location2;
+    }
+    params.zoom = map.getZoom();
+    params.lat = map.getCenter().lat;
+    params.lng = map.getCenter().lng;
+    
+    setCurrentUrl(params);
 }
 
 /**
@@ -460,7 +470,9 @@ map.on('click', function (e) {
         showLocationsOnMap();
     }
 });
-
+// Whenever we move around, update this in the URL
+map.on('dragend', updateUrlParams);
+map.on('zoomend', updateUrlParams);
 /**
  * Utility method to start exporting the current route as a .GPX file.
  */
@@ -730,3 +742,4 @@ function swapArrayValues(array) {
 
 // initialise the geocoders already
 initInputGeocoders();
+
