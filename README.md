@@ -2,6 +2,8 @@
 
 Popular routeplanner apps often do not consider bike-friendly routes and therefore are not optimal to use when cycling in the city. We are building a routeplanning app for bikers in Brussels that considers cycling infrastructure, road quality and other criteria to provide the best route to get to where you want to go.
 
+This repository is a fork of the 'Bike4Brussels' route planner which was an Open Summer Of Code 2018 project.
+
 ## Installation Instructions
 
 This web application is a static website, so installation is not required. Simply serving the files over the network will work. To achieve this in our environment Nginx was run on an Ubuntu server.

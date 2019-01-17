@@ -5,7 +5,7 @@ var location2Marker = undefined;
 var routes = {};
 let routeRequests = {};
 let language = "nl";
-const availableProfiles = ["fast", "networks", "relaxed"];
+const availableProfiles = ["fast", "genk", "relaxed"];
 let selectedProfile = "fast";
 
 //set the corect language
@@ -30,7 +30,7 @@ if (typeof(Storage) !== "undefined") {
 const profileHtmlId = {
     "fast": "fast-instruction",
     "relaxed": "relaxed-instruction",
-    "networks": "networks-instruction",
+    "genk": "networks-instruction",
 };
 
 /**
@@ -40,7 +40,7 @@ const profileHtmlId = {
 const profileButtonIds = {
     "fastest-route": "fast",
     "relaxed-route": "relaxed",
-    "other-route": "networks",
+    "other-route": "genk",
 };
 
 /**
@@ -77,7 +77,7 @@ function roundToThree(num) {
  * @param {boolean} instructions - Whether or not the route instructions should be requested from the server
  * @param {String} lang - en/nl/fr select the language for the instructions
  */
-function calculateAllRoutes(origin, destination, profiles = availableProfiles, instructions = true, lang = language) {
+function calculateAllRoutes(origin, destination, profiles = availableProfiles, instructions = false, lang = language) {
     let deviceSize = getBootstrapDeviceSize();
     if (!isSidebarVisible && !(deviceSize === "xs" || deviceSize === "sm")) {
         toggleSidebar();
@@ -103,7 +103,7 @@ function calculateAllRoutes(origin, destination, profiles = availableProfiles, i
  * @param {boolean} instructions - Whether or not the route instructions should be requested from the server
  * @param {String} lang - en/nl/fr select the language for the instructions
  */
-function calculateRoute(origin, destination, profile = "networks", instructions = false, lang = 'en') {
+function calculateRoute(origin, destination, profile = "genk", instructions = false, lang = 'en') {
     // Swap around values for the API
     const originS = swapArrayValues(origin);
     const destinationS = swapArrayValues(destination);
@@ -115,7 +115,8 @@ function calculateRoute(origin, destination, profile = "networks", instructions 
     } else {
         profile_url = profile;
     }
-    const url = `${urls.route}/route?loc1=${originS}&loc2=${destinationS}&instructions=${instructions}&lang=${lang}` + (profile_url === "" ? "" : `&profile=${profile_url}`);
+    const prof = (profile_url === "" ? "" : `&profile=${profile_url}`);
+    const url = `${urls.route}/route?instructions=${instructions}&lang=${lang}${prof}&loc1=${originS}&loc2=${destinationS}`;
     routes[profile] = [];
 
     if (routeRequests[profile]) {
@@ -180,7 +181,7 @@ function calculateRoute(origin, destination, profile = "networks", instructions 
         let $profileInstructions = $(`#${profileHtmlId[profile]} ul`);
         $profileInstructions.html("");
         $profileInstructions.append(`<li class="startpoint-li">${$("#fromInput").val()}</li>`);
-        if (json.instructions && json.instructions.features) {
+        if (json.instructions && json.instructionscalculateRoutecalculateRoute.features) {
             for (let i in json.instructions.features) {
                 $profileInstructions.append(`<li class="type-${json.instructions.features[i].properties.type}  angle-${json.instructions.features[i].properties.angle}">${json.instructions.features[i].properties.instruction}</li>`);
             }
@@ -211,41 +212,8 @@ function calculateRoute(origin, destination, profile = "networks", instructions 
                                 property: 'cyclecolour'
                             }
                         ,
-                        'line-width': routeWidthMain
-                    },
-                    layout: {
-                        'line-cap': 'round',
-                        'line-join': 'round'
-                    }
-                }, "housenum-label");
-                map.addLayer({
-                    id: profile + '-casing',
-                    type: 'line',
-                    source: profile + "-source",
-                    paint: {
-                        'line-color': "#222222",
-                        'line-width': 0.5,
-                        'line-gap-width': routeWidthMain
-                    },
-                    layout: {
-                        'line-cap': 'round',
-                        'line-join': 'round'
-                    }
-                }, "housenum-label");
-            } else {
-                map.addLayer({
-                    id: profile,
-                    type: 'line',
-                    source: profile + "-source",
-                    paint: {
-                        'line-color':
-                            {   // always use the colors of the cycling network
-                                type: 'identity',
-                                property: 'cyclecolour'
-                            }
-                        ,
                         'line-width': routeWidthMain,
-                        'line-opacity': 0.25
+                        'line-opacity': routeOpacityMain
                     },
                     layout: {
                         'line-cap': 'round',
@@ -260,7 +228,43 @@ function calculateRoute(origin, destination, profile = "networks", instructions 
                         'line-color': "#222222",
                         'line-width': 0.5,
                         'line-gap-width': routeWidthMain,
-                        'line-opacity': 0.25
+                        'line-opacity': routeOpacityMain
+                    },
+                    layout: {
+                        'line-cap': 'round',
+                        'line-join': 'round'
+                    }
+                }, "housenum-label");
+            } else {
+                // we draw the route as layer, so that we can show it later on
+                map.addLayer({
+                    id: profile,
+                    type: 'line',
+                    source: profile + "-source",
+                    paint: {
+                        'line-color':
+                            {   // always use the colors of the cycling network
+                                type: 'identity',
+                                property: 'cyclecolour'
+                            }
+                        ,
+                        'line-width': routeWidthMain,
+                        'line-opacity': routeOpacityAltnerative
+                    },
+                    layout: {
+                        'line-cap': 'round',
+                        'line-join': 'round'
+                    }
+                }, "housenum-label");
+                map.addLayer({
+                    id: profile + '-casing',
+                    type: 'line',
+                    source: profile + "-source",
+                    paint: {
+                        'line-color': "#222222",
+                        'line-width': 0.5,
+                        'line-gap-width': routeWidthMain,
+                        'line-opacity': routeOpacityAltnerative
                     },
                     layout: {
                         'line-cap': 'round',
@@ -405,7 +409,7 @@ map.on('load', function () {
         },
         "paint": {
             'line-color': ['get', 'colour'],
-            "line-opacity": 0.6,
+            "line-opacity": 0.5,
             "line-width": 7,
             "line-blur": 1
         }
