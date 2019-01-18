@@ -472,6 +472,7 @@ map.on('click', function (e) {
 });
 // Whenever we move around, update this in the URL
 map.on('dragend', updateUrlParams);
+map.on('moveend', updateUrlParams);
 map.on('zoomend', updateUrlParams);
 /**
  * Utility method to start exporting the current route as a .GPX file.
