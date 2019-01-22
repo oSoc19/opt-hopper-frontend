@@ -5,7 +5,7 @@ var location2Marker = undefined;
 var routes = {};
 let routeRequests = {};
 let language = "nl";
-const availableProfiles = ["fast", "genk", "relaxed"];
+const availableProfiles = ["fast", "relaxed", "genk"];
 let selectedProfile = "fast";
 
 //set the corect language
@@ -196,82 +196,55 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
             calculatedRoute.setData(json.route);
         } else {
             // Add a new layer
-                map.addSource(profile + "-source", {   
-                    type: 'geojson',
-                    data: json.route
-                });
+            map.addSource(profile + "-source", {   
+                type: 'geojson',
+                data: json.route
+            });
+            console.log(json.route)
+            
+            var opacity = routeOpacityAltnerative;
+            var width = routeWidthMain;
+            
             if (profile === selectedProfile) {
-                map.addLayer({
-                    id: profile,
-                    type: 'line',
-                    source: profile + "-source",
-                    paint: {
-                        'line-color':
-                            {   // always use the colors of the cycling network
-                                type: 'identity',
-                                property: 'cyclecolour'
-                            }
-                        ,
-                        'line-width': routeWidthMain,
-                        'line-opacity': routeOpacityMain
-                    },
-                    layout: {
-                        'line-cap': 'round',
-                        'line-join': 'round'
-                    }
-                }, "housenum-label");
-                map.addLayer({
-                    id: profile + '-casing',
-                    type: 'line',
-                    source: profile + "-source",
-                    paint: {
-                        'line-color': "#222222",
-                        'line-width': 0.5,
-                        'line-gap-width': routeWidthMain,
-                        'line-opacity': routeOpacityMain
-                    },
-                    layout: {
-                        'line-cap': 'round',
-                        'line-join': 'round'
-                    }
-                }, "housenum-label");
-            } else {
-                // we draw the route as layer, so that we can show it later on
-                map.addLayer({
-                    id: profile,
-                    type: 'line',
-                    source: profile + "-source",
-                    paint: {
-                        'line-color':
-                            {   // always use the colors of the cycling network
-                                type: 'identity',
-                                property: 'cyclecolour'
-                            }
-                        ,
-                        'line-width': routeWidthMain,
-                        'line-opacity': routeOpacityAltnerative
-                    },
-                    layout: {
-                        'line-cap': 'round',
-                        'line-join': 'round'
-                    }
-                }, "housenum-label");
-                map.addLayer({
-                    id: profile + '-casing',
-                    type: 'line',
-                    source: profile + "-source",
-                    paint: {
-                        'line-color': "#222222",
-                        'line-width': 0.5,
-                        'line-gap-width': routeWidthMain,
-                        'line-opacity': routeOpacityAltnerative
-                    },
-                    layout: {
-                        'line-cap': 'round',
-                        'line-join': 'round'
-                    }
-                }, "housenum-label");
+                width = routeWidthMain;
+                opacity = routeOpacityMain;
             }
+            // Create the black outline of the route
+            map.addLayer({
+                    id: profile + '-casing',
+                    type: 'line',
+                    source: profile + "-source",
+                    paint: {
+                        'line-color': "#ffffff",
+                        'line-width': width*1.5,
+                        'line-opacity': opacity
+                    },
+                    layout: {
+                        'line-cap': 'round',
+                        'line-join': 'round'
+                    }
+                }, "housenum-label");
+            // And now, create the actual colored line. We paint above the outline
+            map.addLayer({
+                    id: profile,
+                    type: 'line',
+                    source: profile + "-source",
+                    paint: {
+                        'line-color':
+                            {   // always use the colors of the cycling network
+                                type: 'identity',
+                                property: 'cyclecolour'
+                            }
+                        ,
+                        'line-width': width,
+                        'line-opacity': opacity
+                    },
+                    layout: {
+                        'line-cap': 'round',
+                        'line-join': 'round'
+                    }
+                }, "housenum-label");
+
         }
         fitToBounds(origin, destination);   //Called again to make sure the start or endpoint are not hidden behind sidebar
     }
