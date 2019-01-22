@@ -175,7 +175,7 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
         }
         $(`#${profileHtmlId[profile]} .elevation-info`).html(`<div><canvas id="chart-${profile}" style="width: 100%; height: 100px"></canvas></div>`);
 
-        displayChart(`chart-${profile}`, heightInfo);
+        // We disabled the height profiles displayChart(`chart-${profile}`, heightInfo);
 
         // Shows the instructions in the sidebar
         let $profileInstructions = $(`#${profileHtmlId[profile]} ul`);

@@ -129,7 +129,6 @@ jQuery('img.svg').each(function () {
  * Display the elevation data in a nice graph
  * @param htmlCanvasId
  * @param heightInfo
- */
 function displayChart(htmlCanvasId, heightInfo) {
     //console.log(heightInfo);
     var ctx = document.getElementById(htmlCanvasId).getContext('2d');
@@ -165,6 +164,7 @@ function displayChart(htmlCanvasId, heightInfo) {
         },
     });
 }
+ */
 
 /**
  * Detect which language the user has selected
