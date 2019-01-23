@@ -235,7 +235,8 @@ body {
     border-radius: 90%;
 }
 .non-active {
-    background-color: #888888
+    background-color: #ffffff !important;
+    opacity: 0.3 !important
 }
 
 
