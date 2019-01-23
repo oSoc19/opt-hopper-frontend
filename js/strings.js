@@ -52,12 +52,12 @@ const dict = {
     profileDescriptionBalanced: {
       en: "This profile avoids the biggest streets and prefers cycleways.",
       fr: "Ce profil évite les plus grandes rues et préfère les pistes cyclables.",
-      nl: "Dit profiel vermijdt de grote wegen en verkiest voornamelijk het fietsnetwerk."
+      nl: "Dit profiel vermijdt de grote wegen en verkiest het fietsnetwerk."
     },
     profileDescriptionRelaxed: {
       en: "This profile avoids big roads, highly prefers cycleways, avoids uncomfortable surfaces such as cobblestones, and avoids streets with parallel parked cars.",
       fr: "Ce profil évite les grandes routes, privilégie fortement les pistes cyclables, évite les surfaces inconfortables telles que les pavés, et évite les rues avec des voitures en stationnement parallèles.",
-      nl: "Dit profiel vermijdt grote wegen, geeft de voorkeur aan fietspaden, vermijdt oncomfortabele oppervlakken zoals kasseien en vermijdt straten met parallel geparkeerde auto's."
+      nl: "Dit profiel vermijdt grote wegen en verkiest fietspaden. Het schenk geen extra aandacht aan fietsnetwerken."
     },
     profileDescriptionNetworks: {
       en: "This profile heavily prefers the cycling network.",

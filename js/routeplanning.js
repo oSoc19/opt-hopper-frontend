@@ -168,7 +168,8 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
 	    let $instrResumeEl = $(`#${profileHtmlId[profile]} .instructions-resume-electric`);
         if (routeStops.length === 2) {
             $instrResume.html(`<div>${roundToThree(routeStops[1].properties.distance / 1000)}km</div><div>${timeToText(routeStops[1].properties.time)}min</div>`);
-	        $instrResumeEl.html(`<div>${timeToText(routeStops[1].properties.time * 15 / 20 )} minuten met een elektrische fiets</div>`);
+            let totaltimeElectr =  timeToText(routeStops[1].properties.time * 15 / 20 );
+	        $instrResumeEl.html(`<div>${totaltimeElectr} ${totaltimeElectr == 1 ? "minuut" : "minuten"} met een elektrische fiets</div>`);
         } else {
             $instrResume.html("");
 	        $instrResumeEl.html("");
@@ -261,10 +262,17 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
                 map.removeSource(profile);
             }
             console.warn('Problem calculating route: ', errorThrown, textStatus, jqXHR);
+            if(!warningOpen){
+                warningOpen = true;
+                alert("De route kon niet worden berekend. Mogelijk is een vertrek- of eindpunt te ver van de openbare weg.")
+                warningOpen = false;
+            }
         }
     }
 }
 
+ var warningOpen = false;
+   
 /**
  * Removes routes from map.. obviously
  */

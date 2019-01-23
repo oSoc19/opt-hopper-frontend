@@ -5,11 +5,35 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg20"
    version="1.1"
    viewBox="0 0 34 34"
    height="34px"
-   width="34px">
+   width="34px"
+   sodipodi:docname="small-roads.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1053"
+     id="namedview17"
+     showgrid="false"
+     inkscape:zoom="9.8163059"
+     inkscape:cx="37.618243"
+     inkscape:cy="8.4803127"
+     inkscape:window-x="0"
+     inkscape:window-y="1227"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg20" />
   <metadata
      id="metadata24">
     <rdf:RDF>
@@ -51,25 +75,38 @@
              stroke="#2D4959"
              transform="translate(8.000000, 8.000000)"
              id="fastest">
-            <path
-               id="Path"
-               d="M0,18 L3,1" />
-            <path
-               transform="translate(16.500000, 9.500000) scale(-1, 1) translate(-16.500000, -9.500000) "
-               id="path11"
-               d="M15,18 L18,1" />
             <g
                stroke-dasharray="6"
                transform="translate(9.000000, 0.000000)"
-               id="Path-2">
-              <path
-                 stroke-dasharray="3"
-                 id="path-1"
-                 d="M0,17 L0,0" />
-            </g>
+               id="Path-2" />
           </g>
         </g>
       </g>
     </g>
+  </g>
+  <g
+     id="g35"
+     transform="matrix(0.6811313,0,0,0.66268527,9.1094431,9.8597122)">
+    <g
+       id="Page-1-5"
+       style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1">
+      <g
+         transform="translate(0,-1)"
+         id="ic_directions_bike_black_24px">
+        <polygon
+           points="24,0 24,24 0,24 0,0 "
+           id="Shape" />
+        <path
+           style="fill:#2d4959;fill-opacity:1;fill-rule:nonzero"
+           id="path9"
+           d="m 15.5,5.5 c 1.1,0 2,-0.9 2,-2 0,-1.1 -0.9,-2 -2,-2 -1.1,0 -2,0.9 -2,2 0,1.1 0.9,2 2,2 z M 5,12 c -2.8,0 -5,2.2 -5,5 0,2.8 2.2,5 5,5 2.8,0 5,-2.2 5,-5 0,-2.8 -2.2,-5 -5,-5 z m 0,8.5 c -1.9,0 -3.5,-1.6 -3.5,-3.5 0,-1.9 1.6,-3.5 3.5,-3.5 1.9,0 3.5,1.6 3.5,3.5 0,1.9 -1.6,3.5 -3.5,3.5 z m 5.8,-10 2.4,-2.4 0.8,0.8 c 1.3,1.3 3,2.1 5.1,2.1 V 9 C 17.6,9 16.4,8.4 15.5,7.5 L 13.6,5.6 C 13.1,5.2 12.6,5 12,5 11.4,5 10.9,5.2 10.6,5.6 L 7.8,8.4 C 7.4,8.8 7.2,9.3 7.2,9.8 c 0,0.6 0.2,1.1 0.6,1.4 L 11,14 v 5 h 2 V 12.8 Z M 19,12 c -2.8,0 -5,2.2 -5,5 0,2.8 2.2,5 5,5 2.8,0 5,-2.2 5,-5 0,-2.8 -2.2,-5 -5,-5 z m 0,8.5 c -1.9,0 -3.5,-1.6 -3.5,-3.5 0,-1.9 1.6,-3.5 3.5,-3.5 1.9,0 3.5,1.6 3.5,3.5 0,1.9 -1.6,3.5 -3.5,3.5 z"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <path
+       style="fill:#000000;fill-opacity:0"
+       d="m -7.3728814,31.012712 3,-17"
+       id="Path-3"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>

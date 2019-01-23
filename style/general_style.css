@@ -112,20 +112,19 @@ body {
     flex-direction: row;
     font-size: 1.5rem;
     font-weight: bold;
+    margin: 1rem;
 }
 
 .instructions-resume-electric div {
     display: inline;
     flex-grow: 1;
     text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .instructions-resume-electric {
     display: flex;
     flex-direction: row;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 #sidebar-right-container .container-fluid {
