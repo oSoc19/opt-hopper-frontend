@@ -201,7 +201,7 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
                 type: 'geojson',
                 data: json.route
             });
-            console.log(json.route)
+            //console.log(json.route)
             
             var opacity = routeOpacityAltnerative;
             var width = routeWidthMain;
@@ -347,14 +347,14 @@ function showLocationsOnMap() {
 function updateUrlParams(){
     var params = {};
     if (location1) {
-        params.loc1 = location1;
+        params.loc1 = [location1[0].toFixed(6), location1[1].toFixed(6)];
     }
     if(location2){
-        params.loc2 = location2;
+        params.loc2 = [location2[0].toFixed(6), location2[1].toFixed(6)];
     }
-    params.zoom = map.getZoom();
-    params.lat = map.getCenter().lat;
-    params.lng = map.getCenter().lng;
+    params.zoom = map.getZoom().toFixed(2);
+    params.lat = map.getCenter().lat.toFixed(6);
+    params.lng = map.getCenter().lng.toFixed(6);
     
     setCurrentUrl(params);
 }
