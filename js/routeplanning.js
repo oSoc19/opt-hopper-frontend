@@ -406,6 +406,42 @@ map.on('load', function () {
         }
     }, "housenum-label");
 
+    map.addSource('cyclenetworks-tiles', { 
+        type: 'vector',
+        url: 'https://localhost:5001/cyclenetworks/mvt.json' 
+    });
+
+    map.addLayer({
+        "id": "cyclenetwork-tiles",
+        "type": "line",
+        "source": "cyclenetworks-tiles",
+        "source-layer": "cyclenetwork",
+        "layout": {
+            "visibility": "visible",
+            "line-join": "round"
+          },
+          "paint": {
+            "line-color": "#000088",
+            "line-width": 3
+          }
+    });
+
+    map.addLayer({
+        "id": "cyclenodes-tiles",
+        "type": "symbol",
+        "source": "cyclenetworks-tiles",
+        "source-layer": "cyclenodes",
+        "layout": {
+            "text-field": "{rcn_ref}"
+        },
+        "paint": {
+            "text-color": "rgb(117, 129, 145)",
+            "text-halo-color": "rgb(242,243,240)",
+            "text-halo-width": 1,
+            "text-halo-blur": 1
+        }
+    });
+
     if (location1 || location2) {
         showLocationsOnMap();
     }
