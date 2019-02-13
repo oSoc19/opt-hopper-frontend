@@ -453,7 +453,7 @@ map.on('load', function () {
             "text-ignore-placement": true
         },
         "paint": {
-            "text-color": "#000000",
+            "text-color": "#000088",
             "text-halo-color": "#FFFFFF",
             "text-halo-width": 2,
             "text-halo-blur": 1
