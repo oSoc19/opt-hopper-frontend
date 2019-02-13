@@ -408,7 +408,8 @@ map.on('load', function () {
 
     map.addSource('cyclenetworks-tiles', { 
         type: 'vector',
-        url: 'https://localhost:5001/cyclenetworks/mvt.json' 
+        //url: 'https://localhost:5001/cyclenetworks/mvt.json' 
+        url: 'https://genk.anyways.eu/vector-tiles/cyclenetworks/mvt.json' 
     });
 
     map.addLayer({
@@ -424,21 +425,35 @@ map.on('load', function () {
             "line-color": "#000088",
             "line-width": 3
           }
+    }, "housenum-label");
+
+    map.addLayer({
+        "id": "cyclenodes-circles",
+        "type": "circle",
+        "source": "cyclenetworks-tiles",
+        "source-layer": "cyclenodes",
+        "layout": {
+          },
+        "paint": {
+            "circle-stroke-width": 2,
+            "circle-stroke-color": "#000088",
+            "circle-radius": 10,
+            "circle-color": "#FFFFFF"
+        }
     });
 
     map.addLayer({
-        "id": "cyclenodes-tiles",
+        "id": "cyclenodes-labels",
         "type": "symbol",
         "source": "cyclenetworks-tiles",
         "source-layer": "cyclenodes",
         "layout": {
-            "text-field": "{rcn_ref}"
+            "text-field": "{rcn_ref}",
+            "text-size": 12,
+            "text-ignore-placement": true
         },
         "paint": {
-            "text-color": "rgb(117, 129, 145)",
-            "text-halo-color": "rgb(242,243,240)",
-            "text-halo-width": 1,
-            "text-halo-blur": 1
+            "text-color": "#000088"
         }
     });
 
