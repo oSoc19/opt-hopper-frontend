@@ -438,6 +438,20 @@ map.on('load', function () {
             "circle-stroke-width": 2,
             "circle-stroke-color": "#000088",
             "circle-radius": 10,
+            "circle-color": "#000088",
+            "circle-opacity": 0
+        }
+    });
+
+    map.addLayer({
+        "id": "cyclenodes-circles-center",
+        "type": "circle",
+        "source": "cyclenetworks-tiles",
+        "source-layer": "cyclenodes",
+        "layout": {
+          },
+        "paint": {
+            "circle-radius": 10,
             "circle-color": "#FFFFFF"
         }
     });
@@ -449,13 +463,12 @@ map.on('load', function () {
         "source-layer": "cyclenodes",
         "layout": {
             "text-field": "{rcn_ref}",
-            "text-size": 12,
-            "text-ignore-placement": true
+            "text-size": 12
         },
         "paint": {
             "text-color": "#000088",
             "text-halo-color": "#FFFFFF",
-            "text-halo-width": 2,
+            "text-halo-width": 4,
             "text-halo-blur": 1
         }
     });
