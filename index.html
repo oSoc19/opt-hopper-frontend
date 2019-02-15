@@ -74,6 +74,14 @@ if(detectIE()){
     </div>
     <div class="row">
         <div id='top-overlay-profile-buttons-mobile'>
+            <span class="btn btn-lg text-center route" id="network-genk-route-mobile"
+                  onclick="sidebarDisplayProfileHtmlId(this.id)">
+                <span>
+                    <img class="svg" src="./assets/img/network.svg"/>
+                </span>
+                <br>
+                <div id="profile-button-text-networks-mobile">Genk Networks</div>
+            </span>
             <span class="btn btn-lg text-center route" id="fastest-route-mobile"
                   onclick="sidebarDisplayProfileHtmlId(this.id)">
                 <span>
@@ -82,21 +90,13 @@ if(detectIE()){
                 <br>
                 <div id="profile-button-text-fast-mobile">Fast</div>
             </span>
-            <span class="btn btn-lg text-center route" id="relaxed-route-mobile"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
-                <span>
-                    <img class="svg" src="./assets/img/relaxed.svg"/>
-                </span>
-                <br>
-                <div id="profile-button-text-relaxed-mobile">Relaxed</div>
-            </span>
-            <span class="btn btn-lg text-center route" id="other-route-mobile"
+            <span class="btn btn-lg text-center route" id="network-route-mobile"
                   onclick="sidebarDisplayProfileHtmlId(this.id)">
                 <span>
                     <img class="svg" src="./assets/img/network.svg"/>
                 </span>
                 <br>
-                <div id="profile-button-text-networks-mobile">Networks</div>
+                <div id="profile-button-text-relaxed-mobile">Cycle Networks</div>
             </span>
         </div>
     </div>
@@ -110,7 +110,12 @@ if(detectIE()){
                 mapboxgl.accessToken = mapboxAccessCode;
                 var map = new mapboxgl.Map({
                     container: 'map',
-                    style: 'mapbox://styles/ben-anyways/cjm7obna8e73u2rppk8pc49di',
+                    //style: 'mapbox://styles/ben-anyways/cjm7obna8e73u2rppk8pc49di',
+                    //style: 'mapbox://styles/ben-anyways/cjs66aa5d27yv1ftdyq1kvlgr',
+                    //style: 'mapbox://styles/ben-anyways/cj9zvkimu8wjl2spbq2ej7en0',
+                    //style: 'mapbox://styles/ben-anyways/cjm7obefs14442sp63lworwqg',
+                    //style: 'https://maps.tilehosting.com/styles/positron/style.json?key=RrAiXeTeoR4I64mRSxk8',
+                    style: 'https://maps.tilehosting.com/c/57530131-c1b9-40f3-990b-a4ac7177ba23/styles/positron-cycling/style.json?key=RrAiXeTeoR4I64mRSxk8',
                     center: [5.5027, 50.9632], // starting position [lng, lat]
                     zoom: 14, // starting zoom
                     preserveDrawingBuffer: true
@@ -131,6 +136,22 @@ if(detectIE()){
     </div>
     <div id='sidebar-right-content'>
         <div id='sidebar-top'>
+            <span class="btn btn-lg text-center route" id="network-genk-route"
+                  onclick="sidebarDisplayProfileHtmlId(this.id)">
+                <span>
+                    <img class="svg" src="./assets/img/network.svg"/>
+                </span>
+                <br>
+                <div id="profile-button-text-genk-network">Genk Networks</div>
+            </span>  
+            <span class="btn btn-lg text-center route" id="network-route"
+                  onclick="sidebarDisplayProfileHtmlId(this.id)">
+                <span>
+                    <img class="svg" src="./assets/img/network.svg"/>
+                </span>
+                <br>
+                <div id="profile-button-text-network">Networks</div>
+            </span>   
             <span class="btn btn-lg text-center route" id="fastest-route"
                   onclick="sidebarDisplayProfileHtmlId(this.id)">
                 <span>
@@ -138,146 +159,42 @@ if(detectIE()){
                 </span>
                 <br>
                 <div id="profile-button-text-fast">Fast</div>
-            </span>
-            <span class="btn btn-lg text-center route" id="relaxed-route"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
-                <span>
-                    <img class="svg" src="./assets/img/relaxed.svg"/>
-                </span>
-                <br>
-                <div id="profile-button-text-relaxed">Relaxed</div>
-            </span>
-            <span class="btn btn-lg text-center route" id="other-route"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
-                <span>
-                    <img class="svg" src="./assets/img/network.svg"/>
-                </span>
-                <br>
-                <div id="profile-button-text-networks">Networks</div>
-            </span>
-
-
-            
+            </span>       
         </div>
-        <div id="fast-instruction" class="route-instructions">
+        <div id="fastest-instruction" class="route-instructions">
             <div class="profile-explanation">
                 <h5 class="sub-title">This is the FAST route</h5>
                 <p>
                     This profile minimizes the time to destination.
                 </p>
   		        <div class="instructions-resume-electric"></div>
-                <div class="instructions-resume"></div>
-                <div class="profile-explanation-icons">
-                    <div class="networks">
-                        <div>
-                            <img src="img/network_icons.svg" class="non-active">
-                            <img class="indicator non-active" src="img/checkmark.svg">
-                         
-                        </div>
-                        <h6>Fietsnetwerk</h6>
-                    </div>
-                    <div class="small-roads">
-                        <div>
-                        <img class="indicator non-active" src="img/checkmark.svg">
-                            <img src="img/small-roads.svg" class="non-active">
-                        </div>
-                        <h6>Kleine Wegen</h6>
-                    </div>
-                    <div class="hills">
-                        <div>
-                            <img src="img/hill.svg">
-                            <img class="indicator" src="img/forbidden.svg">
-                        </div>
-                        <h6>Heuvels</h6>
-                    </div>
-                    <div class="big-roads">
-                        <div>
-                            <img src="img/bigroad.svg" class="non-active">
-                            <img class="indicator non-active" src="img/checkmark.svg">
-                         
-                        </div>
-                        <h6>Grote wegen</h6>
+                <div class="instructions-resume">
+                    <div class="profile-explanation-icons">                   
                     </div>
                 </div>
             </div>
         </div>
-        <div id="relaxed-instruction" class="route-instructions">
+        <div id="network-genk-instruction" class="route-instructions">
             <div class="profile-explanation">
-                <h5 class="sub-title">This is the RELAXED route</h5>
+                <h5 class="sub-title">This is the GENK NETWORK route</h5>
                 <p>
-                    This profile avoids big roads, highly prefers cycleways, avoids uncomfortable surfaces such as
-                    cobblestones, and avoids streets with parallel parked cars.
+                    This profile highly prefers the cycling networks.
                 </p>
      		<div class="instructions-resume-electric"></div>
 	        <div class="instructions-resume"></div>
-                <div class="profile-explanation-icons">
-                    <div class="networks">
-                        <div>
-                            <img class="indicator non-active" src="img/checkmark.svg">
-                            <img src="img/network_icons.svg" class="non-active">
-                        </div>
-                        <h6>Fietsnetwerk</h6>
-                    </div>
-                    <div class="small-roads">
-                        <div>
-                            <img class="indicator" src="img/checkmark.svg">
-                            <img src="img/small-roads.svg">
-                        </div>
-                        <h6>Kleine Wegen</h6>
-                    </div>
-                    <div class="hills">
-                        <div> 
-                            <img class="indicator" src="img/forbidden.svg">
-                            <img src="img/hill.svg">
-                        </div>
-                        <h6>Heuvels</h6>
-                    </div>
-                    <div class="big-roads">
-                        <div>
-                            <img src="img/bigroad.svg">
-                            <img class="indicator" src="img/forbidden.svg">
-                        </div>
-                        <h6>Grote wegen</h6>
-                    </div>
+                <div class="profile-explanation-icons">                    
                 </div>
             </div>
         </div>
-        <div id="networks-instruction" class="route-instructions">
+        <div id="network-instruction" class="route-instructions">
             <div class="profile-explanation">
                 <h5 class="sub-title">This is the NETWORKS route</h5>
                 <p>
                     This profile heavily prefers the cycling networks.
                 </p>
  	        	<div class="instructions-resume-electric"></div>
-                <div class="instructions-resume"></div>
-                <div class="profile-explanation-icons">
-                    <div class="networks">
-                        <div>
-                          <img class="indicator" src="img/checkmark.svg">
-                          <img src="img/network_icons.svg">
-                        </div>
-                        <h6>Fietsnetwerk</h6>
-                    </div>
-                    <div class="small-roads">
-                        <div>
-                         <img class="indicator" src="img/checkmark.svg">
-                         <img src="img/small-roads.svg">
-                        </div>
-                        <h6>Kleine Wegen</h6>
-                    </div>
-                    <div class="hills">
-                        <div>
-                         <img class="indicator" src="img/forbidden.svg">
-                         <img src="img/hill.svg">
-                        </div>
-                        <h6>Heuvels</h6>
-                    </div>
-                    <div class="big-roads">
-                        <div>
-                         <img class="indicator" src="img/forbidden.svg">
-                            <img src="img/bigroad.svg">
-                        </div>
-                        <h6>Grote wegen</h6>
+                <div class="instructions-resume">
+                    <div class="profile-explanation-icons">                    
                     </div>
                 </div>
             </div>

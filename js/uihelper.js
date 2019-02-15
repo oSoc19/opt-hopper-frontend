@@ -36,6 +36,7 @@ function sidebarDisplayProfile(profile) {
         for (var i in profileHtmlId) {
             try {
                 if (map.getLayer(i)) {
+                    map.setLayoutProperty(i, 'visibility', 'none');
                     map.setPaintProperty(i, 'line-opacity', routeOpacityAltnerative);
                     map.setPaintProperty(i + '-casing', 'line-opacity', routeOpacityAltnerative);
                 }
@@ -44,11 +45,27 @@ function sidebarDisplayProfile(profile) {
             }
         }
         if (map.getLayer(profile)) {
+            map.setLayoutProperty(profile, 'visibility', 'visible');
             map.setPaintProperty(profile, 'line-opacity', routeOpacityMain);
             map.setPaintProperty(profile + '-casing', 'line-opacity', routeOpacityMain);
-            map.moveLayer(profile);
+            //map.moveLayer(profile);
         }
-    }
+        var localConfig = profileConfig[selectedProfile];
+        if (localConfig && localConfig.layers) {
+            for (var layerId in localConfig.layers) {
+                if (localConfig.layers.hasOwnProperty(layerId)) {
+                    var layer = map.getLayer(layerId);
+                    if (layer) {
+                        if (localConfig.layers[layerId]) {
+                            map.setLayoutProperty(layerId, 'visibility', 'visible');
+                        } else {
+                            map.setLayoutProperty(layerId, 'visibility', 'none');
+                        }
+                    }
+                }
+              }
+            }
+        }
     $(".route-instructions").addClass("height-zero");
     $(`#${profileHtmlId[profile]}`).removeClass("height-zero");
     $("#sidebar-top>span").removeClass("active");

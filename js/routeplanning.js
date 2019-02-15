@@ -5,8 +5,47 @@ var location2Marker = undefined;
 var routes = {};
 let routeRequests = {};
 let language = "nl";
-const availableProfiles = ["fast", "relaxed", "genk"];
-let selectedProfile = "fast";
+//var labelLayer = "road-label";
+//var labelLayer = "waterway-label";
+var labelLayer = "highway_name_other";
+
+// defines the available profiles.
+const availableProfiles = ["network-genk", "network", "fastest"];
+// the configuration of the profiles.
+var profileConfig = {
+    "network-genk": {
+        backendName: "genk",
+        layers: {
+            "cyclenetworks": true,
+            "cyclenetwork-tiles": false,
+            "cyclenodes-circles": false,
+            "cyclenodes-circles-center": false,
+            "cyclenodes-labels": false
+        }
+    },
+    "network": {
+        backendName:  "networks",
+        layers: {
+            "cyclenetworks": false,
+            "cyclenetwork-tiles": true,
+            "cyclenodes-circles": true,
+            "cyclenodes-circles-center": true,
+            "cyclenodes-labels": true
+        }
+    },
+    "fastest": {
+        backendName: "",
+        layers: {
+            "cyclenetworks": false,
+            "cyclenetwork-tiles": false,
+            "cyclenodes-circles": false,
+            "cyclenodes-circles-center": false,
+            "cyclenodes-labels": false
+        }
+    }
+};
+
+let selectedProfile = "network-genk";
 
 //set the corect language
 var userLang = navigator.language || navigator.userLanguage;
@@ -28,9 +67,9 @@ if (typeof(Storage) !== "undefined") {
  * @type {{fast: string, relaxed: string, networks: string}}
  */
 const profileHtmlId = {
-    "fast": "fast-instruction",
-    "relaxed": "relaxed-instruction",
-    "genk": "networks-instruction",
+    "fastest": "fastest-instruction",
+    "network": "network-instruction",
+    "network-genk": "network-genk-instruction",
 };
 
 /**
@@ -38,9 +77,9 @@ const profileHtmlId = {
  * @type {{"fastest-route": string, "relaxed-route": string, "other-route": string}}
  */
 const profileButtonIds = {
-    "fastest-route": "fast",
-    "relaxed-route": "relaxed",
-    "other-route": "genk",
+    "fastest-route": "fastest",
+    "network-route": "network",
+    "network-genk-route": "network-genk"
 };
 
 /**
@@ -108,13 +147,8 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
     const originS = swapArrayValues(origin);
     const destinationS = swapArrayValues(destination);
 
-    // Construct the url
-    let profile_url;
-    if (profile == "fast") {
-        profile_url = "";
-    } else {
-        profile_url = profile;
-    }
+    // get the routing profile.
+    let profile_url = profileConfig[profile].backendName;
     const prof = (profile_url === "" ? "" : `&profile=${profile_url}`);
     const url = `${urls.route}/route?instructions=${instructions}&lang=${lang}${prof}&loc1=${originS}&loc2=${destinationS}`;
     routes[profile] = [];
@@ -216,7 +250,7 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
                     type: 'line',
                     source: profile + "-source",
                     paint: {
-                        'line-color': "#ffffff",
+                        'line-color': "#000000",
                         'line-width': width*1.5,
                         'line-opacity': opacity
                     },
@@ -224,7 +258,7 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
                         'line-cap': 'round',
                         'line-join': 'round'
                     }
-                }, "housenum-label");
+                }, labelLayer);
             // And now, create the actual colored line. We paint above the outline
             map.addLayer({
                     id: profile,
@@ -244,7 +278,7 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
                         'line-cap': 'round',
                         'line-join': 'round'
                     }
-                }, "housenum-label");
+                }, labelLayer);
 
         }
         fitToBounds(origin, destination);   //Called again to make sure the start or endpoint are not hidden behind sidebar
@@ -395,16 +429,17 @@ map.on('load', function () {
         "type": "line",
         "source": "cyclenetworks",
         "layout": {
+            "visibility": "visible",
             "line-join": "round",
             "line-cap": "round"
         },
         "paint": {
             'line-color': ['get', 'colour'],
-            "line-opacity": 0.5,
-            "line-width": 7,
-            "line-blur": 1
+            //"line-opacity": 0.5,
+            "line-width": 5,
+            //"line-blur": 1
         }
-    }, "housenum-label");
+    }, labelLayer);
 
     map.addSource('cyclenetworks-tiles', { 
         type: 'vector',
@@ -418,14 +453,14 @@ map.on('load', function () {
         "source": "cyclenetworks-tiles",
         "source-layer": "cyclenetwork",
         "layout": {
-            "visibility": "visible",
+            "visibility": "none",
             "line-join": "round"
           },
           "paint": {
             "line-color": "#000088",
             "line-width": 3
           }
-    }, "housenum-label");
+    }, labelLayer);
 
     map.addLayer({
         "id": "cyclenodes-circles",
@@ -433,7 +468,8 @@ map.on('load', function () {
         "source": "cyclenetworks-tiles",
         "source-layer": "cyclenodes",
         "layout": {
-          },
+            "visibility": "none"
+        },
         "paint": {
             "circle-stroke-width": 2,
             "circle-stroke-color": "#000088",
@@ -449,7 +485,8 @@ map.on('load', function () {
         "source": "cyclenetworks-tiles",
         "source-layer": "cyclenodes",
         "layout": {
-          },
+            "visibility": "none"
+        },
         "paint": {
             "circle-radius": 10,
             "circle-color": "#FFFFFF"
@@ -462,6 +499,7 @@ map.on('load', function () {
         "source": "cyclenetworks-tiles",
         "source-layer": "cyclenodes",
         "layout": {
+            "visibility": "none",
             "text-field": "{rcn_ref}",
             "text-size": 12
         },
