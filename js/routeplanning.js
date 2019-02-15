@@ -250,7 +250,7 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
                     type: 'line',
                     source: profile + "-source",
                     paint: {
-                        'line-color': "#000000",
+                        'line-color': "#FFFFFF",
                         'line-width': width*1.5,
                         'line-opacity': opacity
                     },
