@@ -381,14 +381,15 @@ function showLocationsOnMap() {
 function updateUrlParams(){
     var params = {};
     if (location1) {
-        params.loc1 = [location1[0].toFixed(6), location1[1].toFixed(6)];
+        params.loc1 = [Number(location1[0]).toFixed(6), Number(location1[1]).toFixed(6)];
     }
     if(location2){
-        params.loc2 = [location2[0].toFixed(6), location2[1].toFixed(6)];
+        params.loc2 = [Number(location2[0]).toFixed(6), Number(location2[1]).toFixed(6)];
     }
     params.zoom = map.getZoom().toFixed(2);
     params.lat = map.getCenter().lat.toFixed(6);
     params.lng = map.getCenter().lng.toFixed(6);
+    params.p=selectedProfile;
     
     setCurrentUrl(params);
 }
@@ -429,7 +430,7 @@ map.on('load', function () {
         "type": "line",
         "source": "cyclenetworks",
         "layout": {
-            "visibility": "visible",
+            "visibility": "none",
             "line-join": "round",
             "line-cap": "round"
         },
@@ -511,6 +512,7 @@ map.on('load', function () {
         }
     });
 
+    sidebarDisplayProfile(selectedProfile);
     if (location1 || location2) {
         showLocationsOnMap();
     }

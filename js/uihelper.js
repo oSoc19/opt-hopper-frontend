@@ -24,6 +24,7 @@ function toggleSidebar() {
 function sidebarDisplayProfileHtmlId(id) {
     id = id.replace("-mobile", "");
     sidebarDisplayProfile(profileButtonIds[id]);
+    updateUrlParams();
 }
 
 /**
@@ -437,6 +438,12 @@ window.onload = function () {
     }
     if (urlparams.loc2) {
         location2 = urlparams.loc2;
+    }
+
+    if (urlparams.p) {
+        if (urlparams.p != selectedProfile) {
+            sidebarDisplayProfile(urlparams.p);
+        }
     }
    
     if (location1) {
