@@ -51,7 +51,7 @@ function sidebarDisplayProfile(profile) {
             map.setPaintProperty(profile + '-casing', 'line-opacity', routeOpacityMain);
             //map.moveLayer(profile);
         }
-        var localConfig = profileConfig[selectedProfile];
+        var localConfig = profileConfigs[selectedProfile];
         if (localConfig && localConfig.layers) {
             for (var layerId in localConfig.layers) {
                 if (localConfig.layers.hasOwnProperty(layerId)) {

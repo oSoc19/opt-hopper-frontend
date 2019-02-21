@@ -12,7 +12,7 @@ var labelLayer = "highway_name_other";
 // defines the available profiles.
 const availableProfiles = ["network-genk", "network", "fastest"];
 // the configuration of the profiles.
-var profileConfig = {
+var profileConfigs = {
     "network-genk": {
         backendName: "genk",
         layers: {
@@ -21,7 +21,9 @@ var profileConfig = {
             "cyclenodes-circles": false,
             "cyclenodes-circles-center": false,
             "cyclenodes-labels": false
-        }
+        },
+        routecolor: true,
+        instructions: false
     },
     "network": {
         backendName:  "networks",
@@ -31,7 +33,9 @@ var profileConfig = {
             "cyclenodes-circles": true,
             "cyclenodes-circles-center": true,
             "cyclenodes-labels": true
-        }
+        },
+        routecolor: false,
+        instructions: false
     },
     "fastest": {
         backendName: "",
@@ -41,7 +45,9 @@ var profileConfig = {
             "cyclenodes-circles": false,
             "cyclenodes-circles-center": false,
             "cyclenodes-labels": false
-        }
+        },
+        routecolor: false,
+        instructions: true
     }
 };
 
@@ -113,10 +119,9 @@ function roundToThree(num) {
  * @param {[int, int]} origin - The LatLng Coords
  * @param {[int, int]} destination - The LatLng Coords
  * @param {[String]} profiles - for every profile, a route will be requested
- * @param {boolean} instructions - Whether or not the route instructions should be requested from the server
  * @param {String} lang - en/nl/fr select the language for the instructions
  */
-function calculateAllRoutes(origin, destination, profiles = availableProfiles, instructions = true, lang = language) {
+function calculateAllRoutes(origin, destination, profiles = availableProfiles, lang = language) {
     let deviceSize = getBootstrapDeviceSize();
     if (!isSidebarVisible && !(deviceSize === "xs" || deviceSize === "sm")) {
         toggleSidebar();
@@ -129,7 +134,7 @@ function calculateAllRoutes(origin, destination, profiles = availableProfiles, i
     routes = {};
     removeAllRoutesFromMap();
     profiles.forEach(function (profile) {
-        calculateRoute(origin, destination, profile, instructions, lang);
+        calculateRoute(origin, destination, profile, lang);
     });
     fitToBounds(origin, destination);
 }
@@ -139,16 +144,17 @@ function calculateAllRoutes(origin, destination, profiles = availableProfiles, i
  * @param {[int, int]} origin - The LatLng Coords
  * @param {[int, int]} destination - The LatLng Coords
  * @param {String} profile - The routing profile
- * @param {boolean} instructions - Whether or not the route instructions should be requested from the server
  * @param {String} lang - en/nl/fr select the language for the instructions
  */
-function calculateRoute(origin, destination, profile = "genk", instructions = true, lang = 'en') {
+function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
     // Swap around values for the API
     const originS = swapArrayValues(origin);
     const destinationS = swapArrayValues(destination);
 
     // get the routing profile.
-    let profile_url = profileConfig[profile].backendName;
+    var profileConfig = profileConfigs[profile];
+    var instructions = profileConfig.instructions;
+    let profile_url =profileConfig.backendName;
     const prof = (profile_url === "" ? "" : `&profile=${profile_url}`);
     const url = `${urls.route}/route?instructions=${instructions}&lang=${lang}${prof}&loc1=${originS}&loc2=${destinationS}`;
     routes[profile] = [];
@@ -244,7 +250,7 @@ function calculateRoute(origin, destination, profile = "genk", instructions = tr
                 width = routeWidthMain;
                 opacity = routeOpacityMain;
             }
-            // Create the black outline of the route
+            // create the outline of the route
             map.addLayer({
                     id: profile + '-casing',
                     type: 'line',
@@ -259,26 +265,43 @@ function calculateRoute(origin, destination, profile = "genk", instructions = tr
                         'line-join': 'round'
                     }
                 }, labelLayer);
-            // And now, create the actual colored line. We paint above the outline
-            map.addLayer({
-                    id: profile,
-                    type: 'line',
-                    source: profile + "-source",
-                    paint: {
-                        'line-color':
-                            {   // always use the colors of the cycling network
-                                type: 'identity',
-                                property: 'cyclecolour'
-                            }
-                        ,
-                        'line-width': width,
-                        'line-opacity': opacity
-                    },
-                    layout: {
-                        'line-cap': 'round',
-                        'line-join': 'round'
-                    }
-                }, labelLayer);
+            if (profileConfig.routecolor) {
+                // create the actual colored line. We paint above the outline
+                map.addLayer({
+                        id: profile,
+                        type: 'line',
+                        source: profile + "-source",
+                        paint: {
+                            'line-color':
+                                {   // always use the colors of the cycling network
+                                    type: 'identity',
+                                    property: 'cyclecolour'
+                                }
+                            ,
+                            'line-width': width,
+                            'line-opacity': opacity
+                        },
+                        layout: {
+                            'line-cap': 'round',
+                            'line-join': 'round'
+                        }
+                    }, labelLayer);
+            } else {
+                map.addLayer({
+                        id: profile,
+                        type: 'line',
+                        source: profile + "-source",
+                        paint: {
+                            'line-color': routeColor,
+                            'line-width': width,
+                            'line-opacity': opacity
+                        },
+                        layout: {
+                            'line-cap': 'round',
+                            'line-join': 'round'
+                        }
+                    }, labelLayer);
+            }
 
         }
         fitToBounds(origin, destination);   //Called again to make sure the start or endpoint are not hidden behind sidebar
