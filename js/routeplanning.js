@@ -116,7 +116,7 @@ function roundToThree(num) {
  * @param {boolean} instructions - Whether or not the route instructions should be requested from the server
  * @param {String} lang - en/nl/fr select the language for the instructions
  */
-function calculateAllRoutes(origin, destination, profiles = availableProfiles, instructions = false, lang = language) {
+function calculateAllRoutes(origin, destination, profiles = availableProfiles, instructions = true, lang = language) {
     let deviceSize = getBootstrapDeviceSize();
     if (!isSidebarVisible && !(deviceSize === "xs" || deviceSize === "sm")) {
         toggleSidebar();
@@ -142,7 +142,7 @@ function calculateAllRoutes(origin, destination, profiles = availableProfiles, i
  * @param {boolean} instructions - Whether or not the route instructions should be requested from the server
  * @param {String} lang - en/nl/fr select the language for the instructions
  */
-function calculateRoute(origin, destination, profile = "genk", instructions = false, lang = 'en') {
+function calculateRoute(origin, destination, profile = "genk", instructions = true, lang = 'en') {
     // Swap around values for the API
     const originS = swapArrayValues(origin);
     const destinationS = swapArrayValues(destination);
@@ -216,7 +216,7 @@ function calculateRoute(origin, destination, profile = "genk", instructions = fa
         let $profileInstructions = $(`#${profileHtmlId[profile]} ul`);
         $profileInstructions.html("");
         $profileInstructions.append(`<li class="startpoint-li">${$("#fromInput").val()}</li>`);
-        if (json.instructions && json.instructionscalculateRoutecalculateRoute.features) {
+        if (json.instructions && json.instructions.features) {
             for (let i in json.instructions.features) {
                 $profileInstructions.append(`<li class="type-${json.instructions.features[i].properties.type}  angle-${json.instructions.features[i].properties.angle}">${json.instructions.features[i].properties.instruction}</li>`);
             }
