@@ -45,34 +45,40 @@ function sidebarDisplayProfile(profile) {
                 console.warn(e);
             }
         }
-        if (map.getLayer(profile)) {
-            map.setLayoutProperty(profile, 'visibility', 'visible');
-            map.setPaintProperty(profile, 'line-opacity', routeOpacityMain);
-            map.setPaintProperty(profile + '-casing', 'line-opacity', routeOpacityMain);
-            //map.moveLayer(profile);
-        }
-        var localConfig = profileConfigs[selectedProfile];
-        if (localConfig && localConfig.layers) {
-            for (var layerId in localConfig.layers) {
-                if (localConfig.layers.hasOwnProperty(layerId)) {
-                    var layer = map.getLayer(layerId);
-                    if (layer) {
-                        if (localConfig.layers[layerId]) {
-                            map.setLayoutProperty(layerId, 'visibility', 'visible');
-                        } else {
-                            map.setLayoutProperty(layerId, 'visibility', 'none');
-                        }
+
+        $(".route-instructions").addClass("height-zero");
+        $(`#${profileHtmlId[profile]}`).removeClass("height-zero");
+        $("#sidebar-top>span").removeClass("active");
+        $("#top-overlay-profile-buttons-mobile>span").removeClass("active");
+        $(`#${getKeyByValue(profileButtonIds, profile)}`).addClass("active");
+        $(`#${getKeyByValue(profileButtonIds, profile)}-mobile`).addClass("active");
+    }
+    if (map.getLayer(profile)) {
+        map.setLayoutProperty(profile, 'visibility', 'visible');
+        map.setPaintProperty(profile, 'line-opacity', routeOpacityMain);
+        map.setPaintProperty(profile + '-casing', 'line-opacity', routeOpacityMain);
+        //map.moveLayer(profile);
+    }
+
+    showLayersForProfile(selectedProfile);
+}
+
+function showLayersForProfile(selectedProfile) {
+    var localConfig = profileConfigs[selectedProfile];
+    if (localConfig && localConfig.layers) {
+        for (var layerId in localConfig.layers) {
+            if (localConfig.layers.hasOwnProperty(layerId)) {
+                var layer = map.getLayer(layerId);
+                if (layer) {
+                    if (localConfig.layers[layerId]) {
+                        map.setLayoutProperty(layerId, 'visibility', 'visible');
+                    } else {
+                        map.setLayoutProperty(layerId, 'visibility', 'none');
                     }
                 }
-              }
             }
         }
-    $(".route-instructions").addClass("height-zero");
-    $(`#${profileHtmlId[profile]}`).removeClass("height-zero");
-    $("#sidebar-top>span").removeClass("active");
-    $("#top-overlay-profile-buttons-mobile>span").removeClass("active");
-    $(`#${getKeyByValue(profileButtonIds, profile)}`).addClass("active");
-    $(`#${getKeyByValue(profileButtonIds, profile)}-mobile`).addClass("active");
+    }
 }
 
 /**
@@ -203,7 +209,7 @@ function switchLanguage(element) {
             language = "nl";
             break;
     }
-    if (typeof(Storage) !== "undefined") {
+    if (typeof (Storage) !== "undefined") {
         localStorage.setItem("lang", language);
     }
     if (location1 && location2) {
@@ -275,13 +281,13 @@ function getAllUrlParams(url) {
             // set parameter value (use 'true' if empty)
             //var paramValue = a[1];
             let paramValue;
-            if (typeof(a[1]) === 'undefined') {
+            if (typeof (a[1]) === 'undefined') {
                 paramValue = true;
             } else {
                 paramValue = a[1].toLowerCase();
                 //check if the value is a comma sepperated list
                 var b = paramValue.split(',');
-                paramValue = typeof(b[1]) === 'undefined' ? b[0] : b;
+                paramValue = typeof (b[1]) === 'undefined' ? b[0] : b;
             }
 
             // (optional) keep case consistent
@@ -430,7 +436,7 @@ window.onload = function () {
     if (urlparams.loc1) {
         location1 = urlparams.loc1;
     } else {
-        if (!(typeof(Storage) !== "undefined" && new Date(localStorage.getItem("geolocation.permission.denieddate")).addDays(7) > new Date())) {
+        if (!(typeof (Storage) !== "undefined" && new Date(localStorage.getItem("geolocation.permission.denieddate")).addDays(7) > new Date())) {
             setTimeout(function () {
                 useCurrentLocation();
             }, 2000);
@@ -445,7 +451,7 @@ window.onload = function () {
             sidebarDisplayProfile(urlparams.p);
         }
     }
-   
+
     if (location1) {
         reverseGeocode(location1, function (adress) {
             $("#fromInput").val(adress);
@@ -465,15 +471,15 @@ window.onload = function () {
         },
         trackUserLocation: true
     }), 'top-left');
-    
-     if(urlparams.zoom){
+
+    if (urlparams.zoom) {
         map.setZoom(urlparams.zoom);
     }
-    if(urlparams.lat !== undefined && urlparams.lng !== undefined){
-        map.setCenter({lat:urlparams.lat,lng:urlparams.lng})
+    if (urlparams.lat !== undefined && urlparams.lng !== undefined) {
+        map.setCenter({ lat: urlparams.lat, lng: urlparams.lng })
     }
-    
-    
+
+
     windowLoaded = true;
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js');
