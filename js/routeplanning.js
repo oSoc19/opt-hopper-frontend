@@ -179,6 +179,10 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
     function success(json) {
         //console.log(json);
 
+        if (profile == selectedProfile) {
+            sidebarDisplayProfile(selectedProfile);
+        }
+
         let routeStops = [];
         let heightInfo = [];
 
