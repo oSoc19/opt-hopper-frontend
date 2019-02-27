@@ -47,7 +47,7 @@ var profileConfigs = {
             "cyclenodes-labels": false
         },
         routecolor: false,
-        instructions: true
+        instructions: false
     }
 };
 
