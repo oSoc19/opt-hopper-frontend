@@ -38,7 +38,7 @@ var profileConfigs = {
         instructions: false
     },
     "fastest": {
-        backendName: "",
+        backendName: "balanced",
         layers: {
             "cyclenetworks": false,
             "cyclenetwork-tiles": false,
