@@ -18,7 +18,9 @@ var profileConfigs = {
         layers: {
             "cyclenetworks": true,
             "cyclenetwork-tiles": false,
+            "cyclenetwork-tiles-high": false,
             "cyclenodes-circles": false,
+            "cyclenodes-circles-high": false,
             "cyclenodes-circles-center": false,
             "cyclenodes-labels": false
         },
@@ -30,7 +32,9 @@ var profileConfigs = {
         layers: {
             "cyclenetworks": false,
             "cyclenetwork-tiles": true,
+            "cyclenetwork-tiles-high": true,
             "cyclenodes-circles": true,
+            "cyclenodes-circles-high": true,
             "cyclenodes-circles-center": true,
             "cyclenodes-labels": true
         },
@@ -42,7 +46,9 @@ var profileConfigs = {
         layers: {
             "cyclenetworks": false,
             "cyclenetwork-tiles": false,
+            "cyclenetwork-tiles-high": false,
             "cyclenodes-circles": false,
+            "cyclenodes-circles-high": false,
             "cyclenodes-circles-center": false,
             "cyclenodes-labels": false
         },
@@ -480,6 +486,7 @@ map.on('load', function () {
         "type": "line",
         "source": "cyclenetworks-tiles",
         "source-layer": "cyclenetwork",
+        "minzoom": 11,
         "layout": {
             "visibility": "none",
             "line-join": "round"
@@ -492,10 +499,27 @@ map.on('load', function () {
     }, labelLayer);
 
     map.addLayer({
+        "id": "cyclenetwork-tiles-high",
+        "type": "line",
+        "source": "cyclenetworks-tiles",
+        "source-layer": "cyclenetwork",
+        "maxzoom": 11,
+        "layout": {
+            "visibility": "visible",
+            "line-join": "round"
+          },
+          "paint": {
+            "line-color": "#2D495A",
+            "line-width": 1
+          }
+    }, labelLayer);
+
+    map.addLayer({
         "id": "cyclenodes-circles",
         "type": "circle",
         "source": "cyclenetworks-tiles",
         "source-layer": "cyclenodes",
+        "minzoom": 11,
         "layout": {
             "visibility": "none"
         },
@@ -503,8 +527,25 @@ map.on('load', function () {
             "circle-stroke-width": 2,
             "circle-stroke-color": "#2D495A",
             "circle-radius": 10,
-            "circle-color": "#000088",
+            "circle-color": "#000000",
             "circle-opacity": 0
+        }
+    });
+
+    map.addLayer({
+        "id": "cyclenodes-circles-high",
+        "type": "circle",
+        "source": "cyclenetworks-tiles",
+        "source-layer": "cyclenodes",
+        "maxzoom": 11,
+        "layout": {
+            "visibility": "visible"
+        },
+        "paint": {
+            "circle-stroke-width": 1,
+            "circle-stroke-color": "#2D495A",
+            "circle-radius": 5,
+            "circle-color": "#FFFFFF"
         }
     });
 
@@ -513,6 +554,7 @@ map.on('load', function () {
         "type": "circle",
         "source": "cyclenetworks-tiles",
         "source-layer": "cyclenodes",
+        "minzoom": 11,
         "layout": {
             "visibility": "none"
         },
@@ -527,6 +569,7 @@ map.on('load', function () {
         "type": "symbol",
         "source": "cyclenetworks-tiles",
         "source-layer": "cyclenodes",
+        "minzoom": 11,
         "layout": {
             "visibility": "none",
             "text-field": "{rcn_ref}",
