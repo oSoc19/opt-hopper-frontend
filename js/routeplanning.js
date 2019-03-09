@@ -16,7 +16,14 @@ var profileConfigs = {
     "network-genk": {
         backendName: "genk",
         layers: {
-            "cyclenetworks": true,
+            "cyclenetworks": {
+                "default": {
+                    "line-opacity": 1
+                },
+                "route": {
+                    "line-opacity": 0.3
+                }
+            },
             "cyclenetwork-tiles": false,
             "cyclenetwork-tiles-high": false,
             "cyclenodes-circles": false,
@@ -24,21 +31,41 @@ var profileConfigs = {
             "cyclenodes-circles-center": false,
             "cyclenodes-labels": false
         },
-        routecolor: true,
+        routecolor: {
+            backend: true,
+            color: "#2D495A"
+        },
         instructions: false
     },
     "network": {
         backendName:  "networks",
         layers: {
             "cyclenetworks": false,
-            "cyclenetwork-tiles": true,
-            "cyclenetwork-tiles-high": true,
+            "cyclenetwork-tiles": {
+                "default": {
+                    "line-opacity": 1
+                },
+                "route": {
+                    "line-opacity": 0.5
+                }
+            },
+            "cyclenetwork-tiles-high": {
+                "default": {
+                    "line-opacity": 1
+                },
+                "route": {
+                    "line-opacity": 0.5
+                }
+            },
             "cyclenodes-circles": true,
             "cyclenodes-circles-high": true,
             "cyclenodes-circles-center": true,
             "cyclenodes-labels": true
         },
-        routecolor: false,
+        routecolor: {
+            backend: false,
+            color: "#2D495A"
+        },
         instructions: false
     },
     "fastest": {
@@ -52,7 +79,10 @@ var profileConfigs = {
             "cyclenodes-circles-center": false,
             "cyclenodes-labels": false
         },
-        routecolor: false,
+        routecolor: {
+            backend: false,
+            color: "#2D495A"
+        },
         instructions: false
     }
 };
@@ -183,7 +213,7 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
 
     // method to be executed on successfull ajax call (we have a route now)
     function success(json) {
-        //console.log(json);
+        var routeColor = profileConfig.routecolor.color;
 
         if (profile == selectedProfile) {
             sidebarDisplayProfile(selectedProfile);
@@ -275,8 +305,8 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
                         'line-join': 'round'
                     }
                 }, labelLayer);
-            if (profileConfig.routecolor) {
-                // create the actual colored line. We paint above the outline
+            if (profileConfig.routecolor.backend) {
+                // create the actual colored line using the colors coming from the API.
                 map.addLayer({
                         id: profile,
                         type: 'line',
@@ -302,7 +332,7 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
                         type: 'line',
                         source: profile + "-source",
                         paint: {
-                            'line-color': routeColor,
+                            'line-color': profileConfig.routecolor.color,
                             'line-width': width,
                             'line-opacity': opacity
                         },
@@ -344,6 +374,7 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
  * Removes routes from map.. obviously
  */
 function removeAllRoutesFromMap() {
+    showLayersForProfile(selectedProfile);
     for (let i in availableProfiles) {
         profile = availableProfiles[i];
         if (map.getLayer(profile)) {

@@ -70,8 +70,23 @@ function showLayersForProfile(selectedProfile) {
             if (localConfig.layers.hasOwnProperty(layerId)) {
                 var layer = map.getLayer(layerId);
                 if (layer) {
-                    if (localConfig.layers[layerId]) {
+                    var styleConfig = localConfig.layers[layerId];
+                    if (styleConfig) {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
+
+                        if (location1 && location2) {
+                            if (styleConfig.route) {
+                                if (styleConfig.route["line-opacity"]) {
+                                    map.setPaintProperty(layerId, 'line-opacity', styleConfig.route["line-opacity"]);
+                                }
+                            }
+                        } else {
+                            if (styleConfig.default) {
+                                if (styleConfig.default["line-opacity"]) {
+                                    map.setPaintProperty(layerId, 'line-opacity', styleConfig.default["line-opacity"]);
+                                }
+                            }
+                        }
                     } else {
                         map.setLayoutProperty(layerId, 'visibility', 'none');
                     }
