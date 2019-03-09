@@ -6,15 +6,15 @@ let windowLoaded = false;
  * Make the sidebar visible/invisible
  */
 function toggleSidebar() {
-    $("#sidebar-right-container").toggleClass('hidden-sidebar');
-    isSidebarVisible = !isSidebarVisible;
-    if (isSidebarVisible) {
-        $("#top-overlay-center-spacer").addClass("col-lg-1").addClass("col-md-0").removeClass("col-lg-2").removeClass("col-md-2");
-        $("#top-overlay-input").addClass("col-lg-7").removeClass("col-lg-8");
-    } else {
-        $("#top-overlay-center-spacer").addClass("col-lg-2").addClass("col-md-2").removeClass("col-lg-1").removeClass("col-md-0");
-        $("#top-overlay-input").addClass("col-lg-8").removeClass("col-lg-7");
-    }
+    // $("#sidebar-right-container").toggleClass('hidden-sidebar');
+    // isSidebarVisible = !isSidebarVisible;
+    // if (isSidebarVisible) {
+         $("#top-overlay-center-spacer").addClass("col-lg-1").addClass("col-md-0").removeClass("col-lg-2").removeClass("col-md-2");
+         $("#top-overlay-input").addClass("col-lg-7").removeClass("col-lg-8");
+    // } else {
+    //     $("#top-overlay-center-spacer").addClass("col-lg-2").addClass("col-md-2").removeClass("col-lg-1").removeClass("col-md-0");
+    //     $("#top-overlay-input").addClass("col-lg-8").removeClass("col-lg-7");
+    // }
 }
 
 /**
@@ -33,32 +33,16 @@ function sidebarDisplayProfileHtmlId(id) {
  */
 function sidebarDisplayProfile(profile) {
     selectedProfile = profile;
-    if (location1 && location2) {
-        for (var i in profileHtmlId) {
-            try {
-                if (map.getLayer(i)) {
-                    map.setLayoutProperty(i, 'visibility', 'none');
-                    map.setPaintProperty(i, 'line-opacity', routeOpacityAltnerative);
-                    map.setPaintProperty(i + '-casing', 'line-opacity', routeOpacityAltnerative);
-                }
-            } catch (e) {
-                console.warn(e);
-            }
-        }
+    if (state.location1 && state.location2) {
+        var localConfig = profileConfigs[selectedProfile];
 
         $(".route-instructions").addClass("height-zero");
-        $(`#${profileHtmlId[profile]}`).removeClass("height-zero");
+        $(`#${localConfig.profileDivId}`).removeClass("height-zero");
         $("#sidebar-top>span").removeClass("active");
         $("#top-overlay-profile-buttons-mobile>span").removeClass("active");
         $(`#${getKeyByValue(profileButtonIds, profile)}`).addClass("active");
         $(`#${getKeyByValue(profileButtonIds, profile)}-mobile`).addClass("active");
-    }
-    if (map.getLayer(profile)) {
-        map.setLayoutProperty(profile, 'visibility', 'visible');
-        map.setPaintProperty(profile, 'line-opacity', routeOpacityMain);
-        map.setPaintProperty(profile + '-casing', 'line-opacity', routeOpacityMain);
-        //map.moveLayer(profile);
-    }
+    }   
 
     showLayersForProfile(selectedProfile);
 }
@@ -66,6 +50,21 @@ function sidebarDisplayProfile(profile) {
 function showLayersForProfile(selectedProfile) {
     var localConfig = profileConfigs[selectedProfile];
     if (localConfig && localConfig.layers) {
+
+        availableProfiles.forEach(function (profile) {
+            if (map.getLayer(profile)) {
+                map.setLayoutProperty(profile, 'visibility', 'none');
+                map.setPaintProperty(profile, 'line-opacity', routeOpacityAltnerative);
+                map.setPaintProperty(profile + '-casing', 'line-opacity', routeOpacityAltnerative);
+            }    
+        });
+
+        if (map.getLayer(selectedProfile)) {
+            map.setLayoutProperty(selectedProfile, 'visibility', 'visible');
+            map.setPaintProperty(selectedProfile, 'line-opacity', routeOpacityMain);
+            map.setPaintProperty(selectedProfile + '-casing', 'line-opacity', routeOpacityMain);
+        }
+
         for (var layerId in localConfig.layers) {
             if (localConfig.layers.hasOwnProperty(layerId)) {
                 var layer = map.getLayer(layerId);
@@ -74,7 +73,7 @@ function showLayersForProfile(selectedProfile) {
                     if (styleConfig) {
                         map.setLayoutProperty(layerId, 'visibility', 'visible');
 
-                        if (location1 && location2) {
+                        if (state.location1 && state.location2) {
                             if (styleConfig.route) {
                                 if (styleConfig.route["line-opacity"]) {
                                     map.setPaintProperty(layerId, 'line-opacity', styleConfig.route["line-opacity"]);
@@ -227,8 +226,8 @@ function switchLanguage(element) {
     if (typeof (Storage) !== "undefined") {
         localStorage.setItem("lang", language);
     }
-    if (location1 && location2) {
-        calculateAllRoutes(location1, location2, availableProfiles, true, language);
+    if (state.location1 && state.location2) {
+        calculateAllRoutes(state.location1, state.location2, availableProfiles, true, language);
     }
     applyLanguage(language);
 }
@@ -400,7 +399,7 @@ function fromFieldInputDetected(el) {
         $("#useLocationInputFieldButton").show();
         if (windowLoaded) {
             console.log("setting location 1 to undef");
-            location1 = undefined;
+            state.location1 = undefined;
             showLocationsOnMap();
         }
     } else {
@@ -418,7 +417,7 @@ function toFieldInputDetected(el) {
     if (!el.value || el.value === "") {
         //show location button
         $("#clearInputFieldToButton").hide();
-        location2 = undefined;
+        state.location2 = undefined;
         showLocationsOnMap();
     } else {
         //show empty button
@@ -449,7 +448,7 @@ window.onload = function () {
     applyLanguage(language);
     let urlparams = getAllUrlParams();
     if (urlparams.loc1) {
-        location1 = urlparams.loc1;
+        state.location1 = urlparams.loc1;
     } else {
         if (!(typeof (Storage) !== "undefined" && new Date(localStorage.getItem("geolocation.permission.denieddate")).addDays(7) > new Date())) {
             setTimeout(function () {
@@ -458,7 +457,7 @@ window.onload = function () {
         }
     }
     if (urlparams.loc2) {
-        location2 = urlparams.loc2;
+        state.location2 = urlparams.loc2;
     }
 
     if (urlparams.p) {
@@ -467,15 +466,15 @@ window.onload = function () {
         }
     }
 
-    if (location1) {
-        reverseGeocode(location1, function (adress) {
+    if (state.location1) {
+        reverseGeocode(state.location1, function (adress) {
             $("#fromInput").val(adress);
         });
         $("#useLocationInputFieldButton").hide();
         $("#clearInputFieldFromButton").show();
     }
-    if (location2) {
-        reverseGeocode(location2, function (adress) {
+    if (state.location2) {
+        reverseGeocode(state.location2, function (adress) {
             $("#toInput").val(adress);
         });
         $("#clearInputFieldToButton").show();
@@ -543,7 +542,7 @@ document.getElementById("btnAddToHomescreen").addEventListener('click', (e) => {
  */
 function clearInputFieldFrom() {
     $("#fromInput").val("");
-    location1 = undefined;
+    state.location1 = undefined;
     showLocationsOnMap();
     fromFieldInputDetected(document.getElementById("fromInput"));
 }
@@ -553,7 +552,7 @@ function clearInputFieldFrom() {
  */
 function clearInputFieldTo() {
     $("#toInput").val("");
-    location2 = undefined;
+    state.location2 = undefined;
     showLocationsOnMap();
     toFieldInputDetected(document.getElementById("toInput"));
 }

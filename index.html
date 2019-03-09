@@ -52,10 +52,10 @@ if(detectIE()){
 <div class="container-fluid top-overlay">
     <button class="btn image-button" id="sidebarHamburger" onclick="toggleSidebar()"></button>
     <div class="row">
-        <div class="col-lg-2 col-md-2" id="top-overlay-center-spacer">
+        <div class="col-lg-1 col-md-0" id="top-overlay-center-spacer">
 	    <img src="logo.svg" alt="Iedereen Genkt" height="50vh"></img>
         </div>
-        <div class="col-lg-8 col-md-8" id="top-overlay-input">
+        <div class="col-lg-7 col-md-8" id="top-overlay-input">
             <div class="row">
                 <div class="col-lg-5 col-md-12 col-10 currentLocation right-addon">
                     <input class="form-control typeahead geocoder-input" type="text" id="fromInput" placeholder="From" oninput="fromFieldInputDetected(this)">
@@ -126,7 +126,7 @@ if(detectIE()){
         </div>
     </div>
 </div>
-<div id="sidebar-right-container" class="col-lg-3 col-md-4 col-sm-12 hidden-sidebar">
+<div id="sidebar-right-container" class="col-lg-3 col-md-4 col-sm-12">
     <div class="container-fluid">
         <div class="row">
             <div id="sidebar-top-spacer" class="col-12">
@@ -163,7 +163,7 @@ if(detectIE()){
                 <div id="profile-button-text-fast">Fast</div>
             </span>       
         </div>
-        <div id="fastest-instruction" class="route-instructions">
+        <div id="fastest-instruction" class="route-instructions height-zero">
             <div class="profile-explanation">
                 <h5 class="sub-title">This is the FAST route</h5>
                 <p>
@@ -185,7 +185,13 @@ if(detectIE()){
                 </div>
             </div>
         </div>
-        <div id="network-genk-instruction" class="route-instructions">
+        <!-- <div id="network-genk-summary" class="profile-summary height-zero"> 
+            <div class="profile-summary-explanation">
+                <img src="assets/img/genk-networks.svg"/>
+                <h5 class="sub-title">Dit is de route langs de fietsroutenetwerken van Stad Genk.</h5>
+            </div>
+        </div> -->
+        <div id="network-genk-instruction" class="route-instructions height-zero">
             <div class="profile-explanation">
                 <h5 class="sub-title">This is the GENK NETWORK route</h5>
                 <p>
@@ -206,7 +212,7 @@ if(detectIE()){
                 </div>
             </div>
         </div>
-        <div id="network-instruction" class="route-instructions">
+        <div id="network-instruction" class="route-instructions height-zero">
             <div class="profile-explanation">
                 <h5 class="sub-title">This is the NETWORKS route</h5>
                 <p>

@@ -1,19 +1,28 @@
-var location1 = undefined;
-var location1Marker = undefined;
-var location2 = undefined;
-var location2Marker = undefined;
-var routes = {};
-let routeRequests = {};
 let language = "nl";
+
+// TODO: label layers can be diffent per stylesheet, create a function to find them.
 //var labelLayer = "road-label";
 //var labelLayer = "waterway-label";
 var labelLayer = "highway_name_other";
 
+var state = {
+    routes: {
+
+    },
+    location1: undefined,
+    location1Marker: undefined,
+    location2: undefined,
+    location2Marker: undefined,
+    routeRequests: {}
+}
+
 // defines the available profiles.
 const availableProfiles = ["network-genk", "network", "fastest"];
 // the configuration of the profiles.
+
 var profileConfigs = {
     "network-genk": {
+        profileDivId: "network-genk-instruction",
         backendName: "genk",
         layers: {
             "cyclenetworks": {
@@ -38,6 +47,7 @@ var profileConfigs = {
         instructions: false
     },
     "network": {
+        profileDivId: "network-instruction",
         backendName:  "networks",
         layers: {
             "cyclenetworks": false,
@@ -69,6 +79,7 @@ var profileConfigs = {
         instructions: false
     },
     "fastest": {
+        profileDivId: "fastest-instruction",
         backendName: "balanced",
         layers: {
             "cyclenetworks": false,
@@ -103,16 +114,6 @@ if (typeof(Storage) !== "undefined") {
 } else {
     console.log("Sorry, your browser does not support Web Storage.");
 }
-
-/**
- * Map containing the html instruction elements id's for each profile.
- * @type {{fast: string, relaxed: string, networks: string}}
- */
-const profileHtmlId = {
-    "fastest": "fastest-instruction",
-    "network": "network-instruction",
-    "network-genk": "network-genk-instruction",
-};
 
 /**
  * Map containing the html id's of the profile buttons
@@ -195,16 +196,16 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
     const url = `${urls.route}/route?instructions=${instructions}&lang=${lang}${prof}&loc1=${originS}&loc2=${destinationS}`;
     routes[profile] = [];
 
-    if (routeRequests[profile]) {
+    if (state.routeRequests[profile]) {
         try {
-            routeRequests[profile].abort();
+            state.routeRequests[profile].abort();
         } catch (e) {
-            console.warn(e, routeRequests[profile]);
+            console.warn(e, state.routeRequests[profile]);
         }
     }
 
     // send api-call via ajax
-    routeRequests[profile] = $.ajax({
+    state.routeRequests[profile] = $.ajax({
         dataType: "json",
         url: url,
         success: success,
@@ -244,8 +245,10 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
         }
         routes[profile] = route;
 
-        let $instrResume = $(`#${profileHtmlId[profile]} .instructions-resume`);
-	    let $instrResumeEl = $(`#${profileHtmlId[profile]} .instructions-resume-electric`);
+        var localConfig = profileConfigs[profile];
+        var profileDivId = localConfig.profileDivId;
+        let $instrResume = $(`#${profileDivId} .instructions-resume`);
+	    let $instrResumeEl = $(`#${profileDivId} .instructions-resume-electric`);
         if (routeStops.length === 2) {
             $instrResume.html(`<div>${roundToThree(routeStops[1].properties.distance / 1000)}km</div><div>${timeToText(routeStops[1].properties.time)}min</div>`);
             let totaltimeElectr =  timeToText(routeStops[1].properties.time * 15 / 20 );
@@ -254,12 +257,12 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
             $instrResume.html("");
 	        $instrResumeEl.html("");
         }
-        $(`#${profileHtmlId[profile]} .elevation-info`).html(`<div><canvas id="chart-${profile}" style="width: 100%; height: 100px"></canvas></div>`);
+        $(`#${profileDivId} .elevation-info`).html(`<div><canvas id="chart-${profile}" style="width: 100%; height: 100px"></canvas></div>`);
 
         // We disabled the height profiles displayChart(`chart-${profile}`, heightInfo);
 
         // Shows the instructions in the sidebar
-        let $profileInstructions = $(`#${profileHtmlId[profile]} ul`);
+        let $profileInstructions = $(`#${profileDivId} ul`);
         $profileInstructions.html("");
         $profileInstructions.append(`<li class="startpoint-li">${$("#fromInput").val()}</li>`);
         if (json.instructions && json.instructions.features) {
@@ -395,16 +398,16 @@ function removeAllRoutesFromMap() {
 function showLocationsOnMap() {
     var me = this;
 
-    if (location1 === undefined || location2 === undefined) {
+    if (state.location1 === undefined || state.location2 === undefined) {
         removeAllRoutesFromMap();
     }
-    if (location1Marker !== undefined) {
-        location1Marker.remove();
+    if (state.location1Marker !== undefined) {
+        state.location1Marker.remove();
     }
-    if (location1 !== undefined) {
-        location1Marker = createMarker(location1, '#00808B');
-        location1Marker.on('dragend', function () {
-            var latLng = location1Marker.getLngLat();
+    if (state.location1 !== undefined) {
+        state.location1Marker = createMarker(state.location1, '#00808B');
+        state.location1Marker.on('dragend', function () {
+            var latLng = state.location1Marker.getLngLat();
             me.location1 = [latLng.lng, latLng.lat];
             me.showLocationsOnMap();
             // Update 'from'-textfield
@@ -418,13 +421,13 @@ function showLocationsOnMap() {
             
         });
     }
-    if (location2Marker !== undefined) {
-        location2Marker.remove();
+    if (state.location2Marker !== undefined) {
+        state.location2Marker.remove();
     }
-    if (location2 !== undefined) {
-        location2Marker = createMarker(location2, '#2D4959');
-        location2Marker.on('dragend', function () {
-            var latLng = location2Marker.getLngLat();
+    if (state.location2 !== undefined) {
+        state.location2Marker = createMarker(state.location2, '#2D4959');
+        state.location2Marker.on('dragend', function () {
+            var latLng = state.location2Marker.getLngLat();
             me.location2 = [latLng.lng, latLng.lat];
             me.showLocationsOnMap();
             // Update 'to'-textfield
@@ -435,8 +438,8 @@ function showLocationsOnMap() {
             });
         });
     }
-    if (location1 !== undefined && location2 !== undefined) {
-        calculateAllRoutes(location1, location2);
+    if (state.location1 !== undefined && state.location2 !== undefined) {
+        calculateAllRoutes(state.location1, state.location2);
     } 
     updateUrlParams();
 }
@@ -444,11 +447,11 @@ function showLocationsOnMap() {
 // Sets the latitude, longitude, zoom level and router points as params in the url
 function updateUrlParams(){
     var params = {};
-    if (location1) {
-        params.loc1 = [Number(location1[0]).toFixed(6), Number(location1[1]).toFixed(6)];
+    if (state.location1) {
+        params.loc1 = [Number(state.location1[0]).toFixed(6), Number(state.location1[1]).toFixed(6)];
     }
-    if(location2){
-        params.loc2 = [Number(location2[0]).toFixed(6), Number(location2[1]).toFixed(6)];
+    if(state.location2){
+        params.loc2 = [Number(state.location2[0]).toFixed(6), Number(state.location2[1]).toFixed(6)];
     }
     params.zoom = map.getZoom().toFixed(2);
     params.lat = map.getCenter().lat.toFixed(6);
@@ -615,7 +618,7 @@ map.on('load', function () {
     });
 
     sidebarDisplayProfile(selectedProfile);
-    if (location1 || location2) {
+    if (state.location1 || state.location2) {
         showLocationsOnMap();
     }
 });
@@ -644,15 +647,15 @@ map.on('click', function (e) {
         sidebarDisplayProfile(profile_found);
     } else {                // set new location
         var lngLatArray = [e.lngLat.lng, e.lngLat.lat];
-        if (location1 === undefined) {
-            location1 = lngLatArray;
-            reverseGeocode(location1, function (adress) {
+        if (state.location1 === undefined) {
+            state.location1 = lngLatArray;
+            reverseGeocode(state.location1, function (adress) {
                 $("#fromInput").val(adress);
                 fromFieldInputDetected(document.getElementById("fromInput"));
             });
         } else {
-            location2 = lngLatArray;
-            reverseGeocode(location2, function (adress) {
+            state.location2 = lngLatArray;
+            reverseGeocode(state.location2, function (adress) {
                 $("#toInput").val(adress);
                 toFieldInputDetected(document.getElementById("toInput"));
             });
@@ -792,10 +795,10 @@ function initInputGeocoders() {
             var id = this.$element.attr('id');
             if (id == "fromInput") {
                 //set the origin, add to the map
-                location1 = activeItem.loc;
+                state.location1 = activeItem.loc;
             } else if (id == "toInput") {
                 //set the destination, add to the map
-                location2 = activeItem.loc;
+                state.location2 = activeItem.loc;
             } else {
                 //fout
                 console.warn("FIELD NOT FOUND!");
@@ -851,9 +854,9 @@ Date.prototype.addDays = function(days) {
  * @param position the position to be set (LatLng)
  */
 function showPosition(position) {
-    location1 = [position.coords.longitude, position.coords.latitude];
+    state.location1 = [position.coords.longitude, position.coords.latitude];
     showLocationsOnMap();
-    reverseGeocode(location1, function (adress) {
+    reverseGeocode(state.location1, function (adress) {
         $("#fromInput").val(adress);
         fromFieldInputDetected(document.getElementById("fromInput"));
     });
@@ -902,9 +905,9 @@ function fitToBounds(origin, destination) {
  * Make location1 location2 and location2 location1.
  */
 function swapOriginDestination() {
-    var locTemp = location1;
-    location1 = location2;
-    location2 = locTemp;
+    var locTemp = state.location1;
+    state.location1 = state.location2;
+    state.location2 = locTemp;
 
     var fromInput = $("#fromInput");
     var toInput = $("#toInput");

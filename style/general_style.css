@@ -582,3 +582,28 @@ input[type="text"], textarea {
 #clearInputFieldFromButton, #clearInputFieldToButton {
     display: none;
 }
+
+.profile-summary-explanation {
+    margin: auto;
+    margin-top: 40%;
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+}
+
+.profile-summary {
+    height: 100%;
+    background-color: #00808B;
+    color: #b3d9dc;
+    font-size: 10px;
+}
+
+.profile-summary img {
+    height: 50px;
+}
+
+.profile-summary h5 {
+    margin: 20px;
+    font-size: 1rem;
+    font-weight: 400;
+}
