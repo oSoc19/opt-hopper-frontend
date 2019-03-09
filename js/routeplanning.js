@@ -485,8 +485,9 @@ map.on('load', function () {
             "line-join": "round"
           },
           "paint": {
-            "line-color": "#000088",
-            "line-width": 3
+            "line-color": "#2D495A",
+            "line-width": 2,
+            "line-dasharray": [2, 2]
           }
     }, labelLayer);
 
@@ -500,7 +501,7 @@ map.on('load', function () {
         },
         "paint": {
             "circle-stroke-width": 2,
-            "circle-stroke-color": "#000088",
+            "circle-stroke-color": "#2D495A",
             "circle-radius": 10,
             "circle-color": "#000088",
             "circle-opacity": 0
@@ -529,13 +530,13 @@ map.on('load', function () {
         "layout": {
             "visibility": "none",
             "text-field": "{rcn_ref}",
-            "text-size": 12
+            "text-size": 13
         },
         "paint": {
-            "text-color": "#000088",
+            "text-color": "#2D495A",
             "text-halo-color": "#FFFFFF",
-            "text-halo-width": 4,
-            "text-halo-blur": 1
+            "text-halo-width": 2,
+            "text-halo-blur": 0
         }
     });
 
