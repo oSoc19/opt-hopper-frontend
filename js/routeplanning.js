@@ -23,6 +23,7 @@ const availableProfiles = ["network-genk", "network", "fastest"];
 var profileConfigs = {
     "network-genk": {
         profileDivId: "network-genk-instruction",
+        summaryDivId: "network-genk-summary",
         backendName: "genk",
         layers: {
             "cyclenetworks": {
@@ -48,6 +49,7 @@ var profileConfigs = {
     },
     "network": {
         profileDivId: "network-instruction",
+        summaryDivId: "network-summary",
         backendName:  "networks",
         layers: {
             "cyclenetworks": false,
@@ -80,6 +82,7 @@ var profileConfigs = {
     },
     "fastest": {
         profileDivId: "fastest-instruction",
+        summaryDivId: "fastest-summary",
         backendName: "balanced",
         layers: {
             "cyclenetworks": false,
@@ -377,7 +380,7 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
  * Removes routes from map.. obviously
  */
 function removeAllRoutesFromMap() {
-    showLayersForProfile(selectedProfile);
+    sidebarDisplayProfile(selectedProfile);
     for (let i in availableProfiles) {
         profile = availableProfiles[i];
         if (map.getLayer(profile)) {
@@ -408,7 +411,7 @@ function showLocationsOnMap() {
         state.location1Marker = createMarker(state.location1, '#00808B');
         state.location1Marker.on('dragend', function () {
             var latLng = state.location1Marker.getLngLat();
-            me.location1 = [latLng.lng, latLng.lat];
+            state.location1 = [latLng.lng, latLng.lat];
             me.showLocationsOnMap();
             // Update 'from'-textfield
            
@@ -428,7 +431,7 @@ function showLocationsOnMap() {
         state.location2Marker = createMarker(state.location2, '#2D4959');
         state.location2Marker.on('dragend', function () {
             var latLng = state.location2Marker.getLngLat();
-            me.location2 = [latLng.lng, latLng.lat];
+            state.location2 = [latLng.lng, latLng.lat];
             me.showLocationsOnMap();
             // Update 'to'-textfield
             $.getJSON(urls.reverseGeocoder.format(latLng.lng,latLng.lat), function(data){

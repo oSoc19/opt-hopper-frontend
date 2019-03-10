@@ -33,15 +33,21 @@ function sidebarDisplayProfileHtmlId(id) {
  */
 function sidebarDisplayProfile(profile) {
     selectedProfile = profile;
-    if (state.location1 && state.location2) {
-        var localConfig = profileConfigs[selectedProfile];
+    var localConfig = profileConfigs[selectedProfile];
+    
+    $(".route-instructions").addClass("height-zero");
+    $(".profile-summary").addClass("height-zero");
+    $("#sidebar-top>span").removeClass("active");
+    $("#top-overlay-profile-buttons-mobile>span").removeClass("active");
+    $(`#${getKeyByValue(profileButtonIds, profile)}`).addClass("active");
+    $(`#${getKeyByValue(profileButtonIds, profile)}-mobile`).addClass("active");
 
-        $(".route-instructions").addClass("height-zero");
+    if (state.location1 && state.location2) {
+        //$(".profile-summary-explanation").addClass("height-zero");
         $(`#${localConfig.profileDivId}`).removeClass("height-zero");
-        $("#sidebar-top>span").removeClass("active");
-        $("#top-overlay-profile-buttons-mobile>span").removeClass("active");
-        $(`#${getKeyByValue(profileButtonIds, profile)}`).addClass("active");
-        $(`#${getKeyByValue(profileButtonIds, profile)}-mobile`).addClass("active");
+    
+    } else {
+        $(`#${localConfig.summaryDivId}`).removeClass("height-zero");
     }   
 
     showLayersForProfile(selectedProfile);

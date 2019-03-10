@@ -513,10 +513,6 @@ input[type="text"], textarea {
     font-size: .85em;
 }
 
-.height-zero {
-    height: 0px;
-}
-
 /*.dropdown-menu {
     display: block !important;
 }*/
@@ -598,12 +594,29 @@ input[type="text"], textarea {
     font-size: 10px;
 }
 
-.profile-summary img {
-    height: 50px;
+.profile-summary svg {
+    height: 25%;
+    width: 25%;
+}
+
+
+.profile-summary svg path {
+    fill: white;
+    stroke: white;
+}
+
+.profile-summary svg polyline,
+.profile-summary svg circle {
+    stroke: white;
 }
 
 .profile-summary h5 {
     margin: 20px;
     font-size: 1rem;
     font-weight: 400;
+}
+
+.height-zero {
+    height: 0px;
+    display: none;
 }
