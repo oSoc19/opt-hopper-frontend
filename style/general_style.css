@@ -382,13 +382,14 @@ body {
 .download-button-back {
     display: flex; 
     align-items: center; 
-    margin-left: 30%;
-    height: 100px;
+    margin-left: 25%;
+    margin-bottom: 20px;
+    height: 60px;
 }
 
 .download-button {
     background-color: #2D4959;
-    width: 60%;
+    width: 180px;
     padding: 10px;
     display: flex;
     align-items: center;
