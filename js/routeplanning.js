@@ -72,7 +72,8 @@ var profileConfigs = {
             "cyclenodes-circles": true,
             "cyclenodes-circles-high": true,
             "cyclenodes-circles-center": true,
-            "cyclenodes-labels": true
+            "cyclenodes-labels": true,
+            "cyclenodes-labels-high": true
         },
         routecolor: {
             backend: false,
@@ -168,8 +169,6 @@ function calculateAllRoutes(origin, destination, profiles = availableProfiles, l
     }
     //$(".route-instructions ul").html("Loading...");
     $(".route-instructions ul").html("");
-    $(`.route-instructions  .instructions-resume`).html("");
-    $(`.route-instructions  .instructions-resume-electric`).html("");
     $(`.route-instructions .elevation-info`).html("<img src='./img/Loading.gif' style='width: 100%;'  alt=\"Loading...\" />");
     routes = {};
     removeAllRoutesFromMap();
@@ -250,17 +249,14 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
 
         var localConfig = profileConfigs[profile];
         var profileDivId = localConfig.profileDivId;
-        let $instrResume = $(`#${profileDivId} .instructions-resume`);
-	    let $instrResumeEl = $(`#${profileDivId} .instructions-resume-electric`);
         if (routeStops.length === 2) {
-            $instrResume.html(`<div>${roundToThree(routeStops[1].properties.distance / 1000)}km</div><div>${timeToText(routeStops[1].properties.time)}min</div>`);
             let totaltimeElectr =  timeToText(routeStops[1].properties.time * 15 / 20 );
-	        $instrResumeEl.html(`<div>${totaltimeElectr} ${totaltimeElectr == 1 ? "minuut" : "minuten"} met een elektrische fiets</div>`);
-        } else {
-            $instrResume.html("");
-	        $instrResumeEl.html("");
+            $(`#${profileDivId} .distance`).html(`${roundToThree(routeStops[1].properties.distance / 1000)} km`);
+            $(`#${profileDivId} .time`).html(`${timeToText(routeStops[1].properties.time)} min`);
+            $(`#${profileDivId} .time-electric`).html(`${totaltimeElectr} min`);
+            //$instrResume.html(`<div></div><div>min<br><div><img class="electricity" src="assets/img/electricity.svg"/>  </div></div>`);
         }
-        $(`#${profileDivId} .elevation-info`).html(`<div><canvas id="chart-${profile}" style="width: 100%; height: 100px"></canvas></div>`);
+        //$(`#${profileDivId} .elevation-info`).html(`<div><canvas id="chart-${profile}" style="width: 100%; height: 100px"></canvas></div>`);
 
         // We disabled the height profiles displayChart(`chart-${profile}`, heightInfo);
 
@@ -581,7 +577,7 @@ map.on('load', function () {
         "paint": {
             "circle-stroke-width": 1,
             "circle-stroke-color": "#2D495A",
-            "circle-radius": 5,
+            "circle-radius": 7,
             "circle-color": "#FFFFFF"
         }
     });
@@ -598,6 +594,25 @@ map.on('load', function () {
         "paint": {
             "circle-radius": 10,
             "circle-color": "#FFFFFF"
+        }
+    });
+
+    map.addLayer({
+        "id": "cyclenodes-labels-high",
+        "type": "symbol",
+        "source": "cyclenetworks-tiles",
+        "source-layer": "cyclenodes",
+        "maxzoom": 11,
+        "layout": {
+            "visibility": "none",
+            "text-field": "{rcn_ref}",
+            "text-size": 7
+        },
+        "paint": {
+            "text-color": "#2D495A",
+            "text-halo-color": "#FFFFFF",
+            "text-halo-width": 2,
+            "text-halo-blur": 0
         }
     });
 

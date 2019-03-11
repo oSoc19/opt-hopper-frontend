@@ -15,6 +15,14 @@ body {
     flex-direction: column;
 }
 
+
+
+.electricity-box {
+   display: flex;
+   align-items:center;
+   margin-left: 30%;
+}
+
 .map-container {
     flex-grow: 1;
     position: inherit;
@@ -45,8 +53,8 @@ body {
     width: 100%;
     z-index: 100;
     background: #FAFAFA;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
+    /* padding-top: 1vh;
+    padding-bottom: 1vh; */
 }
 
 .image-button:before {
@@ -64,6 +72,10 @@ body {
 .center-helper {
     margin: auto;
     /*max-width: 300px;*/
+}
+
+.top-overlap-nav {
+    height: 4em;
 }
 
 #top-overlay-center-spacer {
@@ -111,7 +123,6 @@ body {
     display: flex;
     flex-direction: row;
     font-size: 1.5rem;
-    font-weight: bold;
     margin: 1rem;
 }
 
@@ -207,8 +218,8 @@ body {
 }
 
 .route {
-    background-color: white;
-    color: #2D4959;
+    background-color: #2D4959;
+    color: #00808B;
     text-align: center;
     cursor: pointer;
     width: 33%;
@@ -219,6 +230,16 @@ body {
     padding-bottom: 3px;
     padding-top: 3px;
     /*flex-grow: 1;*/
+}
+
+.route svg path {
+    fill: #00808B;
+    stroke: #00808B;
+}
+
+.route svg polyline,
+.route svg circle {
+    stroke: #00808B;
 }
 
 
@@ -265,19 +286,23 @@ body {
 
 .profile-explanation {
     font-family: Circular-Std-Book, sans-serif;
-    margin: 20px 15px 20px 15px;
-   
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .profile-explanation h4 {
     font-family: Circular-Std-Bold, sans-serif;
 }
 
-.profile-explanation p {
-    min-height: 20%;
+.profile-explanation-overview {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-
+.profile-explanation p {
+    min-height: 20%;
+    text-align: center;
+}
 
 .route:hover path, .route:hover polyline {
     fill: white;
@@ -297,9 +322,15 @@ body {
     background-color: #00808B;
 }
 
-.active path, .active polyline {
-    fill: white;
-    stroke: white;
+
+.active svg path {
+    fill: #ffffff;
+    stroke: #ffffff;
+}
+
+.active svg polyline,
+.active svg circle {
+    stroke: #ffffff;
 }
 
 .active circle {
@@ -341,6 +372,37 @@ body {
     color: white;
     list-style: none;
     overflow-x: hidden;
+}
+
+.instruction-accordion {
+    background-color: white;
+    color: #2D4959
+}
+
+.download-button-back {
+    display: flex; 
+    align-items: center; 
+    margin-left: 30%;
+    height: 100px;
+}
+
+.download-button {
+    background-color: #2D4959;
+    width: 60%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.download-button svg {
+    width: 15%;
+    height: 15%;
+    margin-right: 10px;
+}
+
+.download {
+    fill: white;
+    stroke: white;
 }
 
 .button-collapse-instructions {
@@ -599,7 +661,6 @@ input[type="text"], textarea {
     width: 25%;
 }
 
-
 .profile-summary svg path {
     fill: white;
     stroke: white;
@@ -608,6 +669,21 @@ input[type="text"], textarea {
 .profile-summary svg polyline,
 .profile-summary svg circle {
     stroke: white;
+}
+
+.electricity path {
+    fill: white;
+    stroke: white;
+}
+
+.electricity-box svg {
+    height: 15%;
+    width: 15%;
+    margin-right: 5px;
+}
+
+.time-electric {
+    font-size: 0.6em;
 }
 
 .profile-summary h5 {

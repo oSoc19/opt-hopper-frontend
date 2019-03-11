@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -12,232 +13,184 @@
     <title>Iedereen Mobiel</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'/>
-    <link href='style/general_style.css' rel='stylesheet'/>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='style/general_style.css' rel='stylesheet' />
     <script src="js/constants.js"></script>
 </head>
+
 <body style="height: 100vh">
 
-<script>
+    <script>
 
 
-function detectIE(){
-   var ua = window.navigator.userAgent;
+        function detectIE() {
+            var ua = window.navigator.userAgent;
 
-    var msie = ua.indexOf('MSIE ');
-    if (msie > 0) {
-        // IE 10 or older
-        return true;
-    }
+            var msie = ua.indexOf('MSIE ');
+            if (msie > 0) {
+                // IE 10 or older
+                return true;
+            }
 
-    var trident = ua.indexOf('Trident/');
-    if (trident > 0) {
-        // IE 11
-        return true;
-    }
-    return false;
-}
+            var trident = ua.indexOf('Trident/');
+            if (trident > 0) {
+                // IE 11
+                return true;
+            }
+            return false;
+        }
 
-if(detectIE()){
-	alert("Het programma dat je gebruikt om op het internet te gaan is te oud. Gelieve een andere brower te installeren. We sturen je door...");
-	window.location.replace("https://www.mozilla.org/en-US/firefox/new/");
-}
-
-
-</script>
+        if (detectIE()) {
+            alert("Het programma dat je gebruikt om op het internet te gaan is te oud. Gelieve een andere brower te installeren. We sturen je door...");
+            window.location.replace("https://www.mozilla.org/en-US/firefox/new/");
+        }
 
 
-<div class="container-fluid top-overlay">
-    <button class="btn image-button" id="sidebarHamburger" onclick="toggleSidebar()"></button>
-    <div class="row">
-        <div class="col-lg-1 col-md-0" id="top-overlay-center-spacer">
-	    <img src="logo.svg" alt="Iedereen Genkt" height="50vh"></img>
-        </div>
-        <div class="col-lg-7 col-md-8" id="top-overlay-input">
-            <div class="row">
-                <div class="col-lg-5 col-md-12 col-10 currentLocation right-addon">
-                    <input class="form-control typeahead geocoder-input" type="text" id="fromInput" placeholder="From" oninput="fromFieldInputDetected(this)">
-                    <img id="useLocationInputFieldButton" src="./assets/img/currentLocation.svg" onclick="useCurrentLocation()"/>
-                    <img id="clearInputFieldFromButton" src="./style/icons/ic_clear_black_24px.svg" onclick="clearInputFieldFrom()"/>
-                </div>
-                <div class="col-lg-2 col-md-12 col-1 text-center">
-                    <button class="btn btn-warning image-button" id="swap-origin-destination-button"
+    </script>
+
+
+    <div class="container-fluid top-overlay">
+        <button class="btn image-button" id="sidebarHamburger" onclick="toggleSidebar()"></button>
+        <div class="row top-overlap-nav">
+            <div class="col-lg-1 col-md-0" id="top-overlay-center-spacer">
+                <img src="logo.svg" alt="Iedereen Genkt" height="50vh"></img>
+            </div>
+            <div class="col-lg-7 col-md-8" id="top-overlay-input">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 col-10 currentLocation right-addon">
+                        <input class="form-control typeahead geocoder-input" type="text" id="fromInput"
+                            placeholder="From" oninput="fromFieldInputDetected(this)">
+                        <img id="useLocationInputFieldButton" src="./assets/img/currentLocation.svg"
+                            onclick="useCurrentLocation()" />
+                        <img id="clearInputFieldFromButton" src="./style/icons/ic_clear_black_24px.svg"
+                            onclick="clearInputFieldFrom()" />
+                    </div>
+                    <div class="col-lg-2 col-md-12 col-1 text-center">
+                        <button class="btn btn-warning image-button" id="swap-origin-destination-button"
                             onclick="swapOriginDestination()"></button>
-                </div>
-                <div class="col-lg-5 col-md-12 col-10 right-addon">
-                    <input class="form-control typeahead geocoder-input" type="text" id="toInput" placeholder="To" oninput="toFieldInputDetected(this)">
-                    <img id="clearInputFieldToButton" src="./style/icons/ic_clear_black_24px.svg" onclick="clearInputFieldTo()"/>
+                    </div>
+                    <div class="col-lg-5 col-md-12 col-10 right-addon">
+                        <input class="form-control typeahead geocoder-input" type="text" id="toInput" placeholder="To"
+                            oninput="toFieldInputDetected(this)">
+                        <img id="clearInputFieldToButton" src="./style/icons/ic_clear_black_24px.svg"
+                            onclick="clearInputFieldTo()" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div id='top-overlay-profile-buttons-mobile'>
-            <span class="btn btn-lg text-center route" id="network-genk-route-mobile"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
-                <span>
-                    <img class="svg" src="./assets/img/network.svg"/>
-                </span>
-                <br>
-                <div id="profile-button-text-networks-mobile">Genk Networks</div>
-            </span>
-            <span class="btn btn-lg text-center route" id="fastest-route-mobile"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
-                <span>
-                    <img class="svg" src="assets/img/fast.svg"/>
-                </span>
-                <br>
-                <div id="profile-button-text-fast-mobile">Fast</div>
-            </span>
-            <span class="btn btn-lg text-center route" id="network-route-mobile"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
-                <span>
-                    <img class="svg" src="./assets/img/network.svg"/>
-                </span>
-                <br>
-                <div id="profile-button-text-relaxed-mobile">Cycle Networks</div>
-            </span>
-        </div>
-    </div>
-    <!--</div>-->
-</div>
-<div class="container-fluid  map-container">
-    <div class="row">
-        <div class="col-lg-12" style="padding: 0px 0px 0px 0px;">
-            <div id='map' style='width: 100%; height: 100%'></div>
-            <script>
-                mapboxgl.accessToken = mapboxAccessCode;
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    //style: 'mapbox://styles/ben-anyways/cjm7obna8e73u2rppk8pc49di',
-                    //style: 'mapbox://styles/ben-anyways/cjs66aa5d27yv1ftdyq1kvlgr',
-                    //style: 'mapbox://styles/ben-anyways/cj9zvkimu8wjl2spbq2ej7en0',
-                    //style: 'mapbox://styles/ben-anyways/cjm7obefs14442sp63lworwqg',
-                    //style: 'https://maps.tilehosting.com/styles/positron/style.json?key=RrAiXeTeoR4I64mRSxk8',
-                    style: 'https://maps.tilehosting.com/c/57530131-c1b9-40f3-990b-a4ac7177ba23/styles/positron-cycling/style.json?key=RrAiXeTeoR4I64mRSxk8',
-                    //style: './style/streets.json',
-                    center: [5.5027, 50.9632], // starting position [lng, lat]
-                    zoom: 14, // starting zoom
-                    preserveDrawingBuffer: true
-                });
-            </script>
-        </div>
-    </div>
-</div>
-<div id="sidebar-right-container" class="col-lg-3 col-md-4 col-sm-12">
-    <div class="container-fluid">
         <div class="row">
-            <div id="sidebar-top-spacer" class="col-12">
-                <span class="float-right">
-                    <button class="btn-close btn-lg image-button" id="sidebarClose" onclick="toggleSidebar()"></button>
+            <div id='top-overlay-profile-buttons-mobile'>
+                <span class="btn btn-lg text-center route" id="network-genk-route-mobile"
+                    onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <span>
+                        <img class="svg" src="./assets/img/network.svg" />
+                    </span>
+                    <br>
+                    <div id="profile-button-text-networks-mobile">Genk Networks</div>
                 </span>
+                <span class="btn btn-lg text-center route" id="fastest-route-mobile"
+                    onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <span>
+                        <img class="svg" src="assets/img/fast.svg" />
+                    </span>
+                    <br>
+                    <div id="profile-button-text-fast-mobile">Fast</div>
+                </span>
+                <span class="btn btn-lg text-center route" id="network-route-mobile"
+                    onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <span>
+                        <img class="svg" src="./assets/img/network.svg" />
+                    </span>
+                    <br>
+                    <div id="profile-button-text-relaxed-mobile">Cycle Networks</div>
+                </span>
+            </div>
+        </div>
+        <!--</div>-->
+    </div>
+    <div class="container-fluid  map-container">
+        <div class="row">
+            <div class="col-lg-12" style="padding: 0px 0px 0px 0px;">
+                <div id='map' style='width: 100%; height: 100%'></div>
+                <script>
+                    mapboxgl.accessToken = mapboxAccessCode;
+                    var map = new mapboxgl.Map({
+                        container: 'map',
+                        //style: 'mapbox://styles/ben-anyways/cjm7obna8e73u2rppk8pc49di',
+                        //style: 'mapbox://styles/ben-anyways/cjs66aa5d27yv1ftdyq1kvlgr',
+                        //style: 'mapbox://styles/ben-anyways/cj9zvkimu8wjl2spbq2ej7en0',
+                        //style: 'mapbox://styles/ben-anyways/cjm7obefs14442sp63lworwqg',
+                        //style: 'https://maps.tilehosting.com/styles/positron/style.json?key=RrAiXeTeoR4I64mRSxk8',
+                        style: 'https://maps.tilehosting.com/c/57530131-c1b9-40f3-990b-a4ac7177ba23/styles/positron-cycling/style.json?key=RrAiXeTeoR4I64mRSxk8',
+                        //style: './style/streets.json',
+                        center: [5.5027, 50.9632], // starting position [lng, lat]
+                        zoom: 14, // starting zoom
+                        preserveDrawingBuffer: true
+                    });
+                </script>
             </div>
         </div>
     </div>
-    <div id='sidebar-right-content'>
-        <div id='sidebar-top'>
-            <span class="btn btn-lg text-center route" id="network-genk-route"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
-                <span>
-                    <img class="svg" src="./assets/img/genk-networks.svg"/>
-                </span>
-                <br>
-                <div id="profile-button-text-genk-network">Genk Networks</div>
-            </span>  
-            <span class="btn btn-lg text-center route" id="network-route"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
-                <span>
-                    <img class="svg" src="./assets/img/network.svg"/>
-                </span>
-                <br>
-                <div id="profile-button-text-network">Networks</div>
-            </span>   
-            <span class="btn btn-lg text-center route" id="fastest-route"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
-                <span>
-                    <img class="svg" src="assets/img/fast.svg"/>
-                </span>
-                <br>
-                <div id="profile-button-text-fast">Fast</div>
-            </span>       
-        </div>
-        <div id="fastest-summary" class="profile-summary height-zero"> 
-            <div class="profile-summary-explanation">
-                <img class="svg" src="assets/img/fast.svg"/>
-                <h5 class="sub-title">Dit is de snelste route.</h5>
-            </div>
-        </div>
-        <div id="fastest-instruction" class="route-instructions height-zero">
-            <div class="profile-explanation">
-                <h5 class="sub-title">This is the FAST route</h5>
-                <p>
-                    This profile minimizes the time to destination.
-                </p>
-  		        <div class="instructions-resume-electric"></div>
-                <div class="instructions-resume">
-                    <div class="profile-explanation-icons">                   
-                    </div>
+    <div id="sidebar-right-container" class="col-lg-3 col-md-4 col-sm-12">
+        <div class="container-fluid height-zero">
+            <div class="row">
+                <div id="sidebar-top-spacer" class="col-12">
+                    <span class="float-right">
+                        <button class="btn-close btn-lg image-button" id="sidebarClose"
+                            onclick="toggleSidebar()"></button>
+                    </span>
                 </div>
             </div>
-            <div id="accordion1">
-                <div class="card">
-                    <div id="collapseFour" class="collapse show" aria-labelledby="headingFour" data-parent="#accordion1">
-                        <div class="card-body">
-                            <ul></ul>
+        </div>
+        <div id='sidebar-right-content'>
+            <div id='sidebar-top'>
+                <span class="btn btn-lg text-center route" id="network-genk-route"
+                    onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <span>
+                        <img class="svg" src="./assets/img/genk-networks.svg" />
+                    </span>
+                    <br>
+                    <div id="profile-button-text-genk-network">Genk-netwerk</div>
+                </span>
+                <span class="btn btn-lg text-center route" id="network-route"
+                    onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <span>
+                        <img class="svg" src="./assets/img/network.svg" />
+                    </span>
+                    <br>
+                    <div id="profile-button-text-network">Knooppunten</div>
+                </span>
+                <span class="btn btn-lg text-center route" id="fastest-route"
+                    onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <span>
+                        <img class="svg" src="assets/img/fast.svg" />
+                    </span>
+                    <br>
+                    <div id="profile-button-text-fast">Snel</div>
+                </span>
+            </div>
+            <div id="fastest-summary" class="profile-summary height-zero">
+                <div class="profile-summary-explanation">
+                    <img class="svg" src="assets/img/fast.svg" />
+                    <h5 class="sub-title">Dit is de snelste route.</h5>
+                </div>
+            </div>
+            <div id="fastest-instruction" class="route-instructions height-zero">
+                <div class="profile-explanation">
+                    <p>
+                        Dit is de snelste route.
+                    </p>
+                    <div class="instructions-resume">
+                        <div class="profile-explanation-icons">
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div id="network-genk-summary" class="profile-summary height-zero"> 
-            <div class="profile-summary-explanation">
-                <img class="svg" src="assets/img/genk-networks.svg"/>
-                <h5 class="sub-title">Dit is de route langs de fietsroutenetwerken van Stad Genk.</h5>
-            </div>
-        </div>
-        <div id="network-genk-instruction" class="route-instructions height-zero">
-            <div class="profile-explanation">
-                <h5 class="sub-title">This is the GENK NETWORK route</h5>
-                <p>
-                    This profile highly prefers the cycling networks.
-                </p>
-     		<div class="instructions-resume-electric"></div>
-	        <div class="instructions-resume"></div>
-                <div class="profile-explanation-icons">                    
-                </div>
-            </div>
-            <div id="accordion2">
-                <div class="card">
-                    <div id="collapseFour" class="collapse show" aria-labelledby="headingFour" data-parent="#accordion4">
-                        <div class="card-body">
-                            <ul></ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="network-summary" class="profile-summary height-zero"> 
-            <div class="profile-summary-explanation">
-                <img class="svg" src="assets/img/network.svg"/>
-                <h5 class="sub-title">Dit is de route langs de fietsknooppunten.</h5>
-            </div>
-        </div>
-        <div id="network-instruction" class="route-instructions height-zero">
-            <div class="profile-explanation">
-                <h5 class="sub-title">This is the NETWORKS route</h5>
-                <p>
-                    This profile heavily prefers the cycling networks.
-                </p>
- 	        	<div class="instructions-resume-electric"></div>
-                <div class="instructions-resume">
-                    <div class="profile-explanation-icons">                    
-                    </div>
-                </div>
-                <div id="accordion3">
-                    <div class="card">    
-                        <div id="collapseFour" class="collapse show" aria-labelledby="headingFour" data-parent="#accordion4">
+                <div id="accordion1">
+                    <div class="card">
+                        <div id="collapseFour" class="collapse show" aria-labelledby="headingFour"
+                            data-parent="#accordion1">
                             <div class="card-body">
                                 <ul></ul>
                             </div>
@@ -245,21 +198,89 @@ if(detectIE()){
                     </div>
                 </div>
             </div>
+            <div id="network-genk-summary" class="profile-summary height-zero">
+                <div class="profile-summary-explanation">
+                    <img class="svg" src="assets/img/genk-networks.svg" />
+                    <h5 class="sub-title">Dit is de Genk-netwerk route. Dit profiel geeft de voorkeur aan het
+                        fietsnetwerk.</h5>
+                </div>
+            </div>
+            <div id="network-genk-instruction" class="route-instructions height-zero">
+                <div class="profile-explanation">
+                    <div class="instructions-resume"></div>
+                    <div class="profile-explanation-icons">
+                    </div>
+                    <p>
+                        Dit is de Genk-netwerk route. Dit profiel geeft de voorkeur aan het fietsnetwerk.
+                    </p>
+                </div>
+                <div id="accordion2">
+                    <div class="card">
+                        <div id="collapseFour" class="collapse show" aria-labelledby="headingFour"
+                            data-parent="#accordion4">
+                            <div class="card-body">
+                                <ul></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="network-summary" class="profile-summary height-zero">
+                <div class="profile-summary-explanation">
+                    <img class="svg" src="assets/img/network.svg" />
+                    <h5 class="sub-title">Dit is de knooppunten-route. Dit profiel geeft de voorkeur aan het
+                        knooppuntennetwerk.</h5>
+                </div>
+            </div>
+            <div id="network-instruction" class="route-instructions height-zero">
+                <div class="profile-explanation">
+                    <div class="profile-explanation-overview">
+                        <div class="instructions-resume">
+                            <div class="distance">0 km</div>
+                            <div>
+                                <div class="time">0 min</div>
+                                <div class="electricity-box" style="display: flex;">
+                                    <img class="svg electricity" src="assets/img/electricity.svg"><span
+                                        class="time-electric">0 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            Dit is de knooppunten-route. Dit profiel geeft de voorkeur aan het knooppuntennetwerk.
+                        </p>
+                        <div class="download-button-back" style="display: flex; align-items: center; margin-left: 30%;">
+                            <div class="download-button">
+                                    <img class="svg download" src="assets/img/download.svg"/><span>Download route</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="accordion3" >
+                        <div class="card">
+                            <div id="collapseFour" class="instruction-accordion collapse show" aria-labelledby="headingFour"
+                                data-parent="#accordion4">
+                                <div class="card-body">
+                                    <ul></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="bottom-left-floating-buttons">
+    <!-- <div class="bottom-left-floating-buttons">
     <button type="button" class="btn btn-export" data-toggle="modal" data-target="#exportModal"><img src="./assets/img/export.svg" width="30px"/>Download</button>
-</div>
+</div> -->
 
-<div class="bottom-center-floating-buttons">
-    <div style="position: relative; left: -50%;">
-        <button id="btnAddToHomescreen" type="button" class="btn btn-warning"><img src="./assets/img/add-to-home.svg" width="30px"/></button>
+    <div class="bottom-center-floating-buttons">
+        <div style="position: relative; left: -50%;">
+            <button id="btnAddToHomescreen" type="button" class="btn btn-warning"><img
+                    src="./assets/img/add-to-home.svg" width="30px" /></button>
+        </div>
     </div>
-</div>
 
-<!--
+    <!--
 <div class="bottom-right-floating-buttons">
     <!--<button class="btn btn-warning" data-toggle="button">NL</button>
     <button class="btn btn-warning" data-toggle="button">EN</button>
@@ -278,27 +299,29 @@ if(detectIE()){
     </div>
 </div>-->
 
-<div id="exportModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalExportOptions"
-     style="display: none;" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ModalExportOptions">Export Options</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="export-general-explanation">Please select a method to export your route.</p>
-                <div style="display: flex">
-                    <div style="flex-shrink: 1; flex-grow: 1">
-                        <p id="export-gpx-explanation">You can export .gpx files to navigation applications and GPS devices.</p>
-                    </div>
-                    <div>
-                        <button id="exportgpxbutton" class="btn btn-warning" onclick="exportCurrentRoute()">Export as .gpx file</button>
-                    </div>
+    <div id="exportModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalExportOptions"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalExportOptions">Export Options</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-                <!-- <div style="display: flex">
+                <div class="modal-body">
+                    <p id="export-general-explanation">Please select a method to export your route.</p>
+                    <div style="display: flex">
+                        <div style="flex-shrink: 1; flex-grow: 1">
+                            <p id="export-gpx-explanation">You can export .gpx files to navigation applications and GPS
+                                devices.</p>
+                        </div>
+                        <div>
+                            <button id="exportgpxbutton" class="btn btn-warning" onclick="exportCurrentRoute()">Export
+                                as .gpx file</button>
+                        </div>
+                    </div>
+                    <!-- <div style="display: flex">
                     <div style="flex-shrink: 1; flex-grow: 1;">
                         <p id="export-print-explanation">Not into digital? Print it out!</p>
                     </div>
@@ -308,13 +331,13 @@ if(detectIE()){
                 </div>
                 <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe> -->
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-close-export" data-dismiss="modal">Close</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-close-export" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </body>
 <!--<script
@@ -322,15 +345,16 @@ if(detectIE()){
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 <script src="js/bootstrap3-typeahead.min.js"></script>
 <script src="js/routeplanning.js"></script>
 <script src="js/strings.js"></script>
 <script src="js/uihelper.js"></script>
-<script>applyLanguage("nl");localStorage.lang = "nl";</script>
+<script>applyLanguage("nl"); localStorage.lang = "nl";</script>
+
 </html>
