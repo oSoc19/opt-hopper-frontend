@@ -59,7 +59,11 @@
             </div>
             <div class="col-lg-7 col-md-8" id="top-overlay-input">
                 <div class="row">
-                    <div class="col-lg-5 col-md-12 col-10 currentLocation right-addon">
+                    <div class="col-lg-5 col-md-12 col-10 currentLocation right-addon location-input-group">
+                        <div class="location-circle-container">
+                            <img class="svg location-circle" src="assets/img/circle.svg" />
+                            <div class="location-circle-centered">A</div>
+                        </div>
                         <input class="form-control typeahead geocoder-input" type="text" id="fromInput"
                             placeholder="From" oninput="fromFieldInputDetected(this)">
                         <img id="useLocationInputFieldButton" src="./assets/img/currentLocation.svg"
@@ -71,11 +75,14 @@
                         <button class="btn btn-warning image-button" id="swap-origin-destination-button"
                             onclick="swapOriginDestination()"></button>
                     </div>
-                    <div class="col-lg-5 col-md-12 col-10 right-addon">
+                    <div class="col-lg-5 col-md-12 col-10 right-addon location-input-group">
+                        <div class="location-circle-container">
+                            <img class="svg location-circle" src="assets/img/circle.svg" />
+                            <div class="location-circle-centered">B</div>
+                        </div>
                         <input class="form-control typeahead geocoder-input" type="text" id="toInput" placeholder="To"
                             oninput="toFieldInputDetected(this)">
-                        <img id="clearInputFieldToButton" src="./style/icons/ic_clear_black_24px.svg"
-                            onclick="clearInputFieldTo()" />
+                        <img id="clearInputFieldToButton" src="./style/icons/ic_clear_black_24px.svg" onclick="clearInputFieldTo()" />
                     </div>
                 </div>
             </div>
@@ -201,8 +208,8 @@
                     </div>
                     <div id="accordion1">
                         <div class="card">
-                            <div id="collapseFour" class="instruction-accordion collapse show" aria-labelledby="headingFour"
-                                data-parent="#accordion1">
+                            <div id="collapseFour" class="instruction-accordion collapse show"
+                                aria-labelledby="headingFour" data-parent="#accordion1">
                                 <div class="card-body">
                                     <ul></ul>
                                 </div>
@@ -211,39 +218,79 @@
                     </div>
                 </div>
             </div>
-                <div id="network-genk-summary" class="profile-summary height-zero">
-                    <div class="profile-summary-explanation">
-                        <img class="svg" src="assets/img/genk-networks.svg" />
-                        <h5 class="sub-title">Dit is de Genk-netwerk route. Dit profiel geeft de voorkeur aan het
-                            fietsnetwerk.</h5>
-                    </div>
+            <div id="network-genk-summary" class="profile-summary height-zero">
+                <div class="profile-summary-explanation">
+                    <img class="svg" src="assets/img/genk-networks.svg" />
+                    <h5 class="sub-title">Dit is de Genk-netwerk route. Dit profiel geeft de voorkeur aan het
+                        fietsnetwerk.</h5>
                 </div>
-                <div id="network-genk-instruction" class="route-instructions height-zero">
-                    <div class="profile-explanation">
-                        <div class="profile-explanation-overview">
-                            <div class="instructions-resume">
-                                <div class="distance">0 km</div>
-                                <div>
-                                    <div class="time">0 min</div>
-                                    <div class="electricity-box" style="display: flex;">
-                                        <img class="svg electricity" src="assets/img/electricity.svg"><span
-                                            class="time-electric">0 min</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p>
-                                Dit is de Genk-netwerk route. Dit profiel geeft de voorkeur aan het fietsnetwerk.
-                            </p>
-                            <div class="download-button-back"
-                                style="display: flex; align-items: center; margin-left: 30%;">
-                                <div class="download-button">
-                                    <img class="svg download" src="assets/img/download.svg" /><span>Download
-                                        route</span>
+            </div>
+            <div id="network-genk-instruction" class="route-instructions height-zero">
+                <div class="profile-explanation">
+                    <div class="profile-explanation-overview">
+                        <div class="instructions-resume">
+                            <div class="distance">0 km</div>
+                            <div>
+                                <div class="time">0 min</div>
+                                <div class="electricity-box" style="display: flex;">
+                                    <img class="svg electricity" src="assets/img/electricity.svg"><span
+                                        class="time-electric">0 min</span>
                                 </div>
                             </div>
                         </div>
+                        <p>
+                            Dit is de Genk-netwerk route. Dit profiel geeft de voorkeur aan het fietsnetwerk.
+                        </p>
+                        <div class="download-button-back" style="display: flex; align-items: center; margin-left: 30%;">
+                            <div class="download-button">
+                                <img class="svg download" src="assets/img/download.svg" /><span>Download
+                                    route</span>
+                            </div>
+                        </div>
                     </div>
-                    <div id="accordion2">
+                </div>
+                <div id="accordion2">
+                    <div class="card">
+                        <div id="collapseFour" class="instruction-accordion collapse show" aria-labelledby="headingFour"
+                            data-parent="#accordion4">
+                            <div class="card-body">
+                                <ul></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="network-summary" class="profile-summary height-zero">
+                <div class="profile-summary-explanation">
+                    <img class="svg" src="assets/img/network.svg" />
+                    <h5 class="sub-title">Dit is de knooppunten-route. Dit profiel geeft de voorkeur aan het
+                        knooppuntennetwerk.</h5>
+                </div>
+            </div>
+            <div id="network-instruction" class="route-instructions height-zero">
+                <div class="profile-explanation">
+                    <div class="profile-explanation-overview">
+                        <div class="instructions-resume">
+                            <div class="distance">0 km</div>
+                            <div>
+                                <div class="time">0 min</div>
+                                <div class="electricity-box" style="display: flex;">
+                                    <img class="svg electricity" src="assets/img/electricity.svg"><span
+                                        class="time-electric">0 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            Dit is de knooppunten-route. Dit profiel geeft de voorkeur aan het knooppuntennetwerk.
+                        </p>
+                        <div class="download-button-back" style="display: flex; align-items: center; margin-left: 30%;">
+                            <div class="download-button">
+                                <img class="svg download" src="assets/img/download.svg" /><span>Download
+                                    route</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="accordion3">
                         <div class="card">
                             <div id="collapseFour" class="instruction-accordion collapse show"
                                 aria-labelledby="headingFour" data-parent="#accordion4">
@@ -254,64 +301,22 @@
                         </div>
                     </div>
                 </div>
-                <div id="network-summary" class="profile-summary height-zero">
-                    <div class="profile-summary-explanation">
-                        <img class="svg" src="assets/img/network.svg" />
-                        <h5 class="sub-title">Dit is de knooppunten-route. Dit profiel geeft de voorkeur aan het
-                            knooppuntennetwerk.</h5>
-                    </div>
-                </div>
-                <div id="network-instruction" class="route-instructions height-zero">
-                    <div class="profile-explanation">
-                        <div class="profile-explanation-overview">
-                            <div class="instructions-resume">
-                                <div class="distance">0 km</div>
-                                <div>
-                                    <div class="time">0 min</div>
-                                    <div class="electricity-box" style="display: flex;">
-                                        <img class="svg electricity" src="assets/img/electricity.svg"><span
-                                            class="time-electric">0 min</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p>
-                                Dit is de knooppunten-route. Dit profiel geeft de voorkeur aan het knooppuntennetwerk.
-                            </p>
-                            <div class="download-button-back"
-                                style="display: flex; align-items: center; margin-left: 30%;">
-                                <div class="download-button">
-                                    <img class="svg download" src="assets/img/download.svg" /><span>Download
-                                        route</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="accordion3">
-                            <div class="card">
-                                <div id="collapseFour" class="instruction-accordion collapse show"
-                                    aria-labelledby="headingFour" data-parent="#accordion4">
-                                    <div class="card-body">
-                                        <ul></ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
 
-        <!-- <div class="bottom-left-floating-buttons">
+    <!-- <div class="bottom-left-floating-buttons">
     <button type="button" class="btn btn-export" data-toggle="modal" data-target="#exportModal"><img src="./assets/img/export.svg" width="30px"/>Download</button>
 </div> -->
 
-        <div class="bottom-center-floating-buttons">
-            <div style="position: relative; left: -50%;">
-                <button id="btnAddToHomescreen" type="button" class="btn btn-warning"><img
-                        src="./assets/img/add-to-home.svg" width="30px" /></button>
-            </div>
+    <div class="bottom-center-floating-buttons">
+        <div style="position: relative; left: -50%;">
+            <button id="btnAddToHomescreen" type="button" class="btn btn-warning"><img
+                    src="./assets/img/add-to-home.svg" width="30px" /></button>
         </div>
+    </div>
 
-        <!--
+    <!--
 <div class="bottom-right-floating-buttons">
     <!--<button class="btn btn-warning" data-toggle="button">NL</button>
     <button class="btn btn-warning" data-toggle="button">EN</button>
@@ -330,31 +335,30 @@
     </div>
 </div>-->
 
-        <div id="exportModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalExportOptions"
-            style="display: none;" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModalExportOptions">Export Options</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="export-general-explanation">Please select a method to export your route.</p>
-                        <div style="display: flex">
-                            <div style="flex-shrink: 1; flex-grow: 1">
-                                <p id="export-gpx-explanation">You can export .gpx files to navigation applications and
-                                    GPS
-                                    devices.</p>
-                            </div>
-                            <div>
-                                <button id="exportgpxbutton" class="btn btn-warning"
-                                    onclick="exportCurrentRoute()">Export
-                                    as .gpx file</button>
-                            </div>
+    <div id="exportModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalExportOptions"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalExportOptions">Export Options</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="export-general-explanation">Please select a method to export your route.</p>
+                    <div style="display: flex">
+                        <div style="flex-shrink: 1; flex-grow: 1">
+                            <p id="export-gpx-explanation">You can export .gpx files to navigation applications and
+                                GPS
+                                devices.</p>
                         </div>
-                        <!-- <div style="display: flex">
+                        <div>
+                            <button id="exportgpxbutton" class="btn btn-warning" onclick="exportCurrentRoute()">Export
+                                as .gpx file</button>
+                        </div>
+                    </div>
+                    <!-- <div style="display: flex">
                     <div style="flex-shrink: 1; flex-grow: 1;">
                         <p id="export-print-explanation">Not into digital? Print it out!</p>
                     </div>
@@ -364,14 +368,13 @@
                 </div>
                 <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe> -->
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning btn-close-export"
-                            data-dismiss="modal">Close</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-close-export" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+    </div>
 
 </body>
 <!--<script
