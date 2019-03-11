@@ -404,7 +404,7 @@ function showLocationsOnMap() {
         state.location1Marker.remove();
     }
     if (state.location1 !== undefined) {
-        state.location1Marker = createMarker(state.location1, '#00808B');
+        state.location1Marker = createMarker(state.location1, 'A');
         state.location1Marker.on('dragend', function () {
             var latLng = state.location1Marker.getLngLat();
             state.location1 = [latLng.lng, latLng.lat];
@@ -424,7 +424,7 @@ function showLocationsOnMap() {
         state.location2Marker.remove();
     }
     if (state.location2 !== undefined) {
-        state.location2Marker = createMarker(state.location2, '#2D4959');
+        state.location2Marker = createMarker(state.location2, 'B');
         state.location2Marker.on('dragend', function () {
             var latLng = state.location2Marker.getLngLat();
             state.location2 = [latLng.lng, latLng.lat];
@@ -466,9 +466,16 @@ function updateUrlParams(){
  * @param color The color of the marker
  * @returns {*} A marker
  */
-function createMarker(loc, color = '#3FB1CE') {
+function createMarker(loc, label) {
+
+    // create a HTML element for each feature
+    var el = document.createElement('div');
+    el.innerHTML = label;
+    el.className = 'marker';
+
+    // make a marker for each feature and add to the map
     return new mapboxgl.Marker({
-        color: color,
+        element: el,
         draggable: true
     })
         .setLngLat(loc)
