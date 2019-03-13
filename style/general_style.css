@@ -376,7 +376,8 @@ body {
 
 .instruction-accordion {
     background-color: white;
-    color: #2D4959
+    color: #2D4959;
+    display: none;
 }
 
 .download-button-back {
