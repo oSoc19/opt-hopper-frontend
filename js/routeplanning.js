@@ -165,7 +165,7 @@ function roundToThree(num) {
 function calculateAllRoutes(origin, destination, profiles = availableProfiles, lang = language) {
     let deviceSize = getBootstrapDeviceSize();
     if (!isSidebarVisible && !(deviceSize === "xs" || deviceSize === "sm")) {
-        toggleSidebar();
+        //toggleSidebar();
     }
     //$(".route-instructions ul").html("Loading...");
     $(".route-instructions ul").html("");

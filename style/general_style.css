@@ -513,7 +513,6 @@ input[type="text"], textarea {
     }
 
     .top-overlay {
-        background-color: #00808B;
         padding-bottom: 0px;
         padding-top: 0px;
     }
@@ -748,3 +747,65 @@ input[type="text"], textarea {
   .genk-logo {
       margin-top: 6px;
   }
+
+.close-button-container {
+    display: none;
+}
+
+  @media only screen and (max-width: 767px) {
+    body {
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    .close-button-container {
+        display: unset;
+    }
+
+    .mapboxgl-ctrl-group > button {
+        width: 40px;
+        height: 40px;
+    }
+
+    #swap-origin-destination-button {
+        top: 50%;
+        position: relative;
+    }
+
+    .top-overlay {
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    
+    .btn-export {
+        font-size: 0em;
+        padding: 2px 2px 0px 2px;
+    }
+
+    #top-overlay-input {
+        margin-bottom: 5vh;
+    }
+
+    .card {
+        margin-bottom: 50px;
+    }
+
+    #top-overlay-profile-buttons-mobile {
+        display: flex;
+        position: absolute;
+        bottom: 0px;
+    }
+
+    .form-control {
+        line-height: 1;
+    }
+
+    .inputs-row {
+        background-color: white;
+        padding: 15px;
+    }
+
+    .location-input-group {
+        padding: 4px;
+    }
+}

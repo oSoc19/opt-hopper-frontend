@@ -52,13 +52,13 @@
 
 
     <div class="container-fluid top-overlay">
-        <button class="btn image-button" id="sidebarHamburger" onclick="toggleSidebar()"></button>
+        <button class="btn image-button" id="sidebarHamburger" onclick="openSidebar()"></button>
         <div class="row top-overlap-nav">
             <div class="col-lg-1 col-md-0" id="top-overlay-center-spacer">
                 <img src="logo.svg" class="genk-logo" alt="Iedereen Genkt" height="50vh"></img>
             </div>
             <div class="col-lg-7 col-md-8" id="top-overlay-input">
-                <div class="row">
+                <div class="row inputs-row">
                     <div class="col-lg-5 col-md-12 col-10 currentLocation right-addon location-input-group">
                         <div class="location-circle-container">
                             <img class="svg location-circle" src="assets/img/circle.svg" />
@@ -92,18 +92,10 @@
                 <span class="btn btn-lg text-center route" id="network-genk-route-mobile"
                     onclick="sidebarDisplayProfileHtmlId(this.id)">
                     <span>
-                        <img class="svg" src="./assets/img/network.svg" />
+                        <img class="svg" src="./assets/img/genk-networks.svg" />
                     </span>
                     <br>
                     <div id="profile-button-text-networks-mobile">Genk Networks</div>
-                </span>
-                <span class="btn btn-lg text-center route" id="fastest-route-mobile"
-                    onclick="sidebarDisplayProfileHtmlId(this.id)">
-                    <span>
-                        <img class="svg" src="assets/img/fast.svg" />
-                    </span>
-                    <br>
-                    <div id="profile-button-text-fast-mobile">Fast</div>
                 </span>
                 <span class="btn btn-lg text-center route" id="network-route-mobile"
                     onclick="sidebarDisplayProfileHtmlId(this.id)">
@@ -111,7 +103,15 @@
                         <img class="svg" src="./assets/img/network.svg" />
                     </span>
                     <br>
-                    <div id="profile-button-text-relaxed-mobile">Cycle Networks</div>
+                    <div id="profile-button-text-relaxed-mobile">Knooppunten</div>
+                </span>
+                <span class="btn btn-lg text-center route" id="fastest-route-mobile"
+                    onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <span>
+                        <img class="svg" src="assets/img/fast.svg" />
+                    </span>
+                    <br>
+                    <div id="profile-button-text-fast-mobile">Snel</div>
                 </span>
             </div>
         </div>
@@ -140,13 +140,13 @@
             </div>
         </div>
     </div>
-    <div id="sidebar-right-container" class="col-lg-3 col-md-4 col-sm-12">
-        <div class="container-fluid height-zero">
+    <div id="sidebar-right-container" class="col-lg-3 col-md-4 col-sm-12 hidden-sidebar">
+        <div class="container-fluid close-button-container">
             <div class="row">
                 <div id="sidebar-top-spacer" class="col-12">
                     <span class="float-right">
                         <button class="btn-close btn-lg image-button" id="sidebarClose"
-                            onclick="toggleSidebar()"></button>
+                            onclick="closeSidebar()"></button>
                     </span>
                 </div>
             </div>

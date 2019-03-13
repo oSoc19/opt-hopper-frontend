@@ -3,18 +3,17 @@ let windowLoaded = false;
 
 
 /**
- * Make the sidebar visible/invisible
+ * Closes the sidebar visible/invisible
  */
-function toggleSidebar() {
-    // $("#sidebar-right-container").toggleClass('hidden-sidebar');
-    // isSidebarVisible = !isSidebarVisible;
-    // if (isSidebarVisible) {
-         $("#top-overlay-center-spacer").addClass("col-lg-1").addClass("col-md-0").removeClass("col-lg-2").removeClass("col-md-2");
-         $("#top-overlay-input").addClass("col-lg-7").removeClass("col-lg-8");
-    // } else {
-    //     $("#top-overlay-center-spacer").addClass("col-lg-2").addClass("col-md-2").removeClass("col-lg-1").removeClass("col-md-0");
-    //     $("#top-overlay-input").addClass("col-lg-8").removeClass("col-lg-7");
-    // }
+function closeSidebar() {
+    $("#sidebar-right-container").addClass('hidden-sidebar');
+}
+
+/**
+ * Opens the sidebar.
+ */
+function openSidebar() {
+    $("#sidebar-right-container").removeClass('hidden-sidebar');
 }
 
 /**
@@ -356,42 +355,42 @@ function setCurrentUrl(params) {
 }
 
 function applyLanguage(lang) {
-    $(".button-collapse-instructions").html(getString("instructionsCollapseButton", lang));
-    $("#fromInput").attr("placeholder", getString("fromInputPlaceholder", lang));
-    $("#toInput").attr("placeholder", getString("toInputPlaceholder", lang));
+    // $(".button-collapse-instructions").html(getString("instructionsCollapseButton", lang));
+    // $("#fromInput").attr("placeholder", getString("fromInputPlaceholder", lang));
+    // $("#toInput").attr("placeholder", getString("toInputPlaceholder", lang));
 
-    $("#profile-button-text-fast").html(getString("profileNameFast", lang));
-    $("#profile-button-text-balanced").html(getString("profileNameBalanced", lang));
-    $("#profile-button-text-relaxed").html(getString("profileNameRelaxed", lang));
-    $("#profile-button-text-networks").html(getString("profileNameNetworks", lang));
+    // $("#profile-button-text-fast").html(getString("profileNameFast", lang));
+    // $("#profile-button-text-balanced").html(getString("profileNameBalanced", lang));
+    // $("#profile-button-text-relaxed").html(getString("profileNameRelaxed", lang));
+    // $("#profile-button-text-networks").html(getString("profileNameNetworks", lang));
 
-    $("#profile-button-text-fast-mobile").html(getString("profileNameFast", lang));
-    $("#profile-button-text-balanced-mobile").html(getString("profileNameBalanced", lang));
-    $("#profile-button-text-relaxed-mobile").html(getString("profileNameRelaxed", lang));
-    $("#profile-button-text-networks-mobile").html(getString("profileNameNetworks", lang));
+    // $("#profile-button-text-fast-mobile").html(getString("profileNameFast", lang));
+    // $("#profile-button-text-balanced-mobile").html(getString("profileNameBalanced", lang));
+    // $("#profile-button-text-relaxed-mobile").html(getString("profileNameRelaxed", lang));
+    // $("#profile-button-text-networks-mobile").html(getString("profileNameNetworks", lang));
 
-    $("#networks-instruction div p").html(getString("profileDescriptionNetworks", lang));
-    $("#relaxed-instruction div p").html(getString("profileDescriptionRelaxed", lang));
-    $("#balanced-instruction div p").html(getString("profileDescriptionBalanced", lang));
-    $("#fast-instruction div p").html(getString("profileDescriptionFast", lang));
+    // $("#networks-instruction div p").html(getString("profileDescriptionNetworks", lang));
+    // $("#relaxed-instruction div p").html(getString("profileDescriptionRelaxed", lang));
+    // $("#balanced-instruction div p").html(getString("profileDescriptionBalanced", lang));
+    // $("#fast-instruction div p").html(getString("profileDescriptionFast", lang));
 
-    $("#networks-instruction div .sub-title").html(getString("profileTitleNetwork", lang));
-    $("#relaxed-instruction div .sub-title").html(getString("profileTitleRelaxed", lang));
-    $("#balanced-instruction div .sub-title").html(getString("profileTitleBalanced", lang));
-    $("#fast-instruction div .sub-title").html(getString("profileTitleFast", lang));
+    // $("#networks-instruction div .sub-title").html(getString("profileTitleNetwork", lang));
+    // $("#relaxed-instruction div .sub-title").html(getString("profileTitleRelaxed", lang));
+    // $("#balanced-instruction div .sub-title").html(getString("profileTitleBalanced", lang));
+    // $("#fast-instruction div .sub-title").html(getString("profileTitleFast", lang));
 
-    $("#networks-instruction div h4").html(getString("profileProposal", lang));
-    $("#relaxed-instruction div h4").html(getString("profileProposal", lang));
-    $("#balanced-instruction div h4").html(getString("profileProposal", lang));
-    $("#fast-instruction div h4").html(getString("profileProposal", lang));
+    // $("#networks-instruction div h4").html(getString("profileProposal", lang));
+    // $("#relaxed-instruction div h4").html(getString("profileProposal", lang));
+    // $("#balanced-instruction div h4").html(getString("profileProposal", lang));
+    // $("#fast-instruction div h4").html(getString("profileProposal", lang));
 
-    $("#ModalExportOptions").html(getString("exportOptionsTitle", lang));
-    $("#export-general-explanation").html(getString("exportgeneralexplanation", lang));
-    $("#export-gpx-explanation").html(getString("exportgpxexplanation", lang));
-    $("#export-print-explanation").html(getString("exportprintexplanation", lang));
-    $("#exportgpxbutton").html(getString("exportgpxbutton", lang));
-    $("#exportprintbutton").html(getString("exportprintbutton", lang));
-    $(".btn-close-export").html(getString("close", lang));
+    // $("#ModalExportOptions").html(getString("exportOptionsTitle", lang));
+    // $("#export-general-explanation").html(getString("exportgeneralexplanation", lang));
+    // $("#export-gpx-explanation").html(getString("exportgpxexplanation", lang));
+    // $("#export-print-explanation").html(getString("exportprintexplanation", lang));
+    // $("#exportgpxbutton").html(getString("exportgpxbutton", lang));
+    // $("#exportprintbutton").html(getString("exportprintbutton", lang));
+    // $(".btn-close-export").html(getString("close", lang));
 }
 
 /**
