@@ -404,7 +404,7 @@ function showLocationsOnMap() {
         state.location1Marker.remove();
     }
     if (state.location1 !== undefined) {
-        state.location1Marker = createMarker(state.location1, 'A');
+        state.location1Marker = createMarker(state.location1, '<span class="marker-text">A</span>');
         state.location1Marker.on('dragend', function () {
             var latLng = state.location1Marker.getLngLat();
             state.location1 = [latLng.lng, latLng.lat];
@@ -424,7 +424,7 @@ function showLocationsOnMap() {
         state.location2Marker.remove();
     }
     if (state.location2 !== undefined) {
-        state.location2Marker = createMarker(state.location2, 'B');
+        state.location2Marker = createMarker(state.location2, '<span class="marker-text">B</span>');
         state.location2Marker.on('dragend', function () {
             var latLng = state.location2Marker.getLngLat();
             state.location2 = [latLng.lng, latLng.lat];
@@ -476,7 +476,8 @@ function createMarker(loc, label) {
     // make a marker for each feature and add to the map
     return new mapboxgl.Marker({
         element: el,
-        draggable: true
+        draggable: true,
+        offset: [0, -20]
     })
         .setLngLat(loc)
         .addTo(map);
