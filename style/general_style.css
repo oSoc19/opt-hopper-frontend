@@ -719,6 +719,15 @@ input[type="text"], textarea {
     border-bottom: 3px solid #2D4959 !important;
 }
 
+.table-instruction-image{
+    text-align: center;
+
+}
+
+table tr td{
+    vertical-align: middle !important;
+}
+
 .height-zero {
     height: 0px;
     display: none;
