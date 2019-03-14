@@ -18,7 +18,7 @@ function exportRoute(route, name) {
             }
         }
     }
-    exported = exportRouteFromTo(startpoint, endpoint, routepoints);
+    exported = exportRouteFromTo(startpoint, endpoint, routepoints, name);
     if (exported) {
         download(exported, name+".gpx", ".gpx");
     }
@@ -31,11 +31,20 @@ function exportRoute(route, name) {
  * @param routepoints collection of routepoints
  * @returns {string} The .gpx file
  */
-function exportRouteFromTo(startpoint, endpoint, routepoints) {
+function exportRouteFromTo(startpoint, endpoint, routepoints, name) {
     if (!routepoints || !(startpoint && endpoint)) {
         alert(getString("routeMissing", language));
     } else {
-        let gpx = '<?xml version="1.0" encoding="UTF-8"?><gpx xmlns="http://www.topografix.com/GPX/1/1" creator="RouteYou" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">';
+    
+        var currentdate = new Date(); 
+        var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+    
+        let gpx = '<?xml version="1.0" encoding="UTF-8"?><gpx xmlns="http://www.topografix.com/GPX/1/1" creator="genk.anyways.eu" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">';
         gpx +=
             `<wpt lat="${startpoint[1]}" lon="${startpoint[0]}">
             <name>Start</name>
@@ -49,8 +58,8 @@ function exportRouteFromTo(startpoint, endpoint, routepoints) {
         </wpt>`;
         gpx +=
             `\n\t\t<trk>
-            <name>BikeForBrussels Export</name>
-            <desc>Route exported using the Bike For Brussels Routeplaner.</desc>
+            <name>`+name+`</name>
+            <desc>Route exported using the Genk Routeplaner by Anyways. Created on `+datetime+`</desc>
             <trkseg>`;
         for (var i in routepoints) {
             gpx +=
@@ -62,7 +71,6 @@ function exportRouteFromTo(startpoint, endpoint, routepoints) {
             `\n\t\t\t</trkseg>
         </trk>
     </gpx>`;
-        //console.log(gpx);
         return gpx;
     }
 }

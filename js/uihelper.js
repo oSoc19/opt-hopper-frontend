@@ -567,11 +567,11 @@ function exportCurrentRoute(){
     // Grabs the name and current route profile
     // Heavy lifting is done in 'exportRoute.js'
 
-    var from = document.getElementById("fromInput").value.split(" ")[0];
-    var to = document.getElementById("toInput").value.split(" ")[0];
+    var from = document.getElementById("fromInput").value.split(",")[0].split("(")[0];
+    var to = document.getElementById("toInput").value.split(",")[0].split("(")[0];
     
 
-    var name = "Genk-Route "+from+" naar "+to+" - "+selectedProfile;
+    var name = "Van "+from+" naar "+to+" - genk.anyways.eu - "+selectedProfile;
     exportRoute(routes[selectedProfile], name)
 }
 
