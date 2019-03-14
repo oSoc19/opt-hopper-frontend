@@ -561,3 +561,16 @@ function clearInputFieldTo() {
     showLocationsOnMap();
     toFieldInputDetected(document.getElementById("toInput"));
 }
+
+
+function exportCurrentRoute(){
+    // Grabs the name and current route profile
+    // Heavy lifting is done in 'exportRoute.js'
+
+    var from = document.getElementById("fromInput").value.split(" ")[0];
+    var to = document.getElementById("toInput").value.split(" ")[0];
+    
+
+    var name = "Genk-Route "+from+" naar "+to+" - "+selectedProfile;
+    exportRoute(routes[selectedProfile], name)
+}
