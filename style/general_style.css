@@ -716,7 +716,7 @@ input[type="text"], textarea {
 .location-input-group {
     padding-left: 0px;
     padding-right: 5px;
-    border-bottom: 3px solid #2D4959 !important;
+    border-bottom: 2px solid #2D4959 !important;
 }
 
 .height-zero {
