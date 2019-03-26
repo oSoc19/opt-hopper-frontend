@@ -607,7 +607,7 @@ function addInstructions(route, profile){
         row.classList += identifier;
         row.innerHTML = "<td class='table-instruction-image'>"+left+"</td><td>"+right+"</td>";
 
-        appendBefore.parentElement.insertBefore(row, appendBefore)   
+        //appendBefore.parentElement.insertBefore(row, appendBefore)   
     
     }
     

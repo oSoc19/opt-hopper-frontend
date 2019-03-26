@@ -109,6 +109,7 @@ body {
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
     overflow: hidden;
+    background-color: white;
 }
 
 .instructions-resume div {
@@ -773,6 +774,25 @@ table tr td{
 
 .close-button-container {
     display: none;
+}
+
+.instructions {
+    background: white;
+    color: #2D4959;
+    padding-top: 10px;
+}
+
+.instructions .row {
+    margin: 10px;
+}
+
+.instruction-icon {
+    padding-left: 5px;
+}
+
+.instruction-distance {
+    font-size: 0.75em;
+    color: #88acc3;
 }
 
   @media only screen and (max-width: 767px) {
