@@ -15,7 +15,9 @@ body {
     flex-direction: column;
 }
 
-
+html,body {
+    height:100vh;
+}
 
 .electricity-box {
    display: flex;
@@ -368,11 +370,12 @@ body {
 }
 
 .route-instructions, .collapse, .collapsing {
-    overflow-y: auto;
+    overflow-y: hidden;
     background-color: #00808B;
     color: white;
     list-style: none;
     overflow-x: hidden;
+    height: 260px;
 }
 
 .instruction-accordion {
@@ -780,6 +783,7 @@ table tr td{
     background: white;
     color: #2D4959;
     padding-top: 10px;
+    height: auto;    
 }
 
 .instructions .row {
@@ -793,6 +797,15 @@ table tr td{
 .instruction-distance {
     font-size: 0.75em;
     color: #88acc3;
+}
+
+.instructions .location-circle-centered {
+    left: 150%;
+}
+
+.instructions-div {
+    height: calc(100% - 400px);
+    overflow-y: auto;
 }
 
   @media only screen and (max-width: 767px) {
