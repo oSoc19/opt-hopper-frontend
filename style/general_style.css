@@ -643,7 +643,7 @@ input[type="text"], textarea {
 
 .profile-summary-explanation {
     margin: auto;
-    margin-top: 40%;
+    margin-top: 20%;
     width: 90%;
     padding: 10px;
     text-align: center;
@@ -733,11 +733,13 @@ table tr td{
     border-radius: 0.1em;
     font-weight: bold;
     color: white;
+    text-align: center;
     /* background colour is done by a script */
 }
 
 .legend-text {
-    
+    text-align: center;
+    font-weight: bold;
 }
 
 .height-zero {

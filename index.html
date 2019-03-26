@@ -262,9 +262,9 @@
                 <img class="svg" src="assets/img/genk-networks.svg"/>
                 <h5 class="sub-title">Dit is de Genk-netwerk route. Dit profiel geeft de voorkeur aan het
                     fietsnetwerk.</h5>
-                <span id="legend"><!-- Actual content is seeded by a little script, see bottom --></span>
 
             </div>
+            <span id="legend"><!-- Actual content is seeded by a little script, see bottom --></span>
         </div>
         <div id="network-genk-instruction" class="route-instructions height-zero">
             <div class="profile-explanation">
@@ -420,16 +420,21 @@ localStorage.lang = "nl";</script>
         {ref: 6, name: "Hoevenzavel - Zwartberg - Genk", colour: "#9837C1"}];
 
 
+    function routeinfo(routeRef){
+        console.log("Clicked route information for "+routeRef);
+    }
+    
+    
     var contents = "<table class='table table-sm table-borderless'><tbody>";
 
 
     for (var i in routes) {
         var route = routes[i];
-        contents += "<tr><td><div class='legend-ref' style='background-color:" + route.colour + "'>" + route.ref + "</div></td><td><div class='legend-text'>" + route.name + "</div></td>"
+        contents += "<tr onclick='routeinfo("+route.ref+")'><td><div class='legend-ref' style='background-color:" + route.colour + "'>" + route.ref + "</div></td><td><div class='legend-text'>" + route.name + "</div></td>"
     }
 
     contents += "</tbody></table>";
-    element.innerHTML = "<h5>"+contents+"</h5>";
+    element.innerHTML = "<h5>" + contents + "</h5>";
 
 </script>
 
