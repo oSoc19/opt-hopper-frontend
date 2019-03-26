@@ -289,8 +289,9 @@ html,body {
 
 .profile-explanation {
     font-family: Circular-Std-Book, sans-serif;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #00808B;
 }
 
 .profile-explanation h4 {
@@ -371,11 +372,11 @@ html,body {
 
 .route-instructions, .collapse, .collapsing {
     overflow-y: hidden;
-    background-color: #00808B;
+    background-color: white;
     color: white;
     list-style: none;
     overflow-x: hidden;
-    height: 260px;
+    height: 100%;
 }
 
 .instruction-accordion {
