@@ -45,7 +45,7 @@ var profileConfigs = {
             backend: true,
             color: "#2D495A"
         },
-        instructions: false
+        instructions: true
     },
     "network": {
         profileDivId: "network-instruction",
