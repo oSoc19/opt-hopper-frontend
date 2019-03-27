@@ -84,6 +84,24 @@ html, body {
     background-image: url(icons/ic_clear_black_24px.svg);
 }
 
+#sidebar-toggle-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 0.5rem 0.5rem 0.5rem 0.65rem;
+}
+
+#sidebar-toggle-button:before {
+    background-image: url(icons/arrow-right.svg);
+}
+
+.sidebarHamburgerClosed:before {
+    background-image: url(icons/arrow-left.svg) !important;
+}
+
+
+
+
 
 
 #sidebar-right-container {
@@ -94,7 +112,7 @@ html, body {
     top: 0;
     height: 100%;
     padding: 0 0 0 0;
-    z-index: 101;
+    z-index: 103;
     overflow: hidden;
 }
 
@@ -155,12 +173,21 @@ html, body {
 }
 
 .container-fluid {
-    padding-right: 15px;
     padding-left: 15px;
+    padding-right: 15px;
     margin-right: auto;
     margin-left: auto;
 }
 
+/* Element on the upper-right of the map */
+.upper-right-anchor{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 0;
+    margin: 0;
+    z-index: 102;
+}
 
 
 .image-button:before {
@@ -172,113 +199,6 @@ html, body {
     vertical-align: text-top;
     background: transparent no-repeat center center;
 }
-
-/** Generic toggles for screen sizes **/
-
-
-.xs-or-smaller {
-    display: none;
-}
-
-.sm-or-smaller {
-    display: none;
-}
-
-.md-or-smaller {
-    display: none;
-}
-
-.lg-or-smaller {
-    display: none;
-}
-
-.xl-or-smaller {
-    display: none;
-}
-
-.xs-or-bigger {
-    display: none;
-}
-
-.sm-or-bigger {
-    display: none;
-}
-
-.md-or-bigger {
-    display: none;
-}
-
-.lg-or-bigger {
-    display: none;
-}
-
-.xl-or-bigger {
-    display: none;
-}
-
-@media only screen and (min-width: 0px) {
-    .xs-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (max-width: 575px) {
-    .xs-or-smaller {
-        display: flex;
-    }
-}
-
-
-
-@media only screen and (min-width: 576px) {
-    .sm-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .sm-or-smaller {
-        display: flex;
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    .md-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (max-width: 991px) {
-    .md-or-smaller {
-        display: flex;
-    }
-}
-
-
-@media only screen and (min-width: 992px) {
-    .lg-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .lg-or-smaller {
-        display: flex;
-    }
-}
-
-@media only screen and (min-width: 1200px) {
-    .xl-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (min-width: 0) {
-    .xl-or-smaller {
-        display: flex;
-    }
-}
-
 
 
 /******* TO CLEAN UP - Probably contains lots of dead code *******/
@@ -360,24 +280,13 @@ html, body {
     display: none;
 }
 
-#sidebarHamburger {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 0.5rem 0.5rem 0.5rem 0.65rem;
-}
+
 
 #swap-origin-destination-button:before {
     background-image: url(icons/baseline-swap_vert-24px.svg);
 }
 
-#sidebarHamburger:before {
-    background-image: url(icons/arrow-right.svg);
-}
 
-.sidebarHamburgerClosed:before {
-    background-image: url(icons/arrow-left.svg) !important;
-}
 
 
 .btn {

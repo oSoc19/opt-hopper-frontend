@@ -17,6 +17,7 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet'/>
     <link href='style/general_style.css' rel='stylesheet'/>
+    <link href='style/size_toggles.css' rel='stylesheet'/>
     <script src="js/constants.js"></script>
 </head>
 
@@ -46,34 +47,38 @@
     }
 </script>
 
-<div class="container-fluid" style="height: 100%">
-    <div class="row" style="height: 100%">
+<!-- The main content pane -->
+<div class="container-fluid nopadding" style="height: 100%">
+    <div class="row nopadding" style="height: 100%">
 
         <!-- We start with no sidebar to give the map all the place it needs. It gets confused when it has to get bigger -->
-        <div class="col-12 smooth-transition" id="content-pane"
+        <div class="col-12 smooth-transition nopadding" id="content-pane"
              style="display:flex; flex-direction: column; align-items: stretch; padding: 0;">
 
             <!-- The bar on top -->
-            <div class="container-fluid">
+            <div class="sm-or-bigger container-fluid">
                 <div class="row row-eq-height">
 
 
                     <!-- Genk Logo. Gives a horizontal one on big screens, a vertical one on smaller -->
+
                     <div class="col-2 md-or-bigger">
                         <img src="logo.svg" alt="Iedereen Genkt" height="50vh"/>
                     </div>
                     <div class="col-1 sm-or-smaller">
-                        <img src="logo-turned.svg" alt="Iedereen Genkt" width="40vh"/>
+                        <div class="sm-or-bigger">
+                            <img src="logo-turned.svg" alt="Iedereen Genkt" width="40vh"/>
+                        </div>
                     </div>
 
-                    <!-- Input fields -->
-                    <div class="col-9" id="top-overlay-input">
+                    <!-- Input fields. On very small screens, we hide the location bar. Ppl will just have to click the map -->
+                    <div class="col-9 col-md-9 col-sm-10" id="top-overlay-input">
 
                         <div class="container-fluid">
 
                             <div class="row">
-                                <div class="col-5 col-md-5 col-sm-12 col-xs-12 currentLocation right-addon location-input-group">
-                                    <div class="location-circle-container">
+                                <div class="col-5 col-md-5 col-sm-12 col-xs-6 currentLocation right-addon location-input-group">
+                                    <div class="location-circle-container sm-or-bigger">
                                         <img class="svg location-circle" src="assets/img/circle.svg"/>
                                         <div class="location-circle-centered">A</div>
                                     </div>
@@ -84,12 +89,12 @@
                                     <img id="clearInputFieldFromButton" src="./style/icons/ic_clear_black_24px.svg"
                                          onclick="clearInputFieldFrom()"/>
                                 </div>
-                                <div class="col-1 col-md-1 col-sm-2 text-center">
+                                <div class="col-1 col-md-1 col-sm-2 sm-or-bigger text-center">
                                     <button class="btn btn-warning image-button" id="swap-origin-destination-button"
                                             onclick="swapOriginDestination()"></button>
                                 </div>
-                                <div class="col-5 col-md-5 col-sm-10 col-xs-10 right-addon location-input-group">
-                                    <div class="location-circle-container">
+                                <div class="col-5 col-md-5 col-sm-10 col-xs-6 right-addon location-input-group">
+                                    <div class="location-circle-container sm-or-bigger">
                                         <img class="svg location-circle" src="assets/img/circle.svg"/>
                                         <div class="location-circle-centered">B</div>
                                     </div>
@@ -104,17 +109,24 @@
 
                     </div>
 
-                    <!-- Hamburger on the right -->
+                    <!-- Show/hide sidebar on the right -->
                     <div class="col-1">
-                        <button class="btn image-button" id="sidebarHamburger" onclick="toggleSidebar()"></button>
+                        <button class="btn image-button" id="sidebar-toggle-button" onclick="toggleSidebar()"></button>
                     </div>
 
                 </div>
+
             </div>
 
 
             <!-- The big map -->
-            <div class="map-container container-fluid">
+            <div class="map-container container-fluid nopadding">
+                 <div class="upper-right-anchor nopadding">
+                    <div class="xs-or-smaller">
+                        <button class="btn image-button" id="sidebar-toggle-button-2"
+                                onclick="toggleSidebar()"></button>
+                    </div>
+                </div>
                 <div id='map' style="height:100%; width: 100%"></div>
                 <script>
                     mapboxgl.accessToken = mapboxAccessCode;
@@ -136,8 +148,9 @@
 
 
             <!-- The three extra profile buttons. Mobile only -->
-            <div class="container-fluid md-or-smaller nopadding">
-                <div class="row pointer dark-blue-background-cyan-foreground nopadding" style="width:100%;">
+            <div class="md-or-smaller container-fluid nopadding">
+                <div class="sm-or-bigger row pointer dark-blue-background-cyan-foreground nopadding"
+                     style="width:100%;">
 
                     <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
                     <div class="col-sm-4 btn-lg text-center network-genk-button"
@@ -168,10 +181,39 @@
             </div>
 
 
+            <!-- The three extra profile buttons another time. Mobile only, for extra small screens-->
+            <div class="xs-or-smaller container-fluid nopadding">
+                <div class="row pointer dark-blue-background-cyan-foreground nopadding"
+                     style="width:100%;">
+
+                    <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
+                    <div class="col-4 text-center network-genk-button"
+                         onclick="sidebarDisplayProfileHtmlId('network-genk')">
+                    <span>
+                        <img class="svg" src="./assets/img/genk-networks.svg"/>
+                    </span>
+                    </div>
+                    <div class="col-4 text-center network-button"
+                         onclick="sidebarDisplayProfileHtmlId('network')">
+                    <span>
+                        <img class="svg" src="./assets/img/network.svg"/>
+                    </span>
+                    </div>
+                    <div class="col-4 text-center fastest-button"
+                         onclick="sidebarDisplayProfileHtmlId('fastest')">
+                    <span>
+                        <img class="svg" src="assets/img/fast.svg"/>
+                    </span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
 
     </div>
+
+
 </div>
 
 <!-- Sidebar on the right-->
@@ -184,7 +226,6 @@
 
         <!-- Profile selecting button + close button -->
         <div style="display:flex; align-items: stretch">
-
 
 
             <!-- Buttons selecting profile -->

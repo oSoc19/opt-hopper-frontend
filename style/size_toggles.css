@@ -1,0 +1,118 @@
+/*
+Bootstrap-compatible toggles.
+
+If a certain element should only show op on small (and smaller) screens, add class='sm-or-smaller' to it.
+
+To show something between ranges, (e.g. large and medium, but not small, xs or extra large) use a nested div:
+
+<div class="md-or-bigger">
+    <div class="lg-or-smaller">
+        ... contents ...
+    </div>
+</div>
+
+*/
+
+.xs-or-smaller {
+    display: none;
+}
+
+.sm-or-smaller {
+    display: none;
+}
+
+.md-or-smaller {
+    display: none;
+}
+
+.lg-or-smaller {
+    display: none;
+}
+
+.xl-or-smaller {
+    display: none;
+}
+
+.xs-or-bigger {
+    display: none;
+}
+
+.sm-or-bigger {
+    display: none;
+}
+
+.md-or-bigger {
+    display: none;
+}
+
+.lg-or-bigger {
+    display: none;
+}
+
+.xl-or-bigger {
+    display: none;
+}
+
+@media only screen and (min-width: 0px) {
+    .xs-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .xs-or-smaller {
+        display: flex;
+    }
+}
+
+
+
+@media only screen and (min-width: 576px) {
+    .sm-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .sm-or-smaller {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .md-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .md-or-smaller {
+        display: flex;
+    }
+}
+
+
+@media only screen and (min-width: 992px) {
+    .lg-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .lg-or-smaller {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .xl-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 0) {
+    .xl-or-smaller {
+        display: flex;
+    }
+}
+
