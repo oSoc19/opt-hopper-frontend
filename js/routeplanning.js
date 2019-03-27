@@ -79,7 +79,7 @@ var profileConfigs = {
             backend: false,
             color: "#2D495A"
         },
-        instructions: false
+        instructions: true
     },
     "fastest": {
         profileDivId: "fastest-instruction",
@@ -98,7 +98,7 @@ var profileConfigs = {
             backend: false,
             color: "#2D495A"
         },
-        instructions: false
+        instructions: true
     }
 };
 
@@ -246,9 +246,8 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
             }
         }
         routes[profile] = route;
-        addInstructions(route, profile);
+        addInstructions(json.instructions, profile);
 
-        
         var localConfig = profileConfigs[profile];
         var profileDivId = localConfig.profileDivId;
         if (routeStops.length === 2) {
@@ -258,21 +257,6 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
             $(`#${profileDivId} .time-electric`).html(`${totaltimeElectr} min`);
             //$instrResume.html(`<div></div><div>min<br><div><img class="electricity" src="assets/img/electricity.svg"/>  </div></div>`);
         }
-        //$(`#${profileDivId} .elevation-info`).html(`<div><canvas id="chart-${profile}" style="width: 100%; height: 100px"></canvas></div>`);
-
-        // We disabled the height profiles displayChart(`chart-${profile}`, heightInfo);
-
-        // Shows the instructions in the sidebar
-        let $profileInstructions = $(`#${profileDivId} ul`);
-        $profileInstructions.html("");
-        $profileInstructions.append(`<li class="startpoint-li">${$("#fromInput").val()}</li>`);
-        if (json.instructions && json.instructions.features) {
-            for (let i in json.instructions.features) {
-                $profileInstructions.append(`<li class="type-${json.instructions.features[i].properties.type}  angle-${json.instructions.features[i].properties.angle}">${json.instructions.features[i].properties.instruction}</li>`);
-            }
-        }
-        $profileInstructions.append(`<li class="endpoint-li">${$("#toInput").val()}</li>`);
-        $profileInstructions.append(`</ul>`);
 
         // Check if profile already exists
         const calculatedRoute = map.getSource(profile + "-source");

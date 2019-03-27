@@ -575,54 +575,133 @@ function exportCurrentRoute(){
     exportRoute(routes[selectedProfile], name)
 }
 
-function addInstructions(route, profile){
-    // For now, instructions are not really added yet, only the departure and arrival locations
+function htmlToElement(html) {
+    let template = document.createElement('template');
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
+}
 
-    var from = document.getElementById("fromInput").value;
-    var to = document.getElementById("toInput").value;
-    
-    var starts = $(".instructions-start");
-    for(var i in starts){
-        starts[i].innerHTML = "Vertrek aan <strong>"+ from+"</strong>";
+function formatDistance(distance) {
+    if (distance < 1000) {
+        return Math.round(distance) + 'm';
     }
-    
-    var ends = $(".instructions-end");
-    for(var i in ends){
-        ends[i].innerHTML = "Aankomst te <strong>"+to+"</strong>";
-    }
-    
-    var identifier = "instruction-"+profile;
-    
-    var old = $("."+identifier);
-    for(var i in old){
-        var p = old[i].parentElement;
-        if(p !== undefined){
-            p.removeChild(old[i]);
+    return (distance / 1000).toFixed(1) + 'km';
+}
+
+function addInstructions(instructions, profile){
+    var row = 
+        '<div class=\"row\">\r\n' + 
+            '<div class=\"col-sm-1 instruction-icon\">\r\n' + 
+                '{icon}' +
+            '<\/div>\r\n' + 
+            '<div class=\"col-sm-9 instructions-start table-instruction-text\">\r\n' + 
+                '{instruction}' +
+            '<\/div>\r\n' + 
+            '<div class=\"col-sm-1 instruction-distance\">\r\n' + 
+                '{distance}' +
+            '<\/div>\r\n' + 
+        '<\/div>';
+
+    var svgImage = '<img class=\"svg location-circle\" src=\"{image}" \/>';
+    var circleIcon = 
+        '<div class=\"location-circle-container\">\r\n' + 
+            '<img class=\"svg location-circle\" src=\"assets\/img\/circle.svg\" \/>\r\n' + 
+            '<div class=\"location-circle-centered\">{aorb}<\/div>\r\n' + 
+        '<\/div>\r\n';
+
+    // instructions are a geojson feature collection.
+    // go over all features and add them as bootstrap rows.
+
+    var profileConfig = profileConfigs[profile];
+    var instructionsDiv = document.getElementById(profileConfig.profileDivId).getElementsByClassName("instructions")[0];
+    instructionsDiv.innerHTML = ''; // remove children.
+
+    // add departure row.
+    var departure = document.getElementById("fromInput").value
+    var departureRow = htmlToElement(row.replace('{icon}', circleIcon.replace('{aorb}', 'A'))
+        .replace('{instruction}', departure).replace('{distance}', ''));
+    instructionsDiv.appendChild(departureRow);
+
+    var totalDistance = '100m';
+    for (var f in instructions.features) {
+        var feature = instructions.features[f];
+        var icon = '';
+        if (feature.properties.type == 'turn') {
+            if (feature.properties.angle == 'Right' ||
+                feature.properties.angle == 'SlightlyRight') {
+                icon = svgImage.replace('{image}', 'assets/img/right.svg');
+            } else if (feature.properties.angle == 'Left' ||
+                feature.properties.angle == 'SlightlyLeft') {
+                icon = svgImage.replace('{image}', 'assets/img/left.svg');
+            }
         }
+
+        var distance = '';
+        if (feature.properties.distance) {
+            distance = formatDistance(feature.properties.distance);
+        }
+
+        var instructionRow = htmlToElement(
+            row.replace('{icon}', icon)
+                .replace('{instruction}', feature.properties.instruction)
+                .replace('{distance}', distance));
+        instructionsDiv.appendChild(instructionRow);
+
+        totalDistance = distance;
     }
-    var appendBefore = document.getElementById("instructions-"+profile+"-to");
-    function addInstruction(left, right){
+
+    // add arrival row.
+    var arrival = document.getElementById("toInput").value;
+    var arrivalRow = htmlToElement(row.replace('{icon}', circleIcon.replace('{aorb}', 'B'))
+        .replace('{instruction}', arrival).replace('{distance}', totalDistance));
+    instructionsDiv.appendChild(arrivalRow);
+
+    // var from = document.getElementById("fromInput").value;
+    // var to = document.getElementById("toInput").value;
+    
+    // var starts = $(".instructions-start");
+    // for(var i in starts){
+    //     starts[i].innerHTML = "Vertrek aan <strong>"+ from+"</strong>";
+    // }
+    
+    // var ends = $(".instructions-end");
+    // for(var i in ends){
+    //     ends[i].innerHTML = "Aankomst te <strong>"+to+"</strong>";
+    // }
+    
+    // var identifier = "instruction-"+profile;
+    
+    // var old = $("."+identifier);
+    // for(var i in old){
+    //     var p = old[i].parentElement;
+    //     if(p !== undefined){
+    //         p.removeChild(old[i]);
+    //     }
+    // }
+    // var appendBefore = document.getElementById("instructions-"+profile+"-to");
+    // function addInstruction(left, right){
         
-        var row = document.createElement('tr');
-        row.classList += identifier;
-        row.innerHTML = "<td class='table-instruction-image'>"+left+"</td><td>"+right+"</td>";
+    //     var row = document.createElement('tr');
+    //     row.classList += identifier;
+    //     row.innerHTML = "<td class='table-instruction-image'>"+left+"</td><td>"+right+"</td>";
 
-        //appendBefore.parentElement.insertBefore(row, appendBefore)   
+    //     //appendBefore.parentElement.insertBefore(row, appendBefore)   
     
-    }
+    // }
     
-    var currentName = from;
-    for(var i in route){
-        var segment = route[i];
-        var name = segment.properties.name;
-        if(name === undefined){
-            name = "Fietspad zonder naam"
-        }
-        if(name != currentName && name != to){
-            addInstruction("","Neem de <strong>"+name+"</strong>")
-            currentName = name;
-        }
-    }
+    // var currentName = from;
+    // for(var i in route){
+    //     var segment = route[i];
+    //     var name = segment.properties.name;
+    //     if(name === undefined){
+    //         name = "Fietspad zonder naam"
+    //     }
+    //     if(name != currentName && name != to){
+    //         addInstruction("","Neem de <strong>"+name+"</strong>")
+    //         currentName = name;
+    //     }
+    // }
 
 
 }
