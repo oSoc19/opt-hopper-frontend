@@ -163,11 +163,6 @@ function roundToThree(num) {
  * @param {String} lang - en/nl/fr select the language for the instructions
  */
 function calculateAllRoutes(origin, destination, profiles = availableProfiles, lang = language) {
-    let deviceSize = getBootstrapDeviceSize();
-    if (!isSidebarVisible && !(deviceSize === "xs" || deviceSize === "sm")) {
-        //toggleSidebar();
-    }
-    //$(".route-instructions ul").html("Loading...");
     $(".route-instructions ul").html("");
     $(`.route-instructions .elevation-info`).html("<img src='./img/Loading.gif' style='width: 100%;'  alt=\"Loading...\" />");
     routes = {};

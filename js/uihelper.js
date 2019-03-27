@@ -2,22 +2,37 @@ var isSidebarVisible = false;
 let windowLoaded = false;
 
 
+function toggleSidebar(){
+    var container = $("#sidebar-right-container");
+    var isClosed = container.hasClass("hidden-sidebar");
+    
+    if(isClosed){
+        openSidebar();
+    }else{
+        closeSidebar();
+    }
+    
+    
+}
+
 /**
  * Closes the sidebar visible/invisible
  */
 function closeSidebar() {
     var container = $("#sidebar-right-container");
-    container.removeClass('col-lg-3');
-    container.removeClass('col-xs-12');
-    container.removeClass('col-sm-12');
-    container.removeClass('col-md-12');
-    container.addClass('col-0');
+
     container.addClass('hidden-sidebar')
+    container.addClass('col-0');
     
     var bar = $("#content-pane");
     bar.removeClass('col-9');
     bar.addClass('col-12');
+    
+    var button = $("#sidebarHamburger");
+    button.addClass('sidebarHamburgerClosed');
 }
+
+
 
 /**
  * Opens the sidebar.
@@ -26,22 +41,23 @@ function openSidebar() {
     var container = $("#sidebar-right-container");
     container.removeClass('col-0');
     container.removeClass('hidden-sidebar')
-    container.addClass('col-lg-3');
-    container.addClass('col-xs-12');
-    container.addClass('col-md-12');
     
     var bar = $("#content-pane");
     bar.removeClass('col-12');
     bar.addClass('col-9');
+    
+    var button = $("#sidebarHamburger");
+    button.removeClass('sidebarHamburgerClosed')
 }
 
 /**
  * Select a profile with the given button id
  * @param id
  */
-function sidebarDisplayProfileHtmlId(id) {
-    id = id.replace("-mobile", "");
-    sidebarDisplayProfile(profileButtonIds[id]);
+function sidebarDisplayProfileHtmlId(profile) {
+    
+    // Maps 'fastest-route' onto 'network' etc
+    sidebarDisplayProfile(profile);
     updateUrlParams();
 }
 
@@ -50,6 +66,29 @@ function sidebarDisplayProfileHtmlId(id) {
  * @param profile
  */
 function sidebarDisplayProfile(profile) {
+    
+    for(var k in profileButtonIds){
+        // Reset all buttons to the default style
+        var kprofile = profileButtonIds[k];
+        var buttons = document.getElementsByClassName(kprofile+"-button");
+        for(var i = 0; i < buttons.length; i++){
+            var btn = buttons[i];
+            btn.classList.remove("cyan-background");
+            btn.classList.remove("dark-blue-background");
+            btn.classList.add("dark-blue-background-cyan-foreground");
+        }
+    }
+    var profileButtons = document.getElementsByClassName(profile+"-button");
+    for(var j = 0; j < profileButtons.length; j++){
+        var pbtn = profileButtons[j];
+        pbtn.classList.remove("dark-blue-background-cyan-foreground");
+        pbtn.classList.remove("dark-blue-background");
+        pbtn.classList.add("cyan-background");
+    }
+
+
+
+
     selectedProfile = profile;
     var localConfig = profileConfigs[selectedProfile];
     
@@ -119,32 +158,6 @@ function showLayersForProfile(selectedProfile) {
     }
 }
 
-/**
- * Helper method to determine the screen size bootstrap-wise
- * @returns {*}
- */
-function getBootstrapDeviceSize() {
-    let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-    let cat;
-    switch (true) {
-        case width <= 576:
-            cat = "xs";
-            break;
-        case width > 576 && width <= 768:
-            cat = "sm";
-            break;
-        case width > 768 && width <= 992:
-            cat = "md";
-            break;
-        case width > 992 && width <= 1200:
-            cat = "lg";
-            break;
-        case width > 1200:
-            cat = "xl";
-            break;
-    }
-    return cat;
-}
 
 /**
  * Get the key of the given value in a map

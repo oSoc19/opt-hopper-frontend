@@ -49,25 +49,29 @@
 <div class="container-fluid" style="height: 100%">
     <div class="row" style="height: 100%">
 
-        <div class="col-9" id="content-pane" style="height: 100%; padding: 0;">
+        <div class="col-9 smooth-transition" id="content-pane"
+             style="display:flex; flex-direction: column; align-items: stretch; padding: 0;">
 
             <!-- The bar on top -->
-            <div class="container-fluid top-overlay">
-                <div class="row top-overlap-nav">
+            <div class="container-fluid">
+                <div class="row row-eq-height">
 
 
-                    <!-- Genk Logo -->
-                    <div class="col-2" id="top-overlay-center-spacer">
-                        <img src="logo.svg" class="genk-logo" alt="Iedereen Genkt" height="50vh"></img>
+                    <!-- Genk Logo. Gives a horizontal one on big screens, a vertical one on smaller -->
+                    <div class="col-2 md-or-bigger">
+                        <img src="logo.svg" alt="Iedereen Genkt" height="50vh"/>
+                    </div>
+                    <div class="col-1 sm-or-smaller">
+                        <img src="logo-turned.svg" alt="Iedereen Genkt" width="40vh"/>
                     </div>
 
-                    <!-- Input buttons -->
+                    <!-- Input fields -->
                     <div class="col-9" id="top-overlay-input">
 
-                        <div class="container">
+                        <div class="container-fluid">
 
                             <div class="row inputs-row">
-                                <div class="col-5 currentLocation right-addon location-input-group">
+                                <div class="col-5 col-md-5 col-sm-12 col-xs-12 currentLocation right-addon location-input-group">
                                     <div class="location-circle-container">
                                         <img class="svg location-circle" src="assets/img/circle.svg"/>
                                         <div class="location-circle-centered">A</div>
@@ -79,11 +83,11 @@
                                     <img id="clearInputFieldFromButton" src="./style/icons/ic_clear_black_24px.svg"
                                          onclick="clearInputFieldFrom()"/>
                                 </div>
-                                <div class="col-1 text-center">
+                                <div class="col-1 col-md-1 col-sm-1 col-xs-2 text-center">
                                     <button class="btn btn-warning image-button" id="swap-origin-destination-button"
                                             onclick="swapOriginDestination()"></button>
                                 </div>
-                                <div class="col-5 right-addon location-input-group">
+                                <div class="col-5 col-md-5 col-sm-11 col-xs-10 right-addon location-input-group">
                                     <div class="location-circle-container">
                                         <img class="svg location-circle" src="assets/img/circle.svg"/>
                                         <div class="location-circle-centered">B</div>
@@ -101,7 +105,7 @@
 
                     <!-- Hamburger on the right -->
                     <div class="col-1">
-                        <button class="btn image-button" id="sidebarHamburger" onclick="openSidebar()"></button>
+                        <button class="btn image-button" id="sidebarHamburger" onclick="toggleSidebar()"></button>
                     </div>
 
                 </div>
@@ -109,8 +113,8 @@
 
 
             <!-- The big map -->
-            <div class="map-container container-fluid" style="height: 500px">
-                <div id='map' style='height: 500px; width: 100%'></div>
+            <div class="map-container container-fluid">
+                <div id='map' style="height:100%; width: 100%"></div>
                 <script>
                     mapboxgl.accessToken = mapboxAccessCode;
                     var map = new mapboxgl.Map({
@@ -131,85 +135,87 @@
 
 
             <!-- The three extra profile buttons. Mobile only -->
-            <div class="container-fluid">
+            <div class="container-fluid md-or-smaller nopadding" >
+                <div class="row pointer dark-blue-background-cyan-foreground nopadding" style="width:100%;">
 
-                <div class="row">
-                    <div id='top-overlay-profile-buttons-mobile'>
-                <span class="btn btn-lg text-center route" id="network-genk-route-mobile"
-                      onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
+                    <div class="col-sm-4 btn-lg text-center network-genk-button"
+                         onclick="sidebarDisplayProfileHtmlId('network-genk')">
                     <span>
                         <img class="svg" src="./assets/img/genk-networks.svg"/>
                     </span>
-                    <br>
-                    <div id="profile-button-text-networks-mobile">Genk Networks</div>
-                </span>
-                        <span class="btn btn-lg text-center route" id="network-route-mobile"
-                              onclick="sidebarDisplayProfileHtmlId(this.id)">
+                        <br>
+                        <div>Genk-netwerk</div>
+                    </div>
+                    <div class="col-sm-4 btn-lg text-center network-button"
+                         onclick="sidebarDisplayProfileHtmlId('network')">
                     <span>
                         <img class="svg" src="./assets/img/network.svg"/>
                     </span>
-                    <br>
-                    <div id="profile-button-text-relaxed-mobile">Knooppunten</div>
-                </span>
-                        <span class="btn btn-lg text-center route" id="fastest-route-mobile"
-                              onclick="sidebarDisplayProfileHtmlId(this.id)">
+                        <br>
+                        <div>Knooppunten</div>
+                    </div>
+                    <div class="col-sm-4 btn-lg text-center fastest-button"
+                         onclick="sidebarDisplayProfileHtmlId('fastest')">
                     <span>
                         <img class="svg" src="assets/img/fast.svg"/>
                     </span>
-                    <br>
-                    <div id="profile-button-text-fast-mobile">Snel</div>
-                </span>
+                        <br>
+                        <div>Snel</div>
                     </div>
                 </div>
             </div>
 
 
         </div>
+
+
     </div>
 </div>
 
 <!-- Sidebar on the right-->
-<div id="sidebar-right-container" class="col-lg-3 col-md-12 col-sm-12">
-    <!-- Buttons on top: close button (only on mobile) -->
-    <div class="container-fluid close-button-container">
-        <div class="row">
-            <div id="sidebar-top-spacer" class="col-lg-3 col-md-6 col-sm-12">
-                    <span class="float-right">
-                        <button class="btn-close btn-lg image-button" id="sidebarClose"
-                                onclick="closeSidebar()"></button>
-                    </span>
-            </div>
-        </div>
-    </div>
+<div id="sidebar-right-container" class="col-lg-3 col-md-12 col-sm-12 white-background smooth-transition">
 
     <!-- All the sidebar content -->
     <div id='sidebar-right-content'>
         <!-- Buttons selecting profile -->
-        <div id='sidebar-top'>
-                <span class="btn btn-lg text-center route" id="network-genk-route"
-                      onclick="sidebarDisplayProfileHtmlId(this.id)">
+        <div class="container-fluid dark-blue-background">
+            <div class="row dark-blue-background-cyan-foreground">
+
+                <div class="col-xs-1 col-0 pointer text-center md-or-smaller white-background">
+                    <button class="btn-close btn-lg image-button" id="sidebarClose"
+                            onclick="closeSidebar()"></button>
+                </div>
+
+
+                <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
+                <div class="col-md-4 col-xs-3 pointer dark-blue-background-cyan-foreground btn-lg text-center network-genk-button"
+                     onclick="sidebarDisplayProfileHtmlId('network-genk')">
                     <span>
                         <img class="svg" src="./assets/img/genk-networks.svg"/>
                     </span>
                     <br>
-                    <div id="profile-button-text-genk-network">Genk-netwerk</div>
-                </span>
-            <span class="btn btn-lg text-center route" id="network-route"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <div>Genk-netwerk</div>
+                </div>
+                <div class="col-md-4 col-xs-3 pointer btn-lg text-center dark-blue-background-cyan-foreground network-button"
+                     onclick="sidebarDisplayProfileHtmlId('network')">
                     <span>
                         <img class="svg" src="./assets/img/network.svg"/>
                     </span>
                     <br>
-                    <div id="profile-button-text-network">Knooppunten</div>
-                </span>
-            <span class="btn btn-lg text-center route" id="fastest-route"
-                  onclick="sidebarDisplayProfileHtmlId(this.id)">
+                    <div>Knooppunten</div>
+                </div>
+                <div class="col-md-4 col-xs-3 pointer btn-lg text-center dark-blue-background-cyan-foreground fastest-button"
+                     onclick="sidebarDisplayProfileHtmlId('fastest')">
                     <span>
                         <img class="svg" src="assets/img/fast.svg"/>
                     </span>
                     <br>
-                    <div id="profile-button-text-fast">Snel</div>
-                </span>
+                    <div>Snel</div>
+                </div>
+
+
+            </div>
         </div>
 
         <!-- The actual content of the panes; three very similar pieces-->
@@ -229,7 +235,7 @@
                         <div class="distance">0 km</div>
                         <div>
                             <div class="time">0 min</div>
-                            <div class="electricity-box" style="display: flex;">
+                            <div class="electricity-box">
                                 <img class="svg electricity" src="assets/img/electricity.svg"><span
                                     class="time-electric">0 min</span>
                             </div>

@@ -1,3 +1,5 @@
+/***** Setup ******/
+
 @font-face {
     font-family: Circular-Std-Book;
     src: url(../assets/fonts/circular-std-book-cufonfonts-webfont/CircularStd-Book.woff) format("woff");
@@ -10,19 +12,73 @@
     src: url(../assets/fonts/circular-std-book-cufonfonts-webfont/CircularStd-Bold.woff) format("woff");
 }
 
-body {
-    display: flex;
-    flex-direction: column;
+html, body {
+    height: 100vh;
 }
 
-html,body {
-    height:100vh;
+
+/** GENK COLOR STYLES **/
+
+.dark-blue-background{
+    background: #2D4959;
+    color: #FAFAFA;
 }
+
+.dark-blue-background-cyan-foreground{
+    background: #2D4959;
+    color: #00808B;
+}
+
+.cyan-background{
+    background: #00808B;
+    color: #FAFAFA;
+}
+
+.white-background{
+    background: #FAFAFA;
+    color: #2D4959;
+}
+
+
+
+.white-background svg path {
+    fill: #2D4959;
+    stroke: #2D4959;
+}
+
+.white-background svg polyline,
+.white-background svg circle {
+    stroke: #2D4959;
+}
+
+
+
+.dark-blue-background-cyan-foreground svg path {
+    fill: #00808B;
+    stroke: #00808B;
+}
+
+.dark-blue-background-cyan-foreground svg polyline,
+.dark-blue-background-cyan-foreground svg circle {
+    stroke: #00808B;
+}
+
+.cyan-background svg path {
+    fill: #FAFAFA;
+    stroke: #FAFAFA;
+}
+
+.cyan-background svg polyline,
+.cyan-background svg circle {
+    stroke: #FAFAFA;
+}
+
+/***** Specific elements - often used only once ****/
 
 .electricity-box {
-   display: flex;
-   align-items:center;
-   margin-left: 30%;
+    display: flex;
+    align-items: center;
+    margin-left: 30%;
 }
 
 .map-container {
@@ -44,22 +100,13 @@ html,body {
     height: 50px;
 }
 
+
+
 .container-fluid {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-}
-
-.top-overlay {
-    /*position: absolute;*/
-    position: inherit;
-    float: left;
-    width: 100%;
-    z-index: 100;
-    background: #FAFAFA;
-    /* padding-top: 1vh;
-    padding-bottom: 1vh; */
 }
 
 .image-button:before {
@@ -69,35 +116,14 @@ html,body {
     display: inline-block;
     margin-right: 0;
     vertical-align: text-top;
-    background-color: transparent;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-.center-helper {
-    margin: auto;
-    /*max-width: 300px;*/
+    background: transparent no-repeat center center;
 }
 
 .top-overlap-nav {
     height: 4em;
 }
 
-#top-overlay-center-spacer {
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    z-index: -1;
-    position: relative;
-}
 
-.top-overlay div {
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
 
 #sidebar-right-container {
     display: flex;
@@ -183,7 +209,6 @@ html,body {
     display: none;
 }
 
-
 #sidebarHamburger {
     position: absolute;
     top: 5px;
@@ -196,7 +221,11 @@ html,body {
 }
 
 #sidebarHamburger:before {
-    background-image: url(icons/ic_menu_black_24px.svg);
+    background-image: url(icons/arrow-right.svg);
+}
+
+.sidebarHamburgerClosed:before {
+    background-image: url(icons/arrow-left.svg) !important;
 }
 
 #sidebarClose:before {
@@ -223,31 +252,6 @@ html,body {
     border-radius: 0;
 }
 
-.route {
-    background-color: #2D4959;
-    color: #00808B;
-    text-align: center;
-    cursor: pointer;
-    width: 33%;
-    border-radius: 0;
-    font-size: 90%;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 3px;
-    padding-top: 3px;
-    /*flex-grow: 1;*/
-}
-
-.route svg path {
-    fill: #00808B;
-    stroke: #00808B;
-}
-
-.route svg polyline,
-.route svg circle {
-    stroke: #00808B;
-}
-
 
 .profile-explanation-icons {
     text-align: center;
@@ -260,11 +264,11 @@ html,body {
     background-color: #ffffff;
     border-radius: 90%;
 }
+
 .non-active {
     background-color: #ffffff !important;
     opacity: 0.3 !important
 }
-
 
 .profile-explanation-icons div {
     width: 48%;
@@ -272,7 +276,6 @@ html,body {
     vertical-align: top;
     position: relative;
 }
-
 
 .profile-explanation-icons div img {
     width: 110%;
@@ -329,7 +332,6 @@ html,body {
     background-color: #00808B;
 }
 
-
 .active svg path {
     fill: #ffffff;
     stroke: #ffffff;
@@ -355,16 +357,18 @@ html,body {
     align-items: center;
 }
 
-#sidebar-top, #top-overlay-profile-buttons-mobile {
+#sidebar-top {
     width: 100%;
     display: flex;
     flex-direction: row;
     height: 4rem;
     flex-shrink: 0;
     z-index: 1;
+    padding: 0;
+    margin: 0;
 }
 
-#sidebar-top-spacer{
+#sidebar-top-spacer {
     padding: 0 0 0 0;
 }
 
@@ -389,8 +393,8 @@ html,body {
 }
 
 .download-button-back {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     margin-left: 25%;
     margin-bottom: 20px;
     height: 60px;
@@ -434,9 +438,8 @@ html,body {
 }
 
 .btn-group-toggle .active {
-   color: white !important;
+    color: white !important;
 }
-
 
 .bottom-left-floating-buttons button {
     color: #2D4959;
@@ -451,8 +454,8 @@ html,body {
 }
 
 .btn-group-toggle {
-   border: 0.3rem solid #00808B;
-   border-radius: .3rem;
+    border: 0.3rem solid #00808B;
+    border-radius: .3rem;
 }
 
 .btn-warning:not(:disabled):not(.disabled).active {
@@ -461,10 +464,9 @@ html,body {
     color: white;
 }
 
-.btn:focus,.btn:active {
-   outline: none !important;
+.btn:focus, .btn:active {
+    outline: none !important;
 }
-
 
 .bottom-left-floating-buttons button img {
     padding: 0 0 0 0;
@@ -491,60 +493,8 @@ input[type="text"], textarea {
     box-shadow: none !important;
 }
 
-@media only screen and (min-width: 768px) {
-    @media only screen and (max-width: 992px) {
-        .col-md-0 {
-            display: none;
-            /*width: 0px;*/
-        }
-    }
-}
-
 #top-overlay-profile-buttons-mobile {
     display: none;
-}
-
-@media only screen and (max-width: 767px) {
-    body {
-        font-size: 1rem;
-        line-height: 1;
-    }
-
-    .mapboxgl-ctrl-group > button {
-        width: 40px;
-        height: 40px;
-    }
-
-    #swap-origin-destination-button {
-        top: 50%;
-        position: relative;
-    }
-
-    .top-overlay {
-        padding-bottom: 0;
-        padding-top: 0;
-    }
-    
-    .btn-export {
-        font-size: 0;
-        padding: 2px 2px 0 2px;
-    }
-
-    #top-overlay-input {
-        margin-bottom: 5vh;
-    }
-
-    .card {
-        margin-bottom: 50px;
-    }
-
-    #top-overlay-profile-buttons-mobile {
-        display: flex;
-    }
-
-    .form-control {
-        line-height: 1;
-    }
 }
 
 .card-body {
@@ -588,12 +538,12 @@ input[type="text"], textarea {
 }*/
 
 .type-stop {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 #chart-fast {
-  margin-top: 20px;
-  margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .route-instructions ul {
@@ -716,10 +666,10 @@ input[type="text"], textarea {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);    
+    transform: translate(-50%, -50%);
     font-size: 0.8rem;
     font-weight: 700;
-  }
+}
 
 .location-input-group {
     padding-left: 0;
@@ -727,12 +677,12 @@ input[type="text"], textarea {
     border-bottom: 2px solid #2D4959 !important;
 }
 
-.table-instruction-image{
+.table-instruction-image {
     text-align: center;
 
 }
 
-table tr td{
+table tr td {
     vertical-align: middle !important;
 }
 
@@ -758,36 +708,30 @@ table tr td{
 .marker {
     background-image: url('../assets/img/marker.svg');
     background-size: cover;
-    width:31px;
+    width: 31px;
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 0.8rem;
     font-weight: 700;
     line-height: 1.5;
     text-align: center;
     color: #00808B;
-  }
-  
+}
+
 .marker-text {
     display: flex;
     margin-left: 11px;
     margin-top: 4px;
 }
-  .genk-logo {
-      margin-top: 6px;
-  }
 
-.close-button-container {
-    display: none;
-}
 
 .instructions {
     background: white;
     color: #2D4959;
     padding-top: 10px;
-    height: auto;    
+    height: auto;
 }
 
 .instructions .row {
@@ -812,10 +756,58 @@ table tr td{
     overflow-y: auto;
 }
 
-  @media only screen and (max-width: 767px) {
+
+
+@media only screen and (max-width: 767px) {
     body {
         font-size: 1rem;
         line-height: 1;
+    }
+
+    .mapboxgl-ctrl-group > button {
+        width: 40px;
+        height: 40px;
+    }
+
+    #swap-origin-destination-button {
+        top: 50%;
+        position: relative;
+    }
+
+    .top-overlay {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+
+    .btn-export {
+        font-size: 0;
+        padding: 2px 2px 0 2px;
+    }
+
+    #top-overlay-input {
+        margin-bottom: 5vh;
+    }
+
+    .card {
+        margin-bottom: 50px;
+    }
+    
+
+    .form-control {
+        line-height: 1;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    body {
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    #top-overlay-profile-buttons-mobile {
+        display: flex;
+        position: absolute;
+        bottom: 0;
     }
 
     .close-button-container {
@@ -836,7 +828,7 @@ table tr td{
         padding-bottom: 0;
         padding-top: 0;
     }
-    
+
     .btn-export {
         font-size: 0;
         padding: 2px 2px 0 2px;
@@ -850,12 +842,6 @@ table tr td{
         margin-bottom: 50px;
     }
 
-    #top-overlay-profile-buttons-mobile {
-        display: flex;
-        position: absolute;
-        bottom: 0;
-    }
-
     .form-control {
         line-height: 1;
     }
@@ -866,5 +852,130 @@ table tr td{
 
     .location-input-group {
         padding: 4px;
+    }
+}
+
+/** Very generic stuff **/
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+.smooth-transition {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+/** Generic toggles for screen sizes **/
+
+
+.xs-or-smaller {
+    display: none;
+}
+
+.sm-or-smaller {
+    display: none;
+}
+
+.md-or-smaller {
+    display: none;
+}
+
+.lg-or-smaller {
+    display: none;
+}
+
+.xl-or-smaller {
+    display: none;
+}
+
+.xs-or-bigger {
+    display: none;
+}
+
+.sm-or-bigger {
+    display: none;
+}
+
+.md-or-bigger {
+    display: none;
+}
+
+.lg-or-bigger {
+    display: none;
+}
+
+.xl-or-bigger {
+    display: none;
+}
+
+@media only screen and (min-width: 0px) {
+    .xs-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .xs-or-smaller {
+        display: flex;
+    }
+}
+
+
+
+@media only screen and (min-width: 576px) {
+    .sm-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .sm-or-smaller {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .md-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .md-or-smaller {
+        display: flex;
+    }
+}
+
+
+@media only screen and (min-width: 992px) {
+    .lg-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .lg-or-smaller {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .xl-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 0) {
+    .xl-or-smaller {
+        display: flex;
     }
 }
