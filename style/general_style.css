@@ -801,7 +801,7 @@ table tr td{
 }
 
 .instructions .location-circle-centered {
-    left: 150%;
+    left: 15px;
 }
 
 .instructions-div {
