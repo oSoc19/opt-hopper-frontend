@@ -21,12 +21,11 @@ function toggleSidebar(){
 function closeSidebar() {
     var container = $("#sidebar-right-container");
 
-    container.addClass('hidden-sidebar')
-    container.addClass('col-0');
+    container.addClass('hidden-sidebar');
     
     var bar = $("#content-pane");
-    bar.removeClass('col-9');
-    bar.addClass('col-12');
+    bar.removeClass('col-lg-9');
+    bar.addClass('col-lg-12');
     
     var button = $("#sidebarHamburger");
     button.addClass('sidebarHamburgerClosed');
@@ -39,12 +38,11 @@ function closeSidebar() {
  */
 function openSidebar() {
     var container = $("#sidebar-right-container");
-    container.removeClass('col-0');
-    container.removeClass('hidden-sidebar')
+    container.removeClass('hidden-sidebar');
     
     var bar = $("#content-pane");
-    bar.removeClass('col-12');
-    bar.addClass('col-9');
+    bar.removeClass('col-lg-12');
+    bar.addClass('col-lg-9');
     
     var button = $("#sidebarHamburger");
     button.removeClass('sidebarHamburgerClosed')

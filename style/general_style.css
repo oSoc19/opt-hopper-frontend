@@ -99,7 +99,9 @@ html, body {
     background-image: url(icons/arrow-left.svg) !important;
 }
 
-
+#top-overlay-input {
+    margin-bottom: 1vh;
+}
 
 
 
@@ -807,9 +809,7 @@ table tr td {
         padding: 2px 2px 0 2px;
     }
 
-    #top-overlay-input {
-        margin-bottom: 5vh;
-    }
+
 
     .card {
         margin-bottom: 50px;
@@ -853,9 +853,6 @@ table tr td {
         padding: 2px 2px 0 2px;
     }
 
-    #top-overlay-input {
-        margin-bottom: 5vh;
-    }
 
     .card {
         margin-bottom: 50px;

@@ -52,12 +52,12 @@
     <div class="row nopadding" style="height: 100%">
 
         <!-- We start with no sidebar to give the map all the place it needs. It gets confused when it has to get bigger -->
-        <div class="col-12 smooth-transition nopadding" id="content-pane"
+        <div class="col-lg-12 col-xs-12 col-sm-12 smooth-transition nopadding" id="content-pane"
              style="display:flex; flex-direction: column; align-items: stretch; padding: 0;">
 
             <!-- The bar on top -->
             <div class="sm-or-bigger container-fluid">
-                <div class="row row-eq-height">
+                <div class="row row-eq-height" style="align-items: flex-start">
 
 
                     <!-- Genk Logo. Gives a horizontal one on big screens, a vertical one on smaller -->
@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-1 sm-or-smaller">
                         <div class="sm-or-bigger">
-                            <img src="logo-turned.svg" alt="Iedereen Genkt" width="40vh"/>
+                            <img src="logo-turned.svg" alt="Iedereen Genkt" height="80vh"/>
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@
 
                         <div class="container-fluid">
 
-                            <div class="row">
+                            <div class="row" style="align-items: center">
                                 <div class="col-5 col-md-5 col-sm-12 col-xs-6 currentLocation right-addon location-input-group">
                                     <div class="location-circle-container sm-or-bigger">
                                         <img class="svg location-circle" src="assets/img/circle.svg"/>
@@ -121,7 +121,7 @@
 
             <!-- The big map -->
             <div class="map-container container-fluid nopadding">
-                 <div class="upper-right-anchor nopadding">
+                <div class="upper-right-anchor nopadding">
                     <div class="xs-or-smaller">
                         <button class="btn image-button" id="sidebar-toggle-button-2"
                                 onclick="toggleSidebar()"></button>
@@ -187,23 +187,17 @@
                      style="width:100%;">
 
                     <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
-                    <div class="col-4 text-center network-genk-button"
+                    <div class="col-4 text-center network-genk-button" style="align-items: center"
                          onclick="sidebarDisplayProfileHtmlId('network-genk')">
-                    <span>
                         <img class="svg" src="./assets/img/genk-networks.svg"/>
-                    </span>
                     </div>
                     <div class="col-4 text-center network-button"
                          onclick="sidebarDisplayProfileHtmlId('network')">
-                    <span>
                         <img class="svg" src="./assets/img/network.svg"/>
-                    </span>
                     </div>
                     <div class="col-4 text-center fastest-button"
                          onclick="sidebarDisplayProfileHtmlId('fastest')">
-                    <span>
                         <img class="svg" src="assets/img/fast.svg"/>
-                    </span>
                     </div>
                 </div>
             </div>
