@@ -689,51 +689,5 @@ function addInstructions(instructions, profile){
         .replace('{instruction}', arrival).replace('{distance}', totalDistance));
     instructionsDiv.appendChild(arrivalRow);
 
-    // var from = document.getElementById("fromInput").value;
-    // var to = document.getElementById("toInput").value;
-    
-    // var starts = $(".instructions-start");
-    // for(var i in starts){
-    //     starts[i].innerHTML = "Vertrek aan <strong>"+ from+"</strong>";
-    // }
-    
-    // var ends = $(".instructions-end");
-    // for(var i in ends){
-    //     ends[i].innerHTML = "Aankomst te <strong>"+to+"</strong>";
-    // }
-    
-    // var identifier = "instruction-"+profile;
-    
-    // var old = $("."+identifier);
-    // for(var i in old){
-    //     var p = old[i].parentElement;
-    //     if(p !== undefined){
-    //         p.removeChild(old[i]);
-    //     }
-    // }
-    // var appendBefore = document.getElementById("instructions-"+profile+"-to");
-    // function addInstruction(left, right){
-        
-    //     var row = document.createElement('tr');
-    //     row.classList += identifier;
-    //     row.innerHTML = "<td class='table-instruction-image'>"+left+"</td><td>"+right+"</td>";
-
-    //     //appendBefore.parentElement.insertBefore(row, appendBefore)   
-    
-    // }
-    
-    // var currentName = from;
-    // for(var i in route){
-    //     var segment = route[i];
-    //     var name = segment.properties.name;
-    //     if(name === undefined){
-    //         name = "Fietspad zonder naam"
-    //     }
-    //     if(name != currentName && name != to){
-    //         addInstruction("","Neem de <strong>"+name+"</strong>")
-    //         currentName = name;
-    //     }
-    // }
-
 
 }

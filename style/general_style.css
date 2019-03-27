@@ -80,15 +80,28 @@ html, body {
     border: none;
 }
 
-#sidebarClose .button:before {
+#sidebarClose:before {
     background-image: url(icons/ic_clear_black_24px.svg);
 }
 
 
 
+#sidebar-right-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 0 0 0;
+    z-index: 101;
+    overflow: hidden;
+}
+
+
 
 .electricity-box {
-    display: flex;
+    /* For one readon or another, all the element need an explicit 'display: flex' on them */
     align-items: center;
     margin-left: 30%;
 }
@@ -114,12 +127,41 @@ html, body {
 
 
 
+.location-input-group {
+    padding-left: 0;
+    padding-right: 5px;
+    border-bottom: 2px solid #2D4959 !important;
+}
+
+
+
+/** Very generic stuff **/
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+.smooth-transition {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
 .container-fluid {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
 }
+
+
 
 .image-button:before {
     content: "";
@@ -131,29 +173,126 @@ html, body {
     background: transparent no-repeat center center;
 }
 
+/** Generic toggles for screen sizes **/
+
+
+.xs-or-smaller {
+    display: none;
+}
+
+.sm-or-smaller {
+    display: none;
+}
+
+.md-or-smaller {
+    display: none;
+}
+
+.lg-or-smaller {
+    display: none;
+}
+
+.xl-or-smaller {
+    display: none;
+}
+
+.xs-or-bigger {
+    display: none;
+}
+
+.sm-or-bigger {
+    display: none;
+}
+
+.md-or-bigger {
+    display: none;
+}
+
+.lg-or-bigger {
+    display: none;
+}
+
+.xl-or-bigger {
+    display: none;
+}
+
+@media only screen and (min-width: 0px) {
+    .xs-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .xs-or-smaller {
+        display: flex;
+    }
+}
+
+
+
+@media only screen and (min-width: 576px) {
+    .sm-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .sm-or-smaller {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .md-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .md-or-smaller {
+        display: flex;
+    }
+}
+
+
+@media only screen and (min-width: 992px) {
+    .lg-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .lg-or-smaller {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .xl-or-bigger {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 0) {
+    .xl-or-smaller {
+        display: flex;
+    }
+}
+
+
+
+/******* TO CLEAN UP - Probably contains lots of dead code *******/
+
+
+
+
 .top-overlap-nav {
     height: 4em;
 }
 
 
 
-#sidebar-right-container {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    padding: 0 0 0 0;
-    z-index: 101;
-    background: #2D4959;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    overflow: hidden;
-    background-color: white;
-}
+
 
 .instructions-resume div {
     display: inline;
@@ -363,27 +502,9 @@ html, body {
     align-items: center;
 }
 
-#sidebar-top {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    height: 4rem;
-    flex-shrink: 0;
-    z-index: 1;
-    padding: 0;
-    margin: 0;
-}
 
-#sidebar-top-spacer {
-    padding: 0 0 0 0;
-}
 
-.card, .card-header {
-    background-color: #00808B;
-    border: none;
-}
-
-.route-instructions, .collapse, .collapsing {
+.route-instructions {
     overflow-y: hidden;
     background-color: white;
     color: white;
@@ -392,11 +513,6 @@ html, body {
     height: 100%;
 }
 
-.instruction-accordion {
-    background-color: white;
-    color: #2D4959;
-    display: none;
-}
 
 .download-button-back {
     display: flex;
@@ -431,9 +547,6 @@ html, body {
     border-radius: 0;
 }
 
-.lang_label {
-    color: #2D4959;
-}
 
 .btn-warning.focus {
     box-shadow: 0 0 0 0 #00808B;
@@ -677,11 +790,6 @@ input[type="text"], textarea {
     font-weight: 700;
 }
 
-.location-input-group {
-    padding-left: 0;
-    padding-right: 5px;
-    border-bottom: 2px solid #2D4959 !important;
-}
 
 .table-instruction-image {
     text-align: center;
@@ -848,136 +956,4 @@ table tr td {
         line-height: 1;
     }
 
-    .inputs-row {
-        background-color: white;
-    }
-
-    .location-input-group {
-        padding: 4px;
-    }
-}
-
-/** Very generic stuff **/
-
-.nopadding {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-
-.smooth-transition {
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-.pointer{
-    cursor: pointer;
-}
-
-/** Generic toggles for screen sizes **/
-
-
-.xs-or-smaller {
-    display: none;
-}
-
-.sm-or-smaller {
-    display: none;
-}
-
-.md-or-smaller {
-    display: none;
-}
-
-.lg-or-smaller {
-    display: none;
-}
-
-.xl-or-smaller {
-    display: none;
-}
-
-.xs-or-bigger {
-    display: none;
-}
-
-.sm-or-bigger {
-    display: none;
-}
-
-.md-or-bigger {
-    display: none;
-}
-
-.lg-or-bigger {
-    display: none;
-}
-
-.xl-or-bigger {
-    display: none;
-}
-
-@media only screen and (min-width: 0px) {
-    .xs-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (max-width: 575px) {
-    .xs-or-smaller {
-        display: flex;
-    }
-}
-
-
-
-@media only screen and (min-width: 576px) {
-    .sm-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .sm-or-smaller {
-        display: flex;
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    .md-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (max-width: 991px) {
-    .md-or-smaller {
-        display: flex;
-    }
-}
-
-
-@media only screen and (min-width: 992px) {
-    .lg-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .lg-or-smaller {
-        display: flex;
-    }
-}
-
-@media only screen and (min-width: 1200px) {
-    .xl-or-bigger {
-        display: flex;
-    }
-}
-
-@media only screen and (min-width: 0) {
-    .xl-or-smaller {
-        display: flex;
-    }
 }
