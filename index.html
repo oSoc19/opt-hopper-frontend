@@ -182,14 +182,10 @@
         <div class="container-fluid dark-blue-background">
             <div class="row dark-blue-background-cyan-foreground">
 
-                <div class="col-xs-1 col-0 pointer text-center md-or-smaller white-background">
-                    <button class="btn-close btn-lg image-button" id="sidebarClose"
-                            onclick="closeSidebar()"></button>
-                </div>
-
+ 
 
                 <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
-                <div class="col-md-4 col-xs-3 pointer dark-blue-background-cyan-foreground btn-lg text-center network-genk-button"
+                <div class="col-lg-4 col-md-3 col-xs-3 pointer dark-blue-background-cyan-foreground btn-lg text-center network-genk-button"
                      onclick="sidebarDisplayProfileHtmlId('network-genk')">
                     <span>
                         <img class="svg" src="./assets/img/genk-networks.svg"/>
@@ -197,7 +193,7 @@
                     <br>
                     <div>Genk-netwerk</div>
                 </div>
-                <div class="col-md-4 col-xs-3 pointer btn-lg text-center dark-blue-background-cyan-foreground network-button"
+                <div class="col-lg-4  col-md-3 col-xs-3 pointer btn-lg text-center dark-blue-background-cyan-foreground network-button"
                      onclick="sidebarDisplayProfileHtmlId('network')">
                     <span>
                         <img class="svg" src="./assets/img/network.svg"/>
@@ -205,7 +201,7 @@
                     <br>
                     <div>Knooppunten</div>
                 </div>
-                <div class="col-md-4 col-xs-3 pointer btn-lg text-center dark-blue-background-cyan-foreground fastest-button"
+                <div class="col-lg-4 col-md-3 col-xs-3 pointer btn-lg text-center dark-blue-background-cyan-foreground fastest-button"
                      onclick="sidebarDisplayProfileHtmlId('fastest')">
                     <span>
                         <img class="svg" src="assets/img/fast.svg"/>
@@ -214,6 +210,10 @@
                     <div>Snel</div>
                 </div>
 
+                <div class="col-lg-0 col-xs-3 col-0 pointer text-center md-or-smaller white-background" id="btn-close">
+                    <button class="btn-lg image-button" id="sidebarClose"
+                            onclick="closeSidebar()"></button>
+                </div>
 
             </div>
         </div>

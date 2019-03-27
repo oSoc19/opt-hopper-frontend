@@ -75,6 +75,11 @@ html, body {
 
 /***** Specific elements - often used only once ****/
 
+#btn-close {
+    background-color: #2D4959;
+    border: none;
+}
+
 .electricity-box {
     display: flex;
     align-items: center;
@@ -237,10 +242,7 @@ html, body {
     border: none;
 }
 
-.btn-close {
-    background-color: #2D4959;
-    border: none;
-}
+
 
 .btn:hover {
     background-color: #2D4959;
@@ -808,10 +810,6 @@ table tr td {
         display: flex;
         position: absolute;
         bottom: 0;
-    }
-
-    .close-button-container {
-        display: unset;
     }
 
     .mapboxgl-ctrl-group > button {
