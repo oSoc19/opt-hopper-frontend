@@ -921,7 +921,7 @@ table tr td {
     }
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 575px) {
     .xs-or-smaller {
         display: flex;
     }
@@ -935,7 +935,7 @@ table tr td {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .sm-or-smaller {
         display: flex;
     }
@@ -947,7 +947,7 @@ table tr td {
     }
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
     .md-or-smaller {
         display: flex;
     }
