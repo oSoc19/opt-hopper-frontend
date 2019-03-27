@@ -80,6 +80,13 @@ html, body {
     border: none;
 }
 
+#sidebarClose .button:before {
+    background-image: url(icons/ic_clear_black_24px.svg);
+}
+
+
+
+
 .electricity-box {
     display: flex;
     align-items: center;
@@ -233,9 +240,6 @@ html, body {
     background-image: url(icons/arrow-left.svg) !important;
 }
 
-#sidebarClose:before {
-    background-image: url(icons/ic_clear_white_24px.svg);
-}
 
 .btn {
     background-color: #FAFAFA;
