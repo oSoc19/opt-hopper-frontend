@@ -6,14 +6,33 @@ let windowLoaded = false;
  * Closes the sidebar visible/invisible
  */
 function closeSidebar() {
-    $("#sidebar-right-container").addClass('hidden-sidebar');
+    var container = $("#sidebar-right-container");
+    container.removeClass('col-lg-3');
+    container.removeClass('col-xs-12');
+    container.removeClass('col-sm-12');
+    container.removeClass('col-md-12');
+    container.addClass('col-0');
+    container.addClass('hidden-sidebar')
+    
+    var bar = $("#content-pane");
+    bar.removeClass('col-9');
+    bar.addClass('col-12');
 }
 
 /**
  * Opens the sidebar.
  */
 function openSidebar() {
-    $("#sidebar-right-container").removeClass('hidden-sidebar');
+    var container = $("#sidebar-right-container");
+    container.removeClass('col-0');
+    container.removeClass('hidden-sidebar')
+    container.addClass('col-lg-3');
+    container.addClass('col-xs-12');
+    container.addClass('col-md-12');
+    
+    var bar = $("#content-pane");
+    bar.removeClass('col-12');
+    bar.addClass('col-9');
 }
 
 /**

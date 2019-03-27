@@ -30,6 +30,9 @@ html,body {
     position: inherit;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .map-container .row {
@@ -859,7 +862,6 @@ table tr td{
 
     .inputs-row {
         background-color: white;
-        padding: 15px;
     }
 
     .location-input-group {
