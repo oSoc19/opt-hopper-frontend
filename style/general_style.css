@@ -20,7 +20,7 @@ html, body {
 
 .dark-blue-background {
     background: #2D4959;
-    color: #FAFAFA;
+    color: #FFFFFF;
 }
 
 .dark-blue-background-cyan-foreground {
@@ -30,11 +30,11 @@ html, body {
 
 .cyan-background {
     background: #00808B;
-    color: #FAFAFA;
+    color: #FFFFFF;
 }
 
 .white-background {
-    background: #FAFAFA;
+    background: #FFFFFF;
     color: #2D4959;
 }
 
@@ -59,13 +59,13 @@ html, body {
 }
 
 .cyan-background svg path {
-    fill: #FAFAFA;
-    stroke: #FAFAFA;
+    fill: #FFFFFF;
+    stroke: #FFFFFF;
 }
 
 .cyan-background svg polyline,
 .cyan-background svg circle {
-    stroke: #FAFAFA;
+    stroke: #FFFFFF;
 }
 
 /***** Specific elements - often used only once ****/
@@ -275,7 +275,7 @@ html, body {
 }
 
 .btn {
-    background-color: #FAFAFA;
+    background-color: #FFFFFF;
     border: none;
 }
 
@@ -285,7 +285,7 @@ html, body {
 
 .form-control {
     border: none;
-    background-color: #FAFAFA;
+    background-color: #FFFFFF;
     border-radius: 0;
 }
 
@@ -400,6 +400,7 @@ html, body {
     list-style: none;
     overflow-x: hidden;
     height: 100%;
+    overflow-y:auto;
 }
 
 .download-button-back {
@@ -730,7 +731,8 @@ table tr td {
     background: white;
     color: #2D4959;
     padding-top: 10px;
-    height: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
 .instructions .row {
@@ -751,8 +753,7 @@ table tr td {
 }
 
 .instructions-div {
-    height: calc(100% - 400px);
-    overflow-y: auto;
+    height: 50vh;
 }
 
 @media only screen and (max-width: 767px) {
