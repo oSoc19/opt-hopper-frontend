@@ -62,18 +62,18 @@
 
                     <!-- Genk Logo. Gives a horizontal one on big screens, a vertical one on smaller -->
 
-                    <div class="col-2">
+                    <div class="col-2 col-xs-10">
                         <img src="logo.svg" alt="Iedereen Genkt" height="50vh"/>
                     </div>
 
-                    <!-- Input fields for all -->
 
+                      <!-- Input fields for all -->
                     <div class="col-xs-5 col-sm-7 col-md-9">
 
                         <div class="container-fluid">
 
                             <div class="row" style="align-items: center">
-                                <div class="col-md-5 col-sm-12 currentLocation right-addon location-input-group">
+                                <div class="col-md-5 col-sm-12  currentLocation right-addon location-input-group">
                                     <div class="location-circle-container">
                                         <img class="svg location-circle" src="assets/img/circle.svg"/>
                                         <div class="location-circle-centered">A</div>
@@ -85,11 +85,11 @@
                                     <img id="clearInputFieldFromButton" src="./style/icons/ic_clear_black_24px.svg"
                                          onclick="clearInputFieldFrom()"/>
                                 </div>
-                                <div class="col-md-1 col-sm-2  sm-or-bigger text-center">
+                                <div class="col-md-1 col-sm-4 text-center">
                                     <button class="btn btn-warning image-button" id="swap-origin-destination-button"
                                             onclick="swapOriginDestination()"></button>
                                 </div>
-                                <div class="col-md-5 col-sm-10 right-addon location-input-group">
+                                <div class="col-md-5 col-sm-6 right-addon location-input-group">
                                     <div class="location-circle-container">
                                         <img class="svg location-circle" src="assets/img/circle.svg"/>
                                         <div class="location-circle-centered">B</div>
@@ -100,6 +100,7 @@
                                     <img id="clearInputFieldToButton" src="./style/icons/ic_clear_black_24px.svg"
                                          onclick="clearInputFieldTo()"/>
                                 </div>
+
                             </div>
                         </div>
                     </div>
