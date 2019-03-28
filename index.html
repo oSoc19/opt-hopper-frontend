@@ -62,28 +62,21 @@
 
                     <!-- Genk Logo. Gives a horizontal one on big screens, a vertical one on smaller -->
 
-                    <div class="col-2 md-or-bigger">
+                    <div class="col-2">
                         <img src="logo.svg" alt="Iedereen Genkt" height="50vh"/>
-                    </div>
-                    <div class="col-1 sm-only">
-                        <div class="landscape-hidden">
-                            <img src="logo-turned.svg" alt="Iedereen Genkt" height="80vh"/>
-                        </div>
                     </div>
 
                     <!-- Input fields for all -->
 
-                    <div class="col-sm-8 col-md-9">
+                    <div class="col-xs-5 col-sm-7 col-md-9">
 
                         <div class="container-fluid">
 
                             <div class="row" style="align-items: center">
                                 <div class="col-md-5 col-sm-12 currentLocation right-addon location-input-group">
                                     <div class="location-circle-container sm-or-bigger">
-                                        <div class="landscape-hidden">
-                                            <img class="svg location-circle" src="assets/img/circle.svg"/>
-                                            <div class="location-circle-centered">A</div>
-                                        </div>
+                                        <img class="svg location-circle" src="assets/img/circle.svg"/>
+                                        <div class="location-circle-centered">A</div>
                                     </div>
                                     <input class="form-control typeahead geocoder-input" type="text" id="fromInput"
                                            placeholder="From" oninput="fromFieldInputDetected(this)">
@@ -97,11 +90,9 @@
                                             onclick="swapOriginDestination()"></button>
                                 </div>
                                 <div class="col-md-5 col-sm-10 right-addon location-input-group">
-                                    <div class="landscape-hidden">
-                                        <div class="location-circle-container sm-or-bigger">
-                                            <img class="svg location-circle" src="assets/img/circle.svg"/>
-                                            <div class="location-circle-centered">B</div>
-                                        </div>
+                                    <div class="location-circle-container sm-or-bigger">
+                                        <img class="svg location-circle" src="assets/img/circle.svg"/>
+                                        <div class="location-circle-centered">B</div>
                                     </div>
                                     <input class="form-control typeahead geocoder-input" type="text" id="toInput"
                                            placeholder="To"
@@ -126,7 +117,7 @@
 
             <!-- The big map -->
             <div class="map-container container-fluid nopadding">
-                <div class="sm-or-smaller upper-right-anchor">
+                <div class="xs-or-smaller upper-right-anchor">
                     <div class="col-1">
                         <button class="btn image-button padding sidebar-toggle-button"
                                 onclick="toggleSidebar()"></button>
@@ -135,15 +126,7 @@
 
 
                 <div class="bottom-left-anchor nopadding">
-                    <div class="xs-or-smaller landscape-hidden">
-                        <img src="logo.svg" style="height: 8vh">
-                    </div>
-
-                    <div class="sm-only">
-                        <div class="landscape-only">
-                            <img src="logo.svg" style="height: 8vh">
-                        </div>
-                    </div>
+                    <!-- Unused ATM -->
                 </div>
                 <div id='map' style="height:100%; width: 100%"></div>
                 <script>
@@ -165,8 +148,8 @@
             </div>
 
 
-            <!-- The three extra profile buttons. Mobile only -->
-            <div class="md-only container-fluid nopadding">
+            <!-- The three extra profile buttons. md-and-smaller only -->
+            <div class="md-or-smaller container-fluid nopadding">
                 <div class="row pointer dark-blue-background-cyan-foreground nopadding"
                      style="width:100%;">
 
@@ -198,53 +181,6 @@
                 </div>
             </div>
 
-
-            <!-- The three extra small profile buttons. Mobile, portrait only, for extra small screens-->
-            <div class="xs-or-smaller container-fluid nopadding">
-                <div class="landscape-hidden">
-
-                    <div class="row pointer dark-blue-background-cyan-foreground nopadding"
-                         style="width:100%;">
-
-                        <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
-                        <div class="col-4 text-center network-genk-button" style="align-items: center"
-                             onclick="sidebarDisplayProfileHtmlId('network-genk')">
-                            <img class="svg" src="./assets/img/genk-networks.svg"/>
-                        </div>
-                        <div class="col-4 text-center network-button"
-                             onclick="sidebarDisplayProfileHtmlId('network')">
-                            <img class="svg" src="./assets/img/network.svg"/>
-                        </div>
-                        <div class="col-4 text-center fastest-button"
-                             onclick="sidebarDisplayProfileHtmlId('fastest')">
-                            <img class="svg" src="assets/img/fast.svg"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- The three extra small profile buttons another time. Mobile only, for landscape mode-->
-            <div class="landscape-only">
-                <div class="sm-or-smaller container-fluid nopadding">
-                    <div class="row pointer dark-blue-background-cyan-foreground nopadding"
-                         style="width:100%;">
-
-                        <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
-                        <div class="col-4 text-center network-genk-button" style="align-items: center"
-                             onclick="sidebarDisplayProfileHtmlId('network-genk')">
-                            <img class="svg" src="./assets/img/genk-networks.svg"/>
-                        </div>
-                        <div class="col-4 text-center network-button"
-                             onclick="sidebarDisplayProfileHtmlId('network')">
-                            <img class="svg" src="./assets/img/network.svg"/>
-                        </div>
-                        <div class="col-4 text-center fastest-button"
-                             onclick="sidebarDisplayProfileHtmlId('fastest')">
-                            <img class="svg" src="assets/img/fast.svg"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
