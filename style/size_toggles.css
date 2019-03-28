@@ -13,6 +13,24 @@ To show something between ranges, (e.g. large and medium, but not small, xs or e
 
 */
 
+.landscape-only {
+    display: none;
+}
+
+.landscape-hidden {
+    display: unset;
+}
+
+@media screen and (orientation: landscape) {
+    .landscape-only {
+        display: unset;
+    }
+
+    .landscape-hidden {
+        display: none;
+    }
+}
+
 .xs-or-smaller {
     display: none;
 }
@@ -53,66 +71,109 @@ To show something between ranges, (e.g. large and medium, but not small, xs or e
     display: none;
 }
 
+.xs-only {
+    display: none;
+}
+
+.sm-only {
+    display: none;
+}
+
+.md-only {
+    display: none;
+}
+
+.lg-only {
+    display: none;
+}
+
+.xl-only {
+    display: none;
+}
+
 @media only screen and (min-width: 0px) {
     .xs-or-bigger {
-        display: flex;
+        display: unset;
     }
 }
 
 @media only screen and (max-width: 575px) {
     .xs-or-smaller {
-        display: flex;
+        display: unset;
+    }
+
+    .xs-only {
+        display: unset;
     }
 }
 
-
-
 @media only screen and (min-width: 576px) {
     .sm-or-bigger {
-        display: flex;
+        display: unset;
+    }
+}
+
+@media only screen and (min-width: 576px)and (max-width: 767px) {
+    .sm-only {
+        display: unset;
     }
 }
 
 @media only screen and (max-width: 767px) {
     .sm-or-smaller {
-        display: flex;
+        display: unset;
     }
 }
 
 @media only screen and (min-width: 768px) {
     .md-or-bigger {
-        display: flex;
+        display: unset;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .md-only {
+        display: unset;
     }
 }
 
 @media only screen and (max-width: 991px) {
     .md-or-smaller {
-        display: flex;
+        display: unset;
     }
 }
 
-
 @media only screen and (min-width: 992px) {
     .lg-or-bigger {
-        display: flex;
+        display: unset;
+    }
+}
+
+@media only screen and (min-width: 992px)and (max-width: 1200px) {
+    .lg-only {
+        display: unset;
     }
 }
 
 @media only screen and (max-width: 1200px) {
     .lg-or-smaller {
-        display: flex;
+        display: unset;
     }
 }
 
 @media only screen and (min-width: 1200px) {
     .xl-or-bigger {
-        display: flex;
+        display: unset;
+    }
+
+    .xl-only {
+        display: unset;
     }
 }
 
 @media only screen and (min-width: 0) {
     .xl-or-smaller {
-        display: flex;
+        display: unset;
     }
 }
 

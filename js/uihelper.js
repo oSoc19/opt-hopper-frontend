@@ -26,9 +26,11 @@ function closeSidebar() {
     var bar = $("#content-pane");
     bar.removeClass('col-lg-9');
     bar.addClass('col-lg-12');
-    
-    var button = $("#sidebarHamburger");
-    button.addClass('sidebarHamburgerClosed');
+
+    var buttons = document.getElementsByClassName("sidebar-toggle-button");
+    for(var i in buttons){
+        buttons[i].classList.remove('sidebar-toggle-button-close');
+    }
 }
 
 
@@ -44,8 +46,10 @@ function openSidebar() {
     bar.removeClass('col-lg-12');
     bar.addClass('col-lg-9');
     
-    var button = $("#sidebarHamburger");
-    button.removeClass('sidebarHamburgerClosed')
+    var buttons = document.getElementsByClassName("sidebar-toggle-button");
+    for(var i in buttons){
+        buttons[i].classList.add('sidebar-toggle-button-close');
+    }
 }
 
 /**

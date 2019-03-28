@@ -21,7 +21,7 @@
     <script src="js/constants.js"></script>
 </head>
 
-<body>
+<body class="nopadding">
 
 <script>
     function detectIE() {
@@ -56,8 +56,8 @@
              style="display:flex; flex-direction: column; align-items: stretch; padding: 0;">
 
             <!-- The bar on top -->
-            <div class="sm-or-bigger container-fluid">
-                <div class="row row-eq-height" style="align-items: flex-start">
+            <div class="container-fluid">
+                <div class="row row-eq-height">
 
 
                     <!-- Genk Logo. Gives a horizontal one on big screens, a vertical one on smaller -->
@@ -65,22 +65,25 @@
                     <div class="col-2 md-or-bigger">
                         <img src="logo.svg" alt="Iedereen Genkt" height="50vh"/>
                     </div>
-                    <div class="col-1 sm-or-smaller">
-                        <div class="sm-or-bigger">
+                    <div class="col-1 sm-only">
+                        <div class="landscape-hidden">
                             <img src="logo-turned.svg" alt="Iedereen Genkt" height="80vh"/>
                         </div>
                     </div>
 
-                    <!-- Input fields. On very small screens, we hide the location bar. Ppl will just have to click the map -->
-                    <div class="col-9 col-md-9 col-sm-10" id="top-overlay-input">
+                    <!-- Input fields for all -->
+
+                    <div class="col-sm-8 col-md-9">
 
                         <div class="container-fluid">
 
                             <div class="row" style="align-items: center">
-                                <div class="col-5 col-md-5 col-sm-12 col-xs-6 currentLocation right-addon location-input-group">
+                                <div class="col-md-5 col-sm-12 currentLocation right-addon location-input-group">
                                     <div class="location-circle-container sm-or-bigger">
-                                        <img class="svg location-circle" src="assets/img/circle.svg"/>
-                                        <div class="location-circle-centered">A</div>
+                                        <div class="landscape-hidden">
+                                            <img class="svg location-circle" src="assets/img/circle.svg"/>
+                                            <div class="location-circle-centered">A</div>
+                                        </div>
                                     </div>
                                     <input class="form-control typeahead geocoder-input" type="text" id="fromInput"
                                            placeholder="From" oninput="fromFieldInputDetected(this)">
@@ -89,14 +92,16 @@
                                     <img id="clearInputFieldFromButton" src="./style/icons/ic_clear_black_24px.svg"
                                          onclick="clearInputFieldFrom()"/>
                                 </div>
-                                <div class="col-1 col-md-1 col-sm-2 sm-or-bigger text-center">
+                                <div class="col-md-1 col-sm-2  sm-or-bigger text-center">
                                     <button class="btn btn-warning image-button" id="swap-origin-destination-button"
                                             onclick="swapOriginDestination()"></button>
                                 </div>
-                                <div class="col-5 col-md-5 col-sm-10 col-xs-6 right-addon location-input-group">
-                                    <div class="location-circle-container sm-or-bigger">
-                                        <img class="svg location-circle" src="assets/img/circle.svg"/>
-                                        <div class="location-circle-centered">B</div>
+                                <div class="col-md-5 col-sm-10 right-addon location-input-group">
+                                    <div class="landscape-hidden">
+                                        <div class="location-circle-container sm-or-bigger">
+                                            <img class="svg location-circle" src="assets/img/circle.svg"/>
+                                            <div class="location-circle-centered">B</div>
+                                        </div>
                                     </div>
                                     <input class="form-control typeahead geocoder-input" type="text" id="toInput"
                                            placeholder="To"
@@ -106,12 +111,12 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
-                    <!-- Show/hide sidebar on the right -->
-                    <div class="col-1">
-                        <button class="btn image-button" id="sidebar-toggle-button" onclick="toggleSidebar()"></button>
+                    <!-- Show/hide sidebar button on the right -->
+                    <div class="col-1 sm-or-bigger" style="height: 100%">
+                        <button class="sidebar-toggle-button btn image-button padding"
+                                onclick="toggleSidebar()"></button>
                     </div>
 
                 </div>
@@ -121,10 +126,23 @@
 
             <!-- The big map -->
             <div class="map-container container-fluid nopadding">
-                <div class="upper-right-anchor nopadding">
-                    <div class="xs-or-smaller">
-                        <button class="btn image-button" id="sidebar-toggle-button-2"
+                <div class="sm-or-smaller upper-right-anchor">
+                    <div class="col-1">
+                        <button class="btn image-button padding sidebar-toggle-button"
                                 onclick="toggleSidebar()"></button>
+                    </div>
+                </div>
+
+
+                <div class="bottom-left-anchor nopadding">
+                    <div class="xs-or-smaller landscape-hidden">
+                        <img src="logo.svg" style="height: 8vh">
+                    </div>
+
+                    <div class="sm-only">
+                        <div class="landscape-only">
+                            <img src="logo.svg" style="height: 8vh">
+                        </div>
                     </div>
                 </div>
                 <div id='map' style="height:100%; width: 100%"></div>
@@ -148,8 +166,8 @@
 
 
             <!-- The three extra profile buttons. Mobile only -->
-            <div class="md-or-smaller container-fluid nopadding">
-                <div class="sm-or-bigger row pointer dark-blue-background-cyan-foreground nopadding"
+            <div class="md-only container-fluid nopadding">
+                <div class="row pointer dark-blue-background-cyan-foreground nopadding"
                      style="width:100%;">
 
                     <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
@@ -181,23 +199,49 @@
             </div>
 
 
-            <!-- The three extra profile buttons another time. Mobile only, for extra small screens-->
+            <!-- The three extra small profile buttons. Mobile, portrait only, for extra small screens-->
             <div class="xs-or-smaller container-fluid nopadding">
-                <div class="row pointer dark-blue-background-cyan-foreground nopadding"
-                     style="width:100%;">
+                <div class="landscape-hidden">
 
-                    <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
-                    <div class="col-4 text-center network-genk-button" style="align-items: center"
-                         onclick="sidebarDisplayProfileHtmlId('network-genk')">
-                        <img class="svg" src="./assets/img/genk-networks.svg"/>
+                    <div class="row pointer dark-blue-background-cyan-foreground nopadding"
+                         style="width:100%;">
+
+                        <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
+                        <div class="col-4 text-center network-genk-button" style="align-items: center"
+                             onclick="sidebarDisplayProfileHtmlId('network-genk')">
+                            <img class="svg" src="./assets/img/genk-networks.svg"/>
+                        </div>
+                        <div class="col-4 text-center network-button"
+                             onclick="sidebarDisplayProfileHtmlId('network')">
+                            <img class="svg" src="./assets/img/network.svg"/>
+                        </div>
+                        <div class="col-4 text-center fastest-button"
+                             onclick="sidebarDisplayProfileHtmlId('fastest')">
+                            <img class="svg" src="assets/img/fast.svg"/>
+                        </div>
                     </div>
-                    <div class="col-4 text-center network-button"
-                         onclick="sidebarDisplayProfileHtmlId('network')">
-                        <img class="svg" src="./assets/img/network.svg"/>
-                    </div>
-                    <div class="col-4 text-center fastest-button"
-                         onclick="sidebarDisplayProfileHtmlId('fastest')">
-                        <img class="svg" src="assets/img/fast.svg"/>
+                </div>
+            </div>
+
+            <!-- The three extra small profile buttons another time. Mobile only, for landscape mode-->
+            <div class="landscape-only">
+                <div class="sm-or-smaller container-fluid nopadding">
+                    <div class="row pointer dark-blue-background-cyan-foreground nopadding"
+                         style="width:100%;">
+
+                        <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
+                        <div class="col-4 text-center network-genk-button" style="align-items: center"
+                             onclick="sidebarDisplayProfileHtmlId('network-genk')">
+                            <img class="svg" src="./assets/img/genk-networks.svg"/>
+                        </div>
+                        <div class="col-4 text-center network-button"
+                             onclick="sidebarDisplayProfileHtmlId('network')">
+                            <img class="svg" src="./assets/img/network.svg"/>
+                        </div>
+                        <div class="col-4 text-center fastest-button"
+                             onclick="sidebarDisplayProfileHtmlId('fastest')">
+                            <img class="svg" src="assets/img/fast.svg"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -295,7 +339,7 @@
                          style="display: flex; align-items: center; margin-left: 30%; cursor: pointer"
                          onclick="exportCurrentRoute()">
 
-                        <div class="download-button">
+                        <div class="download-button dark-blue-background">
                             <img class="svg download" src="assets/img/download.svg"/><span>Download route</span>
                         </div>
                     </div>
@@ -422,7 +466,7 @@
 localStorage.lang = "nl";</script>
 
 
-<script>toggleSidebar()</script>
+<script>//toggleSidebar()</script>
 <script>
     // This scripts add the legend entries on the span with ID 'legend'"
     var element = document.getElementById("legend");

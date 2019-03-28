@@ -16,30 +16,27 @@ html, body {
     height: 100vh;
 }
 
-
 /** GENK COLOR STYLES **/
 
-.dark-blue-background{
+.dark-blue-background {
     background: #2D4959;
     color: #FAFAFA;
 }
 
-.dark-blue-background-cyan-foreground{
+.dark-blue-background-cyan-foreground {
     background: #2D4959;
     color: #00808B;
 }
 
-.cyan-background{
+.cyan-background {
     background: #00808B;
     color: #FAFAFA;
 }
 
-.white-background{
+.white-background {
     background: #FAFAFA;
     color: #2D4959;
 }
-
-
 
 .white-background svg path {
     fill: #2D4959;
@@ -50,8 +47,6 @@ html, body {
 .white-background svg circle {
     stroke: #2D4959;
 }
-
-
 
 .dark-blue-background-cyan-foreground svg path {
     fill: #00808B;
@@ -84,27 +79,22 @@ html, body {
     background-image: url(icons/ic_clear_black_24px.svg);
 }
 
-#sidebar-toggle-button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 0.5rem 0.5rem 0.5rem 0.65rem;
+/* CLosed by default: should point left */
+.sidebar-toggle-button {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(icons/arrow-left.svg);
 }
 
-#sidebar-toggle-button:before {
-    background-image: url(icons/arrow-right.svg);
-}
-
-.sidebarHamburgerClosed:before {
-    background-image: url(icons/arrow-left.svg) !important;
+.sidebar-toggle-button-close {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(icons/arrow-right.svg) !important;
 }
 
 #top-overlay-input {
     margin-bottom: 1vh;
 }
-
-
-
 
 #sidebar-right-container {
     display: flex;
@@ -117,8 +107,6 @@ html, body {
     z-index: 103;
     overflow: hidden;
 }
-
-
 
 .electricity-box {
     /* For one readon or another, all the element need an explicit 'display: flex' on them */
@@ -145,15 +133,11 @@ html, body {
     height: 50px;
 }
 
-
-
 .location-input-group {
     padding-left: 0;
     padding-right: 5px;
     border-bottom: 2px solid #2D4959 !important;
 }
-
-
 
 /** Very generic stuff **/
 
@@ -162,6 +146,10 @@ html, body {
     margin: 0 !important;
 }
 
+.padding {
+    padding: 0 !important;
+    margin: 1vh !important;
+}
 
 .smooth-transition {
     -webkit-transition: all 0.5s ease;
@@ -170,7 +158,7 @@ html, body {
     transition: all 0.5s ease;
 }
 
-.pointer{
+.pointer {
     cursor: pointer;
 }
 
@@ -182,7 +170,7 @@ html, body {
 }
 
 /* Element on the upper-right of the map */
-.upper-right-anchor{
+.upper-right-anchor {
     position: absolute;
     right: 5px;
     top: 5px;
@@ -191,6 +179,14 @@ html, body {
     z-index: 102;
 }
 
+.bottom-left-anchor {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    padding: 0;
+    margin: 0;
+    z-index: 102;
+}
 
 .image-button:before {
     content: "";
@@ -202,19 +198,11 @@ html, body {
     background: transparent no-repeat center center;
 }
 
-
 /******* TO CLEAN UP - Probably contains lots of dead code *******/
-
-
-
 
 .top-overlap-nav {
     height: 4em;
 }
-
-
-
-
 
 .instructions-resume div {
     display: inline;
@@ -282,21 +270,14 @@ html, body {
     display: none;
 }
 
-
-
 #swap-origin-destination-button:before {
     background-image: url(icons/baseline-swap_vert-24px.svg);
 }
-
-
-
 
 .btn {
     background-color: #FAFAFA;
     border: none;
 }
-
-
 
 .btn:hover {
     background-color: #2D4959;
@@ -307,7 +288,6 @@ html, body {
     background-color: #FAFAFA;
     border-radius: 0;
 }
-
 
 .profile-explanation-icons {
     text-align: center;
@@ -413,8 +393,6 @@ html, body {
     align-items: center;
 }
 
-
-
 .route-instructions {
     overflow-y: hidden;
     background-color: white;
@@ -423,7 +401,6 @@ html, body {
     overflow-x: hidden;
     height: 100%;
 }
-
 
 .download-button-back {
     display: flex;
@@ -457,7 +434,6 @@ html, body {
     color: #2D4959;
     border-radius: 0;
 }
-
 
 .btn-warning.focus {
     box-shadow: 0 0 0 0 #00808B;
@@ -701,7 +677,6 @@ input[type="text"], textarea {
     font-weight: 700;
 }
 
-
 .table-instruction-image {
     text-align: center;
 
@@ -751,7 +726,6 @@ table tr td {
     margin-top: 4px;
 }
 
-
 .instructions {
     background: white;
     color: #2D4959;
@@ -781,8 +755,6 @@ table tr td {
     overflow-y: auto;
 }
 
-
-
 @media only screen and (max-width: 767px) {
     body {
         font-size: 1rem;
@@ -809,12 +781,9 @@ table tr td {
         padding: 2px 2px 0 2px;
     }
 
-
-
     .card {
         margin-bottom: 50px;
     }
-    
 
     .form-control {
         line-height: 1;
@@ -852,7 +821,6 @@ table tr td {
         font-size: 0;
         padding: 2px 2px 0 2px;
     }
-
 
     .card {
         margin-bottom: 50px;
