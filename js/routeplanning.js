@@ -4,7 +4,8 @@ let language = "nl";
 //var labelLayer = "road-label";
 //var labelLayer = "waterway-label";
 //var labelLayer = "highway_name_other";
-var labelLayer = "water_name_line";
+//var labelLayer = "water_name_line";
+var labelLayer = "waterway-name";
 
 var state = {
     routes: {
