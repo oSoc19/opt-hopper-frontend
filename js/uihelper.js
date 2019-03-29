@@ -32,7 +32,10 @@ function closeSidebar() {
 
     var buttons = document.getElementsByClassName("sidebar-toggle-button");
     for(var i in buttons){
-        buttons[i].classList.remove('sidebar-toggle-button-close');
+        if (buttons[i] &&
+            buttons[i].classList) {
+            buttons[i].classList.remove('sidebar-toggle-button-close');
+        }
     }
 }
 
@@ -52,7 +55,10 @@ function openSidebar() {
     
     var buttons = document.getElementsByClassName("sidebar-toggle-button");
     for(var i in buttons){
-        buttons[i].classList.add('sidebar-toggle-button-close');
+        if (buttons[i] &&
+            buttons[i].classList) {
+            buttons[i].classList.add('sidebar-toggle-button-close');
+        }
     }
 }
 
