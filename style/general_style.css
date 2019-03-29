@@ -454,8 +454,20 @@ html, body {
     border-radius: 0;
 }
 
-.btn-warning.focus {
+.btn:focus {
     box-shadow: 0 0 0 0 #00808B;
+}
+
+.btn-warning:focus {
+    box-shadow: 0 0 0 0 #00808B;
+}
+
+.btn-warning:active {
+    box-shadow: 0 0 0 0 #00808B;
+}
+
+.btn-warning:hover {
+    border-color: #00808B;
 }
 
 .button-collapse-instructions:hover, .lang_label:hover {
