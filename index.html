@@ -152,7 +152,7 @@
                      style="width:100%;">
 
                     <!-- Beware: class names 'network-genk-button', 'fastest-button' ... are used in the script and not in the css. Don't remove 'em-->
-                    <div class="col-sm-4 btn-lg text-center network-genk-button"
+                    <div class="col-4 btn-lg text-center network-genk-button"
                          onclick="sidebarDisplayProfileHtmlId('network-genk')">
                     <span>
                         <img class="svg" src="./assets/img/genk-networks.svg"/>
@@ -160,7 +160,7 @@
                         <br>
                         <div>Genk-netwerk</div>
                     </div>
-                    <div class="col-sm-4 btn-lg text-center network-button"
+                    <div class="col-4 btn-lg text-center network-button"
                          onclick="sidebarDisplayProfileHtmlId('network')">
                     <span>
                         <img class="svg" src="./assets/img/network.svg"/>
@@ -168,7 +168,7 @@
                         <br>
                         <div>Knooppunten</div>
                     </div>
-                    <div class="col-sm-4 btn-lg text-center fastest-button"
+                    <div class="col-4 btn-lg text-center fastest-button"
                          onclick="sidebarDisplayProfileHtmlId('fastest')">
                     <span>
                         <img class="svg" src="assets/img/fast.svg"/>
@@ -190,7 +190,7 @@
 
 <!-- Sidebar on the right-->
 <div id="sidebar-right-container"
-     class="col-lg-3 col-md-12 col-sm-12 hidden-sidebar white-background smooth-transition">
+     class="col-lg-3 col-md-5 col-sm-12 hidden-sidebar white-background smooth-transition">
 
     <!-- All the sidebar content -->
     <div id='sidebar-right-content'>
@@ -237,8 +237,8 @@
 
             <!-- Close button. Only on small screens -->
             <div class="md-or-smaller white-background" id="btn-close">
-                <button class="btn-lg image-button" id="sidebarClose"
-                        onclick="closeSidebar()"></button>
+                <div class="btn-lg image-button dark-blue-background" id="sidebarClose"
+                        onclick="closeSidebar()"></div>
             </div>
 
         </div>

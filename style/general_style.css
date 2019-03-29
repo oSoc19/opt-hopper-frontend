@@ -76,7 +76,11 @@ html, body {
 }
 
 #sidebarClose:before {
-    background-image: url(icons/ic_clear_black_24px.svg);
+    background-image: url(icons/close.svg);
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-top-width: 0px;
+    border-top-width: 0px;
 }
 
 /* CLosed by default: should point left */
@@ -215,8 +219,6 @@ html, body {
     display: inline;
     flex-grow: 1;
     text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .instructions-resume {
