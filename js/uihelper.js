@@ -27,13 +27,14 @@ function closeSidebar() {
     bar.removeClass('col-lg-9');
     bar.addClass('col-lg-12');
 
+    var mobileButtons = $(".mobile-buttons");
+    mobileButtons.removeClass('hidden');
+
     var buttons = document.getElementsByClassName("sidebar-toggle-button");
     for(var i in buttons){
         buttons[i].classList.remove('sidebar-toggle-button-close');
     }
 }
-
-
 
 /**
  * Opens the sidebar.
@@ -45,6 +46,9 @@ function openSidebar() {
     var bar = $("#content-pane");
     bar.removeClass('col-lg-12');
     bar.addClass('col-lg-9');
+
+    var mobileButtons = $(".mobile-buttons");
+    mobileButtons.addClass('hidden');
     
     var buttons = document.getElementsByClassName("sidebar-toggle-button");
     for(var i in buttons){

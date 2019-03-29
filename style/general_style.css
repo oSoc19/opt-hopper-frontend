@@ -263,6 +263,10 @@ html, body {
     width: 0;
 }
 
+.hidden {
+    display: none;
+}
+
 .bottom-right-floating-buttons {
     position: absolute;
     right: 10px;
