@@ -758,7 +758,7 @@ table tr td {
 .marker-text {
     display: flex;
     margin-left: 11px;
-    margin-top: 4px;
+    margin-top: 5px;
 }
 
 .instructions {
