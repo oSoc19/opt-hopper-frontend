@@ -775,6 +775,10 @@ table tr td {
     padding-bottom: 10px;
 }
 
+.logo img {
+    height: 50px;
+}
+
 @media only screen and (max-width: 767px) {
     body {
         font-size: 1rem;
@@ -817,7 +821,19 @@ table tr td {
         margin-bottom: 10px;
         padding-bottom: 2px;
     }
-}
+
+    .location-circle {
+        height: 25px;
+        width: 25px;
+    }
+
+    .mobile-buttons .btn-lg {
+        font-size: 0.85rem;
+    }
+
+    .logo img {
+        height: 40px;
+    }
 
 @media only screen and (max-width: 767px) {
     body {
