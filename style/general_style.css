@@ -782,6 +782,10 @@ table tr td {
     height: 50px;
 }
 
+#sidebarHamburger::before {
+    background-image: url(icons/ic_menu_black_24px.svg);
+}
+
 @media only screen and (max-width: 767px) {
     body {
         font-size: 0.95rem;

@@ -57,10 +57,16 @@
 
             <!-- The bar on top -->
             <div class="container-fluid top-bar">
+
                 <div class="row row-eq-height">
 
-                    <div class="col-2 col-xs-10 logo">
+                    <div class="col-1 col-xs-10 logo">
                         <img src="logo.svg" alt="Iedereen Genkt"/>
+                    </div>
+                    <div class="col-9 xs-or-smaller">
+                    </div>
+                    <div class="col-1 xs-or-smaller" style="height: 100%">
+                        <button class="btn image-button" id="sidebarHamburger" onclick="toggleSidebar()"></button>
                     </div>
 
 
@@ -115,14 +121,6 @@
 
             <!-- The big map -->
             <div class="map-container container-fluid nopadding">
-                <div class="xs-or-smaller upper-right-anchor">
-                    <div class="col-1">
-                        <button class="btn image-button padding sidebar-toggle-button"
-                                onclick="toggleSidebar()"></button>
-                    </div>
-                </div>
-
-
                 <div class="bottom-left-anchor nopadding">
                     <!-- Unused ATM -->
                 </div>
