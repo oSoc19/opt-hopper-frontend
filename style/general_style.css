@@ -148,6 +148,10 @@ html, body {
     border-bottom: 2px solid #2D4959 !important;
 }
 
+.mobile-buttons .btn-lg {
+    border-radius: 0px;
+}
+
 /** Very generic stuff **/
 
 .nopadding {
@@ -802,6 +806,10 @@ table tr td {
 
     .form-control {
         line-height: 1;
+    }
+
+    .w-100-md {
+        width: 100% !important;
     }
 }
 
