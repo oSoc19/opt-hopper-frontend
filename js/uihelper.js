@@ -626,13 +626,13 @@ function formatDistance(distance) {
 function addInstructions(instructions, profile){
     var row = 
         '<div class=\"row\">\r\n' + 
-            '<div class=\"col-sm-1 instruction-icon\">\r\n' + 
+            '<div class=\"col-1 instruction-icon\">\r\n' + 
                 '{icon}' +
             '<\/div>\r\n' + 
-            '<div class=\"col-sm-9 instructions-start table-instruction-text\">\r\n' + 
+            '<div class=\"col-9 instructions-start table-instruction-text\">\r\n' + 
                 '{instruction}' +
             '<\/div>\r\n' + 
-            '<div class=\"col-sm-1 instruction-distance\">\r\n' + 
+            '<div class=\"col-1 instruction-distance\">\r\n' + 
                 '{distance}' +
             '<\/div>\r\n' + 
         '<\/div>';

@@ -25,7 +25,7 @@ html, body {
 
 .dark-blue-background-cyan-foreground {
     background: #2D4959;
-    color: #00808B;
+    color: white;
 }
 
 .cyan-background {
@@ -49,13 +49,13 @@ html, body {
 }
 
 .dark-blue-background-cyan-foreground svg path {
-    fill: #00808B;
-    stroke: #00808B;
+    fill: white;
+    stroke: white;
 }
 
 .dark-blue-background-cyan-foreground svg polyline,
 .dark-blue-background-cyan-foreground svg circle {
-    stroke: #00808B;
+    stroke: white;
 }
 
 .cyan-background svg path {
@@ -744,9 +744,8 @@ table tr td {
 .instructions {
     background: white;
     color: #2D4959;
-    padding-top: 10px;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    padding-top: 0px;
+    margin-top: 4vh;
 }
 
 .instructions .row {
@@ -781,8 +780,8 @@ table tr td {
 
 @media only screen and (max-width: 767px) {
     body {
-        font-size: 1rem;
-        line-height: 1;
+        font-size: 0.85rem;
+        line-height: 1.5;
     }
 
     .mapboxgl-ctrl-group > button {
@@ -798,6 +797,12 @@ table tr td {
     .top-overlay {
         padding-bottom: 0;
         padding-top: 0;
+    }
+
+    #sidebar-right-container .btn-lg {
+        font-size: unset;
+        padding-left: 2px;
+        padding-right: 2px;
     }
 
     .btn-export {
@@ -839,46 +844,4 @@ table tr td {
         padding-top: 5px;
         padding-bottom: 5px;
     }
-}
-
-@media only screen and (max-width: 767px) {
-    body {
-        font-size: 1rem;
-        line-height: 1;
-    }
-
-    #top-overlay-profile-buttons-mobile {
-        display: flex;
-        position: absolute;
-        bottom: 0;
-    }
-
-    .mapboxgl-ctrl-group > button {
-        width: 40px;
-        height: 40px;
-    }
-
-    #swap-origin-destination-button {
-        top: 50%;
-        position: relative;
-    }
-
-    .top-overlay {
-        padding-bottom: 0;
-        padding-top: 0;
-    }
-
-    .btn-export {
-        font-size: 0;
-        padding: 2px 2px 0 2px;
-    }
-
-    .card {
-        margin-bottom: 50px;
-    }
-
-    .form-control {
-        line-height: 1;
-    }
-
 }
