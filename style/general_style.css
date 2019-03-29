@@ -150,6 +150,7 @@ html, body {
 
 .mobile-buttons .btn-lg {
     border-radius: 0px;
+    font-size: 1rem;
 }
 
 /** Very generic stuff **/
@@ -810,6 +811,11 @@ table tr td {
 
     .w-100-md {
         width: 100% !important;
+    }
+
+    .margin-mobile {
+        margin-bottom: 10px;
+        padding-bottom: 2px;
     }
 }
 
