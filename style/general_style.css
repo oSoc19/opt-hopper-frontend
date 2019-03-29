@@ -834,6 +834,12 @@ table tr td {
     .logo img {
         height: 40px;
     }
+    
+    .top-bar {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
 
 @media only screen and (max-width: 767px) {
     body {
