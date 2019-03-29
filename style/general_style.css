@@ -14,6 +14,7 @@
 
 html, body {
     height: 100vh;
+    font-size: .95rem;
 }
 
 /** GENK COLOR STYLES **/
@@ -115,6 +116,8 @@ html, body {
 #sidebar-right-container .btn-lg {
     font-size: 1rem;
     border-radius: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .electricity-box {
@@ -206,10 +209,11 @@ html, body {
 
 .image-button:before {
     content: "";
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     display: inline-block;
-    margin-right: 0;
+    margin-right: 4px;
+    margin-left: 4px;
     vertical-align: text-top;
     background: transparent no-repeat center center;
 }
@@ -785,8 +789,8 @@ table tr td {
     }
 
     .mapboxgl-ctrl-group > button {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
 
     #swap-origin-destination-button {
