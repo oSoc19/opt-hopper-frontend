@@ -400,7 +400,12 @@
 localStorage.lang = "nl";</script>
 
 
-<script>toggleSidebar()</script>
+<script>
+if (window.innerWidth <= 767) {
+    closeSidebar();
+} else {
+    openSidebar();
+}</script>
 <script>
     // This scripts add the legend entries on the span with ID 'legend'"
     var element = document.getElementById("legend");
