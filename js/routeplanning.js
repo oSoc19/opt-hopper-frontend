@@ -3,7 +3,8 @@ let language = "nl";
 // TODO: label layers can be diffent per stylesheet, create a function to find them.
 //var labelLayer = "road-label";
 //var labelLayer = "waterway-label";
-var labelLayer = "highway_name_other";
+//var labelLayer = "highway_name_other";
+var labelLayer = "water_name_line";
 
 var state = {
     routes: {
