@@ -41,7 +41,8 @@ var profileConfigs = {
             "cyclenodes-circles": false,
             "cyclenodes-circles-high": false,
             "cyclenodes-circles-center": false,
-            "cyclenodes-labels": false
+            "cyclenodes-labels": false,
+            "cyclenodes-labels-high": false
         },
         routecolor: {
             backend: true,
@@ -94,7 +95,8 @@ var profileConfigs = {
             "cyclenodes-circles": false,
             "cyclenodes-circles-high": false,
             "cyclenodes-circles-center": false,
-            "cyclenodes-labels": false
+            "cyclenodes-labels": false,
+            "cyclenodes-labels-high": false
         },
         routecolor: {
             backend: false,
