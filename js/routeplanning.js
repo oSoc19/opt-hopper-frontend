@@ -729,6 +729,16 @@ function initInputGeocoders() {
 
             if (state.location1 && state.location2) {
                 fitToBounds(state.location1, state.location2);
+            } else if (state.location1) {
+                map.jumpTo({
+                    center: state.location1,
+                    zoom: 15
+                });
+            } else if (state.location2) {
+                map.jumpTo({
+                    center: state.location2,
+                    zoom: 15
+                });
             }
         }
     });
@@ -819,7 +829,14 @@ function fitToBounds(origin, destination) {
     }
 
     if (window.innerWidth <= 767) {
-        map.fitBounds(bounds);
+        map.fitBounds(bounds, {
+            padding: {
+                top: 0,
+                right: 10,
+                bottom: 0,
+                left: 10
+            }
+        });
     } else {
         map.fitBounds(bounds, {
             padding: {
