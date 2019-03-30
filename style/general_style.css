@@ -546,6 +546,19 @@ input[type="text"], textarea {
     padding-top: 0;
 }
 
+.btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active,
+.show > .btn-warning.dropdown-toggle {
+  color: #2D4959;
+  background-color: #2D4959;
+  border-color: #2D4959;
+}
+
+.btn-warning:not(:disabled):not(.disabled):active:focus, 
+.btn-warning:not(:disabled):not(.disabled).active:focus,
+.show > .btn-warning.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem #00808B;
+}
+
 /* enable absolute positioning */
 /*.currentLocation {*/
 .right-addon {
