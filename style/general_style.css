@@ -141,8 +141,8 @@ html, body {
 }
 
 .mapboxgl-ctrl-group > button {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }
 
 .location-input-group {
@@ -884,6 +884,18 @@ table tr td {
     .top-bar {
         padding-top: 5px;
         padding-bottom: 5px;
+    }
+
+    .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-in  {
+        display: none;
+    }
+
+    .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-out {
+        display: none;
+    }
+
+    .mapboxgl-ctrl-icon.mapboxgl-ctrl-compass {
+        display: none;
     }
 }
 

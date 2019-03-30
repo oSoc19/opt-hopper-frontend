@@ -535,6 +535,7 @@ window.onload = function () {
         },
         trackUserLocation: true
     }), 'top-left');
+    map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
 
     if (urlparams.zoom) {
         map.setZoom(urlparams.zoom);
