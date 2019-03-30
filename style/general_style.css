@@ -886,3 +886,9 @@ table tr td {
         padding-bottom: 5px;
     }
 }
+
+@media only screen and (max-height: 400px) {
+    .mobile-buttons {
+        display: none;
+    }
+}
