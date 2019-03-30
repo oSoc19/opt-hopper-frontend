@@ -817,14 +817,19 @@ function fitToBounds(origin, destination) {
     if (!sidebarIsClosed()) {
         paddingRight += $("#sidebar-right-container").width();
     }
-    map.fitBounds(bounds, {
-        padding: {
-            top: 75,
-            right: paddingRight,
-            bottom: 150,
-            left: 50
-        }
-    });
+
+    if (window.innerWidth <= 767) {
+        map.fitBounds(bounds);
+    } else {
+        map.fitBounds(bounds, {
+            padding: {
+                top: 75,
+                right: paddingRight,
+                bottom: 150,
+                left: 50
+            }
+        });
+    }
 }
 
 /**
