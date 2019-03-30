@@ -3,16 +3,17 @@ let windowLoaded = false;
 
 
 function toggleSidebar(){
-    var container = $("#sidebar-right-container");
-    var isClosed = container.hasClass("hidden-sidebar");
-    
+    var isClosed = sidebarIsClosed();
     if(isClosed){
         openSidebar();
     }else{
         closeSidebar();
     }
-    
-    
+}
+
+function sidebarIsClosed() {
+    var container = $("#sidebar-right-container");
+    return container.hasClass("hidden-sidebar");
 }
 
 /**

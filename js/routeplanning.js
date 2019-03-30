@@ -172,7 +172,7 @@ function calculateAllRoutes(origin, destination, profiles = availableProfiles, l
     profiles.forEach(function (profile) {
         calculateRoute(origin, destination, profile, lang);
     });
-    fitToBounds(origin, destination);
+    //fitToBounds(origin, destination);
 }
 
 /**
@@ -329,7 +329,7 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
             }
 
         }
-        fitToBounds(origin, destination);   //Called again to make sure the start or endpoint are not hidden behind sidebar
+        //fitToBounds(origin, destination);   //Called again to make sure the start or endpoint are not hidden behind sidebar
     }
 
     // Request failed, cleanup nicely
@@ -724,6 +724,10 @@ function initInputGeocoders() {
                 console.warn("FIELD NOT FOUND!");
             }
             showLocationsOnMap();
+
+            if (state.location1 && state.location2) {
+                fitToBounds(state.location1, state.location2);
+            }
         }
     });
 }
@@ -808,17 +812,17 @@ function fitToBounds(origin, destination) {
     bounds.extend(destination);
     // Fit the map to the route
     let paddingRight = 50;
-    if (isSidebarVisible) {
+    if (!sidebarIsClosed()) {
         paddingRight += $("#sidebar-right-container").width();
     }
-    // map.fitBounds(bounds, {
-    //     padding: {
-    //         top: 75,
-    //         right: paddingRight,
-    //         bottom: 75,
-    //         left: 50
-    //     }
-    // });
+    map.fitBounds(bounds, {
+        padding: {
+            top: 75,
+            right: paddingRight,
+            bottom: 150,
+            left: 50
+        }
+    });
 }
 
 /**

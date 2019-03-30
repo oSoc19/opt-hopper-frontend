@@ -521,12 +521,16 @@ html, body {
 
 li {
     border-bottom: 1px solid white;
-    padding: 1.5rem;
+    padding: .2rem;
 }
 
 ul {
     list-style-type: none;
     padding: 0;
+}
+
+.dropdown-menu {
+    font-size: .85rem;
 }
 
 input[type="text"], textarea {
