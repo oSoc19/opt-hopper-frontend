@@ -120,28 +120,32 @@
 
 
             <!-- The big map -->
-            <div id="map" class="map-container container-fluid nopadding">
-            </div>
-            <script>
-                mapboxgl.accessToken = mapboxAccessCode;
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    //style: 'mapbox://styles/ben-anyways/cjm7obna8e73u2rppk8pc49di',
-                    //style: 'mapbox://styles/ben-anyways/cjs66aa5d27yv1ftdyq1kvlgr',
-                    //style: 'mapbox://styles/ben-anyways/cj9zvkimu8wjl2spbq2ej7en0',
-                    //style: 'mapbox://styles/ben-anyways/cjm7obefs14442sp63lworwqg',
-                    //style: 'https://maps.tilehosting.com/styles/positron/style.json?key=RrAiXeTeoR4I64mRSxk8',
-                    //style: 'https://maps.tilehosting.com/c/57530131-c1b9-40f3-990b-a4ac7177ba23/styles/positron-cycling/style.json?key=RrAiXeTeoR4I64mRSxk8',
-                    //style: 'https://maps.tilehosting.com/c/57530131-c1b9-40f3-990b-a4ac7177ba23/styles/positron-cycling/style.json?key=RrAiXeTeoR4I64mRSxk8',
-                    //style: './style/streets.json',
-                    style: 'https://maps.tilehosting.com/c/57530131-c1b9-40f3-990b-a4ac7177ba23/styles/cycling-bright/style.json?key=RrAiXeTeoR4I64mRSxk8',
-                    center: [5.5027, 50.9632], // starting position [lng, lat]
-                    zoom: 14, // starting zoom
-                    preserveDrawingBuffer: true
-                });
+            <div class="map-container container-fluid nopadding">
+                <div class="bottom-left-anchor nopadding">
+                    <!-- Unused ATM -->
+                </div>
+                <div id='map' style="height:100vh; width: 100%"></div>
+                <script>
+                    mapboxgl.accessToken = mapboxAccessCode;
+                    var map = new mapboxgl.Map({
+                        container: 'map',
+                        //style: 'mapbox://styles/ben-anyways/cjm7obna8e73u2rppk8pc49di',
+                        //style: 'mapbox://styles/ben-anyways/cjs66aa5d27yv1ftdyq1kvlgr',
+                        //style: 'mapbox://styles/ben-anyways/cj9zvkimu8wjl2spbq2ej7en0',
+                        //style: 'mapbox://styles/ben-anyways/cjm7obefs14442sp63lworwqg',
+                        //style: 'https://maps.tilehosting.com/styles/positron/style.json?key=RrAiXeTeoR4I64mRSxk8',
+                        //style: 'https://maps.tilehosting.com/c/57530131-c1b9-40f3-990b-a4ac7177ba23/styles/positron-cycling/style.json?key=RrAiXeTeoR4I64mRSxk8',
+                        //style: 'https://maps.tilehosting.com/c/57530131-c1b9-40f3-990b-a4ac7177ba23/styles/positron-cycling/style.json?key=RrAiXeTeoR4I64mRSxk8',
+                        //style: './style/streets.json',
+                        style: 'https://maps.tilehosting.com/c/57530131-c1b9-40f3-990b-a4ac7177ba23/styles/cycling-bright/style.json?key=RrAiXeTeoR4I64mRSxk8',
+                        center: [5.5027, 50.9632], // starting position [lng, lat]
+                        zoom: 14, // starting zoom
+                        preserveDrawingBuffer: true
+                    });
 
-                map.addControl(new mapboxgl.NavigationControl());
-            </script>
+                    map.addControl(new mapboxgl.NavigationControl());
+                </script>
+            </div>
 
 
             <!-- The three extra profile buttons. md-and-smaller only -->
