@@ -3,16 +3,17 @@ let windowLoaded = false;
 
 
 function toggleSidebar(){
-    var container = $("#sidebar-right-container");
-    var isClosed = container.hasClass("hidden-sidebar");
-    
+    var isClosed = sidebarIsClosed();
     if(isClosed){
         openSidebar();
     }else{
         closeSidebar();
     }
-    
-    
+}
+
+function sidebarIsClosed() {
+    var container = $("#sidebar-right-container");
+    return container.hasClass("hidden-sidebar");
 }
 
 /**
@@ -27,13 +28,17 @@ function closeSidebar() {
     bar.removeClass('col-lg-9');
     bar.addClass('col-lg-12');
 
+    var mobileButtons = $(".mobile-buttons");
+    mobileButtons.removeClass('hidden');
+
     var buttons = document.getElementsByClassName("sidebar-toggle-button");
     for(var i in buttons){
-        buttons[i].classList.remove('sidebar-toggle-button-close');
+        if (buttons[i] &&
+            buttons[i].classList) {
+            buttons[i].classList.remove('sidebar-toggle-button-close');
+        }
     }
 }
-
-
 
 /**
  * Opens the sidebar.
@@ -45,10 +50,16 @@ function openSidebar() {
     var bar = $("#content-pane");
     bar.removeClass('col-lg-12');
     bar.addClass('col-lg-9');
+
+    var mobileButtons = $(".mobile-buttons");
+    mobileButtons.addClass('hidden');
     
     var buttons = document.getElementsByClassName("sidebar-toggle-button");
     for(var i in buttons){
-        buttons[i].classList.add('sidebar-toggle-button-close');
+        if (buttons[i] &&
+            buttons[i].classList) {
+            buttons[i].classList.add('sidebar-toggle-button-close');
+        }
     }
 }
 
@@ -524,6 +535,7 @@ window.onload = function () {
         },
         trackUserLocation: true
     }), 'top-left');
+    map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
 
     if (urlparams.zoom) {
         map.setZoom(urlparams.zoom);
@@ -626,13 +638,13 @@ function formatDistance(distance) {
 function addInstructions(instructions, profile){
     var row = 
         '<div class=\"row\">\r\n' + 
-            '<div class=\"col-sm-1 instruction-icon\">\r\n' + 
+            '<div class=\"col-1 instruction-icon\">\r\n' + 
                 '{icon}' +
             '<\/div>\r\n' + 
-            '<div class=\"col-sm-9 instructions-start table-instruction-text\">\r\n' + 
+            '<div class=\"col-9 instructions-start table-instruction-text\">\r\n' + 
                 '{instruction}' +
             '<\/div>\r\n' + 
-            '<div class=\"col-sm-1 instruction-distance\">\r\n' + 
+            '<div class=\"col-1 instruction-distance\">\r\n' + 
                 '{distance}' +
             '<\/div>\r\n' + 
         '<\/div>';

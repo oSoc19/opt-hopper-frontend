@@ -14,6 +14,7 @@
 
 html, body {
     height: 100vh;
+    font-size: .95rem;
 }
 
 /** GENK COLOR STYLES **/
@@ -25,7 +26,7 @@ html, body {
 
 .dark-blue-background-cyan-foreground {
     background: #2D4959;
-    color: #00808B;
+    color: white;
 }
 
 .cyan-background {
@@ -49,13 +50,13 @@ html, body {
 }
 
 .dark-blue-background-cyan-foreground svg path {
-    fill: #00808B;
-    stroke: #00808B;
+    fill: white;
+    stroke: white;
 }
 
 .dark-blue-background-cyan-foreground svg polyline,
 .dark-blue-background-cyan-foreground svg circle {
-    stroke: #00808B;
+    stroke: white;
 }
 
 .cyan-background svg path {
@@ -76,20 +77,24 @@ html, body {
 }
 
 #sidebarClose:before {
-    background-image: url(icons/ic_clear_black_24px.svg);
+    background-image: url(icons/close.svg);
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-top-width: 0px;
+    border-top-width: 0px;
 }
 
 /* CLosed by default: should point left */
 .sidebar-toggle-button {
     background-repeat: no-repeat;
     background-position: center center;
-    background-image: url(icons/arrow-left.svg);
+    background-image: url(icons/arrow-left-thin.svg);
 }
 
 .sidebar-toggle-button-close {
     background-repeat: no-repeat;
     background-position: center center;
-    background-image: url(icons/arrow-right.svg) !important;
+    background-image: url(icons/arrow-right-thin.svg);
 }
 
 #top-overlay-input {
@@ -106,6 +111,13 @@ html, body {
     padding: 0 0 0 0;
     z-index: 103;
     overflow: hidden;
+}
+
+#sidebar-right-container .btn-lg {
+    font-size: 1rem;
+    border-radius: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .electricity-box {
@@ -129,14 +141,19 @@ html, body {
 }
 
 .mapboxgl-ctrl-group > button {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }
 
 .location-input-group {
     padding-left: 0;
     padding-right: 5px;
     border-bottom: 2px solid #2D4959 !important;
+}
+
+.mobile-buttons .btn-lg {
+    border-radius: 0px;
+    font-size: 1rem;
 }
 
 /** Very generic stuff **/
@@ -192,10 +209,11 @@ html, body {
 
 .image-button:before {
     content: "";
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     display: inline-block;
-    margin-right: 0;
+    margin-right: 4px;
+    margin-left: 4px;
     vertical-align: text-top;
     background: transparent no-repeat center center;
 }
@@ -210,8 +228,6 @@ html, body {
     display: inline;
     flex-grow: 1;
     text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .instructions-resume {
@@ -245,6 +261,10 @@ html, body {
 
 #sidebar-right-container.hidden-sidebar {
     width: 0;
+}
+
+.hidden {
+    display: none;
 }
 
 .bottom-right-floating-buttons {
@@ -438,8 +458,20 @@ html, body {
     border-radius: 0;
 }
 
-.btn-warning.focus {
+.btn:focus {
     box-shadow: 0 0 0 0 #00808B;
+}
+
+.btn-warning:focus {
+    box-shadow: 0 0 0 0 #00808B;
+}
+
+.btn-warning:active {
+    box-shadow: 0 0 0 0 #00808B;
+}
+
+.btn-warning:hover {
+    border-color: #00808B;
 }
 
 .button-collapse-instructions:hover, .lang_label:hover {
@@ -489,12 +521,16 @@ html, body {
 
 li {
     border-bottom: 1px solid white;
-    padding: 1.5rem;
+    padding: .2rem;
 }
 
 ul {
     list-style-type: none;
     padding: 0;
+}
+
+.dropdown-menu {
+    font-size: .85rem;
 }
 
 input[type="text"], textarea {
@@ -508,6 +544,19 @@ input[type="text"], textarea {
 
 .card-body {
     padding-top: 0;
+}
+
+.btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active,
+.show > .btn-warning.dropdown-toggle {
+  color: #2D4959;
+  background-color: #2D4959;
+  border-color: #2D4959;
+}
+
+.btn-warning:not(:disabled):not(.disabled):active:focus, 
+.btn-warning:not(:disabled):not(.disabled).active:focus,
+.show > .btn-warning.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem #00808B;
 }
 
 /* enable absolute positioning */
@@ -726,15 +775,14 @@ table tr td {
 .marker-text {
     display: flex;
     margin-left: 11px;
-    margin-top: 4px;
+    margin-top: 5px;
 }
 
 .instructions {
     background: white;
     color: #2D4959;
-    padding-top: 10px;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    padding-top: 0px;
+    margin-top: 4vh;
 }
 
 .instructions .row {
@@ -758,56 +806,28 @@ table tr td {
     height: 50vh;
 }
 
-@media only screen and (max-width: 767px) {
-    body {
-        font-size: 1rem;
-        line-height: 1;
-    }
+.top-bar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
-    .mapboxgl-ctrl-group > button {
-        width: 40px;
-        height: 40px;
-    }
+.logo img {
+    height: 50px;
+}
 
-    #swap-origin-destination-button {
-        top: 50%;
-        position: relative;
-    }
-
-    .top-overlay {
-        padding-bottom: 0;
-        padding-top: 0;
-    }
-
-    .btn-export {
-        font-size: 0;
-        padding: 2px 2px 0 2px;
-    }
-
-    .card {
-        margin-bottom: 50px;
-    }
-
-    .form-control {
-        line-height: 1;
-    }
+#sidebarHamburger::before {
+    background-image: url(icons/ic_menu_black_24px.svg);
 }
 
 @media only screen and (max-width: 767px) {
     body {
-        font-size: 1rem;
-        line-height: 1;
-    }
-
-    #top-overlay-profile-buttons-mobile {
-        display: flex;
-        position: absolute;
-        bottom: 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
 
     .mapboxgl-ctrl-group > button {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
 
     #swap-origin-destination-button {
@@ -818,6 +838,12 @@ table tr td {
     .top-overlay {
         padding-bottom: 0;
         padding-top: 0;
+    }
+
+    #sidebar-right-container .btn-lg {
+        font-size: unset;
+        padding-left: 2px;
+        padding-right: 2px;
     }
 
     .btn-export {
@@ -833,4 +859,48 @@ table tr td {
         line-height: 1;
     }
 
+    .w-100-md {
+        width: 100% !important;
+    }
+
+    .margin-mobile {
+        margin-bottom: 5px;
+        padding-bottom: 2px;
+    }
+
+    .location-circle {
+        height: 25px;
+        width: 25px;
+    }
+
+    .mobile-buttons .btn-lg {
+        font-size: 0.85rem;
+    }
+
+    .logo img {
+        height: 40px;
+    }
+    
+    .top-bar {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-in  {
+        display: none;
+    }
+
+    .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-out {
+        display: none;
+    }
+
+    .mapboxgl-ctrl-icon.mapboxgl-ctrl-compass {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .mobile-buttons {
+        display: none;
+    }
 }
