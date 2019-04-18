@@ -486,7 +486,7 @@ map.on('load', function () {
 
     map.addSource('cyclenetworks-tiles', { 
         type: 'vector',
-        url: 'https://localhost:5001/cyclenetworks/mvt.json' /*/
+        // url: 'https://localhost:5001/cyclenetworks/mvt.json' /*/
         url: 'https://genk.anyways.eu/vector-tiles/cyclenetworks/mvt.json' //*/ 
     });
 
