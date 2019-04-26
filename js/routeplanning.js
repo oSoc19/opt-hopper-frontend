@@ -483,30 +483,30 @@ map.on('load', function () {
     //     // insert below waterway-river-canal-shadow;
     //     // where hillshading sits in the Mapbox Outdoors style
     // }, );//'waterway-river-canal-shadow');
-    map.addSource('cyclenetworks', { type: 'geojson', data: "./data/cyclenetworks.geojson" });
+
+    map.addSource('cyclenetworks-tiles', { 
+        type: 'vector',
+        // url: 'https://localhost:5001/cyclenetworks/mvt.json' /*/
+        url: 'https://genk.anyways.eu/vector-tiles/cyclenetworks-test/mvt.json' //*/ 
+    });
+
     map.addLayer({
         "id": "cyclenetworks",
         "type": "line",
-        "source": "cyclenetworks",
+        "source": "cyclenetworks-tiles",
+        "source-layer": "cyclenetwork-genk",
         "layout": {
             "visibility": "none",
             "line-join": "round",
             "line-cap": "round"
-        },
-        "paint": {
-            'line-color': ['get', 'colour'],
-            //"line-opacity": 0.5,
-            "line-width": 5,
-            //"line-blur": 1
-        }
+          },
+          "paint": {
+            "line-color": ['get', 'cyclecolour'],
+            "line-width": 4
+          }
     }, labelLayer);
-
-    map.addSource('cyclenetworks-tiles', { 
-        type: 'vector',
-        //url: 'https://localhost:5001/cyclenetworks/mvt.json' 
-        url: 'https://genk.anyways.eu/vector-tiles/cyclenetworks/mvt.json' 
-    });
-
+    
+    
     map.addLayer({
         "id": "cyclenetwork-tiles",
         "type": "line",
