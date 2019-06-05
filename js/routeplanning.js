@@ -245,7 +245,9 @@ function calculateRoute(origin, destination, profile = "genk", lang = 'en') {
             }
         }
         routes[profile] = route;
-        addInstructions(json.instructions, profile);
+        if (json.instructions) {
+            addInstructions(json.instructions, profile);
+        }
 
         var localConfig = profileConfigs[profile];
         var profileDivId = localConfig.profileDivId;
