@@ -48,7 +48,7 @@ var profileConfigs = {
             backend: true,
             color: "#2D495A"
         },
-        instructions: true
+        instructions: false
     },
     "network": {
         profileDivId: "network-instruction",
@@ -82,7 +82,7 @@ var profileConfigs = {
             backend: false,
             color: "#2D495A"
         },
-        instructions: true
+        instructions: false
     },
     "fastest": {
         profileDivId: "fastest-instruction",
@@ -102,7 +102,7 @@ var profileConfigs = {
             backend: false,
             color: "#2D495A"
         },
-        instructions: true
+        instructions: false
     }
 };
 
