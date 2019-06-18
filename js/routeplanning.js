@@ -87,7 +87,7 @@ var profileConfigs = {
     "fastest": {
         profileDivId: "fastest-instruction",
         summaryDivId: "fastest-summary",
-        backendName: "balanced",
+        backendName: "shortest",
         layers: {
             "cyclenetworks": false,
             "cyclenetwork-tiles": false,
