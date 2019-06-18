@@ -417,7 +417,7 @@ html, body {
 
 .route-instructions {
     overflow-y: hidden;
-    background-color: white;
+    background-color: #00808B;
     color: white;
     list-style: none;
     overflow-x: hidden;
