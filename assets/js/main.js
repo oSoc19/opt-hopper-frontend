@@ -1,5 +1,4 @@
 
-
 // Utils
 
 function getCurrentLocation(centerToCurrentLocation){
