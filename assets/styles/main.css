@@ -1,20 +1,29 @@
 body{
     margin:0; padding:0;
-    background-color: pink !important
+    background-image: url(../img/GoogleMapTA.jpg)
 }
 #map { position:absolute; top:0; bottom:0; width:100%; }
 
 .inputCard{
-    background-color: grey;
+    background-color: rgba(0, 0, 0, 0.80);
     margin: 5%;
+    border-radius: 25px;
 }
 
+.inputCard{
 
+}
+
+label{
+    margin: 0px !important;
+}
 
 .fromInput, .toInput, .timeInput{
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .fromInput{
