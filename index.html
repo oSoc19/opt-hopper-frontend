@@ -36,14 +36,14 @@
             <div class="row timeInput">
                 <label for="timeInput" class="col-2">When</label>
                 <div class="col-10">
-                    <input type="time" name="usr_time"> <input type="date">
+                    <input type="time" name="usr_time" id="timeInput"> <input id="dateInput" type="date">
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col text-center">
-                <button class="btn btn-primary berekenRouteBtn" onclick="">Calculate route</button>
+                <button class="btn btn-primary berekenRouteBtn" onclick="getInputFromCard()">Calculate route</button>
             </div>
         </div>
     </div>
@@ -59,6 +59,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 </script>
+<script src='assets/js/inputCard.js'></script>
 <script src='assets/js/main.js'></script>
+
 
 </html>
