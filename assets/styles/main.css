@@ -1,5 +1,15 @@
-body { margin:0; padding:0; }
-#map { position:absolute; top:0; bottom:0; width:100%; }
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
 .tabsContainer {
     position: absolute;
     bottom: 0;
@@ -8,14 +18,23 @@ body { margin:0; padding:0; }
     flex-direction: row;
     background: #2D4959;
 }
+
 .tab {
-    flex-grow: 1;
+    flex: 1;
     border-top: 1px solid #00808B;
     border-right: 1px solid #00808B;
     border-left: 1px solid #00808B;
     text-align: center;
+    height: 100px;
 }
 
 .tab img {
-    width: 30%;
+    width: 50%;
+    max-height: 65%;
+    margin: auto;
+}
+
+.tab span {
+    display: block;
+    color: white;
 }
