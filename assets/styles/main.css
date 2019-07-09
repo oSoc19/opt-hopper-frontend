@@ -11,7 +11,7 @@ body {
 }
 
 .tabsContainer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100vw;
     display: flex;
