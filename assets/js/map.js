@@ -8,6 +8,15 @@ function loadMap(coords){ //long, lat
     center: coords,
     zoom: 9 
     });
+
+    getCurrentLocation(centerToCurrentLocation);
 }
 
+function centerToCurrentLocation(position) {
+    if(position != null) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
 
+        map.setCenter([long, lat]);
+    }
+}
