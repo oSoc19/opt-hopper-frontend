@@ -40,3 +40,32 @@ body {
     padding-left: 5px;
     padding-right: 5px;
 }
+
+.tabsContainer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    background: #2D4959;
+}
+
+.tab {
+    flex: 1;
+    border-top: 1px solid #00808B;
+    border-right: 1px solid #00808B;
+    border-left: 1px solid #00808B;
+    text-align: center;
+    height: 100px;
+}
+
+.tab img {
+    width: 50%;
+    max-height: 65%;
+    margin: auto;
+}
+
+.tab span {
+    display: block;
+    color: white;
+}
