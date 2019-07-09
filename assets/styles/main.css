@@ -13,7 +13,7 @@ body {
 .detailViewContainer {
     height: 100vh;
     width: 100%;
-    background-color: hotpink;
+    background-color: #29ff0a;
     position: absolute;
 }
 
@@ -28,7 +28,7 @@ body {
 .detailViewScroller {
     background-color: #2D4959;
     margin-top: calc(calc(100vh - 100px) - 4cm);
-    padding-bottom: 100px;
+    padding-bottom: 110px;
     padding-left: 20px;
     padding-right: 20px;
 }

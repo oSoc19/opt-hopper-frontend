@@ -1,6 +1,15 @@
-function fillItinerary(journey) {
+
+
+function fillItinerary(departure, arrival, journey) {
+
+    let minutes = journey.travelTime / 60;
+    let hours = Math.floor(minutes / 60);
+    minutes = Math.round(minutes - (hours * 60));
+    $(".detailViewSummaryTotalTime").html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
+    $(".detailViewSummaryTrains").html(journey.vehiclesTaken);
+
     //departure
-    $(".itineraryStartField").html(journey.departure.name); //TODO: use name from "From" field instead of this name. Will often (always?) be null
+    $(".itineraryStartField").html(departure);
 
     //segments
     let itineraryConainer = $(".itineraryContentContainer");
@@ -12,7 +21,7 @@ function fillItinerary(journey) {
         let hours = Math.floor(minutes / 60);
         minutes = Math.round(minutes - (hours * 60));
 
-        console.log(hours, ":", minutes);
+        //console.log(hours, ":", minutes);
 
         let vehicle = journey.segments[i].vehicle;
         if(vehicle.indexOf("irail")>=0){
@@ -20,6 +29,9 @@ function fillItinerary(journey) {
         }
 
         itineraryConainer.append(`<div>${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min</div>`);
+        if(i===0){
+            $(".detailViewSummaryTotalCyclingTime").html((hours > 0 ? `${hours}h ` : "") + `${minutes}min`);
+        }
 
         if(i<journey.segments.length-1) {
             itineraryConainer.append(`<div>${journey.segments[i].arrival.location.name} </div>`);
@@ -28,10 +40,10 @@ function fillItinerary(journey) {
     }
 
     //arrival
-    $(".itineraryFinishField").html(journey.arrival.name); //TODO: use name from "From" field instead of this name. Will often (always?) be null
+    $(".itineraryFinishField").html(arrival);
 }
 
-fillItinerary(
+fillItinerary("Bosa", "Stationsplein Aalst",
     {
         "segments": [
             {
