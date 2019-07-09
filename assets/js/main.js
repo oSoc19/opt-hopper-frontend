@@ -1,4 +1,7 @@
 
+
+// Utils
+
 function getCurrentLocation(centerToCurrentLocation){
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(centerToCurrentLocation);
@@ -6,3 +9,8 @@ function getCurrentLocation(centerToCurrentLocation){
         centerToCurrentLocation(null);
     }
 }
+
+$(function(){
+    //load map with standard coords
+    loadMap([4.3558571,50.860088]);
+});
