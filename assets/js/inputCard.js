@@ -87,14 +87,15 @@ function fromFieldInputDetected(el) {
 function clearInputFieldTo() {
     $("#toInput").val("");
     state.location2 = undefined;
-
+    
     toFieldInputDetected(document.getElementById("toInput"));
+    removeMarker(`markerB`);
 }
 
 function clearInputFieldFrom() {
     $("#fromInput").val("");
     state.location1 = undefined;
-
+    removeMarker('markerA')
     fromFieldInputDetected(document.getElementById("fromInput"));
 }
 

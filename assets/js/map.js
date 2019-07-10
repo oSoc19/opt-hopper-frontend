@@ -199,12 +199,18 @@ function zoomToEdge(origin, destination) {
         });
 }
 
+function removeMarker(markerId){
+    var element = document.getElementById(markerId);
+    element.parentNode.removeChild(element);
+}
+
 function createMarker(loc, label) {
 
     // create a HTML element for each feature
     var el = document.createElement('div');
     el.innerHTML = label;
     el.className = 'marker';
+    el.id = 'marker' + label;
 
     // make a marker for each feature and add to the map
     return new mapboxgl.Marker({
