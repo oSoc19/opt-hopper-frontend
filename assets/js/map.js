@@ -163,7 +163,6 @@ function displayRoute(profile, isSelected, journey) {
 function processInputOnMap(){
     if (state.location1 && state.location2) {
         zoomToEdge(state.location1, state.location2);
-
         if(state.location1Marker){
             createMarker(state.location2, "B")
         }else if (state.location2Marker) {
@@ -194,7 +193,7 @@ function zoomToEdge(origin, destination) {
         padding: {
             top: 20,
             right: 20,
-            bottom: 20,
+            bottom: document.getElementById('inputCard').offsetHeight + 20,
             left: 20
             }
         });
