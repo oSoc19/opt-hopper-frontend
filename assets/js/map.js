@@ -11,10 +11,6 @@ function loadMap(coords) { //long, lat
     });
 
     getCurrentLocation(centerToCurrentLocation);
-
-    setTimeout(function () {
-        displayRoute("ebike", true, dummy2.journeys[0]);
-    }, 1000);
 }
 
 function centerToCurrentLocation(position) {
@@ -104,7 +100,7 @@ function displayRoute(profile, isSelected, journey) {
     const calculatedRoute = map.getSource(profile + "-source");
     if (calculatedRoute) {
         // Just set the data
-        calculatedRoute.setData(routeList);
+        calculatedRoute.setData(route);
     } else {
         // Add a new layer
         map.addSource(profile + "-source", {

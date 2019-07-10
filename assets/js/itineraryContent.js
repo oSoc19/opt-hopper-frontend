@@ -13,6 +13,7 @@ function fillItinerary(departure, arrival, journey) {
 
     //segments
     let itineraryConainer = $(".itineraryContentContainer");
+    itineraryConainer.html("");
     for(let i = 0; i < journey.segments.length; i++){
         let depDate = new Date(journey.segments[i].departure.time);
         let arrDate = new Date(journey.segments[i].arrival.time);
@@ -24,8 +25,10 @@ function fillItinerary(departure, arrival, journey) {
         //console.log(hours, ":", minutes);
 
         let vehicle = journey.segments[i].vehicle;
-        if(vehicle.indexOf("irail")>=0){
+        if(vehicle && vehicle.indexOf("irail")>=0){
             vehicle = "TRAIN";
+        } else if(!vehicle){
+            vehicle = "WALK";
         }
         if(i===0){
             $(".detailViewSummaryTotalCyclingTime").html((hours > 0 ? `${hours}h ` : "") + `${minutes}min`);
