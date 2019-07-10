@@ -53,13 +53,14 @@ function calculateAllRoutes(){
         //const routingProfile = '&walksGeneratorDescription=' + encodeURIComponent('firstLastMile&default=osm&maxDistance=1000&profile=pedestrian&firstMile=osm&maxDistance=1000&profile=pedestrian&lastMile=osm&maxDistance=1000&profile=pedestrian');
         const routingProfile = '&walksGeneratorDescription=' + encodeURIComponent('osm&maxDistance=500&profile=pedestrian');
         const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}`;//${routingProfile}`;//${prof}`;
+        const profile = availableProfiles[key];
 
         $.ajax({
             url: url,
             success: function (data) {
                 console.log(data);
-                displayRoute(availableProfiles[key], true, data.journeys[0]);
-                fillItinerary(inputData.fromName, inputData.toName, data.journeys[0]);
+                displayRoute(profile, true, data.journeys[0]);
+                fillItinerary(profile, inputData.fromName, inputData.toName, data.journeys[0]);
             },
             error: function (error) {
                 console.error("Routing request failed.", error);

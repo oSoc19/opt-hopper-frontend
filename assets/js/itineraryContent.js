@@ -1,11 +1,11 @@
 
 
-function fillItinerary(departure, arrival, journey) {
+function fillItinerary(profile, departure, arrival, journey) {
 
     let minutes = journey.travelTime / 60;
     let hours = Math.floor(minutes / 60);
     minutes = Math.round(minutes - (hours * 60));
-    $(".detailViewSummaryTotalTime").html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
+    $(".detailViewSummaryTotalTime, .travelTime-" + profile).html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
     $(".detailViewSummaryTrains").html(journey.vehiclesTaken);
 
     //departure
