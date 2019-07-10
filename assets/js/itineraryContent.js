@@ -27,14 +27,20 @@ function fillItinerary(departure, arrival, journey) {
         if(vehicle.indexOf("irail")>=0){
             vehicle = "TRAIN";
         }
-
-        itineraryConainer.append(`<div>${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min</div>`);
         if(i===0){
             $(".detailViewSummaryTotalCyclingTime").html((hours > 0 ? `${hours}h ` : "") + `${minutes}min`);
         }
 
+        itineraryConainer.append(`<div class="itineraryVehicle">${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min</div>`);
         if(i<journey.segments.length-1) {
-            itineraryConainer.append(`<div>${journey.segments[i].arrival.location.name} </div>`);
+            itineraryConainer.append(
+                `<div class="itineraryStop">
+                    <svg height="24" width="24">
+                      <circle cx="12" cy="12" r="10" stroke="blue" stroke-width="3" fill="blue" />
+                    </svg>
+                    ${journey.segments[i].arrival.location.name}
+                </div>`
+            );
         }
 
     }

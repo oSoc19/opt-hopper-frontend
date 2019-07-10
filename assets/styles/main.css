@@ -114,3 +114,22 @@ background-color: pink;
 ::-webkit-scrollbar {
     display: none;
 }
+
+.itineraryContentContainer {
+    position: relative;
+}
+
+.itineraryVehicle, .itineraryStop {
+    border-left: 6px solid blueviolet;
+    padding-left: 20px;
+    margin-left: 20px;
+}
+
+.itineraryStop svg {
+    position: absolute;
+    left: 10px;
+}
+
+/*.itineraryStop {
+    border-left: 12px solid blue;
+}*/
