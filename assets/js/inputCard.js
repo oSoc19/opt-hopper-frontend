@@ -9,9 +9,6 @@ let state = {
 }
 
 function getInputFromCard(){
-    $(".inputCard").hide();
-    $(".tabsContainer, .detailViewContainer").show();
-
     let input = {from: undefined, to: undefined,fromName: undefined, toName: undefined, date: undefined}
 
     input.from = state.location1;
@@ -24,8 +21,7 @@ function getInputFromCard(){
     time = $('#timeInput').val()
 
     input.date = new Date(date + " " + time)
-    
-    console.log(input)
+
     return input;
 }
 

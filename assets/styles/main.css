@@ -110,3 +110,7 @@ background-color: pink;
 #clearInputFieldFromButton, #clearInputFieldToButton {
     display: none;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
