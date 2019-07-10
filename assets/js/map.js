@@ -1,5 +1,6 @@
 let map;
 
+
 function loadMap(coords) { //long, lat
     mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsbGV0ZXJyYXMiLCJhIjoiY2pqeWJheGxhMGwxODNxbW1sb2UzMGo0aiJ9.Y5HiKm7qjB1vrX7NGTOofA';
     map = new mapboxgl.Map({
@@ -162,16 +163,26 @@ function displayRoute(profile, isSelected, journey) {
 function processInputOnMap(){
     if (state.location1 && state.location2) {
         zoomToEdge(state.location1, state.location2);
+
+        if(state.location1Marker){
+            createMarker(state.location2, "B")
+        }else if (state.location2Marker) {
+            createMarker(state.location2, "A")
+        }
     } else if (state.location1) {
         map.jumpTo({
             center: state.location1,
             zoom: 15
         });
+        createMarker(state.location1, "A");
+        state.location1Marker = true;
     } else if (state.location2) {
         map.jumpTo({
             center: state.location2,
             zoom: 15
         });
+        createMarker(state.location2, "B");
+        state.location2Marker = true;
     } 
 }
 
@@ -199,7 +210,7 @@ function createMarker(loc, label) {
     // make a marker for each feature and add to the map
     return new mapboxgl.Marker({
         element: el,
-        draggable: true,
+        draggable: false,
         offset: [0, -20]
     })
         .setLngLat(loc)
