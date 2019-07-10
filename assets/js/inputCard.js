@@ -32,7 +32,7 @@ function getInputFromCard(){
 function initInputGeocoders() {
     $('.geocoder-input').typeahead({
         source: function (query, callback) {
-            $.getJSON(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxAccessCode}&proximity=50.861%2C4.356&country=BE&bbox=3.9784240723%2C50.6485897217%2C4.7282409668%2C51.0552073386&limit=5`/*`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxAccessCode}&proximity=50.861%2C4.356&country=BE&bbox=3.9784240723%2C50.6485897217%2C4.7282409668%2C51.0552073386&limit=5`*/,
+            $.getJSON(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxAccessCode}`,
                 function (data) {
                     var resArray = [];
                     for (var feature in data.features) {
@@ -58,6 +58,8 @@ function initInputGeocoders() {
             } else {
                 console.warn("FIELD NOT FOUND!");
             }
+
+            processInputOnMap()
         }
     });
 }

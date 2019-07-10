@@ -159,6 +159,52 @@ function displayRoute(profile, isSelected, journey) {
     }
 }
 
+function processInputOnMap(){
+    if (state.location1 && state.location2) {
+        zoomToEdge(state.location1, state.location2);
+    } else if (state.location1) {
+        map.jumpTo({
+            center: state.location1,
+            zoom: 15
+        });
+    } else if (state.location2) {
+        map.jumpTo({
+            center: state.location2,
+            zoom: 15
+        });
+    } 
+}
+
+function zoomToEdge(origin, destination) {
+    let bounds = new mapboxgl.LngLatBounds();
+    bounds.extend(origin);
+    bounds.extend(destination);
+    map.fitBounds(bounds, {
+        padding: {
+            top: 20,
+            right: 20,
+            bottom: 20,
+            left: 20
+            }
+        });
+}
+
+function createMarker(loc, label) {
+
+    // create a HTML element for each feature
+    var el = document.createElement('div');
+    el.innerHTML = label;
+    el.className = 'marker';
+
+    // make a marker for each feature and add to the map
+    return new mapboxgl.Marker({
+        element: el,
+        draggable: true,
+        offset: [0, -20]
+    })
+        .setLngLat(loc)
+        .addTo(map);
+}
 
 //dummydata
 let dummy = {
