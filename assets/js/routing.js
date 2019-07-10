@@ -72,3 +72,8 @@ function calculateAllRoutes(){
     $(".inputCard").hide();
     $(".tabsContainer, .detailViewContainer").show();
 }
+
+function clearRoute(){
+    $(".inputCard").show();
+    $(".tabsContainer, .detailViewContainer").hide();
+}
