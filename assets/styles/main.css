@@ -105,6 +105,10 @@ background-color: pink;
 #clearInputFieldToButton, #clearInputFieldFromButton {
     padding: 10px;
     width: 2.5rem;
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    cursor: pointer;
 }
 
 #clearInputFieldFromButton, #clearInputFieldToButton {
@@ -124,3 +128,9 @@ background-color: pink;
     line-height: 2.2;
     text-align: center;
 }
+
+.fromInput, .toInput{
+    position: relative;
+}
+
+
