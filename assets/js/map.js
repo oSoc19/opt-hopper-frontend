@@ -81,8 +81,7 @@ function displayRoute(profile, isSelected, journey) {
         };
         featureObjects.push(featureObject);
     }
-
-    console.log("Adding route to map now");
+    
 
     let route = featureObjects;
     for (let i in route) {
@@ -98,23 +97,7 @@ function displayRoute(profile, isSelected, journey) {
                 route[i].properties.cyclecolour = routeColor;
             }
         }
-        /*try {
-            heightInfo.push(route[i].geometry.coordinates[0][2]);
-        } catch (e) {
-            console.log("Failed to read height info", e);
-        }*/
     }
-    //routes[profile] = route;
-
-    /*var localConfig = profileConfigs[profile];
-    var profileDivId = localConfig.profileDivId;
-    if (routeStops.length === 2) {
-        let totaltimeElectr = timeToText(routeStops[1].properties.time * 15 / 20);
-        $(`#${profileDivId} .distance`).html(`${roundToThree(routeStops[1].properties.distance / 1000)} km`);
-        $(`#${profileDivId} .time`).html(`${timeToText(routeStops[1].properties.time)} min`);
-        $(`#${profileDivId} .time-electric`).html(`${totaltimeElectr} min`);
-        //$instrResume.html(`<div></div><div>min<br><div><img class="electricity" src="assets/img/electricity.svg"/>  </div></div>`);
-    }*/
 
     // Check if profile already exists
     const calculatedRoute = map.getSource(profile + "-source");
@@ -123,7 +106,6 @@ function displayRoute(profile, isSelected, journey) {
         calculatedRoute.setData(routeList);
     } else {
         // Add a new layer
-        console.log(featureObjects);
         map.addSource(profile + "-source", {
             type: 'geojson',
             data: {
