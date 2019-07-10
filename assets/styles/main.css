@@ -20,7 +20,7 @@ label{
 
 .fromInput, .toInput, .timeInput{
     padding-left: 10px;
-    padding-right: 10px;
+
     padding-bottom: 10px;
     display: flex;
     align-items: center;
@@ -37,4 +37,13 @@ label{
 
 .testMap{
 background-color: pink;
+}
+
+#clearInputFieldToButton, #clearInputFieldFromButton {
+    padding: 10px;
+    width: 2.5rem;
+}
+
+#clearInputFieldFromButton, #clearInputFieldToButton {
+    display: none;
 }
