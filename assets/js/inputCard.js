@@ -1,4 +1,7 @@
 function getInputFromCard(){
+    $(".inputCard").hide();
+    $(".tabsContainer, .detailViewContainer").show();
+
     let input = {from: "", to: "", date: ""}
 
     input.from = $('#fromInput').val()
