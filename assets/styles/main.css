@@ -105,6 +105,10 @@ background-color: pink;
 #clearInputFieldToButton, #clearInputFieldFromButton {
     padding: 10px;
     width: 2.5rem;
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    cursor: pointer;
 }
 
 #clearInputFieldFromButton, #clearInputFieldToButton {
@@ -130,6 +134,20 @@ background-color: pink;
     left: 10px;
 }
 
-/*.itineraryStop {
-    border-left: 12px solid blue;
-}*/
+.marker {
+    background-image: url('../img/icons/maps-and-flags.svg');
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 2.2;
+    text-align: center;
+}
+
+.fromInput, .toInput{
+    position: relative;
+}
