@@ -51,8 +51,15 @@ function calculateAllRoutes(){
         const prof = (profile_url === "" ? "" : `&profile=${profile_url}`);
         const dateParam = (isDeparture ? "&departure=" : "&arrival=") + encodeURIComponent(new Date(inputData.date).toISOString());
         //const routingProfile = '&walksGeneratorDescription=' + encodeURIComponent('firstLastMile&default=osm&maxDistance=1000&profile=pedestrian&firstMile=osm&maxDistance=1000&profile=pedestrian&lastMile=osm&maxDistance=1000&profile=pedestrian');
-        const routingProfile = '&walksGeneratorDescription=' + encodeURIComponent('osm&maxDistance=500&profile=pedestrian');
-        const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}`;//${routingProfile}`;//${prof}`;
+        //const routingProfile = '&walksGeneratorDescription=' + encodeURIComponent('osm&maxDistance=500&profile=pedestrian');
+        const routingProfile = "&inBetweenOsmProfile=pedestrian&" +
+            "inBetweenSearchDistance=500&" +
+            "firstMileOsmProfile=ebike&" +
+            "firstMileSearchDistance=30000&" +
+            "lastMileOsmProfile=pedestrian&" +
+            "lastMileSearchDistance=10000";
+
+        const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}`;//${prof}`;
         const profile = availableProfiles[key];
 
         $.ajax({
