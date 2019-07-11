@@ -28,7 +28,7 @@ function getInputFromCard(){
 function initInputGeocoders() {
     $('.geocoder-input').typeahead({
         source: function (query, callback) {
-            $.getJSON(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxAccessCode}`,
+            $.getJSON(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxAccessCode}&country=be`,
                 function (data) {
                     var resArray = [];
                     for (var feature in data.features) {
