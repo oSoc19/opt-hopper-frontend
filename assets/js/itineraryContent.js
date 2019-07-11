@@ -52,7 +52,7 @@ function fillItinerary(profile, departure, arrival, journey) {
     $(".itineraryFinishField").html(arrival);
 }
 
-fillItinerary("Bosa", "Stationsplein Aalst",
+/*fillItinerary("Bosa", "Stationsplein Aalst",
     {
         "segments": [
             {
@@ -179,4 +179,4 @@ fillItinerary("Bosa", "Stationsplein Aalst",
         "travelTime": 3801,
         "vehiclesTaken": 1
     }
-);
+);*/
