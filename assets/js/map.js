@@ -103,7 +103,7 @@ function displayRoute(profile, isSelected, journey) {
     const calculatedRoute = map.getSource(profile + "-source");
     if (calculatedRoute) {
         // Just set the data
-        calculatedRoute.setData(route);
+        calculatedRoute.setData({type: 'FeatureCollection', features: route});
     } else {
         // Add a new layer
         map.addSource(profile + "-source", {
