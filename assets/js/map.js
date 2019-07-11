@@ -10,7 +10,10 @@ function loadMap(coords) { //long, lat
         zoom: 9
     });
 
+    mapOnClick()
+
     getCurrentLocation(centerToCurrentLocation);
+    showLocationsOnMap()
 }
 
 function centerToCurrentLocation(position) {
@@ -156,6 +159,32 @@ function displayRoute(profile, isSelected, journey) {
     }
 }
 
+function showLocationsOnMap() {
+    console.log(state.location1Marker)
+    console.log(state.location2Marker)
+    if (state.location1Marker !== undefined) {
+        state.location1Marker.remove();
+    }
+    if (state.location1 !== undefined) {
+        state.location1Marker = createMarker(state.location1, 'A');
+    }
+    if (state.location2Marker !== undefined) {
+        state.location2Marker.remove();
+    }
+    if (state.location2 !== undefined) {
+        state.location2Marker = createMarker(state.location2, 'B');
+    }
+    if (state.location1 !== undefined && state.location2 !== undefined) {
+        setCurrentUrl({loc1: state.location1, loc2: state.location2});
+    } else if (state.location1) {
+        setCurrentUrl({loc1: state.location1});
+    } else if (state.location2) {
+        setCurrentUrl({loc2: state.location2});
+    } else {
+        setCurrentUrl({});
+    }
+}
+
 function processInputOnMap(){
     if (state.location1 && state.location2) {
         zoomToEdge(state.location1, state.location2);
@@ -194,10 +223,46 @@ function zoomToEdge(origin, destination) {
             }
         });
 }
-
+/*
 function removeMarker(markerId){
     var element = document.getElementById(markerId);
     element.parentNode.removeChild(element);
+}*/
+
+function mapOnClick(){
+    map.on('click', function (e) {
+    var bbox = [[e.point.x - 5, e.point.y - 5], [e.point.x + 5, e.point.y + 5]];
+    var features = map.queryRenderedFeatures(
+        bbox,
+        {
+            //options (none)
+        }
+    );
+
+        var lngLatArray = [e.lngLat.lng, e.lngLat.lat];
+        if (state.location1 === undefined) {
+            state.location1 = lngLatArray;
+            reverseGeocode(state.location1, function (adress) {
+                $("#fromInput").val(adress);
+                fromFieldInputDetected(document.getElementById("fromInput"));
+            });
+        } else {
+            state.location2 = lngLatArray;
+            reverseGeocode(state.location2, function (adress) {
+                $("#toInput").val(adress);
+                toFieldInputDetected(document.getElementById("toInput"));
+            });
+        }
+        showLocationsOnMap();
+});
+}
+
+function reverseGeocode(location, callback) {
+    var lng = location[0];
+    var lat = location[1];
+    $.getJSON(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?limit=1&access_token=${mapboxAccessCode}`, function (data) {
+        callback(data.features[0].text + " (" + data.features[0].place_name + ")");
+    });
 }
 
 function createMarker(loc, label) {

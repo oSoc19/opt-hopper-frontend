@@ -64,7 +64,7 @@ function toFieldInputDetected(el) {
     if (!el.value || el.value === "") {
         $("#clearInputFieldToButton").hide();
         state.location2 = undefined;
-
+        showLocationsOnMap();
     } else {
         $("#clearInputFieldToButton").show();
     }
@@ -74,25 +74,26 @@ function fromFieldInputDetected(el) {
     if (!el.value || el.value === "") {
         $("#clearInputFieldFromButton").hide();
         state.location1 = undefined;
-
+        showLocationsOnMap();
     } else {
         $("#clearInputFieldFromButton").show();
     }
 }
 
-function clearInputFieldTo() {
-    $("#toInput").val("");
-    state.location2 = undefined;
-    
-    toFieldInputDetected(document.getElementById("toInput"));
-    removeMarker(`markerB`);
-}
-
 function clearInputFieldFrom() {
     $("#fromInput").val("");
     state.location1 = undefined;
-    removeMarker('markerA')
+    showLocationsOnMap();
     fromFieldInputDetected(document.getElementById("fromInput"));
 }
+
+function clearInputFieldTo() {
+    $("#toInput").val("");
+    state.location2 = undefined;
+    showLocationsOnMap();
+    toFieldInputDetected(document.getElementById("toInput"));
+}
+
+
 
 initInputGeocoders();
