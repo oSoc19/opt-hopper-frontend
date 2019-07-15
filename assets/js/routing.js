@@ -2,9 +2,9 @@
 const availableProfiles = ["default", "bike", "ebike", "speedy"];
 
 var profileConfigs = {
-    "pedestrian": {
+    "default": {
         backendName: "pedestrian",
-        routingProfile: "",
+        routingProfile: "&crowsflight&maxDistance=20000&speed=1.4",
         routecolor: {
             backend: true,
             color: "#5a0449"
@@ -12,7 +12,12 @@ var profileConfigs = {
     },
     "bike": {
         backendName: "bicycle",
-        routingProfile: "",
+        routingProfile: "&inBetweenOsmProfile=pedestrian&" +
+            "inBetweenSearchDistance=500&" +
+            "firstMileOsmProfile=bicycle&" +
+            "firstMileSearchDistance=10000&" +
+            "lastMileOsmProfile=pedestrian&" +
+            "lastMileSearchDistance=10000",
         routecolor: {
             backend: true,
             color: "#315a33"
@@ -33,7 +38,12 @@ var profileConfigs = {
     },
     "speedy": {
         backendName: "speedPedelec",
-        routingProfile: "",
+        routingProfile: "&inBetweenOsmProfile=pedestrian&" +
+            "inBetweenSearchDistance=500&" +
+            "firstMileOsmProfile=speedPedelec&" +
+            "firstMileSearchDistance=50000&" +
+            "lastMileOsmProfile=pedestrian&" +
+            "lastMileSearchDistance=10000",
         routecolor: {
             backend: true,
             color: "#6c6615"
