@@ -1,6 +1,15 @@
 
 // Utils
 
+function setCurrentUrl(params) {
+    currentUrl = window.location.href;
+    currentUrl = currentUrl.split('?')[0] + '?';
+    for (var i in params) {
+        currentUrl += i + '=' + params[i] + "&";
+    }
+    window.history.pushState("object or string", "Title", currentUrl);
+}
+
 function getCurrentLocation(centerToCurrentLocation){
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(centerToCurrentLocation);
@@ -33,4 +42,10 @@ $(function(){
     $(".detailViewSummary").on("click", function(){
         window.scrollTo({top: window.innerHeight - 100 - (4*pxCm), behavior: 'smooth'});
     });
+
+    document.querySelector("#dateInput").valueAsDate = new Date();
+    let today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes()
+    console.log(time)
+    document.getElementById("timeInput").value = time;
 });
