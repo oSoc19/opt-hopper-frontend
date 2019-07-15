@@ -82,6 +82,32 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
     }
 }
 
+function clearAllItineraries(){
+    for(i in availableProfiles){
+        clearItinerary(availableProfiles[i], availableProfiles[i] == selectedProfile);
+    }
+}
+
+function clearItinerary(profile, selected) {
+
+    $(".travelTime-" + profile).html( profile );
+
+    if(selected) {
+        $(".detailViewSummaryTotalTime").html( "" );
+        $(".detailViewSummaryTrains").html( "" );
+        $(".detailViewSummaryTotalCyclingTime").html( "" );
+
+        //departure
+        $(".itineraryStartField").html( "" );
+
+        //segments
+        $(".itineraryContentContainer").html( "" );
+
+        //arrival
+        $(".itineraryFinishField").html( "" );
+    }
+}
+
 /*fillItinerary("Bosa", "Stationsplein Aalst",
     {
         "segments": [

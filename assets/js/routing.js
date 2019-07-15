@@ -58,6 +58,8 @@ function calculateAllRoutes(){
     //TODO: Show loading icon
 
     receivedItineraries = {};
+    clearAllItineraries();
+    //TODO: Remove routes from map
 
     let isDeparture = true;
     let inputData = getInputFromCard();
