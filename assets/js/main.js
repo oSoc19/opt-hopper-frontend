@@ -48,4 +48,10 @@ $(function(){
     var time = today.getHours() + ":" + today.getMinutes()
     console.log(time)
     document.getElementById("timeInput").value = time;
+
+    $(".tab").on("click", function(){
+        activateProfile($(this).attr("profile"));
+        $(".tab").removeClass("selected");
+        $(this).addClass("selected");
+    });
 });

@@ -47,6 +47,8 @@ let selectedProfile = "ebike";
 function calculateAllRoutes(){
     //TODO: Show loading icon
 
+    receivedItineraries = {};
+
     let isDeparture = true;
     let inputData = getInputFromCard();
     const originS = swapArrayValues(inputData.from).join("%2F");
@@ -64,9 +66,18 @@ function calculateAllRoutes(){
         $.ajax({
             url: url,
             success: function (data) {
-                console.log(data);
-                displayRoute(profile, profile === selectedProfile, data.journeys[0]);
-                fillItinerary(profile, inputData.fromName, inputData.toName, data.journeys[0]);
+                //console.log(data);
+                //console.log(profile);
+                receivedItineraries[profile] = {};
+                receivedItineraries[profile].data = data;
+                receivedItineraries[profile].from = inputData.fromName;
+                receivedItineraries[profile].to = inputData.toName;
+                if(data.journeys) {
+                    displayRoute(profile, profile === selectedProfile, data.journeys[0]);
+                    fillItinerary(profile, profile === selectedProfile, inputData.fromName, inputData.toName, data.journeys[0]);
+                } else {
+                    console.warn("Got journeys: null from Itinero with profile", profile);
+                }
             },
             error: function (error) {
                 console.error("Routing request failed.", error);
