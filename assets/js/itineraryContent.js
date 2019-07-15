@@ -2,15 +2,24 @@ let receivedItineraries = {};
 
 function activateProfile(profile){
     if(!profile){
-        console.error("No valid profile given");
+        console.error("No valid profile given", profile);
         return;
     }
+    if(!availableProfiles.includes(profile)){
+        console.error("This profile is not valid (or is disabled).", profile);
+        return;
+    }
+    //At this point we're sure the profile exists and is enabled. Profile is selected, even if there is no valid data to show to the user.
+    selectedProfile = profile;
+    $(".tab").removeClass("selected");
+    $(`.tab[profile=${profile}]`).addClass("selected");
+
     if(!receivedItineraries[profile]){
-        console.warn("No itinerary for this profile available yet.");
+        console.warn("No itinerary for this profile available yet.", profile);
         return;
     }
     if(!receivedItineraries[profile].data || !receivedItineraries[profile].data.journeys[0]){
-        console.error("We received an itinerary for this profile, but it doesn't make sense. Sorry.");
+        console.error("We received an itinerary for this profile (" + profile + "), but it doesn't make sense. Sorry.");
         return;
     }
     fillItinerary(profile, true, receivedItineraries[profile].from, receivedItineraries[profile].to, receivedItineraries[profile].data.journeys[0]);

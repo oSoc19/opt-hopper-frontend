@@ -1,5 +1,5 @@
 
-const availableProfiles = ["bike", "ebike"/*, "speedy"*/];
+const availableProfiles = ["default", "bike", "ebike", "speedy"];
 
 var profileConfigs = {
     "pedestrian": {

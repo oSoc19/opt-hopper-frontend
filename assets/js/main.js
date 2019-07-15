@@ -49,9 +49,15 @@ $(function(){
     console.log(time)
     document.getElementById("timeInput").value = time;
 
-    $(".tab").on("click", function(){
+    let tabs = $(".tab");
+    tabs.on("click", function(){
         activateProfile($(this).attr("profile"));
-        $(".tab").removeClass("selected");
-        $(this).addClass("selected");
     });
+
+    for (let i = 0; i < tabs.length; i++) {
+        if(!availableProfiles.includes(tabs[i].getAttribute("profile"))){
+            tabs[i].style.display = "none"
+        }
+    }
+
 });
