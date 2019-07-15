@@ -26,7 +26,7 @@ class Station {
 class StationRepository{
     constructor(journeyName){
         this.journeyName = journeyName;
-        this.stations = [];
+        this.stations = {firstStation : undefined, lastStation : undefined};
     }
 }
 
@@ -52,10 +52,10 @@ function getVeloParkData(){
                     if (counter === data["dcat:dataset"]["dcat:distribution"].length - 1) {
                         console.log("Adding parkings to map now.", counter, "total; ", errorCounter, "failed.");
                         getFirstAndLastStation(dummyJourney)
-                        stationRepository.stations.forEach(station => {
-                            station.getParkings();
-                        })
+                        stationRepository.stations.firstStation.getParkings();
+                        stationRepository.stations.lastStation.getParkings();
                         console.log(stationRepository)
+                        checkForFacilities();
                         //processArray(parkingRepo._parkings)
                     }
                 })
@@ -77,11 +77,11 @@ function getFirstAndLastStation(journey){
     //incase starting at station
     if (journey.journeys[0].segments[0].departure.location.id.includes('irail') && journey.journeys[0].segments[0].arrival.location.id.includes('irail')) {
         let station = new Station(journey.journeys[0].segments[0].departure.location.name, {lat : journey.journeys[0].segments[0].departure.location.lat, lon : journey.journeys[0].segments[0].departure.location.lon})
-        stationRepository.stations.push(station)
+        stationRepository.stations.firstStation = station;
     }else{//incase starting at OSM point
         if (journey.journeys[0].segments[0].arrival.location.id.includes('irail')) {
             let station = new Station(journey.journeys[0].segments[0].arrival.location.name, {lat : journey.journeys[0].segments[0].arrival.location.lat, lon : journey.journeys[0].segments[0].arrival.location.lon})
-            stationRepository.stations.push(station)
+            stationRepository.stations.firstStation = station;
         }
     }
     
@@ -89,10 +89,10 @@ function getFirstAndLastStation(journey){
     //incase ending at station
     if (journey.journeys[0].segments[journey.journeys[0].segments.length-1].departure.location.id.includes('irail') && journey.journeys[0].segments[journey.journeys[0].segments.length-1].arrival.location.id.includes('irail')) {
         let station = new Station(journey.journeys[0].segments[journey.journeys[0].segments.length-1].arrival.location.name, {lat : journey.journeys[0].segments[journey.journeys[0].segments.length-1].arrival.location.lat, lon : journey.journeys[0].segments[journey.journeys[0].segments.length-1].arrival.location.lon})
-        stationRepository.stations.push(station)
+        stationRepository.stations.lastStation = station
     }else{//incase ending at OSM point
         let station = new Station(journey.journeys[0].segments[journey.journeys[0].segments.length-1].departure.location.name, {lat : journey.journeys[0].segments[journey.journeys[0].segments.length-1].departure.location.lat, lon : journey.journeys[0].segments[journey.journeys[0].segments.length-1].departure.location.lon})
-        stationRepository.stations.push(station)
+        stationRepository.stations.lastStation = station
     }
 }
 
