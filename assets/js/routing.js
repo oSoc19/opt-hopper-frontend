@@ -59,6 +59,7 @@ function calculateAllRoutes(){
 
     receivedItineraries = {};
     clearAllItineraries();
+    clearRoutes();
     //TODO: Remove routes from map
 
     let isDeparture = true;
@@ -105,4 +106,5 @@ function calculateAllRoutes(){
 function clearRoute(){
     $(".inputCard").show();
     $(".tabsContainer, .detailViewContainer").hide();
+    clearRoutes();
 }
