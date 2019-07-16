@@ -1,9 +1,13 @@
+const myStations = {}
+
 class Parking {
     constructor(name, latitude, longitude){
         this.name = name;
         this.coordinates = [longitude, latitude];
     }
 }
+
+
 
 class ParkingRepository{
     constructor(){
@@ -51,11 +55,8 @@ function getVeloParkData(){
                     parkingRepo.parkings.push(parking)
                     if (counter === data["dcat:dataset"]["dcat:distribution"].length - 1) {
                         console.log("Adding parkings to map now.", counter, "total; ", errorCounter, "failed.");
-                        getFirstAndLastStation(dummyJourney)
-                        stationRepository.stations.firstStation.getParkings();
-                        stationRepository.stations.lastStation.getParkings();
-                        console.log(stationRepository)
-                        checkForFacilities();
+                        processParkings()
+                        //checkForFacilities();
                         //processArray(parkingRepo._parkings)
                     }
                 })
@@ -70,6 +71,42 @@ function getVeloParkData(){
             }
         }
     })
+}
+
+function processParkings(){
+    if (!$.isEmptyObject(myStations)) {
+        let values = Object.values(stations)
+        values.forEach(station =>{
+            station.parkings = checkForNearParkings(station.location.lat, station.location.lon)
+            console.log(station)
+        })
+    }
+}
+
+function getStations(journey) {
+    let stations = {}
+
+        journey.segments.forEach(segment => {
+        if (segment.departure.location.id.includes('irail')) {
+            if (!myStations[segment.departure.location.id]) {
+                myStations[segment.departure.location.id] = new Station(segment.departure.location.name, {lat : segment.departure.location.lat, lon : segment.departure.location.lon});
+                stations[segment.departure.location.id] = new Station(segment.departure.location.name, {lat : segment.departure.location.lat, lon : segment.departure.location.lon})
+            }
+        }
+        if (!myStations[segment.arrival.location.id]) {
+            if (segment.arrival.location.id.includes('irail')) {
+                myStations[segment.arrival.location.id] = new Station(segment.arrival.location.name, {lat : segment.arrival.location.lat, lon : segment.arrival.location.lon});
+                stations[segment.arrival.location.id] = new Station(segment.arrival.location.name, {lat : segment.arrival.location.lat, lon : segment.arrival.location.lon})
+            }
+        } 
+    })
+    if (parkingRepo.parkings.length) {
+        let values = Object.values(stations)
+        values.forEach(station =>{
+            station.parkings = checkForNearParkings(station.location.lat, station.location.lon)
+            console.log(station)
+        })
+    }
 }
 
 function getFirstAndLastStation(journey){
