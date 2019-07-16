@@ -43,9 +43,12 @@ $(function(){
         window.scrollTo({top: window.innerHeight - 100 - (4*pxCm), behavior: 'smooth'});
     });
 
+
+    //load input with current date & time
     document.querySelector("#dateInput").valueAsDate = new Date();
     let today = new Date();
     var time = today.getHours() + ":" + today.getMinutes()
-    console.log(time)
     document.getElementById("timeInput").value = time;
+
+    getVeloParkData();
 });
