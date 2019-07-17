@@ -35,7 +35,7 @@ function centerToCurrentLocation(position) {
     }
 }
 
-var labelLayer = "road-label";
+var labelLayer = "road-label-large";
 
 function clearRoutes(){
     for (let i in availableProfiles) {
