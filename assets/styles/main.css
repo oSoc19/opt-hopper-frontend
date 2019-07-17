@@ -174,3 +174,13 @@ background-color: pink;
     right: 20px;
     top: 20px;
 }
+
+@media (min-width: 768px) {
+    #inputCard {
+        right: unset;
+        bottom: unset;
+        top: 0;
+        width: 20vw;
+        min-width: 400px;
+    }
+}
