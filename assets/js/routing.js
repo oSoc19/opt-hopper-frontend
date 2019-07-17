@@ -4,7 +4,7 @@ const availableProfiles = ["default", "bike", "ebike", "speedy"];
 var profileConfigs = {
     "default": {
         backendName: "pedestrian",
-        routingProfile: "&crowsflight&maxDistance=20000&speed=1.4",
+        routingProfile: "&walksGeneratorDescription=crowsflight%26maxDistance%3D20000%26speed%3D1.4",
         routecolor: {
             backend: true,
             color: "#5a0449"
@@ -12,7 +12,7 @@ var profileConfigs = {
     },
     "bike": {
         backendName: "bicycle",
-        routingProfile: "&inBetweenOsmProfile=pedestrian&" +
+        routingProfile: "&inBetweenOsmProfile=crowsflight&" +
             "inBetweenSearchDistance=500&" +
             "firstMileOsmProfile=bicycle&" +
             "firstMileSearchDistance=10000&" +
@@ -25,7 +25,7 @@ var profileConfigs = {
     },
     "ebike": {
         backendName: "ebike",
-        routingProfile: "&inBetweenOsmProfile=pedestrian&" +
+        routingProfile: "&inBetweenOsmProfile=crowsflight&" +
             "inBetweenSearchDistance=500&" +
             "firstMileOsmProfile=ebike&" +
             "firstMileSearchDistance=30000&" +
@@ -38,7 +38,7 @@ var profileConfigs = {
     },
     "speedy": {
         backendName: "speedPedelec",
-        routingProfile: "&inBetweenOsmProfile=pedestrian&" +
+        routingProfile: "&inBetweenOsmProfile=crowsflight&" +
             "inBetweenSearchDistance=500&" +
             "firstMileOsmProfile=speedPedelec&" +
             "firstMileSearchDistance=50000&" +
