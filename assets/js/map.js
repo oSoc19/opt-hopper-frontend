@@ -27,6 +27,21 @@ function centerToCurrentLocation(position) {
 
 var labelLayer = "road-label";
 
+function clearRoutes(){
+    for (let i in availableProfiles) {
+        profile = availableProfiles[i];
+        if (map.getLayer(profile)) {
+            map.removeLayer(profile);
+        }
+        if (map.getLayer(profile + "-casing")) {
+            map.removeLayer(profile + "-casing");
+        }
+        if (map.getSource(profile + "-source")) {
+            map.removeSource(profile + "-source");
+        }
+    }
+}
+
 function displayRoute(profile, isSelected, journey) {
     var routeColor = "blue";//profileConfig.routecolor.color;
 
@@ -103,7 +118,7 @@ function displayRoute(profile, isSelected, journey) {
     const calculatedRoute = map.getSource(profile + "-source");
     if (calculatedRoute) {
         // Just set the data
-        calculatedRoute.setData(route);
+        calculatedRoute.setData({type: 'FeatureCollection', features: route});
     } else {
         // Add a new layer
         map.addSource(profile + "-source", {

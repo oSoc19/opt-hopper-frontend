@@ -59,6 +59,18 @@ body {
     height: 100px;
 }
 
+.tab:hover {
+    background-color: #00808B;
+}
+
+.tab:active {
+    background-color: aqua;
+}
+
+.tab.selected {
+    background-color: blueviolet;
+}
+
 .tab img {
     width: 50%;
     max-height: 65%;

@@ -50,5 +50,17 @@ $(function(){
     var time = today.getHours() + ":" + today.getMinutes()
     document.getElementById("timeInput").value = time;
 
+    let tabs = $(".tab");
+    tabs.on("click", function(){
+        activateProfile($(this).attr("profile"));
+    });
+
+    for (let i = 0; i < tabs.length; i++) {
+        if(!availableProfiles.includes(tabs[i].getAttribute("profile"))){
+            tabs[i].style.display = "none"
+        }
+    }
+
     getVeloParkData();
+
 });

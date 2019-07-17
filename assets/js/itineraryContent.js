@@ -1,55 +1,113 @@
+let receivedItineraries = {};
 
+function activateProfile(profile){
+    if(!profile){
+        console.error("No valid profile given", profile);
+        return;
+    }
+    if(!availableProfiles.includes(profile)){
+        console.error("This profile is not valid (or is disabled).", profile);
+        return;
+    }
+    //At this point we're sure the profile exists and is enabled. Profile is selected, even if there is no valid data to show to the user.
+    selectedProfile = profile;
+    $(".tab").removeClass("selected");
+    $(`.tab[profile=${profile}]`).addClass("selected");
 
-function fillItinerary(profile, departure, arrival, journey) {
+    if(!receivedItineraries[profile] || !receivedItineraries[profile].data || !receivedItineraries[profile].data.journeys){
+        console.warn("No itinerary for this profile available yet.", profile);
+        clearItinerary(profile, true);
+        return;
+    }
+    if(!receivedItineraries[profile].data || !receivedItineraries[profile].data.journeys[0]){
+        console.error("We received an itinerary for this profile (" + profile + "), but it doesn't make sense. Sorry.");
+        clearItinerary(profile, true);
+        return;
+    }
+    fillItinerary(profile, true, receivedItineraries[profile].from, receivedItineraries[profile].to, receivedItineraries[profile].data.journeys[0]);
+    //TODO: fix map view
+}
+
+function fillItinerary(profile, selected, departure, arrival, journey) {
 
     let minutes = journey.travelTime / 60;
     let hours = Math.floor(minutes / 60);
     minutes = Math.round(minutes - (hours * 60));
-    $(".detailViewSummaryTotalTime, .travelTime-" + profile).html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
-    $(".detailViewSummaryTrains").html(journey.vehiclesTaken);
+    $(".travelTime-" + profile).html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
 
-    //departure
-    $(".itineraryStartField").html(departure);
+    if(selected) {
+        $(".detailViewSummaryTotalTime").html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
+        $(".detailViewSummaryTrains").html(journey.vehiclesTaken);
 
-    //segments
-    let itineraryConainer = $(".itineraryContentContainer");
-    itineraryConainer.html("");
-    for(let i = 0; i < journey.segments.length; i++){
-        let depDate = new Date(journey.segments[i].departure.time);
-        let arrDate = new Date(journey.segments[i].arrival.time);
-        //let seconds = ((arrDate - depDate) / 1000) % 60;
-        let minutes = ((arrDate - depDate) / 1000) / 60;
-        let hours = Math.floor(minutes / 60);
-        minutes = Math.round(minutes - (hours * 60));
+        //departure
+        $(".itineraryStartField").html(departure);
 
-        //console.log(hours, ":", minutes);
+        //segments
+        let itineraryConainer = $(".itineraryContentContainer");
+        itineraryConainer.html("");
+        for (let i = 0; i < journey.segments.length; i++) {
+            let depDate = new Date(journey.segments[i].departure.time);
+            let arrDate = new Date(journey.segments[i].arrival.time);
+            //let seconds = ((arrDate - depDate) / 1000) % 60;
+            let minutes = ((arrDate - depDate) / 1000) / 60;
+            let hours = Math.floor(minutes / 60);
+            minutes = Math.round(minutes - (hours * 60));
 
-        let vehicle = journey.segments[i].vehicle;
-        if(vehicle && vehicle.indexOf("irail")>=0){
-            vehicle = "TRAIN";
-        } else if(!vehicle){
-            vehicle = "WALK";
-        }
-        if(i===0){
-            $(".detailViewSummaryTotalCyclingTime").html((hours > 0 ? `${hours}h ` : "") + `${minutes}min`);
-        }
+            //console.log(hours, ":", minutes);
 
-        itineraryConainer.append(`<div class="itineraryVehicle">${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min</div>`);
-        if(i<journey.segments.length-1) {
-            itineraryConainer.append(
-                `<div class="itineraryStop">
+            let vehicle = journey.segments[i].vehicle;
+            if (vehicle && vehicle.indexOf("irail") >= 0) {
+                vehicle = "TRAIN";
+            } else if (!vehicle) {
+                vehicle = "WALK";
+            }
+            if (i === 0) {
+                $(".detailViewSummaryTotalCyclingTime").html((hours > 0 ? `${hours}h ` : "") + `${minutes}min`);
+            }
+
+            itineraryConainer.append(`<div class="itineraryVehicle">${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min</div>`);
+            if (i < journey.segments.length - 1) {
+                itineraryConainer.append(
+                    `<div class="itineraryStop">
                     <svg height="24" width="24">
                       <circle cx="12" cy="12" r="10" stroke="blue" stroke-width="3" fill="blue" />
                     </svg>
                     ${journey.segments[i].arrival.location.name}
                 </div>`
-            );
+                );
+            }
+
         }
 
+        //arrival
+        $(".itineraryFinishField").html(arrival);
     }
+}
 
-    //arrival
-    $(".itineraryFinishField").html(arrival);
+function clearAllItineraries(){
+    for(i in availableProfiles){
+        clearItinerary(availableProfiles[i], availableProfiles[i] == selectedProfile);
+    }
+}
+
+function clearItinerary(profile, selected) {
+
+    $(".travelTime-" + profile).html( profile );
+
+    if(selected) {
+        $(".detailViewSummaryTotalTime").html( "" );
+        $(".detailViewSummaryTrains").html( "" );
+        $(".detailViewSummaryTotalCyclingTime").html( "" );
+
+        //departure
+        $(".itineraryStartField").html( "" );
+
+        //segments
+        $(".itineraryContentContainer").html( "" );
+
+        //arrival
+        $(".itineraryFinishField").html( "" );
+    }
 }
 
 /*fillItinerary("Bosa", "Stationsplein Aalst",
