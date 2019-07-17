@@ -259,12 +259,14 @@ function mapOnClick(){
             state.location1 = lngLatArray;
             reverseGeocode(state.location1, function (adress) {
                 $("#fromInput").val(adress);
+                state.location1Name = adress
                 fromFieldInputDetected(document.getElementById("fromInput"));
             });
         } else {
             state.location2 = lngLatArray;
             reverseGeocode(state.location2, function (adress) {
                 $("#toInput").val(adress);
+                state.location2Name = adress
                 toFieldInputDetected(document.getElementById("toInput"));
             });
         }
