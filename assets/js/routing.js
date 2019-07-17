@@ -74,7 +74,11 @@ function calculateAllRoutes(){
         const profile = availableProfiles[key];
         const routingProfile = profileConfigs[profile].routingProfile;
 
+        //*
         const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}`;
+        /*/
+        const url = `http://localhost:5000/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}`;
+        //*/
 
         $.ajax({
             url: url,
