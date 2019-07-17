@@ -18,6 +18,30 @@ function getCurrentLocation(centerToCurrentLocation){
     }
 }
 
+function loadCurrentTime(){
+
+    document.querySelector("#dateInput").valueAsDate = new Date();
+    let today = new Date();
+    var time = getHours(today.getHours()) + ":" + getMinutes(today.getMinutes())
+    document.getElementById("timeInput").value = time;
+
+}
+
+function getHours(hours){
+    if (hours < 10) {
+        return `0${hours}`
+    }else{
+        return hours
+    }
+}
+
+function getMinutes(minutes){
+    if (minutes < 10) {
+        return `0${minutes}`
+    }else{
+        return minutes
+    }
+}
 /**
  * Utility method to swap 2 array values (usefull for LatLng <=> LngLat)
  * @param array
@@ -45,10 +69,7 @@ $(function(){
 
 
     //load input with current date & time
-    document.querySelector("#dateInput").valueAsDate = new Date();
-    let today = new Date();
-    var time = today.getHours() + ":" + today.getMinutes()
-    document.getElementById("timeInput").value = time;
+    loadCurrentTime()
 
     let tabs = $(".tab");
     tabs.on("click", function(){
