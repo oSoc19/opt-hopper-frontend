@@ -1,12 +1,21 @@
 let map;
 
+let mapstyleAnyways = 'mapbox://styles/mapbox/streets-v11';
+let tokenAnyways = 'pk.eyJ1IjoiZGFuaWVsbGV0ZXJyYXMiLCJhIjoiY2pqeWJheGxhMGwxODNxbW1sb2UzMGo0aiJ9.Y5HiKm7qjB1vrX7NGTOofA';
+
+let mapstyleMargot = 'mapbox://styles/mverbs/cjy6ztopn10dx1cpfxw5y0wz1';
+let tokenMargot = 'pk.eyJ1IjoibXZlcmJzIiwiYSI6ImNqeTZ6c215MjBsdmozY21zMzEyNnZhNGcifQ.sRED4F6Fh59-wz90S0st4Q';
+
+let mapstyleGulsen = "mapbox://styles/gugul/cjy77yl1713rg1cn0wiwq2ong";
+// draft:  mapbox://styles/gugul/cjy77yl1713rg1cn0wiwq2ong/draft
+let tokenGulsen = "pk.eyJ1IjoiZ3VndWwiLCJhIjoiY2p4cDVqZXZvMGN6ejNjcm5zdjF6OWR1dSJ9._vc_H7CbewiDCHWYvD4CdQ";
+// pk.eyJ1IjoiZ3VndWwiLCJhIjoiY2p4cDVqZXZvMGN6ejNjcm5zdjF6OWR1dSJ9._vc_H7CbewiDCHWYvD4CdQ
 
 function loadMap(coords) { //long, lat
-    //mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsbGV0ZXJyYXMiLCJhIjoiY2pqeWJheGxhMGwxODNxbW1sb2UzMGo0aiJ9.Y5HiKm7qjB1vrX7NGTOofA'; //anyways
-    mapboxgl.accessToken = 'pk.eyJ1IjoibXZlcmJzIiwiYSI6ImNqeTZ6c215MjBsdmozY21zMzEyNnZhNGcifQ.sRED4F6Fh59-wz90S0st4Q';  //Margot
+    mapboxgl.accessToken = tokenGulsen;
     map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mverbs/cjy6ztopn10dx1cpfxw5y0wz1',//mapbox://styles/mapbox/streets-v11',
+        style: mapstyleGulsen,
         center: coords,
         zoom: 9
     });
