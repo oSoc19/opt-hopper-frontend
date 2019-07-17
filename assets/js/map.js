@@ -42,6 +42,11 @@ function clearRoutes(){
     }
 }
 
+let routeOpacityAltnerative = 0.5;
+let routeOpacityMain = 1;
+let routeLineWidthAlternative = 4;
+let routeLineWidthmain = 6;
+
 function displayRoute(profile, isSelected, journey) {
     var routeColor = "blue";//profileConfig.routecolor.color;
 
@@ -129,12 +134,12 @@ function displayRoute(profile, isSelected, journey) {
             }
         });
 
-        var opacity = 0.5;
-        var width = 4;
+        var opacity = routeOpacityAltnerative;
+        var width = routeLineWidthAlternative;
 
         if (isSelected) {
-            width = 6;
-            opacity = 1;
+            width = routeLineWidthmain;
+            opacity = routeOpacityMain;
         }
         // create the outline of the route
         map.addLayer({
@@ -171,6 +176,28 @@ function displayRoute(profile, isSelected, journey) {
                 'line-join': 'round'
             }
         }, labelLayer);
+    }
+}
+
+
+
+function showProfileRoute(profile){
+    availableProfiles.forEach(function (profile) {
+        if (map.getLayer(profile)) {
+            //map.setLayoutProperty(profile, 'visibility', 'none');
+            map.setPaintProperty(profile, 'line-opacity', routeOpacityAltnerative);
+            map.setPaintProperty(profile + '-casing', 'line-opacity', routeOpacityAltnerative);
+            map.setPaintProperty(profile, 'line-width', routeLineWidthAlternative);
+            map.setPaintProperty(profile + '-casing', 'line-width', routeLineWidthAlternative * 1.5);
+        }
+    });
+
+    if (map.getLayer(selectedProfile)) {
+        //map.setLayoutProperty(selectedProfile, 'visibility', 'visible');
+        map.setPaintProperty(selectedProfile, 'line-opacity', routeOpacityMain);
+        map.setPaintProperty(selectedProfile + '-casing', 'line-opacity', routeOpacityMain);
+        map.setPaintProperty(profile, 'line-width', routeLineWidthmain);
+        map.setPaintProperty(profile + '-casing', 'line-width', routeLineWidthmain * 1.5);
     }
 }
 

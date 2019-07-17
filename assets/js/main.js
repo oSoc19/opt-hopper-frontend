@@ -52,7 +52,9 @@ $(function(){
 
     let tabs = $(".tab");
     tabs.on("click", function(){
-        activateProfile($(this).attr("profile"));
+        let profile = $(this).attr("profile");
+        activateProfile(profile);
+        showProfileRoute(profile);
     });
 
     for (let i = 0; i < tabs.length; i++) {
