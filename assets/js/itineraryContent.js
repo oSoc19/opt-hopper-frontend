@@ -67,6 +67,48 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
 
             itineraryConainer.append(`<div class="itineraryVehicle">${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min</div>`);
             if (i < journey.segments.length - 1) {
+                if(journey.segments[i].arrival.location.id.includes('irail')){
+                    itineraryConainer.append(
+                        `<div class="itineraryStop" stationid="${journey.segments[i].arrival.location.id}">
+                        <svg height="24" width="24">
+                          <circle cx="12" cy="12" r="10" stroke="blue" stroke-width="3" fill="blue" />
+                        </svg>
+                        ${journey.segments[i].arrival.location.name}
+                    </div>`
+                    );
+                    if (parkingRepo.parkings.length) {
+                        if (myStations[journey.segments[i].arrival.location.id].parkings.length > 0) {
+                            var parkingImg = document.createElement("img");
+                            parkingImg.classList.add("facilityIcon")
+                            parkingImg.src = 'assets/img/icons/Parking_icon.svg'
+                            $(`.itineraryStop[stationid="${journey.segments[i].arrival.location.id}"]`).append(parkingImg)
+
+                            let parkingHasPump = false;
+                            myStations[journey.segments[i].arrival.location.id].parkings.forEach(parking => {
+                                parking[`@graph`].forEach(graph => {
+                                    if (graph.amenityFeature) {
+                                        graph.amenityFeature.forEach(feature => {
+                                            if (feature[`@type`].includes('BicyclePump')) {
+                                                parkingHasPump = true;
+                                            }   
+                                        });
+                                    }
+                                });
+                            });
+                            if (parkingHasPump) {
+                                var BicyclePumpImg = document.createElement("img");
+                                BicyclePumpImg.classList.add("facilityIcon")
+                                BicyclePumpImg.src = 'assets/img/icons/pump-air.svg'
+                                $(`.itineraryStop[stationid="${journey.segments[i].arrival.location.id}"]`).append(BicyclePumpImg)
+                            }
+                            
+
+                        }
+                        
+                        
+                    }
+
+                }else{
                 itineraryConainer.append(
                     `<div class="itineraryStop">
                     <svg height="24" width="24">
@@ -75,6 +117,10 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                     ${journey.segments[i].arrival.location.name}
                 </div>`
                 );
+            }
+
+
+
             }
 
         }
