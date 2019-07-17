@@ -17,7 +17,7 @@ body {
 }
 
 .detailViewSummary {
-    background-color: #2D4959;
+    background-color: #28A987;;
     font-size: x-large;
     font-weight: bold;
     color: white;
@@ -25,7 +25,7 @@ body {
 }
 
 .detailViewScroller {
-    background-color: #2D4959;
+    background-color: #28A987;;
     margin-top: calc(calc(100vh - 100px) - 4cm);
     padding-bottom: 110px;
     padding-left: 20px;
@@ -47,7 +47,7 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: row;
-    background: #2D4959;
+    background: white;
 }
 
 .tab {
@@ -68,7 +68,7 @@ body {
 }
 
 .tab.selected {
-    background-color: blueviolet;
+    background-color: #1D9575;
 }
 
 .tab img {
@@ -79,12 +79,17 @@ body {
 
 .tab span {
     display: block;
+    color: #A0A0A0;
+}
+
+.tab.selected span {
+    display: block;
     color: white;
 }
 
 .inputCard {
     background-color: rgba(0, 0, 0, 0.80);
-    margin: 5%;
+    /*margin: 5%;*/
     border-radius: 25px;
 }
 
@@ -109,6 +114,10 @@ label {
 
 .fromInput {
     padding-top: 10px;
+}
+
+.fromInput, .toInput{
+    position: relative;
 }
 
 .berekenRouteBtn {
@@ -165,22 +174,23 @@ background-color: pink;
     text-align: center;
 }
 
-.fromInput, .toInput{
-    position: relative;
-}
-
 #clearRouteButton {
     position: absolute;
     right: 20px;
     top: 20px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     #inputCard {
         right: unset;
         bottom: unset;
         top: 0;
         width: 20vw;
         min-width: 400px;
+    }
+
+    .detailViewContainer, .tabsContainer, #inputCard {
+        width: calc(200px + 15vw);
+        min-width: 300px;
     }
 }
