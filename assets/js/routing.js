@@ -93,7 +93,7 @@ function calculateAllRoutes(){
                 if(data.journeys && receivedItineraries[profile].journey) {
                     displayRoute(profile, profile === selectedProfile, receivedItineraries[profile].journey);
                     fillItinerary(profile, profile === selectedProfile, inputData.fromName, inputData.toName, receivedItineraries[profile].journey);
-                    getStations(data.journeys[0]);
+                    getStations(receivedItineraries[profile].journey);
                 } else {
                     console.warn("Got journeys: null from Itinero with profile", profile);
                 }
