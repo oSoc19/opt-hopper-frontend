@@ -65,7 +65,7 @@ $(function(){
 
     $(".detailViewSummary").on("click", function(){
         window.scrollTo({top: window.innerHeight - 100 - (4*pxCm), behavior: 'smooth'});
-    });
+    }); 
 
 
     //load input with current date & time
@@ -84,6 +84,6 @@ $(function(){
         }
     }
 
-    getVeloParkData();
+     getVeloParkData();
 
 });
