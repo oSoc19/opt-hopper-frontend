@@ -84,6 +84,8 @@ $(function(){
         }
     }
 
-    getVeloParkData();
-
+    setTimeout(function(){ 
+        getVeloParkData();
+    }, 3000);
+    
 });

@@ -21,10 +21,6 @@ class Station {
         this.location = location;
         this.parkings;
     }
-
-    getParkings() {
-        this.parkings = checkForNearParkings(this.location.lat, this.location.lon);
-    }
 }
 
 class StationRepository {
@@ -39,6 +35,59 @@ class StationRepository {
 
 let parkingRepo = new ParkingRepository();
 
+function displayVeloParkData() { //
+    for (const key in myStations) {
+        if (myStations.hasOwnProperty(key)) {
+            if (myStations[key].parkings.length) {
+                if ($(`.itineraryStop[stationid="${key}"]`)) {
+                    var parkingImg = document.createElement("img");
+                    parkingImg.classList.add("facilityIcon")
+                    parkingImg.src = 'assets/img/icons/parkingIcon.svg'
+                    $(`.itineraryStop[stationid="${key}"]`).append(parkingImg)
+                }
+                let parkingHasPump = false;
+                myStations[key].parkings.forEach(parking => {
+                    parking[`@graph`].forEach(graph => {
+                        if (graph.amenityFeature) {
+                            graph.amenityFeature.forEach(feature => {
+                                if (feature[`@type`].includes('BicyclePump')) {
+                                    parkingHasPump = true;
+                                }   
+                            });
+                        }
+                    });
+                });
+                if (parkingHasPump) {
+                    var BicyclePumpImg = document.createElement("img");
+                    BicyclePumpImg.classList.add("facilityIcon")
+                    BicyclePumpImg.src = 'assets/img/icons/pumpIcon.svg'
+                    $(`.itineraryStop[stationid="${key}"]`).append(BicyclePumpImg)
+                }
+            }  
+        }
+    }
+}
+
+function displayParkingAvailable(){
+    for (const key in myStations) {
+        if (myStations.hasOwnProperty(key)) {
+            if (myStations[key].parkings.length) {
+                
+            }  
+        }
+    }
+}
+
+function clearStations(){
+    if (!$.isEmptyObject(myStations)) {
+        console.log(myStations)
+        for (var prop in myStations) { 
+            if (myStations.hasOwnProperty(prop)) {
+                 delete myStations[prop]; 
+                } 
+            }  
+    }
+}
 
 
 function getVeloParkData() {
@@ -51,13 +100,14 @@ function getVeloParkData() {
                 let parkingUrl = element['@id']
                 $.getJSON(parkingUrl, function (p) {
                         counter++
-                        let name = p.name[0][`@value`];
+                        /*let name = p.name[0][`@value`];
                         let latitude = p[`@graph`][0].geo[0].latitude;
-                        let longitude = p[`@graph`][0].geo[0].longitude;
-                        let parking = new Parking(name, latitude, longitude)
+                        let longitude = p[`@graph`][0].geo[0].longitude;*/
+                        let parking = p;
                         parkingRepo.parkings.push(parking)
                         if (counter === data["dcat:dataset"]["dcat:distribution"].length - 1) {
                             console.log("Adding parkings to map now.", counter, "total; ", errorCounter, "failed.");
+                            console.log(parkingRepo)
                             processParkings()
                             //checkForFacilities();
                             //processArray(parkingRepo._parkings)
@@ -78,11 +128,12 @@ function getVeloParkData() {
 
 function processParkings() {
     if (!$.isEmptyObject(myStations)) {
-        let values = Object.values(stations)
-        values.forEach(station => {
-            station.parkings = checkForNearParkings(station.location.lat, station.location.lon)
-            console.log(station)
-        })
+        for (const key in myStations) {
+            if (myStations.hasOwnProperty(key)) {
+                myStations[key].parkings = checkForNearParkings(myStations[key].location.lat, myStations[key].location.lon);
+            }
+        }
+        displayVeloParkData();
     }
 }
 
@@ -116,11 +167,11 @@ function getStations(journey) {
         }
     })
     if (parkingRepo.parkings.length) {
-        let values = Object.values(stations)
-        values.forEach(station => {
-            station.parkings = checkForNearParkings(station.location.lat, station.location.lon)
-            console.log(station)
-        })
+        for (const key in stations  ) {
+            if (stations.hasOwnProperty(key)) {
+                myStations[key].parkings = checkForNearParkings(stations[key].location.lat, stations[key].location.lon);    
+            }
+        }
     }
 }
 
@@ -163,7 +214,7 @@ function getFirstAndLastStation(journey) {
 function checkForNearParkings(latStation, lonStation) {
     let parkingsInRange = [];
     parkingRepo.parkings.forEach(p => {
-        let dist = distance(p.coordinates[1], p.coordinates[0], latStation, lonStation)
+        let dist = distance(p[`@graph`][0].geo[0].latitude, p[`@graph`][0].geo[0].longitude, latStation, lonStation)
         if (dist <= 0.5) {
             parkingsInRange.push(p)
         }

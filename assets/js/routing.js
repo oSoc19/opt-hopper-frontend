@@ -61,6 +61,7 @@ function calculateAllRoutes(){
     clearAllItineraries();
     clearRoutes();
     //TODO: Remove routes from map
+    clearStations()
 
     let isDeparture = true;
     let inputData = getInputFromCard();
@@ -92,6 +93,7 @@ function calculateAllRoutes(){
                 if(data.journeys) {
                     displayRoute(profile, profile === selectedProfile, data.journeys[0]);
                     fillItinerary(profile, profile === selectedProfile, inputData.fromName, inputData.toName, data.journeys[0]);
+                    getStations(data.journeys[0])
                 } else {
                     console.warn("Got journeys: null from Itinero with profile", profile);
                 }

@@ -175,6 +175,10 @@ background-color: pink;
     top: 20px;
 }
 
+.facilityIcon{
+    width: 1.5rem;
+}
+
 @media (min-width: 768px) {
     #inputCard {
         right: unset;
@@ -184,3 +188,6 @@ background-color: pink;
         min-width: 400px;
     }
 }
+
+
+
