@@ -14,10 +14,11 @@ body {
     height: 100vh;
     width: 100%;
     position: absolute;
+    display: none;
 }
 
 .detailViewSummary {
-    background-color: #2D4959;
+    background-color: #28A987;;
     font-size: x-large;
     font-weight: bold;
     color: white;
@@ -25,7 +26,7 @@ body {
 }
 
 .detailViewScroller {
-    background-color: #2D4959;
+    background-color: #28A987;;
     margin-top: calc(calc(100vh - 100px) - 4cm);
     padding-bottom: 110px;
     padding-left: 20px;
@@ -36,7 +37,7 @@ body {
 .detailViewItinerary {
     font-size: large;
     color: white;
-    background-color: #00808B;
+    background-color: unset;
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -47,16 +48,18 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: row;
-    background: #2D4959;
+    background-color: unset;
 }
 
 .tab {
     flex: 1;
-    border-top: 1px solid #00808B;
+    /*border-top: 1px solid #00808B;
     border-right: 1px solid #00808B;
-    border-left: 1px solid #00808B;
+    border-left: 1px solid #00808B;*/
     text-align: center;
     height: 100px;
+    border-radius: 5px;
+    background-color: white;
 }
 
 .tab:hover {
@@ -68,7 +71,7 @@ body {
 }
 
 .tab.selected {
-    background-color: blueviolet;
+    background-color: #1D9575;
 }
 
 .tab img {
@@ -79,17 +82,24 @@ body {
 
 .tab span {
     display: block;
+    color: #A0A0A0;
+}
+
+.tab.selected span {
+    display: block;
     color: white;
 }
 
 .inputCard {
-    background-color: rgba(0, 0, 0, 0.80);
-    margin: 5%;
-    border-radius: 25px;
+    /*background-color: rgba(0, 0, 0, 0.80);
+    border-radius: 25px;*/
+    background: #FFFFFF;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
 }
 
 .inputCard {
-    color: white;
+    color: #28A987;
 }
 
 label {
@@ -103,12 +113,22 @@ label {
     align-items: center;
 }
 
+#fromInput, #toInput, #timeInput, #dateInput {
+    background: #FFFFFF;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
 .form-control{
     padding-right: 25px !important;
 }
 
 .fromInput {
     padding-top: 10px;
+}
+
+.fromInput, .toInput{
+    position: relative;
 }
 
 .berekenRouteBtn {
@@ -165,10 +185,6 @@ background-color: pink;
     text-align: center;
 }
 
-.fromInput, .toInput{
-    position: relative;
-}
-
 #clearRouteButton {
     position: absolute;
     right: 20px;
@@ -179,15 +195,49 @@ background-color: pink;
     width: 1.5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     #inputCard {
         right: unset;
         bottom: unset;
         top: 0;
         width: 20vw;
         min-width: 400px;
+        height: 5.5cm;
+    }
+
+    .detailViewContainer, .tabsContainer, #inputCard {
+        width: calc(200px + 15vw);
+        min-width: 300px;
+        display: initial;
+    }
+
+    .detailViewContainer {
+        background-color: #28A987;
+    }
+
+    .tabsContainer {
+        display: flex;
+    }
+
+    .detailViewScroller {
+        margin-top: 5.5cm;
+    }
+
+    #clearRouteButton {
+        display: none;
     }
 }
 
+@media (max-width: 992px) {
+    .mobileVisible {
+        display: unset;
+    }
 
+    .mobileFlex {
+        display: flex;
+    }
 
+    .mobileHidden {
+         display: none;
+     }
+}
