@@ -80,7 +80,7 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                         if (myStations[journey.segments[i].arrival.location.id].parkings.length > 0) {
                             var parkingImg = document.createElement("img");
                             parkingImg.classList.add("facilityIcon")
-                            parkingImg.src = 'assets/img/icons/Parking_icon.svg'
+                            parkingImg.src = 'assets/img/icons/parkingIcon.svg'
                             $(`.itineraryStop[stationid="${journey.segments[i].arrival.location.id}"]`).append(parkingImg)
 
                             let parkingHasPump = false;
@@ -98,7 +98,7 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                             if (parkingHasPump) {
                                 var BicyclePumpImg = document.createElement("img");
                                 BicyclePumpImg.classList.add("facilityIcon")
-                                BicyclePumpImg.src = 'assets/img/icons/pump-air.svg'
+                                BicyclePumpImg.src = 'assets/img/icons/pumpIcon.svg'
                                 $(`.itineraryStop[stationid="${journey.segments[i].arrival.location.id}"]`).append(BicyclePumpImg)
                             }
                             

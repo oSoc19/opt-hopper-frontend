@@ -35,18 +35,16 @@ class StationRepository {
 
 let parkingRepo = new ParkingRepository();
 
-function displayVeloParkData() {
+function displayVeloParkData() { //
     for (const key in myStations) {
         if (myStations.hasOwnProperty(key)) {
             if (myStations[key].parkings.length) {
                 if ($(`.itineraryStop[stationid="${key}"]`)) {
                     var parkingImg = document.createElement("img");
                     parkingImg.classList.add("facilityIcon")
-                    parkingImg.src = 'assets/img/icons/Parking_icon.svg'
+                    parkingImg.src = 'assets/img/icons/parkingIcon.svg'
                     $(`.itineraryStop[stationid="${key}"]`).append(parkingImg)
                 }
-                //TODO ADD ICONS TO ACTIVE PROFILE
-
                 let parkingHasPump = false;
                 myStations[key].parkings.forEach(parking => {
                     parking[`@graph`].forEach(graph => {
@@ -62,42 +60,12 @@ function displayVeloParkData() {
                 if (parkingHasPump) {
                     var BicyclePumpImg = document.createElement("img");
                     BicyclePumpImg.classList.add("facilityIcon")
-                    BicyclePumpImg.src = 'assets/img/icons/pump-air.svg'
+                    BicyclePumpImg.src = 'assets/img/icons/pumpIcon.svg'
                     $(`.itineraryStop[stationid="${key}"]`).append(BicyclePumpImg)
                 }
-
-
             }  
         }
     }
-
-
-    /*
-    if (myStations[journey.segments[i].arrival.location.id].parkings.length > 0) {
-        var parkingImg = document.createElement("img");
-        parkingImg.classList.add("facilityIcon")
-        parkingImg.src = 'assets/img/icons/Parking_icon.svg'
-        $(`.itineraryStop[stationid="${journey.segments[i].arrival.location.id}"]`).append(parkingImg)
-
-        let parkingHasPump = false;
-        myStations[journey.segments[i].arrival.location.id].parkings.forEach(parking => {
-            parking[`@graph`].forEach(graph => {
-                if (graph.amenityFeature) {
-                    graph.amenityFeature.forEach(feature => {
-                        if (feature[`@type`].includes('BicyclePump')) {
-                            parkingHasPump = true;
-                        }   
-                    });
-                }
-            });
-        });
-        if (parkingHasPump) {
-            var BicyclePumpImg = document.createElement("img");
-            BicyclePumpImg.classList.add("facilityIcon")
-            BicyclePumpImg.src = 'assets/img/icons/pump-air.svg'
-            $(`.itineraryStop[stationid="${journey.segments[i].arrival.location.id}"]`).append(BicyclePumpImg)
-        }
-    }*/
 }
 
 function displayParkingAvailable(){
