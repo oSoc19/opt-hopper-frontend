@@ -76,24 +76,24 @@ function calculateAllRoutes(){
         const routingProfile = profileConfigs[profile].routingProfile;
 
         //*
-        const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}`;
+        const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}&multipleOptions=true`;
         /*/
-        const url = `http://localhost:5000/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}`;
+        const url = `http://localhost:5000/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}&multipleOptions=true`;
         //*/
 
         $.ajax({
             url: url,
             success: function (data) {
-                //console.log(data);
-                //console.log(profile);
                 receivedItineraries[profile] = {};
                 receivedItineraries[profile].data = data;
                 receivedItineraries[profile].from = inputData.fromName;
                 receivedItineraries[profile].to = inputData.toName;
-                if(data.journeys) {
-                    displayRoute(profile, profile === selectedProfile, data.journeys[0]);
-                    fillItinerary(profile, profile === selectedProfile, inputData.fromName, inputData.toName, data.journeys[0]);
-                    getStations(data.journeys[0])
+                receivedItineraries[profile].journey = filterItineraries(data.journeys);
+
+                if(data.journeys && receivedItineraries[profile].journey) {
+                    displayRoute(profile, profile === selectedProfile, receivedItineraries[profile].journey);
+                    fillItinerary(profile, profile === selectedProfile, inputData.fromName, inputData.toName, receivedItineraries[profile].journey);
+                    getStations(data.journeys[0]);
                 } else {
                     console.warn("Got journeys: null from Itinero with profile", profile);
                 }
@@ -105,12 +105,30 @@ function calculateAllRoutes(){
     }
 
     //TODO: hide loading icon
-    $(".inputCard").hide();
-    $(".tabsContainer, .detailViewContainer").show();
+    $(".inputCard").addClass("mobileHidden");
+    $(".tabsContainer, .detailViewContainer").removeClass("mobileHidden");
 }
 
 function clearRoute(){
-    $(".inputCard").show();
-    $(".tabsContainer, .detailViewContainer").hide();
+    $(".inputCard").removeClass("mobileHidden");
+    $(".tabsContainer, .detailViewContainer").addClass("mobileHidden");
     clearRoutes();
+}
+
+function filterItineraries(journeys){
+    if(!journeys){
+        return null;
+    }
+    let smallestScore = Number.MAX_VALUE;
+    let smallestJourney = null;
+
+    for (key in journeys){
+        let score = journeys[key].travelTime * journeys[key].vehiclesTaken / (journeys[key].vehiclesTaken+1);
+        if(score < smallestScore){
+            smallestScore = score;
+            smallestJourney = journeys[key];
+        }
+    }
+
+    return smallestJourney;
 }

@@ -14,18 +14,17 @@ function activateProfile(profile){
     $(".tab").removeClass("selected");
     $(`.tab[profile=${profile}]`).addClass("selected");
 
-    if(!receivedItineraries[profile] || !receivedItineraries[profile].data || !receivedItineraries[profile].data.journeys){
+    if(!receivedItineraries[profile] || !receivedItineraries[profile].data || !receivedItineraries[profile].journey){
         console.warn("No itinerary for this profile available yet.", profile);
         clearItinerary(profile, true);
         return;
     }
-    if(!receivedItineraries[profile].data || !receivedItineraries[profile].data.journeys[0]){
+    if(!receivedItineraries[profile].data || !receivedItineraries[profile].journey){
         console.error("We received an itinerary for this profile (" + profile + "), but it doesn't make sense. Sorry.");
         clearItinerary(profile, true);
         return;
     }
-    fillItinerary(profile, true, receivedItineraries[profile].from, receivedItineraries[profile].to, receivedItineraries[profile].data.journeys[0]);
-    //TODO: fix map view
+    fillItinerary(profile, true, receivedItineraries[profile].from, receivedItineraries[profile].to, receivedItineraries[profile].journey);
 }
 
 function fillItinerary(profile, selected, departure, arrival, journey) {
