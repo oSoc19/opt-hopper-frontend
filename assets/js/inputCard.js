@@ -32,8 +32,18 @@ function initInputGeocoders() {
                 function (data) {
                     var resArray = [];
                     for (var feature in data.features) {
+                        //Get place from context in response
+                        let context = data.features[feature].context;
+                        let place;
+                        let i = 0;
+                        while(!place){
+                            if(context[i].id.includes("place")){
+                                place = context[i].text;
+                            }
+                            i++;
+                        }
                         resArray.push({
-                            name: data.features[feature].text + " (" + data.features[feature].place_name + ")",
+                            name: data.features[feature].text + ", " + place,
                             loc: data.features[feature].center
                         });
                     }
