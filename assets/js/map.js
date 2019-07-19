@@ -334,11 +334,64 @@ function mapOnClick(){
 });
 }
 
+let fallbackCounterReverse = 0;
+
 function reverseGeocode(location, callback) {
     var lng = location[0];
     var lat = location[1];
-    $.getJSON(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?limit=1&access_token=${mapboxAccessCode}`, function (data) {
-        callback(data.features[0].text + " (" + data.features[0].place_name + ")");
+    if(fallbackCounterReverse <= 4) {
+        $.ajax({
+            dataType: "json",
+            url: `https://best.osoc.be/v1/reverse?point.lat=${lat}&point.lon=${lng}`,
+            success: function (data) {
+                console.log(data);
+                if (data.features && data.features[0] && data.features[0].properties) {
+                    //Get region
+                    let region;
+                    if (data.features[0].properties) {
+                        region = data.features[0].properties.localadmin
+                        if (!region) {
+                            region = data.features[0].properties.locality;
+                        }
+                        if (!region) {
+                            region = data.features[0].properties.county;
+                        }
+                        if (!region) {
+                            region = data.features[0].properties.region;
+                        }
+                    }
+                    callback(data.features[0].properties.name + (region ? (", " + region) : ""));
+                } else {
+                    fallbackCounterReverse++;
+                    console.warn("BEST reverse geocode did not return useful results. Falling back to MapBox now.");
+                    mapBoxReverseGeoCode(location, callback);
+                }
+            },
+            error: function (error) {
+                fallbackCounterReverse++;
+                console.warn("BEST reverse geocode failed:", error, "\nFalling back to MapBox");
+                mapBoxReverseGeoCode(location, callback);
+            }
+        });
+    } else {
+        mapBoxReverseGeoCode(location, callback);
+    }
+}
+
+function mapBoxReverseGeoCode(location, callback){
+    $.ajax({
+        dataType: "json",
+        url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?limit=1&access_token=${mapboxAccessCode}`,
+        success: function (data) {
+            callback(data.features[0].text + ", " + data.features[0].place_name);
+        },
+        error: function(error){
+            if(fallbackCounterReverse > 0) {
+                fallbackCounterReverse--;
+            }
+            console.warn("MapBox reverse geocode failed:", error);
+            callback("[Geen adres gevonden voor deze locatie]");
+        }
     });
 }
 
