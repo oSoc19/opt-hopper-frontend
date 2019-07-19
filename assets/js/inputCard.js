@@ -32,8 +32,18 @@ function initInputGeocoders() {
                 function (data) {
                     var resArray = [];
                     for (var feature in data.features) {
+                        //Get place from context in response
+                        let context = data.features[feature].context;
+                        let place;
+                        let i = 0;
+                        while(!place){
+                            if(context[i].id.includes("place")){
+                                place = context[i].text;
+                            }
+                            i++;
+                        }
                         resArray.push({
-                            name: data.features[feature].text + " (" + data.features[feature].place_name + ")",
+                            name: data.features[feature].text + ", " + place,
                             loc: data.features[feature].center
                         });
                     }
@@ -45,55 +55,60 @@ function initInputGeocoders() {
         },
         afterSelect: function (activeItem) {
             var id = this.$element.attr('id');
-            if (id == "fromInput") {
+            if (id === "fromInput") {
                 state.location1 = activeItem.loc;
                 state.location1Name = activeItem.name
-            } else if (id == "toInput") {
+            } else if (id === "toInput") {
                 state.location2 = activeItem.loc;
                 state.location2Name = activeItem.name
             } else {
                 console.warn("FIELD NOT FOUND!");
             }
 
-            processInputOnMap()
+            processInputOnMap();
+            clearAllItineraries();
+            clearRoute();
         }
     });
 }
 
-function toFieldInputDetected(el) {
-    if (!el.value || el.value === "") {
-        $("#clearInputFieldToButton").hide();
-        state.location2 = undefined;
-        showLocationsOnMap();
-    } else {
-        $("#clearInputFieldToButton").show();
-    }
-}
-
 function fromFieldInputDetected(el) {
+    if(state.location1 && state.location1Name !== el.value) {
+        state.location1 = null;
+        clearAllItineraries();
+        clearRoute();
+        showLocationsOnMap();
+    }
     if (!el.value || el.value === "") {
         $("#clearInputFieldFromButton").hide();
-        state.location1 = undefined;
-        showLocationsOnMap();
     } else {
         $("#clearInputFieldFromButton").show();
     }
 }
 
+function toFieldInputDetected(el) {
+    if(state.location2 && state.location2Name !== el.value){
+        state.location2 = null;
+        clearAllItineraries();
+        clearRoute();
+        showLocationsOnMap();
+    }
+    if (!el.value || el.value === "") {
+        $("#clearInputFieldToButton").hide();
+    } else {
+        $("#clearInputFieldToButton").show();
+    }
+}
+
 function clearInputFieldFrom() {
     $("#fromInput").val("");
-    state.location1 = undefined;
-    showLocationsOnMap();
     fromFieldInputDetected(document.getElementById("fromInput"));
 }
 
 function clearInputFieldTo() {
     $("#toInput").val("");
-    state.location2 = undefined;
-    showLocationsOnMap();
     toFieldInputDetected(document.getElementById("toInput"));
 }
-
 
 
 initInputGeocoders();

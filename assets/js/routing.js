@@ -67,7 +67,6 @@ function calculateAllRoutes(){
     let inputData = getInputFromCard();
     const originS = swapArrayValues(inputData.from).join("%2F");
     const destinationS = swapArrayValues(inputData.to).join("%2F");
-    console.log(inputData);
 
     for(let key in availableProfiles) {
         const dateParam = (isDeparture ? "&departure=" : "&arrival=") + encodeURIComponent(new Date(inputData.date).toISOString());
@@ -91,9 +90,9 @@ function calculateAllRoutes(){
                 receivedItineraries[profile].journey = filterItineraries(data.journeys);
 
                 if(data.journeys && receivedItineraries[profile].journey) {
+                    getStations(receivedItineraries[profile].journey);
                     displayRoute(profile, profile === selectedProfile, receivedItineraries[profile].journey);
                     fillItinerary(profile, profile === selectedProfile, inputData.fromName, inputData.toName, receivedItineraries[profile].journey);
-                    getStations(receivedItineraries[profile].journey);
                 } else {
                     console.warn("Got journeys: null from Itinero with profile", profile);
                 }
