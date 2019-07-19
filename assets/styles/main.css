@@ -23,6 +23,7 @@ body {
     font-weight: bold;
     color: white;
     height: 4cm;
+    text-align: center;
 }
 
 .detailViewScroller {
@@ -58,7 +59,7 @@ body {
     border-left: 1px solid #00808B;*/
     text-align: center;
     height: 100px;
-    border-radius: 5px;
+    border-radius: 5px 5px 0 0;
     background-color: white;
 }
 
@@ -77,6 +78,12 @@ body {
 .tab img {
     width: 50%;
     max-height: 65%;
+    margin: auto;
+}
+
+.tab svg {
+    max-height: 50%;
+    width: 75%;
     margin: auto;
 }
 
@@ -161,14 +168,14 @@ background-color: pink;
 }
 
 .itineraryVehicle, .itineraryStop {
-    border-left: 6px solid blueviolet;
+    border-left: 6px solid white;
     padding-left: 20px;
     margin-left: 20px;
 }
 
 .itineraryStop svg {
     position: absolute;
-    left: 10px;
+    left: 11px;
 }
 
 .marker {
@@ -193,6 +200,55 @@ background-color: pink;
 
 .facilityIcon{
     width: 1.5rem;
+}
+
+.detailViewSummaryFacts {
+    display: flex;
+    flex-direction: row;
+    /*margin: 20px;*/
+    padding: 20px 20px 5px;
+}
+
+.detailViewSummaryFacts div {
+    flex: 1;
+    text-align: center;
+    min-height: 28px;
+    white-space: nowrap;
+
+    font-family: Karla, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #FFFFFF;
+}
+
+.detailViewSummaryFacts .summaryTitle {
+    min-height: initial;
+    font-family: Karla, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.detailViewSummaryIconContainer {
+    padding: 0 20px 0 20px;
+    text-align: initial;
+    white-space: nowrap;
+    min-height: 42px;
+}
+
+#clearRouteButton path {
+    fill: white;
+}
+
+#clearRouteButton:hover path {
+    fill: grey;
 }
 
 @media (min-width: 992px) {
@@ -223,7 +279,7 @@ background-color: pink;
         margin-top: 5.5cm;
     }
 
-    #clearRouteButton {
+    #clearRouteButton, .scrollableIcon {
         display: none;
     }
 }

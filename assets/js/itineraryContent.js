@@ -70,7 +70,7 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                     itineraryConainer.append(
                         `<div class="itineraryStop" stationid="${journey.segments[i].arrival.location.id}">
                         <svg height="24" width="24">
-                          <circle cx="12" cy="12" r="10" stroke="blue" stroke-width="3" fill="blue" />
+                          <circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" fill="white" />
                         </svg>
                         ${journey.segments[i].arrival.location.name}
                     </div>`
@@ -111,7 +111,7 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                 itineraryConainer.append(
                     `<div class="itineraryStop">
                     <svg height="24" width="24">
-                      <circle cx="12" cy="12" r="10" stroke="blue" stroke-width="3" fill="blue" />
+                      <circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" fill="white" />
                     </svg>
                     ${journey.segments[i].arrival.location.name}
                 </div>`
