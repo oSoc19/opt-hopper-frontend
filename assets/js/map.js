@@ -347,8 +347,8 @@ function mapOnClick(){
 let fallbackCounterReverse = 0;
 
 function reverseGeocode(location, callback) {
-    var lng = location[0];
-    var lat = location[1];
+    let lng = location[0];
+    let lat = location[1];
     if(fallbackCounterReverse <= 4) {
         $.ajax({
             dataType: "json",
@@ -389,6 +389,8 @@ function reverseGeocode(location, callback) {
 }
 
 function mapBoxReverseGeoCode(location, callback){
+    let lng = location[0];
+    let lat = location[1];
     $.ajax({
         dataType: "json",
         url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?limit=1&access_token=${mapboxAccessCode}`,
