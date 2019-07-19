@@ -25,30 +25,53 @@ function getInputFromCard(){
     return input;
 }
 
+let fallbackCounter = 0;
+
 function initInputGeocoders() {
     $('.geocoder-input').typeahead({
         source: function (query, callback) {
-            $.getJSON(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxAccessCode}&country=be`,
-                function (data) {
-                    var resArray = [];
-                    for (var feature in data.features) {
-                        //Get place from context in response
-                        let context = data.features[feature].context;
-                        let place;
-                        let i = 0;
-                        while(!place){
-                            if(context[i].id.includes("place")){
-                                place = context[i].text;
+            if(fallbackCounter <= 4) {
+                $.ajax({
+                    dataType: "json",
+                    url: `https://best.osoc.be/v1/autocomplete?text=${query}`,
+                    success: function (data) {
+                        var resArray = [];
+                        for (let feature in data.features) {
+                            //Get region
+                            let region;
+                            if(data.features[feature].properties){
+                                region = data.features[feature].properties.localadmin
+                                if(!region){
+                                    region = data.features[feature].properties.county;
+                                }
+                                if(!region){
+                                    region = data.features[feature].properties.locality;
+                                }
+                                if(!region){
+                                    region = data.features[feature].properties.region;
+                                }
                             }
-                            i++;
+                            resArray.push({
+                                name: data.features[feature].properties.name + (region ? (", " + region) : ""),
+                                loc: data.features[feature].geometry.coordinates
+                            });
+                            callback(resArray);
                         }
-                        resArray.push({
-                            name: data.features[feature].text + ", " + place,
-                            loc: data.features[feature].center
-                        });
+                    },
+                    error: function (error) {
+                        console.warn("Best geocoding failed:", error, "\nTemporary falling back to mapbox geocoder.");
+                        //Fallback to MapBox Geocoder
+                        fallbackCounter++;
+                        if(fallbackCounter > 4){
+                            console.warn("Stop using best geocoder. Falling back to Mapbox for this session.");
+                        }
+                        mapBoxGeoCode(query, callback);
                     }
-                    callback(resArray);
                 });
+            } else {
+                //Best has failed too many times, just use mapbox geocoder now
+                mapBoxGeoCode(query, callback);
+            }
         },
         matcher: function (s) { 
             return true;
@@ -68,6 +91,45 @@ function initInputGeocoders() {
             processInputOnMap();
             clearAllItineraries();
             clearRoute();
+        },
+        minLength: 3,
+        delay: 300,
+        sorter: function (texts) {
+            return texts;
+        }
+    });
+}
+
+function mapBoxGeoCode(query, callback){
+    $.ajax({
+        dataType: "json",
+        url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxAccessCode}&country=be`,
+        success: function (data) {
+            var resArray = [];
+            for (var feature in data.features) {
+                //Get place from context in response
+                let context = data.features[feature].context;
+                let place = "";
+                let i = 0;
+                while (!place && i < context.length ) {
+                    if (context[i].id.includes("place")) {
+                        place = context[i].text;
+                    }
+                    i++;
+                }
+                resArray.push({
+                    name: data.features[feature].text + ", " + place,
+                    loc: data.features[feature].center
+                });
+            }
+            callback(resArray);
+        },
+        error: function (error) {
+            console.warn("Mapbox geocoding request failed:", error);
+            //If mapbox also fails, you probably have connection issues
+            if(fallbackCounter > 0) {
+                fallbackCounter--;
+            }
         }
     });
 }
