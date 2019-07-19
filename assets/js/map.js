@@ -26,7 +26,7 @@ function loadMap(coords) { //long, lat
             "type": "line",
             "source": {
                 "type": "vector",
-                "tiles": ["http://localhost:63342/frontend/assets/tiles/{z}/{x}/{y}.pbf"],
+                "tiles": ["https://openhopper.be/assets/tiles/{z}/{x}/{y}.pbf"],
                 "minzoom": 6,
                 "maxzoom": 14
             },
