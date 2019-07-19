@@ -20,6 +20,29 @@ function loadMap(coords) { //long, lat
         zoom: 9
     });
 
+    map.on('load', function() {
+        map.addLayer({
+            "id": "railway",
+            "type": "line",
+            "source": {
+                "type": "vector",
+                "tiles": ["http://localhost:63342/frontend/assets/tiles/{z}/{x}/{y}.pbf"],
+                "minzoom": 6,
+                "maxzoom": 14
+            },
+            "source-layer": "transportation",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round"
+            },
+            "paint": {
+                "line-opacity": 0.4,
+                "line-color": "rgb(12,83,175)",
+                "line-width": 1
+            }
+        }, 'waterway-label');
+    });
+
     mapOnClick()
 
     getCurrentLocation(centerToCurrentLocation);
