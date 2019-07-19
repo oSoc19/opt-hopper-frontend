@@ -20,6 +20,29 @@ function loadMap(coords) { //long, lat
         zoom: 9
     });
 
+    map.on('load', function() {
+        map.addLayer({
+            "id": "railway",
+            "type": "line",
+            "source": {
+                "type": "vector",
+                "tiles": ["https://openhopper.be/assets/tiles/{z}/{x}/{y}.pbf"],
+                "minzoom": 6,
+                "maxzoom": 14
+            },
+            "source-layer": "transportation",
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round"
+            },
+            "paint": {
+                "line-opacity": 0.4,
+                "line-color": "rgb(12,83,175)",
+                "line-width": 1
+            }
+        }, 'waterway-label');
+    });
+
     mapOnClick()
 
     getCurrentLocation(centerToCurrentLocation);
@@ -214,19 +237,19 @@ function showProfileRoute(profile){
 function showLocationsOnMap() {
     console.log(state.location1Marker)
     console.log(state.location2Marker)
-    if (state.location1Marker) {
+    if (state.location1Marker !== undefined) {
         state.location1Marker.remove();
     }
-    if (state.location1) {
+    if (state.location1 !== undefined) {
         state.location1Marker = createMarker(state.location1, 'A');
     }
-    if (state.location2Marker) {
+    if (state.location2Marker !== undefined) {
         state.location2Marker.remove();
     }
-    if (state.location2) {
+    if (state.location2 !== undefined) {
         state.location2Marker = createMarker(state.location2, 'B');
     }
-    if (state.location1 && state.location2) {
+    if (state.location1 !== undefined && state.location2 !== undefined) {
         setCurrentUrl({loc1: state.location1, loc2: state.location2});
     } else if (state.location1) {
         setCurrentUrl({loc1: state.location1});
@@ -238,36 +261,28 @@ function showLocationsOnMap() {
 }
 
 function processInputOnMap(){
-    //Remove markers if they exist
-    if(state.location1Marker){
-        state.location1Marker.remove();
-    }
-    if(state.location2Marker){
-        state.location2Marker.remove();
-    }
-    //Add new markers if there is a location for them
-    if(state.location1){
-        state.location1Marker = createMarker(state.location1, "A");
-        if(!state.location2){
-            map.jumpTo({
-                center: state.location1,
-                zoom: 15
-            });
-        }
-    }
-    if(state.location2){
-        state.location2Marker = createMarker(state.location2, "B");
-        if(!state.location1){
-            map.jumpTo({
-                center: state.location2,
-                zoom: 15
-            });
-        }
-    }
-    //If both locations are given, zoom map to include both locations
     if (state.location1 && state.location2) {
         zoomToEdge(state.location1, state.location2);
-    }
+        if(state.location1Marker){
+            createMarker(state.location2, "B")
+        }else if (state.location2Marker) {
+            createMarker(state.location2, "A")
+        }
+    } else if (state.location1) {
+        map.jumpTo({
+            center: state.location1,
+            zoom: 15
+        });
+        createMarker(state.location1, "A");
+        state.location1Marker = true;
+    } else if (state.location2) {
+        map.jumpTo({
+            center: state.location2,
+            zoom: 15
+        });
+        createMarker(state.location2, "B");
+        state.location2Marker = true;
+    } 
 }
 
 function zoomToEdge(origin, destination) {
@@ -300,23 +315,21 @@ function mapOnClick(){
     );
 
         var lngLatArray = [e.lngLat.lng, e.lngLat.lat];
-        if (!state.location1) {
+        if (state.location1 === undefined) {
             state.location1 = lngLatArray;
-            reverseGeocode(state.location1, function (address) {
-                $("#fromInput").val(address);
-                state.location1Name = address;
+            reverseGeocode(state.location1, function (adress) {
+                $("#fromInput").val(adress);
+                state.location1Name = adress
+                fromFieldInputDetected(document.getElementById("fromInput"));
             });
-            $("#clearInputFieldFromButton").show();
         } else {
             state.location2 = lngLatArray;
-            reverseGeocode(state.location2, function (address) {
-                $("#toInput").val(address);
-                state.location2Name = address
+            reverseGeocode(state.location2, function (adress) {
+                $("#toInput").val(adress);
+                state.location2Name = adress
+                toFieldInputDetected(document.getElementById("toInput"));
             });
-            $("#clearInputFieldToButton").show();
         }
-        clearAllItineraries();
-        clearRoute();
         showLocationsOnMap();
 });
 }
