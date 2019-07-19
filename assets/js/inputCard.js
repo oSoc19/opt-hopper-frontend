@@ -42,10 +42,10 @@ function initInputGeocoders() {
                             if(data.features[feature].properties){
                                 region = data.features[feature].properties.localadmin
                                 if(!region){
-                                    region = data.features[feature].properties.county;
+                                    region = data.features[feature].properties.locality;
                                 }
                                 if(!region){
-                                    region = data.features[feature].properties.locality;
+                                    region = data.features[feature].properties.county;
                                 }
                                 if(!region){
                                     region = data.features[feature].properties.region;
