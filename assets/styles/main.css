@@ -34,6 +34,7 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     position: relative;
+    border-radius: 5px;
 }
 
 .detailViewItinerary {
@@ -201,6 +202,7 @@ background-color: pink;
 
 .facilityIcon{
     width: 1.5rem;
+    margin-left: 0.5em;
 }
 
 .detailViewSummaryFacts {
@@ -257,6 +259,10 @@ background-color: pink;
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+
+.itineraryStartFieldTime, .itineraryFinishFieldTime {
+    margin-right: 1em;
 }
 
 @media (min-width: 992px) {

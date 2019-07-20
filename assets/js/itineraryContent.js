@@ -27,6 +27,9 @@ function activateProfile(profile){
     fillItinerary(profile, true, receivedItineraries[profile].from, receivedItineraries[profile].to, receivedItineraries[profile].journey);
 }
 
+let parkingFacilityIconElement = '<img class="facilityIcon" src="assets/img/icons/parkingIcon.svg" alt="P"/>';
+let pumpFacilityIconElement = '<img class="facilityIcon" src="assets/img/icons/pumpIcon.svg" alt="P"/>';
+
 function fillItinerary(profile, selected, departure, arrival, journey) {
 
     let minutes = journey.travelTime / 60;
@@ -39,14 +42,17 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
         $(".detailViewSummaryTrains").html(journey.vehiclesTaken);
 
         //departure
+        let depDate = new Date(journey.segments[0].departure.time);
+        let arrDate;
+        $(".itineraryStartFieldTime").html(formatTwoDigits(depDate.getHours())+':'+formatTwoDigits(depDate.getMinutes()));
         $(".itineraryStartField").html(departure);
 
         //segments
         let itineraryConainer = $(".itineraryContentContainer");
         itineraryConainer.html("");
         for (let i = 0; i < journey.segments.length; i++) {
-            let depDate = new Date(journey.segments[i].departure.time);
-            let arrDate = new Date(journey.segments[i].arrival.time);
+            depDate = new Date(journey.segments[i].departure.time);
+            arrDate = new Date(journey.segments[i].arrival.time);
             //let seconds = ((arrDate - depDate) / 1000) % 60;
             let minutes = ((arrDate - depDate) / 1000) / 60;
             let hours = Math.floor(minutes / 60);
@@ -65,68 +71,57 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
             }
 
             itineraryConainer.append(`<div class="itineraryVehicle">${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min</div>`);
+
             if (i < journey.segments.length - 1) {
+                let stationId;
                 if(journey.segments[i].arrival.location.id.includes('irail')){
-                    itineraryConainer.append(
-                        `<div class="itineraryStop" stationid="${journey.segments[i].arrival.location.id}">
+                    stationId = journey.segments[i].arrival.location.id;
+                }
+
+                let stationHasParking = false;
+                let stationHasPump = false;
+
+                if (stationId && parkingRepo.parkings.length) {
+                    if (myStations[journey.segments[i].arrival.location.id].parkings.length > 0) {
+                        stationHasParking = true;
+
+                        myStations[journey.segments[i].arrival.location.id].parkings.forEach(parking => {
+                            parking[`@graph`].forEach(graph => {
+                                if (graph.amenityFeature) {
+                                    graph.amenityFeature.forEach(feature => {
+                                        if (feature[`@type`].includes('BicyclePump')) {
+                                            stationHasPump = true;
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    }
+                }
+
+                itineraryConainer.append(
+                    `<div class="itineraryStop"` + (stationId ? `stationid="${journey.segments[i].arrival.location.id}"` : '') + `>
                         <svg height="24" width="24">
                           <circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" fill="white" />
                         </svg>
-                        ${journey.segments[i].arrival.location.name}
-                    </div>`
-                    );
-                    if (parkingRepo.parkings.length) {
-                        if (myStations[journey.segments[i].arrival.location.id].parkings.length > 0) {
-                            var parkingImg = document.createElement("img");
-                            parkingImg.classList.add("facilityIcon")
-                            parkingImg.src = 'assets/img/icons/parkingIcon.svg'
-                            $(`.itineraryStop[stationid="${journey.segments[i].arrival.location.id}"]`).append(parkingImg)
-
-                            let parkingHasPump = false;
-                            myStations[journey.segments[i].arrival.location.id].parkings.forEach(parking => {
-                                parking[`@graph`].forEach(graph => {
-                                    if (graph.amenityFeature) {
-                                        graph.amenityFeature.forEach(feature => {
-                                            if (feature[`@type`].includes('BicyclePump')) {
-                                                parkingHasPump = true;
-                                            }   
-                                        });
-                                    }
-                                });
-                            });
-                            if (parkingHasPump) {
-                                var BicyclePumpImg = document.createElement("img");
-                                BicyclePumpImg.classList.add("facilityIcon")
-                                BicyclePumpImg.src = 'assets/img/icons/pumpIcon.svg'
-                                $(`.itineraryStop[stationid="${journey.segments[i].arrival.location.id}"]`).append(BicyclePumpImg)
-                            }
-                            
-
-                        }
-                        
-                        
-                    }
-
-                }else{
-                itineraryConainer.append(
-                    `<div class="itineraryStop">
-                    <svg height="24" width="24">
-                      <circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" fill="white" />
-                    </svg>
-                    ${journey.segments[i].arrival.location.name}
-                </div>`
+                        ${journey.segments[i].arrival.location.name}`+
+                        (stationHasParking ? parkingFacilityIconElement : '') +
+                        (stationHasPump ? pumpFacilityIconElement : '') +
+                    `</div>`
                 );
-            }
-
-
 
             }
 
         }
 
         //arrival
+        $(".itineraryFinishFieldTime").html(formatTwoDigits(arrDate.getHours())+':'+formatTwoDigits(arrDate.getMinutes()));
         $(".itineraryFinishField").html(arrival);
     }
+}
+
+function formatTwoDigits(n) {
+    return n < 10 ? '0' + n : n;
 }
 
 function clearAllItineraries(){
@@ -145,12 +140,14 @@ function clearItinerary(profile, selected) {
         $(".detailViewSummaryTotalCyclingTime").html( "" );
 
         //departure
+        $(".itineraryStartFieldTime").html( "" );
         $(".itineraryStartField").html( "" );
 
         //segments
         $(".itineraryContentContainer").html( "" );
 
         //arrival
+        $(".itineraryFinishFieldTime").html( "" );
         $(".itineraryFinishField").html( "" );
     }
 }
