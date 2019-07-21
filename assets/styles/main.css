@@ -176,12 +176,12 @@ background-color: pink;
     margin-left: 20px;*/
 }
 
-.itineraryVehicle td, .itineraryStop td {
+.itineraryContentContainer td {
     position: relative;
 }
 
 .itineraryVehicle td:nth-of-type(2), .itineraryStop td:nth-of-type(2) {
-    width: 20px;
+    width: 30px;
 }
 
 .circle {
@@ -193,6 +193,7 @@ background-color: pink;
 .line {
     left: 50%;
     height: 50%;
+    position: absolute;
 }
 
 .line.top-line {
@@ -210,7 +211,7 @@ td .dotted line {
 }
 
 .itineraryVehicle svg.line, .itineraryStop svg.line {
-    position: absolute;
+    /*position: absolute;*/
     /*position: relative;
     left: -27px;*/
 }

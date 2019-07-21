@@ -38,18 +38,40 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
     $(".travelTime-" + profile).html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
 
     if(selected) {
+        let itineraryConainer = $(".itineraryContentContainer");
+        itineraryConainer.html("");
+
         $(".detailViewSummaryTotalTime").html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
         $(".detailViewSummaryTrains").html(journey.vehiclesTaken);
+
+
 
         //departure
         let depDate = new Date(journey.segments[0].departure.time);
         let arrDate;
-        $(".itineraryStartFieldTime").html(formatTwoDigits(depDate.getHours())+':'+formatTwoDigits(depDate.getMinutes()));
-        $(".itineraryStartField").html(departure);
+        //$(".itineraryStartFieldTime").html(formatTwoDigits(depDate.getHours())+':'+formatTwoDigits(depDate.getMinutes()));
+        //$(".itineraryStartField").html(departure);
+
+        itineraryConainer.append(
+            `<tr>
+                <td>
+                    ${formatTwoDigits(depDate.getHours())+':'+formatTwoDigits(depDate.getMinutes())}
+                </td>
+                <td>
+                    <svg class="circle" height="13" width="13">
+                        <circle cx="7" cy="7" r="5" stroke="white" stroke-width="2" fill="#28A987"></circle>
+                    </svg>
+                    <svg class="line bottom-line dotted" width="3">
+                        <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
+                    </svg>
+                </td>
+                <td>
+                    ${departure}
+                </td>
+            </tr>`
+        );
 
         //segments
-        let itineraryConainer = $(".itineraryContentContainer");
-        itineraryConainer.html("");
         for (let i = 0; i < journey.segments.length; i++) {
             depDate = new Date(journey.segments[i].departure.time);
             arrDate = new Date(journey.segments[i].arrival.time);
@@ -124,7 +146,7 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                         </td>
                         <td>
                             <svg class="line top-line dotted" width="3">
-                                <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line> <!-- stroke-dasharray="2 4" stroke-linecap="round" -->
+                                <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
                             </svg>
                             <svg class="circle" height="13" width="13">
                                 <circle cx="7" cy="7" r="5" stroke="white" stroke-width="2" fill="#28A987"></circle>
@@ -146,8 +168,27 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
         }
 
         //arrival
-        $(".itineraryFinishFieldTime").html(formatTwoDigits(arrDate.getHours())+':'+formatTwoDigits(arrDate.getMinutes()));
-        $(".itineraryFinishField").html(arrival);
+        //$(".itineraryFinishFieldTime").html(formatTwoDigits(arrDate.getHours())+':'+formatTwoDigits(arrDate.getMinutes()));
+        //$(".itineraryFinishField").html(arrival);
+
+        itineraryConainer.append(
+            `<tr>
+                <td>
+                    ${formatTwoDigits(arrDate.getHours())+':'+formatTwoDigits(arrDate.getMinutes())}
+                </td>
+                <td>
+                    <svg class="line top-line dotted" width="3">
+                        <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
+                    </svg>
+                    <svg class="circle" height="13" width="13">
+                        <circle cx="7" cy="7" r="5" stroke="white" stroke-width="2" fill="#28A987"></circle>
+                    </svg>
+                </td>
+                <td>
+                    ${arrival}
+                </td>
+            </tr>`
+        );
     }
 }
 
