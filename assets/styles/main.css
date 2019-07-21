@@ -146,6 +146,26 @@ label {
 
 .berekenRouteBtn {
     margin-bottom: 10px;
+    background-color: #28A987 !important;
+    border-color: #28A987 !important;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+.berekenRouteBtn:hover {
+    color: #fff;
+    background-color: #228565 !important;
+    border-color: #134c39 !important;
+}
+
+.berekenRouteBtn:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #228565;
+    border-color: #228565;
+}
+
+.berekenRouteBtn:focus {
+    box-shadow: 0 0 0 0.2rem rgba(51, 180, 117, 0.5) !important;
+    border-color: #32e79c;
 }
 
 .testMap{
