@@ -101,8 +101,8 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
 
                 itineraryConainer.append(
                     `<div class="itineraryStop"` + (stationId ? `stationid="${journey.segments[i].arrival.location.id}"` : '') + `>
-                        <svg height="24" width="24">
-                          <circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" fill="white" />
+                        <svg height="12" width="12">
+                            <circle cx="6" cy="6" r="5" stroke="white" stroke-width="3" fill="#28A987"></circle>
                         </svg>
                         ${journey.segments[i].arrival.location.name}`+
                         (stationHasParking ? parkingFacilityIconElement : '') +

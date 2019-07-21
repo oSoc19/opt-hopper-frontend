@@ -170,14 +170,14 @@ background-color: pink;
 }
 
 .itineraryVehicle, .itineraryStop {
-    border-left: 6px solid white;
+    border-left: 3px solid white;
     padding-left: 20px;
     margin-left: 20px;
 }
 
 .itineraryStop svg {
-    position: absolute;
-    left: 11px;
+    position: relative;
+    left: -27px;
 }
 
 .marker {
