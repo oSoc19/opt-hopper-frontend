@@ -45,12 +45,19 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
         $(".detailViewSummaryTrains").html(journey.vehiclesTaken);
 
 
+        let dottedPrevious = false;
+        let dottedNext = false;
 
         //departure
         let depDate = new Date(journey.segments[0].departure.time);
         let arrDate;
         //$(".itineraryStartFieldTime").html(formatTwoDigits(depDate.getHours())+':'+formatTwoDigits(depDate.getMinutes()));
         //$(".itineraryStartField").html(departure);
+
+        let nextVehicle = journey.segments[0].vehicle;
+        if (!nextVehicle || !nextVehicle.indexOf("irail") >= 0) {
+            dottedNext = true;
+        }
 
         itineraryConainer.append(
             `<tr>
@@ -61,7 +68,7 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                     <svg class="circle" height="13" width="13">
                         <circle cx="7" cy="7" r="5" stroke="white" stroke-width="2" fill="#28A987"></circle>
                     </svg>
-                    <svg class="line bottom-line dotted" width="3">
+                    <svg class="line bottom-line ${ dottedNext ? "dotted" : ""}" width="3">
                         <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
                     </svg>
                 </td>
@@ -83,10 +90,13 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
             //console.log(hours, ":", minutes);
 
             let vehicle = journey.segments[i].vehicle;
+            dottedPrevious = false;
+            dottedNext = false;
             if (vehicle && vehicle.indexOf("irail") >= 0) {
                 vehicle = "TRAIN";
             } else if (!vehicle) {
                 vehicle = "WALK";
+                dottedPrevious = true;
             }
             if (i === 0) {
                 $(".detailViewSummaryTotalCyclingTime").html((hours > 0 ? `${hours}h ` : "") + `${minutes}min`);
@@ -98,12 +108,12 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                         
                     </td>
                     <td>
-                        <svg class="line top-line dotted" width="3">
-                                <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
-                            </svg>
-                            <svg class="line bottom-line dotted" width="3">
-                                <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
-                            </svg>
+                        <svg class="line top-line ${ dottedPrevious ? "dotted" : ""}" width="3">
+                            <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
+                        </svg>
+                        <svg class="line bottom-line ${ dottedPrevious ? "dotted" : ""}" width="3">
+                            <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
+                        </svg>
                     </td>
                     <td>
                         ${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min
@@ -111,6 +121,13 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                 </tr>`);
 
             if (i < journey.segments.length - 1) {
+
+                //Determine dotted line or solid line for next segment
+                let nextVehicle = journey.segments[i+1].vehicle;
+                if (!(nextVehicle && nextVehicle.indexOf("irail") >= 0)) {
+                    dottedNext = true;
+                }
+
                 let departureTimeFromThisArrivalLocation = new Date(journey.segments[i+1].departure.time);
 
                 let stationId;
@@ -145,13 +162,13 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                             ${formatTwoDigits(departureTimeFromThisArrivalLocation.getHours())+':'+formatTwoDigits(departureTimeFromThisArrivalLocation.getMinutes())}
                         </td>
                         <td>
-                            <svg class="line top-line dotted" width="3">
+                            <svg class="line top-line ${ dottedPrevious ? "dotted" : ""}" width="3">
                                 <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
                             </svg>
                             <svg class="circle" height="13" width="13">
                                 <circle cx="7" cy="7" r="5" stroke="white" stroke-width="2" fill="#28A987"></circle>
                             </svg>
-                            <svg class="line bottom-line dotted" width="3">
+                            <svg class="line bottom-line ${ dottedNext ? "dotted" : ""}" width="3">
                                 <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
                             </svg>
                         </td>
@@ -177,7 +194,7 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                     ${formatTwoDigits(arrDate.getHours())+':'+formatTwoDigits(arrDate.getMinutes())}
                 </td>
                 <td>
-                    <svg class="line top-line dotted" width="3">
+                    <svg class="line top-line ${ dottedPrevious ? "dotted" : ""}" width="3">
                         <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
                     </svg>
                     <svg class="circle" height="13" width="13">
