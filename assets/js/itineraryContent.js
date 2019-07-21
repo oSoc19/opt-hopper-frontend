@@ -70,9 +70,27 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                 $(".detailViewSummaryTotalCyclingTime").html((hours > 0 ? `${hours}h ` : "") + `${minutes}min`);
             }
 
-            itineraryConainer.append(`<div class="itineraryVehicle">${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min</div>`);
+            itineraryConainer.append(
+                `<tr class="itineraryVehicle">
+                    <td>
+                        
+                    </td>
+                    <td>
+                        <svg class="line top-line dotted" width="3">
+                                <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
+                            </svg>
+                            <svg class="line bottom-line dotted" width="3">
+                                <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
+                            </svg>
+                    </td>
+                    <td>
+                        ${vehicle} ` + (hours > 0 ? `${hours}h ` : "") + `${minutes}min
+                    </td>
+                </tr>`);
 
             if (i < journey.segments.length - 1) {
+                let departureTimeFromThisArrivalLocation = new Date(journey.segments[i+1].departure.time);
+
                 let stationId;
                 if(journey.segments[i].arrival.location.id.includes('irail')){
                     stationId = journey.segments[i].arrival.location.id;
@@ -100,14 +118,27 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                 }
 
                 itineraryConainer.append(
-                    `<div class="itineraryStop"` + (stationId ? `stationid="${journey.segments[i].arrival.location.id}"` : '') + `>
-                        <svg height="12" width="12">
-                            <circle cx="6" cy="6" r="5" stroke="white" stroke-width="3" fill="#28A987"></circle>
-                        </svg>
-                        ${journey.segments[i].arrival.location.name}`+
-                        (stationHasParking ? parkingFacilityIconElement : '') +
-                        (stationHasPump ? pumpFacilityIconElement : '') +
-                    `</div>`
+                    `<tr class="itineraryStop"` + (stationId ? `stationid="${journey.segments[i].arrival.location.id}"` : '') + `>
+                        <td>
+                            ${formatTwoDigits(departureTimeFromThisArrivalLocation.getHours())+':'+formatTwoDigits(departureTimeFromThisArrivalLocation.getMinutes())}
+                        </td>
+                        <td>
+                            <svg class="line top-line dotted" width="3">
+                                <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line> <!-- stroke-dasharray="2 4" stroke-linecap="round" -->
+                            </svg>
+                            <svg class="circle" height="13" width="13">
+                                <circle cx="7" cy="7" r="5" stroke="white" stroke-width="2" fill="#28A987"></circle>
+                            </svg>
+                            <svg class="line bottom-line dotted" width="3">
+                                <line x1="1" y1="0" x2="1" y2="200" stroke="white" stroke-width="2px"></line>
+                            </svg>
+                        </td>
+                        <td>
+                            ${journey.segments[i].arrival.location.name}`+
+                            (stationHasParking ? parkingFacilityIconElement : '') +
+                            (stationHasPump ? pumpFacilityIconElement : '') +
+                        `</td>
+                    </tr>`
                 );
 
             }
