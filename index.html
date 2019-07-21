@@ -6,6 +6,7 @@
     <title>Hopper</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
 
+    <link rel="manifest" href="./manifest.json">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.0/mapbox-gl.css' rel='stylesheet'/>
     <link rel="stylesheet" type="text/css" href="assets/styles/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -172,5 +173,12 @@
 <script src='assets/js/itineraryContent.js'></script>
 <script src="assets/js/map.js"></script>
 <script src="assets/js/routing.js"></script>
+<script>
+    if('serviceWorker' in navigator) {
+        navigator.serviceWorker
+            .register('service-worker.js')
+            .then(function() { console.log("Service Worker Registered"); });
+    }
+</script>
 
 </html>
