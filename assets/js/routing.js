@@ -65,6 +65,10 @@ function calculateAllRoutes(){
 
     let isDeparture = true;
     let inputData = getInputFromCard();
+    if(!inputData.from || !inputData.to){
+        console.warn("Trying to calculate routes while departure or arrival are not set");
+        return;
+    }
     const originS = swapArrayValues(inputData.from).join("%2F");
     const destinationS = swapArrayValues(inputData.to).join("%2F");
 
