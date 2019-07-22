@@ -20,7 +20,7 @@ Link to APIs
 
 <h2>Getting Started</h2>
 
-Before starting, make sur that you’ve installed git tools if not follow the instructions here  https://git-scm.com/downloads
+Before starting, make sure that you’ve installed git tools. 1ıf not, follow the instructions here  https://git-scm.com/downloads
 
 •	Frontend part
 
