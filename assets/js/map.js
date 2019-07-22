@@ -66,11 +66,17 @@ function clearRoutes(){
         if (map.getLayer(profile)) {
             map.removeLayer(profile);
         }
+        if (map.getLayer(profile + '-transfer-points')){
+            map.removeLayer(profile + '-transfer-points');
+        }
         if (map.getLayer(profile + "-casing")) {
             map.removeLayer(profile + "-casing");
         }
         if (map.getSource(profile + "-source")) {
             map.removeSource(profile + "-source");
+        }
+        if (map.getSource(profile + "-points-source")) {
+            map.removeSource(profile + "-points-source");
         }
     }
 }
@@ -78,7 +84,7 @@ function clearRoutes(){
 let routeOpacityAltnerative = 0.5;
 let routeOpacityMain = 1;
 let routeLineWidthAlternative = 4;
-let routeLineWidthmain = 6;
+let routeLineWidthMain = 6;
 
 function displayRoute(profile, isSelected, journey) {
     var routeColor = "blue";//profileConfig.routecolor.color;
@@ -86,6 +92,7 @@ function displayRoute(profile, isSelected, journey) {
     let routeStops = [];
 
     let featureObjects = [];
+    let pointObjects = [];
 
     let allSegments = journey.segments;
 
@@ -109,12 +116,12 @@ function displayRoute(profile, isSelected, journey) {
         let color;
         if (isTrain) {
             if (numTrains % 2 === 0) {
-                color = "#bf0003";
+                color = "#004696";
             } else {
-                color = "#C71585";
+                color = "#0B3463";
             }
         } else {
-            color = "#0000FF";
+            color = "#28A987";
         }
 
         let featureObject = {
@@ -126,14 +133,40 @@ function displayRoute(profile, isSelected, journey) {
             },
             "properties": {
                 "highway": "footway",
-                "profile": "bicycle",
+                /*"profile": "bicycle",
                 "distance": "1.391604",
-                "time": "0.333985",
+                "time": "0.333985",*/
                 "cyclecolour": color //k % 2 === 0 ? "#0000FF" : "#bf0003" //switch between green and blue lines for now
             }
         };
         featureObjects.push(featureObject);
+
+        let pointObject = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": coords[0]
+            },
+            "properties": {
+                "cyclecolour": color
+            }
+        };
+        pointObjects.push(pointObject);
+        pointObject = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": coords[coords.length-1]
+            },
+            "properties": {
+                "cyclecolour": color
+            }
+        };
+        pointObjects.push(pointObject);
+
     }
+
+    console.log(pointObjects);
     
 
     let route = featureObjects;
@@ -167,11 +200,19 @@ function displayRoute(profile, isSelected, journey) {
             }
         });
 
+        map.addSource(profile + "-points-source", {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: pointObjects
+            }
+        });
+
         var opacity = routeOpacityAltnerative;
         var width = routeLineWidthAlternative;
 
         if (isSelected) {
-            width = routeLineWidthmain;
+            width = routeLineWidthMain;
             opacity = routeOpacityMain;
         }
         // create the outline of the route
@@ -209,6 +250,28 @@ function displayRoute(profile, isSelected, journey) {
                 'line-join': 'round'
             }
         }, labelLayer);
+
+        //Draw circles on the stations
+        map.addLayer({
+            'id': profile + '-transfer-points',
+            'type': 'circle',
+            'source': profile + "-points-source",
+            paint: {
+                'circle-color': '#fff',
+                /*{
+                    type: 'identity',
+                    property: 'cyclecolour'
+                },*/
+                "circle-radius": width,
+                "circle-stroke-width": 4,
+                "circle-stroke-color": {
+                    type: 'identity',
+                    property: 'cyclecolour'
+                },
+                "circle-opacity": opacity,
+                "circle-stroke-opacity": opacity
+            }
+        });
     }
 }
 
@@ -222,6 +285,12 @@ function showProfileRoute(profile){
             map.setPaintProperty(profile + '-casing', 'line-opacity', routeOpacityAltnerative);
             map.setPaintProperty(profile, 'line-width', routeLineWidthAlternative);
             map.setPaintProperty(profile + '-casing', 'line-width', routeLineWidthAlternative * 1.5);
+            map.setPaintProperty(profile + "-transfer-points", "circle-color", {
+                type: 'identity',
+                property: 'cyclecolour'
+            });
+            map.setPaintProperty(profile + "-transfer-points", 'circle-radius', routeLineWidthAlternative);
+            map.setPaintProperty(profile + "-transfer-points", 'circle-stroke-opacity', routeOpacityAltnerative);
         }
     });
 
@@ -229,8 +298,20 @@ function showProfileRoute(profile){
         //map.setLayoutProperty(selectedProfile, 'visibility', 'visible');
         map.setPaintProperty(selectedProfile, 'line-opacity', routeOpacityMain);
         map.setPaintProperty(selectedProfile + '-casing', 'line-opacity', routeOpacityMain);
-        map.setPaintProperty(profile, 'line-width', routeLineWidthmain);
-        map.setPaintProperty(profile + '-casing', 'line-width', routeLineWidthmain * 1.5);
+        map.setPaintProperty(profile, 'line-width', routeLineWidthMain);
+        map.setPaintProperty(profile + '-casing', 'line-width', routeLineWidthMain * 1.5);
+        map.setPaintProperty(profile + "-transfer-points", "circle-color", "#fff");
+        map.setPaintProperty(profile + "-transfer-points", 'circle-radius', routeLineWidthMain);
+        map.setPaintProperty(profile + "-transfer-points", 'circle-stroke-opacity', routeOpacityMain);
+
+        //Fix z-order of custom layers
+        for(key in availableProfiles){
+            if(availableProfiles[key] !== profile && map.getLayer(availableProfiles[key])){
+                map.moveLayer(profile + '-casing', availableProfiles[key] + '-casing');
+                map.moveLayer(profile, availableProfiles[key]);
+                map.moveLayer(profile + '-transfer-points', availableProfiles[key] + '-transfer-points');
+            }
+        }
     }
 }
 
@@ -359,7 +440,7 @@ function reverseGeocode(location, callback) {
                     //Get region
                     let region;
                     if (data.features[0].properties) {
-                        region = data.features[0].properties.localadmin
+                        region = data.features[0].properties.localadmin;
                         if (!region) {
                             region = data.features[0].properties.locality;
                         }

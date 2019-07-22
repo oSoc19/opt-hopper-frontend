@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    letter-spacing: -0.03em;
 }
 
 #map {
@@ -272,8 +273,8 @@ td .dotted line {
 }
 
 .detailViewSummaryFacts div {
-    flex: 1;
-    text-align: center;
+    flex: 4;
+    text-align: left;
     min-height: 28px;
     white-space: nowrap;
 
@@ -284,6 +285,10 @@ td .dotted line {
     line-height: 28px;
 
     color: #FFFFFF;
+}
+
+.detailViewSummaryFacts div:last-child {
+    flex: 3;
 }
 
 .detailViewSummaryFacts .summaryTitle {
