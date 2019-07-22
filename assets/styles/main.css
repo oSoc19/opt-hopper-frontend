@@ -393,6 +393,10 @@ td .dotted line {
     #clearRouteButton, .scrollableIcon {
         display: none;
     }
+
+    .pageHeader {
+        position: fixed;
+    }
 }
 
 @media (max-width: 992px) {
