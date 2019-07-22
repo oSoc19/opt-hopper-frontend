@@ -30,6 +30,9 @@ function activateProfile(profile){
 let parkingFacilityIconElement = '<img class="facilityIcon" src="assets/img/icons/parkingIcon.svg" alt="P"/>';
 let pumpFacilityIconElement = '<img class="facilityIcon" src="assets/img/icons/pumpIcon.svg" alt="P"/>';
 
+let summaryParkingFacilityIconElement = '<img class="summaryFacilityIconElement" src="assets/img/icons/parkingIcon.svg" alt="P"/>';
+let summaryPumpFacilityIconElement = '<img class="summaryFacilityIconElement" src="assets/img/icons/pumpIcon.svg" alt="P"/>';
+
 function fillItinerary(profile, selected, departure, arrival, journey) {
 
     let minutes = journey.travelTime / 60;
@@ -37,14 +40,46 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
     minutes = Math.round(minutes - (hours * 60));
     $(".travelTime-" + profile).html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
 
-    if(selected) {
+    if(selected) {  
         let itineraryConainer = $(".itineraryContentContainer");
         itineraryConainer.html("");
+        let detailViewSummaryIcons = $(".detailViewSummaryIcons")
+        detailViewSummaryIcons.html("")
 
         $(".detailViewSummaryTotalTime").html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
         $(".detailViewSummaryTrains").html(journey.vehiclesTaken);
 
+        //adding summaryIcons
+        //check if route cointains station parkings 
+        firstStation = getFirstStation(journey);
 
+        let firstStationHasParking;
+        let firstStationHasPump;
+        let detailViewSummaryIconContainer = $(".detailViewSummaryIconContainer")
+
+        if (firstStation && parkingRepo.parkings.length) {
+            if (myStations[firstStation].parkings.length > 0) {
+                firstStationHasParking = true;
+
+                myStations[firstStation].parkings.forEach(parking =>{
+                    parking[`@graph`].forEach(graph => {
+                        if (graph.amenityFeature) {
+                            graph.amenityFeature.forEach(feature => {
+                                if (feature[`@type`].includes('BicyclePump')) {
+                                    firstStationHasPump = true;
+                                }
+                            });
+                        }
+                    });
+                })
+            }
+        }
+        
+        detailViewSummaryIcons.append(
+            (firstStationHasParking ? summaryParkingFacilityIconElement : '') +
+            (firstStationHasPump ? summaryPumpFacilityIconElement : '')
+        )
+            
         let dottedPrevious = false;
         let dottedNext = false;
 
@@ -221,12 +256,14 @@ function clearAllItineraries(){
 
 function clearItinerary(profile, selected) {
 
-    $(".travelTime-" + profile).html( profile );
+    //$(".travelTime-" + profile).html( profile );
 
     if(selected) {
         $(".detailViewSummaryTotalTime").html( "" );
         $(".detailViewSummaryTrains").html( "" );
         $(".detailViewSummaryTotalCyclingTime").html( "" );
+        $(".detailViewSummaryIcons").html( "" )
+        
 
         //departure
         $(".itineraryStartFieldTime").html( "" );

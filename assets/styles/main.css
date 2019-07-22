@@ -264,6 +264,11 @@ td .dotted line {
     margin-left: 0.5em;
 }
 
+.summaryFacilityIconElement{
+    width: 2rem;
+    padding: 5px 5px 5px 0px;
+}
+
 .detailViewSummaryFacts {
     display: flex;
     flex-direction: row;
@@ -300,9 +305,16 @@ td .dotted line {
 
 .detailViewSummaryIconContainer {
     padding: 0 20px 0 20px;
-    text-align: initial;
+    text-align: center;
     white-space: nowrap;
     min-height: 42px;
+    font-family: Karla, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 #clearRouteButton path {

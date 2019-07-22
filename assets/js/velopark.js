@@ -175,6 +175,18 @@ function getStations(journey) {
     }
 }
 
+function getFirstStation(journey){
+    for(let i = 0; i < journey.segments.length; i++) {
+        let segment = journey.segments[i]; 
+        if (segment.departure.location.id.includes('irail')) {
+            return segment.departure.location.id;
+        }   
+        if (segment.arrival.location.id.includes('irail')) {
+            return segment.arrival.location.id;
+        }   
+    }
+}
+
 function getFirstAndLastStation(journey) {
     //first station
     //incase starting at station
