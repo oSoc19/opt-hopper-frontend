@@ -41,7 +41,7 @@ function loadMap(coords) { //long, lat
             },
             "paint": {
                 "line-opacity": 0.4,
-                "line-color": "rgb(12,83,175)",
+                "line-color": "rgb(118,119,144)",
                 "line-width": 1
             }
         }, 'waterway-label');
