@@ -341,6 +341,26 @@ td .dotted line {
     margin-right: 1em;
 }
 
+.pageHeader {
+    position: absolute;
+    top: 0;
+    left: calc(calc(50% - 10vw) + 20vw);
+    transform: translate(-50%, 0);
+    z-index: 1031;
+    width: 40%;
+    background-color: white;
+    color: #28A987;
+    font-family: Karla, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px -7px 21px rgba(0, 0, 0, 0.25);
+}
+
 @media (min-width: 992px) {
     #inputCard {
         right: unset;
@@ -386,4 +406,9 @@ td .dotted line {
     .mobileHidden {
          display: none;
      }
+
+    .pageHeader {
+        width: 100%;
+        left: 50%;
+    }
 }
