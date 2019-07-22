@@ -104,6 +104,22 @@ body {
     color: white;
 }
 
+.tab svg path {
+    stroke: #737373;
+}
+
+.tab svg path[fill] {
+    fill: #737373;
+}
+
+.tab.selected svg path {
+    stroke: white;
+}
+
+.tab.selected svg path[fill] {
+    fill: white;
+}
+
 .inputCard {
     /*background-color: rgba(0, 0, 0, 0.80);
     border-radius: 25px;*/
