@@ -21,6 +21,10 @@ function loadMap(coords) { //long, lat
     });
 
     map.on('load', function() {
+
+        getCurrentLocation(centerToCurrentLocation);
+        //showLocationsOnMap();
+
         map.addLayer({
             "id": "railway",
             "type": "line",
@@ -43,10 +47,8 @@ function loadMap(coords) { //long, lat
         }, 'waterway-label');
     });
 
-    mapOnClick()
+    mapOnClick();
 
-    getCurrentLocation(centerToCurrentLocation);
-    showLocationsOnMap()
 }
 
 function centerToCurrentLocation(position) {
