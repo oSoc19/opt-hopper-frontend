@@ -71,11 +71,7 @@ body {
 }
 
 .tab:hover {
-    background-color: #00808B;
-}
-
-.tab:active {
-    background-color: aqua;
+    background-color: #28A987;
 }
 
 .tab.selected {
@@ -96,10 +92,10 @@ body {
 
 .tab span {
     display: block;
-    color: #A0A0A0;
+    color: #737373;
 }
 
-.tab.selected span {
+.tab.selected span, .tab:hover span {
     display: block;
     color: white;
 }
@@ -112,11 +108,11 @@ body {
     fill: #737373;
 }
 
-.tab.selected svg path {
+.tab.selected svg path, .tab:hover svg path {
     stroke: white;
 }
 
-.tab.selected svg path[fill] {
+.tab.selected svg path[fill], .tab:hover svg path[fill] {
     fill: white;
 }
 
