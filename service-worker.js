@@ -16,6 +16,7 @@
 // in turn trigger the install event again.
 const PRECACHE = 'precache-v3';
 const RUNTIME = 'runtime-v3';
+const MAPBOX_CACHE = "mapbox-tiles";
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
@@ -43,7 +44,7 @@ self.addEventListener('install', event => {
 
 // The activate handler takes care of cleaning up old caches.
 self.addEventListener('activate', event => {
-    const currentCaches = [PRECACHE, RUNTIME];
+    const currentCaches = [PRECACHE, RUNTIME, MAPBOX_CACHE];
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
