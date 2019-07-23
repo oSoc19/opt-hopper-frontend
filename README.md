@@ -30,13 +30,13 @@ If not, follow the instructions here  https://git-scm.com/downloads
 
 •	Frontend part
 
-On your computer make a new directory such as « projectNameFront » then clone the repository.
+On your computer make a new directory such as « projectNameFront » then clone the repository in this directory.
 ```
 git clone https://github.com/oSoc19/opt-hopper-frontend.git
 ```
 •	Backend part
 
-On your computer make a new directory such as « projectNameBack » then clone the repository.
+On your computer make a new directory such as « projectNameBack » then clone the repository in this directory. 
 ```
 git clone https://github.com/anyways-open/itinero-transit-server.git
 ```
