@@ -11,12 +11,12 @@ Hopper is a route-planner that takes all those needs into account and allows you
 Hopper is powered by Linked Open Data. Find out more at openhopper.be 
 
 <h2>Technologies</h2>
-Frontend : JavaScript, HTML, CSS
-Backend : C#, ASP.NET, Lua
-IDE : Visual Studio, Visual Studio Code, WebStorm
+Frontend : JavaScript, HTML, CSS </br>
+Backend : C#, ASP.NET, Lua </br>
+IDE : Visual Studio, Visual Studio Code, WebStorm </br>
 
 <h2>API Reference</h2>
-Parking datas from : https://velopark.ilabt.imec.be/data/catalog </br>
+Velopark : https://velopark.ilabt.imec.be/data/catalog </br>
 Mapbox: https://docs.mapbox.com/api/ </br>
 Anyways Transit API: https://routing.anyways.eu/transitapi/swagger/index.html#/ </br>
 
@@ -28,13 +28,13 @@ Before starting, make sure that you have installed git tools. If not, follow the
 
 On your computer make a new directory such as « hopper-projectFront » then clone the repository.
 ```
-Git clone https://github.com/oSoc19/opt-hopper-frontend.git
+git clone https://github.com/oSoc19/opt-hopper-frontend.git
 ```
 •	Backend part
 
 On your computer make a new directory such as « hopper-projectBack » then clone the repository.
 ```
-Git clone https://github.com/anyways-open/itinero-transit-server.git
+git clone https://github.com/anyways-open/itinero-transit-server.git
 ```
 
 <h2>Screenshots</h2>
@@ -48,9 +48,18 @@ The structure of the project
 
 <h2>Running the app</h2>
 On Visual Studio: you have to install the plug-in live server and launch it.
-write dotnet run on the console/terminal to run the application.
-<p>
-On WebStorm:
+Then on the console/terminal:
+
+```
+//build the application
+dotnet build
+```
+
+```
+//run the application
+dotnet run
+```
+
 
 
 <h2>Deployment</h2>
@@ -59,11 +68,12 @@ Add additional notes about how to deploy this on a live system
 
 <h2>Authors</h2>
 
-•	Gulsen Guler
-•	François Halin
-•	Kristof Neyt  
-•	Hervé Tendayi
-•	Dieter De Schrijver
+•	[Gulsen Guler](https://github.com/gulsenguler) </br>
+•	[François Halin](https://github.com/fhalin) </br>
+•	[Kristof Neyt](https://github.com/Fizz55) </br>
+•	[Hervé Tendayi](https://github.com/HerveKurtis) </br>
+•	[Dieter De Schrijver](https://github.com/https://github.com/DieterDeSchrijver) </br>
+
 
 
 
