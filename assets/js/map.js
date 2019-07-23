@@ -11,6 +11,11 @@ let mapstyleGulsen = "mapbox://styles/gugul/cjy77yl1713rg1cn0wiwq2ong";
 let tokenGulsen = "pk.eyJ1IjoiZ3VndWwiLCJhIjoiY2p4cDVqZXZvMGN6ejNjcm5zdjF6OWR1dSJ9._vc_H7CbewiDCHWYvD4CdQ";
 // pk.eyJ1IjoiZ3VndWwiLCJhIjoiY2p4cDVqZXZvMGN6ejNjcm5zdjF6OWR1dSJ9._vc_H7CbewiDCHWYvD4CdQ
 
+/**
+ * [create map object and display the map. Center it on the given coordinates.]
+ * [add the train tiles as a layer. Execute mapOnClick(), getCurrentLocatin() and showLocationsOnMap()]
+ * @param  {[number[]]} coords [description]
+ */
 function loadMap(coords) { //long, lat
     mapboxgl.accessToken = tokenGulsen;
     map = new mapboxgl.Map({
@@ -51,6 +56,10 @@ function loadMap(coords) { //long, lat
 
 }
 
+/**
+ * [center the map to the given coordinates]
+ * @param  {[number[]]} positioon [description]
+ */
 function centerToCurrentLocation(position) {
     if (position != null) {
         var lat = position.coords.latitude;
@@ -62,6 +71,9 @@ function centerToCurrentLocation(position) {
 
 var labelLayer = "road-label-large";
 
+/**
+ * [clear all the routes on the map]
+ */
 function clearRoutes(){
     for (let i in availableProfiles) {
         profile = availableProfiles[i];
@@ -88,6 +100,12 @@ let routeOpacityMain = 1;
 let routeLineWidthAlternative = 4;
 let routeLineWidthMain = 6;
 
+/**
+ * [description]
+ * @param  {[type]} arg1 [description]
+ * @param  {[type]} arg2 [description]
+ * @return {[type]}      [description]
+ */
 function displayRoute(profile, isSelected, journey) {
     var routeColor = "blue";//profileConfig.routecolor.color;
 
@@ -278,7 +296,10 @@ function displayRoute(profile, isSelected, journey) {
 }
 
 
-
+/**
+ * [grey out the alternative routes and highlight the selected profile route.]
+ * @param  {[profile]} profile
+ */
 function showProfileRoute(profile){
     availableProfiles.forEach(function (profile) {
         if (map.getLayer(profile)) {
@@ -319,6 +340,9 @@ function showProfileRoute(profile){
     }
 }
 
+/**
+ * [create markers for each location. If the locations is cleared, delete the marker.]
+ */
 function showLocationsOnMap() {
     console.log(state.location1Marker)
     console.log(state.location2Marker)
@@ -343,8 +367,17 @@ function showLocationsOnMap() {
     } else {
         setCurrentUrl({});
     }
+    if (state.location1 && state.location2) {
+        zoomToEdge(state.location1, state.location2);
+    }
 }
 
+/**
+ * [someFunction description]
+ * @param  {[type]} arg1 [description]
+ * @param  {[type]} arg2 [description]
+ * @return {[type]}      [description]
+ */
 function processInputOnMap(){
     //Remove markers if they exist
     if(state.location1Marker){
@@ -378,6 +411,11 @@ function processInputOnMap(){
     }
 }
 
+/**
+ * [center the map to given location]
+ * @param  {[number[]]} arg1 [origin coordinates]
+ * @param  {[number[]]} arg2 [destination coordinates]
+ */
 function zoomToEdge(origin, destination) {
     let bounds = new mapboxgl.LngLatBounds();
     bounds.extend(origin);
@@ -391,12 +429,10 @@ function zoomToEdge(origin, destination) {
             }
         });
 }
-/*
-function removeMarker(markerId){
-    var element = document.getElementById(markerId);
-    element.parentNode.removeChild(element);
-}*/
 
+/**
+ * [when map is clicked set locations to the clicked position. Reverse geocode the coordinates and put them in the input field]
+ */
 function mapOnClick(){
     map.on('click', function (e) {
     var bbox = [[e.point.x - 5, e.point.y - 5], [e.point.x + 5, e.point.y + 5]];
@@ -431,6 +467,11 @@ function mapOnClick(){
 
 let fallbackCounterReverse = 0;
 
+/**
+ * [Use to Best geocoder the reverse the coordinates to place names. If Best geocoder fails, use MapBox geocoder]
+ * @param  {[type]} arg1 [description]
+
+ */
 function reverseGeocode(location, callback) {
     let lng = location[0];
     let lat = location[1];
@@ -473,6 +514,9 @@ function reverseGeocode(location, callback) {
     }
 }
 
+/**
+ * [MapBox reverse geocoder]
+ */
 function mapBoxReverseGeoCode(location, callback){
     let lng = location[0];
     let lat = location[1];
@@ -492,6 +536,12 @@ function mapBoxReverseGeoCode(location, callback){
     });
 }
 
+/**
+ * [create a marker at the given location with the given label. Add the marker to the map.]
+ * @param  {[number[]]} loc [the location to create the marker]
+ * @param  {[String]} label [label to give the marker, such as A or B]
+ * @return {[marker]}      [the created marker]
+ */
 function createMarker(loc, label) {
 
     // create a HTML element for each feature

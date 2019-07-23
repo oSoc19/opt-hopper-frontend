@@ -35,6 +35,10 @@ class StationRepository {
 
 let parkingRepo = new ParkingRepository();
 
+
+/**
+ * [Add the icons if the velopark data is fetched AFTER there is a route.]
+ */
 function displayVeloParkData() { //
     for (const key in myStations) {
         if (myStations.hasOwnProperty(key)) {
@@ -68,16 +72,9 @@ function displayVeloParkData() { //
     }
 }
 
-function displayParkingAvailable(){
-    for (const key in myStations) {
-        if (myStations.hasOwnProperty(key)) {
-            if (myStations[key].parkings.length) {
-                
-            }  
-        }
-    }
-}
-
+/**
+ * [Empty the myParkings object]
+ */
 function clearStations(){
     if (!$.isEmptyObject(myStations)) {
         console.log(myStations)
@@ -89,7 +86,9 @@ function clearStations(){
     }
 }
 
-
+/**
+ * [fetch the VeloPark data. After the fetch run processParkings()]
+ */
 function getVeloParkData() {
     $.getJSON("https://velopark.ilabt.imec.be/data/catalog", function (data) {
         let counter = 0;
@@ -100,17 +99,12 @@ function getVeloParkData() {
                 let parkingUrl = element['@id']
                 $.getJSON(parkingUrl, function (p) {
                         counter++
-                        /*let name = p.name[0][`@value`];
-                        let latitude = p[`@graph`][0].geo[0].latitude;
-                        let longitude = p[`@graph`][0].geo[0].longitude;*/
                         let parking = p;
                         parkingRepo.parkings.push(parking)
                         if (counter === data["dcat:dataset"]["dcat:distribution"].length - 1) {
                             console.log("Adding parkings to map now.", counter, "total; ", errorCounter, "failed.");
-                            console.log(parkingRepo)
                             processParkings()
-                            //checkForFacilities();
-                            //processArray(parkingRepo._parkings)
+
                         }
                     })
                     .fail(function (jqXHR, textStatus, errorThrown) {
@@ -126,6 +120,9 @@ function getVeloParkData() {
     })
 }
 
+/**
+ * [calculate the parkings for each station if the VeloPark data is fetched AFTER there is a route]
+ */
 function processParkings() {
     if (!$.isEmptyObject(myStations)) {
         for (const key in myStations) {
@@ -137,6 +134,11 @@ function processParkings() {
     }
 }
 
+/**
+ * [calculate the stations we pass in our journey and add them to myStations. Duplicate stations will not be added.]
+ * [At the end calculate the parkings for each station if the VeloPark data was fetched BEFORE we got the route.]
+ * @param  {[journey]} journey [one of the journeys we get from Itinero.]
+ */
 function getStations(journey) {
     let stations = {}
 
@@ -175,42 +177,12 @@ function getStations(journey) {
     }
 }
 
-function getFirstAndLastStation(journey) {
-    //first station
-    //incase starting at station
-    if (journey.journeys[0].segments[0].departure.location.id.includes('irail') && journey.journeys[0].segments[0].arrival.location.id.includes('irail')) {
-        let station = new Station(journey.journeys[0].segments[0].departure.location.name, {
-            lat: journey.journeys[0].segments[0].departure.location.lat,
-            lon: journey.journeys[0].segments[0].departure.location.lon
-        })
-        stationRepository.stations.firstStation = station;
-    } else { //incase starting at OSM point
-        if (journey.journeys[0].segments[0].arrival.location.id.includes('irail')) {
-            let station = new Station(journey.journeys[0].segments[0].arrival.location.name, {
-                lat: journey.journeys[0].segments[0].arrival.location.lat,
-                lon: journey.journeys[0].segments[0].arrival.location.lon
-            })
-            stationRepository.stations.firstStation = station;
-        }
-    }
-
-    //last station 
-    //incase ending at station
-    if (journey.journeys[0].segments[journey.journeys[0].segments.length - 1].departure.location.id.includes('irail') && journey.journeys[0].segments[journey.journeys[0].segments.length - 1].arrival.location.id.includes('irail')) {
-        let station = new Station(journey.journeys[0].segments[journey.journeys[0].segments.length - 1].arrival.location.name, {
-            lat: journey.journeys[0].segments[journey.journeys[0].segments.length - 1].arrival.location.lat,
-            lon: journey.journeys[0].segments[journey.journeys[0].segments.length - 1].arrival.location.lon
-        })
-        stationRepository.stations.lastStation = station
-    } else { //incase ending at OSM point
-        let station = new Station(journey.journeys[0].segments[journey.journeys[0].segments.length - 1].departure.location.name, {
-            lat: journey.journeys[0].segments[journey.journeys[0].segments.length - 1].departure.location.lat,
-            lon: journey.journeys[0].segments[journey.journeys[0].segments.length - 1].departure.location.lon
-        })
-        stationRepository.stations.lastStation = station
-    }
-}
-
+/**
+ * [calculate the parkings that are 500m or less from the given station.]
+ * @param  {[number]} latStation [the latitude from the station.]
+ * @param  {[number]} lonStation [the longitude from the station]
+ * @return {[parking[]]]}     [return the parkings in range for the station]
+ */
 function checkForNearParkings(latStation, lonStation) {
     let parkingsInRange = [];
     parkingRepo.parkings.forEach(p => {
@@ -225,6 +197,14 @@ function checkForNearParkings(latStation, lonStation) {
     return parkingsInRange;
 }
 
+/**
+ * [calculate and return the distance between 2 coordinates in km]
+ * @param  {[number]} arg1 [latitude of the first coordinates]
+ * @param  {[number]} arg2 [longitude of the first coordinates]
+ * @param  {[number]} arg3 [latitude of the second coordinates]
+ * @param  {[number]} arg4 [longitude of the second coordinates]
+ * @return {[number]}      [the distance in km]
+ */
 function distance(lat1, lon1, lat2, lon2) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
         return 0;
@@ -244,13 +224,6 @@ function distance(lat1, lon1, lat2, lon2) {
         return dist;
     }
 }
-
-function testParkings() {
-    console.log('test')
-    parkingsInRange = checkForNearParkings(50.85966280479139, 4.360842704772949)
-    console.log(parkingsInRange)
-}
-
 
 
 //!DUMMYDATA
