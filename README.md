@@ -76,7 +76,7 @@ Add additional notes about how to deploy this on a live system
 •	[François Halin](https://github.com/fhalin) </br>
 •	[Kristof Neyt](https://github.com/Fizz55) </br>
 •	[Hervé Tendayi](https://github.com/HerveKurtis) </br>
-•	[Dieter De Schrijver](https://github.com/https://github.com/DieterDeSchrijver) </br>
+•	[Dieter De Schrijver](https://github.com/DieterDeSchrijver) </br>
 
 
 
