@@ -195,6 +195,7 @@ $(function(){
             setTimeout(function () {
                 console.log("using current location");
                 useCurrentLocation();
+                showLocationsOnMap()
             }, 2000);
         }
     }
