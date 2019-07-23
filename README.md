@@ -1,6 +1,9 @@
 <h1>Hopper front-end</h1>
 
-Route planner that combines <b>e-bikes</b> and public transport.
+<a href="http://zupimages.net/viewer.php?id=19/30/mzn0.png"><img src="https://zupimages.net/up/19/30/mzn0.png" alt="" /></a>
+
+
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Route planner that combines <b>e-bikes</b> and public transport.
 
 <h2>About the project</h2>
 
@@ -22,17 +25,18 @@ Anyways Transit API: https://routing.anyways.eu/transitapi/swagger/index.html#/ 
 
 <h2>Getting Started</h2>
 
-Before starting, make sure that you have installed git tools. If not, follow the instructions here  https://git-scm.com/downloads
+Before starting, make sure that you have installed git tools. </br>
+If not, follow the instructions here  https://git-scm.com/downloads
 
 •	Frontend part
 
-On your computer make a new directory such as « hopper-projectFront » then clone the repository.
+On your computer make a new directory such as « projectNameFront » then clone the repository.
 ```
 git clone https://github.com/oSoc19/opt-hopper-frontend.git
 ```
 •	Backend part
 
-On your computer make a new directory such as « hopper-projectBack » then clone the repository.
+On your computer make a new directory such as « projectNameBack » then clone the repository.
 ```
 git clone https://github.com/anyways-open/itinero-transit-server.git
 ```
