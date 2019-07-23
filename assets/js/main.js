@@ -1,5 +1,8 @@
 
 // Utils
+
+/iP/i.test(navigator.userAgent) && $('*').css('cursor', 'pointer');
+
 /**
  * Get the parameters that are encoded in the given url
  * @param url
@@ -196,6 +199,7 @@ $(function(){
                 console.log("using current location");
                 useCurrentLocation();
                 showLocationsOnMap()
+                $("#clearInputFieldFromButton").show();
             }, 2000);
         }
     }
