@@ -8,6 +8,10 @@ let state = {
     location2Marker: undefined,
 }
 
+/**
+ * [gather the input from the card and create an object. return this object]
+ * @return {[input]}      [input object containing: from, to, fromName, toName and date]
+ */
 function getInputFromCard(){
     let input = {from: undefined, to: undefined,fromName: undefined, toName: undefined, date: undefined}
 
@@ -27,6 +31,10 @@ function getInputFromCard(){
 
 let fallbackCounter = 0;
 
+/**
+ * [Use 'Best' geocoder. If it fails use MapBox geocoder.]
+ * [Generate typeahead for input and show the typeahead. We are using the bootstrap the bootstrap3-typeahead]
+ */
 function initInputGeocoders() {
     $('.geocoder-input').typeahead({
         source: function (query, callback) {
@@ -100,6 +108,9 @@ function initInputGeocoders() {
     });
 }
 
+/**
+ * [use mapbox geocoder]
+ */
 function mapBoxGeoCode(query, callback){
     $.ajax({
         dataType: "json",
@@ -134,6 +145,10 @@ function mapBoxGeoCode(query, callback){
     });
 }
 
+/**
+ * [detect when the user is entering something in the FROM input field. If empty run clearAllItineraries(), clearRoute() and showLocationsOnMap()]
+ * @param  {[element]} el [the from input field]
+ */
 function fromFieldInputDetected(el) {
     if(state.location1 && state.location1Name !== el.value) {
         state.location1 = null;
@@ -148,6 +163,10 @@ function fromFieldInputDetected(el) {
     }
 }
 
+/**
+ * [detect when the user is entering something in the TO input field. If empty run clearAllItineraries(), clearRoute() and showLocationsOnMap()]
+ * @param  {[element]} el [the to input field]
+ */
 function toFieldInputDetected(el) {
     if(state.location2 && state.location2Name !== el.value){
         state.location2 = null;
@@ -162,11 +181,17 @@ function toFieldInputDetected(el) {
     }
 }
 
+/**
+ * [clear the from input field]
+ */
 function clearInputFieldFrom() {
     $("#fromInput").val("");
     fromFieldInputDetected(document.getElementById("fromInput"));
 }
 
+/**
+ * [clear the to input field]
+ */
 function clearInputFieldTo() {
     $("#toInput").val("");
     toFieldInputDetected(document.getElementById("toInput"));
