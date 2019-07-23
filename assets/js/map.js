@@ -351,8 +351,6 @@ function showProfileRoute(profile) {
  * [create markers for each location. If the locations is cleared, delete the marker.]
  */
 function showLocationsOnMap() {
-    console.log(state.location1Marker)
-    console.log(state.location2Marker)
     if (state.location1Marker) {
         state.location1Marker.remove();
     }
