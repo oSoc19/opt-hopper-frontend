@@ -84,10 +84,17 @@ function useCurrentLocation() {
             showLocationsOnMap();
             reverseGeocode(state.location1, function (address) {
                 $("#fromInput").val(address);
-                fromFieldInputDetected(document.getElementById("fromInput"));
+                //fromFieldInputDetected(document.getElementById("fromInput"));
             });
         }, function(error){
-            console.warn("Accessing geolocation failed.", error);
+            if (error.code === error.PERMISSION_DENIED) {
+                console.log("Geolocation permission denied");
+                if (typeof(Storage) !== "undefined") {
+                    localStorage.setItem("geolocation.permission.denieddate", new Date());
+                }
+            } else {
+                console.warn("Accessing geolocation failed.", error);
+            }
         });
         if(typeof(Storage) !== "undefined") {
             localStorage.removeItem("geolocation.permission.denieddate");
@@ -184,8 +191,9 @@ $(function(){
     if (urlparams.loc1) {
         state.location1 = urlparams.loc1;
     } else {
-        if (!(typeof(Storage) !== "undefined" && new Date(localStorage.getItem("geolocation.permission.denieddate")).addDays(7) > new Date())) {
+        if (typeof(Storage) !== "undefined" && (!localStorage.getItem("geolocation.permission.denieddate") || new Date(localStorage.getItem("geolocation.permission.denieddate")).addDays(7) > new Date())) {
             setTimeout(function () {
+                console.log("using current location");
                 useCurrentLocation();
             }, 2000);
         }
