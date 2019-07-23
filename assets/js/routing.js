@@ -63,6 +63,9 @@ function calculateAllRoutes(){
     //TODO: Remove routes from map
     clearStations()
 
+    $(".loaderContainer").show();
+    $(".errorContainer").hide();
+
     let isDeparture = true;
     let inputData = getInputFromCard();
     if(!inputData.from || !inputData.to){
@@ -99,15 +102,18 @@ function calculateAllRoutes(){
                     fillItinerary(profile, profile === selectedProfile, inputData.fromName, inputData.toName, receivedItineraries[profile].journey);
                 } else {
                     console.warn("Got journeys: null from Itinero with profile", profile);
+                    $(`.tab[profile=${profile}] .loaderContainer`).hide();
+                    $(`.tab[profile=${profile}] .errorContainer`).show();
                 }
             },
             error: function (error) {
                 console.error("Routing request failed.", error);
+                $(`.tab[profile=${profile}] .loaderContainer`).hide();
+                $(`.tab[profile=${profile}] .errorContainer`).show();
             }
         });
     }
 
-    //TODO: hide loading icon
     $(".inputCard").addClass("mobileHidden");
     $(".tabsContainer, .detailViewContainer").removeClass("mobileHidden");
     $("#clearRouteButton").removeClass("mobileHidden");
@@ -117,6 +123,8 @@ function clearRoute(){
     $(".inputCard").removeClass("mobileHidden");
     $(".tabsContainer, .detailViewContainer").addClass("mobileHidden");
     $("#clearRouteButton").addClass("mobileHidden");
+    $(".loaderContainer").show();
+    $(".errorContainer").hide();
     clearRoutes();
 }
 

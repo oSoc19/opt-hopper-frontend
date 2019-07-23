@@ -36,6 +36,7 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
     let hours = Math.floor(minutes / 60);
     minutes = Math.round(minutes - (hours * 60));
     $(".travelTime-" + profile).html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
+    $(`.tab[profile=${profile}] .loaderContainer`).hide();
 
     if(selected) {
         let itineraryConainer = $(".itineraryContentContainer");
