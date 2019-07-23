@@ -274,6 +274,9 @@ function displayRoute(profile, isSelected, journey) {
                 "circle-stroke-opacity": opacity
             }
         });
+
+        //Fix layer order
+        showProfileRoute(selectedProfile);
     }
 }
 
