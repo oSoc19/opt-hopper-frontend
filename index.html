@@ -16,6 +16,10 @@
 <body>
 
 <div class="pageHeader">
+    <svg id="clearRouteButton" class="mobileHidden" width="32" height="39" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg"  onclick="clearRoute()">
+        <path d="M7 1L1 7.24L7 14" stroke="black" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+
     <span>Hopper</span>
 </div>
 
@@ -23,11 +27,6 @@
 
 <div class="detailViewContainer mobileVisible mobileHidden" style="pointer-events: none;">
     <div class="detailViewScroller" style="pointer-events: initial;">
-        <!--<img id="clearRouteButton" src="assets/img/icons/ic_clear_black_24px.svg" onclick="clearRoute()">-->
-        <svg id="clearRouteButton" height="24" fill="none" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" onclick="clearRoute()">
-            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-            <!--<path d="M0 0h24v24H0z" fill="white"/>-->
-        </svg>
         <div class="detailViewSummary">
             <div class="detailViewSummaryFacts">
                 <div>

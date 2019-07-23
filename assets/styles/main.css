@@ -268,8 +268,9 @@ td .dotted line {
 
 #clearRouteButton {
     position: absolute;
-    right: 20px;
-    top: 20px;
+    left: 20px;
+    top: 4px;
+    padding: 12px;
 }
 
 .facilityIcon{
@@ -323,11 +324,11 @@ td .dotted line {
 }
 
 #clearRouteButton path {
-    fill: white;
+    stroke: black;
 }
 
 #clearRouteButton:hover path {
-    fill: grey;
+    stroke: grey;
 }
 
 .verticalAligner {

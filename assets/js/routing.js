@@ -110,11 +110,13 @@ function calculateAllRoutes(){
     //TODO: hide loading icon
     $(".inputCard").addClass("mobileHidden");
     $(".tabsContainer, .detailViewContainer").removeClass("mobileHidden");
+    $("#clearRouteButton").removeClass("mobileHidden");
 }
 
 function clearRoute(){
     $(".inputCard").removeClass("mobileHidden");
     $(".tabsContainer, .detailViewContainer").addClass("mobileHidden");
+    $("#clearRouteButton").addClass("mobileHidden");
     clearRoutes();
 }
 
