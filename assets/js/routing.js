@@ -123,7 +123,7 @@ function clearRoute(){
     $(".inputCard").removeClass("mobileHidden");
     $(".tabsContainer, .detailViewContainer").addClass("mobileHidden");
     $("#clearRouteButton").addClass("mobileHidden");
-    $(".loaderContainer").show();
+    $(".loaderContainer").hide();
     $(".errorContainer").hide();
     clearRoutes();
 }

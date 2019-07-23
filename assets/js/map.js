@@ -292,6 +292,9 @@ function displayRoute(profile, isSelected, journey) {
                 "circle-stroke-opacity": opacity
             }
         });
+
+        //Fix layer order
+        showProfileRoute(selectedProfile);
     }
 }
 
@@ -330,11 +333,11 @@ function showProfileRoute(profile){
         map.setPaintProperty(profile + "-transfer-points", 'circle-opacity', routeOpacityMain);
 
         //Fix z-order of custom layers
-        for(key in availableProfiles){
-            if(availableProfiles[key] !== profile && map.getLayer(availableProfiles[key])){
-                map.moveLayer(profile + '-casing', availableProfiles[key] + '-casing');
-                map.moveLayer(profile, availableProfiles[key]);
-                map.moveLayer(profile + '-transfer-points', availableProfiles[key] + '-transfer-points');
+        for (key in availableProfiles) {
+            if (availableProfiles[key] !== profile && map.getLayer(availableProfiles[key])) {
+                map.moveLayer(availableProfiles[key] + '-casing', profile + '-casing');
+                map.moveLayer(availableProfiles[key], profile);
+                map.moveLayer(availableProfiles[key] + '-transfer-points', profile + '-transfer-points');
             }
         }
     }
