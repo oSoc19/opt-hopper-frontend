@@ -1,6 +1,6 @@
 <h1>Hopper front-end</h1>
 
-<a href="http://zupimages.net/viewer.php?id=19/30/mzn0.png"><img src="https://zupimages.net/up/19/30/mzn0.png" alt="" /></a>
+<a href=""><img src="https://zupimages.net/up/19/30/mzn0.png" alt="Hopper logo" /></a>
 
 
   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Route planner that combines <b>e-bikes</b> and public transport.
