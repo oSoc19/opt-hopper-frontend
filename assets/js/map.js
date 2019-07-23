@@ -452,7 +452,7 @@ function zoomToEdge(origin, destination) {
 
         map.fitBounds(bounds, {
             padding: {
-                top: 30,
+                top: $(".pageHeader").height() + 50,
                 right: 20,
                 bottom: 20,
                 left: $(".detailViewSummary").width() + 60
