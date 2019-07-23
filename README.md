@@ -18,7 +18,7 @@ Frontend : JavaScript, HTML, CSS </br>
 Backend : C#, ASP.NET, Lua </br>
 IDE : Visual Studio, Visual Studio Code, WebStorm </br>
 
-<h2>API Reference</h2>
+<h2>API References</h2>
 Velopark : https://velopark.ilabt.imec.be/data/catalog </br>
 Mapbox: https://docs.mapbox.com/api/ </br>
 Anyways Transit API: https://routing.anyways.eu/transitapi/swagger/index.html#/ </br>
