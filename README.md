@@ -24,12 +24,12 @@ Before starting, make sure that you’ve installed git tools. If not, follow the
 
 •	Frontend part
 
-On your computer make a new directory such as « hooper-projectFront » then clone the repository.
+On your computer make a new directory such as « hopper-projectFront » then clone the repository.
 Git clone https://github.com/oSoc19/opt-hopper-frontend.git
 
 •	Backend part
 
-On your computer make a new directory such as « hooper-projectBack » then clone the repository.
+On your computer make a new directory such as « hopper-projectBack » then clone the repository.
 
 Git clone https://github.com/anyways-open/itinero-transit-server.git
 
