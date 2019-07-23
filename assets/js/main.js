@@ -1,8 +1,6 @@
 
 // Utils
 
-/iP/i.test(navigator.userAgent) && $('*').css('cursor', 'pointer');
-
 /**
  * Get the parameters that are encoded in the given url
  * @param url

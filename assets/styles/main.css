@@ -163,6 +163,7 @@ label {
 }
 
 .berekenRouteBtn {
+    cursor: pointer;
     color: white !important;
     font-weight: bolder !important;
     margin-bottom: 10px;
