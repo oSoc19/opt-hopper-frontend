@@ -272,6 +272,13 @@ td .dotted line {
     left: 20px;
     top: 4px;
     padding: 12px;
+    height: 85%;
+}
+
+.pageHeader img {
+    max-width: 40vw;
+    max-height: 6vh;
+    margin: 8px
 }
 
 .facilityIcon{
