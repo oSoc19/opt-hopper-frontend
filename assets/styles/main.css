@@ -146,6 +146,10 @@ label {
     border: none;
 }
 
+#dateInputCol{
+    padding-left: 0;
+}
+
 .form-control{
     padding-right: 25px !important;
 }
