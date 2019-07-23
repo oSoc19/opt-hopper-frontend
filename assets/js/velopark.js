@@ -177,6 +177,54 @@ function getStations(journey) {
     }
 }
 
+function getFirstStation(journey){
+    for(let i = 0; i < journey.segments.length; i++) {
+        let segment = journey.segments[i]; 
+        if (segment.departure.location.id.includes('irail')) {
+            return segment.departure.location.id;
+        }   
+        if (segment.arrival.location.id.includes('irail')) {
+            return segment.arrival.location.id;
+        }   
+    }
+}
+
+function getFirstAndLastStation(journey) {
+    //first station
+    //incase starting at station
+    if (journey.journeys[0].segments[0].departure.location.id.includes('irail') && journey.journeys[0].segments[0].arrival.location.id.includes('irail')) {
+        let station = new Station(journey.journeys[0].segments[0].departure.location.name, {
+            lat: journey.journeys[0].segments[0].departure.location.lat,
+            lon: journey.journeys[0].segments[0].departure.location.lon
+        })
+        stationRepository.stations.firstStation = station;
+    } else { //incase starting at OSM point
+        if (journey.journeys[0].segments[0].arrival.location.id.includes('irail')) {
+            let station = new Station(journey.journeys[0].segments[0].arrival.location.name, {
+                lat: journey.journeys[0].segments[0].arrival.location.lat,
+                lon: journey.journeys[0].segments[0].arrival.location.lon
+            })
+            stationRepository.stations.firstStation = station;
+        }
+    }
+
+    //last station 
+    //incase ending at station
+    if (journey.journeys[0].segments[journey.journeys[0].segments.length - 1].departure.location.id.includes('irail') && journey.journeys[0].segments[journey.journeys[0].segments.length - 1].arrival.location.id.includes('irail')) {
+        let station = new Station(journey.journeys[0].segments[journey.journeys[0].segments.length - 1].arrival.location.name, {
+            lat: journey.journeys[0].segments[journey.journeys[0].segments.length - 1].arrival.location.lat,
+            lon: journey.journeys[0].segments[journey.journeys[0].segments.length - 1].arrival.location.lon
+        })
+        stationRepository.stations.lastStation = station
+    } else { //incase ending at OSM point
+        let station = new Station(journey.journeys[0].segments[journey.journeys[0].segments.length - 1].departure.location.name, {
+            lat: journey.journeys[0].segments[journey.journeys[0].segments.length - 1].departure.location.lat,
+            lon: journey.journeys[0].segments[journey.journeys[0].segments.length - 1].departure.location.lon
+        })
+        stationRepository.stations.lastStation = station
+    }
+}
+
 /**
  * [calculate the parkings that are 500m or less from the given station.]
  * @param  {[number]} latStation [the latitude from the station.]
