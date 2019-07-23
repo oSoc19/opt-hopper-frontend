@@ -16,25 +16,26 @@ Backend : C#, ASP.NET, Lua
 IDE : Visual Studio, Visual Studio Code, WebStorm
 
 <h2>API Reference</h2>
-Parking datas from : https://velopark.ilabt.imec.be/data/catalog
-Mapbox: https://docs.mapbox.com/api/
-To get route: https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}&multipleOptions=true
+Parking datas from : https://velopark.ilabt.imec.be/data/catalog </br>
+Mapbox: https://docs.mapbox.com/api/ </br>
+Anyways Transit API: https://routing.anyways.eu/transitapi/swagger/index.html#/ </br>
 
 <h2>Getting Started</h2>
 
-Before starting, make sure that you’ve installed git tools. If not, follow the instructions here  https://git-scm.com/downloads
+Before starting, make sure that you have installed git tools. If not, follow the instructions here  https://git-scm.com/downloads
 
 •	Frontend part
 
 On your computer make a new directory such as « hopper-projectFront » then clone the repository.
+```
 Git clone https://github.com/oSoc19/opt-hopper-frontend.git
-
+```
 •	Backend part
 
 On your computer make a new directory such as « hopper-projectBack » then clone the repository.
-
+```
 Git clone https://github.com/anyways-open/itinero-transit-server.git
-
+```
 
 <h2>Screenshots</h2>
 
@@ -46,8 +47,11 @@ The structure of the project
 
 
 <h2>Running the app</h2>
+On Visual Studio: you have to install the plug-in live server and launch it.
+write dotnet run on the console/terminal to run the application.
+<p>
+On WebStorm:
 
-Explain how to run the application
 
 <h2>Deployment</h2>
 
