@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    letter-spacing: -0.03em;
 }
 
 #map {
@@ -70,11 +71,7 @@ body {
 }
 
 .tab:hover {
-    background-color: #00808B;
-}
-
-.tab:active {
-    background-color: aqua;
+    background-color: #28A987;
 }
 
 .tab.selected {
@@ -95,12 +92,28 @@ body {
 
 .tab span {
     display: block;
-    color: #A0A0A0;
+    color: #737373;
 }
 
-.tab.selected span {
+.tab.selected span, .tab:hover span {
     display: block;
     color: white;
+}
+
+.tab svg path {
+    stroke: #737373;
+}
+
+.tab svg path[fill] {
+    fill: #737373;
+}
+
+.tab.selected svg path, .tab:hover svg path {
+    stroke: white;
+}
+
+.tab.selected svg path[fill], .tab:hover svg path[fill] {
+    fill: white;
 }
 
 .inputCard {
@@ -272,8 +285,8 @@ td .dotted line {
 }
 
 .detailViewSummaryFacts div {
-    flex: 1;
-    text-align: center;
+    flex: 4;
+    text-align: left;
     min-height: 28px;
     white-space: nowrap;
 
@@ -284,6 +297,10 @@ td .dotted line {
     line-height: 28px;
 
     color: #FFFFFF;
+}
+
+.detailViewSummaryFacts div:last-child {
+    flex: 3;
 }
 
 .detailViewSummaryFacts .summaryTitle {
@@ -324,6 +341,27 @@ td .dotted line {
     margin-right: 1em;
 }
 
+.pageHeader {
+    position: absolute;
+    top: 0;
+    left: calc(calc(50% - 10vw) + 20vw);
+    transform: translate(-50%, 0);
+    z-index: 1031;
+    width: 40%;
+    background-color: white;
+    color: #28A987;
+    font-family: Karla, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 3rem;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px -7px 21px rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+}
+
 @media (min-width: 992px) {
     #inputCard {
         right: unset;
@@ -355,6 +393,10 @@ td .dotted line {
     #clearRouteButton, .scrollableIcon {
         display: none;
     }
+
+    .pageHeader {
+        position: fixed;
+    }
 }
 
 @media (max-width: 992px) {
@@ -369,4 +411,9 @@ td .dotted line {
     .mobileHidden {
          display: none;
      }
+
+    .pageHeader {
+        width: 100%;
+        left: 50%;
+    }
 }

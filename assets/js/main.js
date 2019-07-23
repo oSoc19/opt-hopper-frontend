@@ -1,5 +1,101 @@
 
 // Utils
+/**
+ * Get the parameters that are encoded in the given url
+ * @param url
+ */
+function getAllUrlParams(url) {
+    // get query string from url (optional) or window
+    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+
+    // we'll store the parameters here
+    var obj = {};
+
+    // if query string exists
+    if (queryString) {
+
+        // stuff after # is not part of query string, so get rid of it
+        queryString = queryString.split('#')[0];
+
+        // split our query string into its component parts
+        var arr = queryString.split('&');
+
+        for (var i = 0; i < arr.length; i++) {
+            // separate the keys and the values
+            var a = arr[i].split('=');
+
+            // in case params look like: list[]=thing1&list[]=thing2
+            var paramNum = undefined;
+            var paramName = a[0].replace(/\[\d*\]/, function (v) {
+                paramNum = v.slice(1, -1);
+                return '';
+            });
+
+            // set parameter value (use 'true' if empty)
+            //var paramValue = a[1];
+            let paramValue;
+            if (typeof(a[1]) === 'undefined') {
+                paramValue = true;
+            } else {
+                paramValue = a[1].toLowerCase();
+                //check if the value is a comma sepperated list
+                var b = paramValue.split(',');
+                paramValue = typeof(b[1]) === 'undefined' ? b[0] : b;
+            }
+
+            // (optional) keep case consistent
+            paramName = paramName.toLowerCase();
+
+
+            // if parameter name already exists
+            if (obj[paramName]) {
+                // convert value to array (if still string)
+                if (typeof obj[paramName] === 'string') {
+                    obj[paramName] = [obj[paramName]];
+                }
+                // if no array index number specified...
+                if (typeof paramNum === 'undefined') {
+                    // put the value on the end of the array
+                    obj[paramName].push(paramValue);
+                }
+                // if array index number specified...
+                else {
+                    // put the value at that index number
+                    obj[paramName][paramNum] = paramValue;
+                }
+            }
+            // if param name doesn't exist yet, set it
+            else {
+                obj[paramName] = paramValue;
+            }
+        }
+    }
+
+    return obj;
+}
+
+/**
+ * Use the current user location as a startpoint.
+ */
+function useCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position){
+            state.location1 = [position.coords.longitude, position.coords.latitude];
+            showLocationsOnMap();
+            reverseGeocode(state.location1, function (address) {
+                $("#fromInput").val(address);
+                fromFieldInputDetected(document.getElementById("fromInput"));
+            });
+        }, function(error){
+            console.warn("Accessing geolocation failed.", error);
+        });
+        if(typeof(Storage) !== "undefined") {
+            localStorage.removeItem("geolocation.permission.denieddate");
+        }
+    } else {
+        console.warn("Geolocation is not supported by this browser.");
+    }
+}
 
 function setCurrentUrl(params) {
     currentUrl = window.location.href;
@@ -82,6 +178,36 @@ $(function(){
         if(!availableProfiles.includes(tabs[i].getAttribute("profile"))){
             tabs[i].style.display = "none"
         }
+    }
+
+    let urlparams = getAllUrlParams();
+    if (urlparams.loc1) {
+        state.location1 = urlparams.loc1;
+    } else {
+        if (!(typeof(Storage) !== "undefined" && new Date(localStorage.getItem("geolocation.permission.denieddate")).addDays(7) > new Date())) {
+            setTimeout(function () {
+                useCurrentLocation();
+            }, 2000);
+        }
+    }
+    if (urlparams.loc2) {
+        state.location2 = urlparams.loc2;
+    }
+    if (state.location1) {
+        reverseGeocode(state.location1, function (address) {
+            $("#fromInput").val(address);
+        });
+        $("#useLocationInputFieldButton").hide();
+        $("#clearInputFieldFromButton").show();
+    }
+    if (state.location2) {
+        reverseGeocode(state.location2, function (address) {
+            $("#toInput").val(address);
+        });
+        $("#clearInputFieldToButton").show();
+    }
+    if (state.location1 || state.location2) {
+        showLocationsOnMap();
     }
 
     setTimeout(function(){ 
