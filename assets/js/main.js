@@ -196,6 +196,7 @@ $(function(){
                 console.log("using current location");
                 useCurrentLocation();
                 showLocationsOnMap()
+                $("#clearInputFieldFromButton").show();
             }, 2000);
         }
     }
