@@ -293,6 +293,7 @@ function showProfileRoute(profile){
             });
             map.setPaintProperty(profile + "-transfer-points", 'circle-radius', routeLineWidthAlternative);
             map.setPaintProperty(profile + "-transfer-points", 'circle-stroke-opacity', routeOpacityAltnerative);
+            map.setPaintProperty(profile + "-transfer-points", 'circle-opacity', routeOpacityAltnerative);
         }
     });
 
@@ -305,6 +306,7 @@ function showProfileRoute(profile){
         map.setPaintProperty(profile + "-transfer-points", "circle-color", "#fff");
         map.setPaintProperty(profile + "-transfer-points", 'circle-radius', routeLineWidthMain);
         map.setPaintProperty(profile + "-transfer-points", 'circle-stroke-opacity', routeOpacityMain);
+        map.setPaintProperty(profile + "-transfer-points", 'circle-opacity', routeOpacityMain);
 
         //Fix z-order of custom layers
         for(key in availableProfiles){
