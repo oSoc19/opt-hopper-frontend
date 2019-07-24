@@ -4,7 +4,7 @@ const availableProfiles = ["default", "bike", "ebike", "speedy"];
 var profileConfigs = {
     "default": {
         backendName: "pedestrian",
-        routingProfile: "&walksGeneratorDescription=crowsflight%26maxDistance%3D20000%26speed%3D1.4",
+        routingProfile: "&walksGeneratorDescription=crowsflight%26maxDistance%3D15000%26speed%3D1.4",
         routecolor: {
             backend: true,
             color: "#5a0449"
@@ -13,7 +13,7 @@ var profileConfigs = {
     "bike": {
         backendName: "bicycle",
         routingProfile: "&inBetweenOsmProfile=crowsflight&" +
-            "inBetweenSearchDistance=500&" +
+            "inBetweenSearchDistance=0&" +
             "firstMileOsmProfile=bicycle&" +
             "firstMileSearchDistance=10000&" +
             "lastMileOsmProfile=pedestrian&" +
@@ -26,9 +26,9 @@ var profileConfigs = {
     "ebike": {
         backendName: "ebike",
         routingProfile: "&inBetweenOsmProfile=crowsflight&" +
-            "inBetweenSearchDistance=500&" +
+            "inBetweenSearchDistance=0&" +
             "firstMileOsmProfile=ebike&" +
-            "firstMileSearchDistance=30000&" +
+            "firstMileSearchDistance=20000&" +
             "lastMileOsmProfile=pedestrian&" +
             "lastMileSearchDistance=10000",
         routecolor: {
@@ -39,9 +39,9 @@ var profileConfigs = {
     "speedy": {
         backendName: "speedPedelec",
         routingProfile: "&inBetweenOsmProfile=crowsflight&" +
-            "inBetweenSearchDistance=500&" +
+            "inBetweenSearchDistance=0&" +
             "firstMileOsmProfile=speedPedelec&" +
-            "firstMileSearchDistance=50000&" +
+            "firstMileSearchDistance=20000&" +
             "lastMileOsmProfile=pedestrian&" +
             "lastMileSearchDistance=10000",
         routecolor: {
@@ -82,7 +82,7 @@ function calculateAllRoutes(){
         const routingProfile = profileConfigs[profile].routingProfile;
 
         //*
-        const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}&multipleOptions=true`;
+        const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}`;//&multipleOptions=true`;
         /*/
         const url = `http://localhost:5000/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}&multipleOptions=true`;
         //*/
