@@ -25,7 +25,7 @@ function getInputFromCard(){
     time = $('#timeInput').val()
 
     if (date.includes('-')) {
-        date.replace('-','/')
+        date = date.split('-').join('/')
     }
     console.log('date: ', date)
 
