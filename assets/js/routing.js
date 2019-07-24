@@ -1,4 +1,3 @@
-
 const availableProfiles = ["default", "bike", "ebike", "speedy"];
 
 var profileConfigs = {
@@ -54,7 +53,10 @@ var profileConfigs = {
 let selectedProfile = "ebike";
 
 
-function calculateAllRoutes(){
+/**
+ * calculate all the routes and fill the inineraries 
+ */
+function calculateAllRoutes() {
     //TODO: Show loading icon
 
     receivedItineraries = {};
@@ -68,14 +70,14 @@ function calculateAllRoutes(){
 
     let isDeparture = true;
     let inputData = getInputFromCard();
-    if(!inputData.from || !inputData.to){
+    if (!inputData.from || !inputData.to) {
         console.warn("Trying to calculate routes while departure or arrival are not set");
         return;
     }
     const originS = swapArrayValues(inputData.from).join("%2F");
     const destinationS = swapArrayValues(inputData.to).join("%2F");
 
-    for(let key in availableProfiles) {
+    for (let key in availableProfiles) {
         const dateParam = (isDeparture ? "&departure=" : "&arrival=") + encodeURIComponent(new Date(inputData.date).toISOString());
         // get the routing profile.
         const profile = availableProfiles[key];
@@ -96,7 +98,7 @@ function calculateAllRoutes(){
                 receivedItineraries[profile].to = inputData.toName;
                 receivedItineraries[profile].journey = filterItineraries(data.journeys);
 
-                if(data.journeys && receivedItineraries[profile].journey) {
+                if (data.journeys && receivedItineraries[profile].journey) {
                     getStations(receivedItineraries[profile].journey);
                     displayRoute(profile, profile === selectedProfile, receivedItineraries[profile].journey);
                     fillItinerary(profile, profile === selectedProfile, inputData.fromName, inputData.toName, receivedItineraries[profile].journey);
@@ -119,7 +121,10 @@ function calculateAllRoutes(){
     $("#clearRouteButton").removeClass("mobileHidden");
 }
 
-function clearRoute(){
+/**
+ * change the visibilty of certen elements and execute clearRoutes()
+ */
+function clearRoute() {
     $(".inputCard").removeClass("mobileHidden");
     $(".tabsContainer, .detailViewContainer").addClass("mobileHidden");
     $("#clearRouteButton").addClass("mobileHidden");
@@ -128,16 +133,20 @@ function clearRoute(){
     clearRoutes();
 }
 
-function filterItineraries(journeys){
-    if(!journeys){
+/**
+ * filter the multiple journeys we get back from Itinero to the best journey
+ * @param  {journeys} journeys the journey you want to filter
+ */
+function filterItineraries(journeys) {
+    if (!journeys) {
         return null;
     }
     let smallestScore = Number.MAX_VALUE;
     let smallestJourney = null;
 
-    for (key in journeys){
-        let score = journeys[key].travelTime * journeys[key].vehiclesTaken / (journeys[key].vehiclesTaken+1);
-        if(score < smallestScore){
+    for (key in journeys) {
+        let score = journeys[key].travelTime * journeys[key].vehiclesTaken / (journeys[key].vehiclesTaken + 1);
+        if (score < smallestScore) {
             smallestScore = score;
             smallestJourney = journeys[key];
         }

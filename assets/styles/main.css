@@ -146,6 +146,10 @@ label {
     border: none;
 }
 
+#dateInputCol{
+    padding-left: 0;
+}
+
 .form-control{
     padding-right: 25px !important;
 }
@@ -159,6 +163,9 @@ label {
 }
 
 .berekenRouteBtn {
+    cursor: pointer;
+    color: white !important;
+    font-weight: bolder !important;
     margin-bottom: 10px;
     background-color: #28A987 !important;
     border-color: #28A987 !important;
@@ -187,12 +194,16 @@ background-color: pink;
 }
 
 #clearInputFieldToButton, #clearInputFieldFromButton {
-    padding: 10px;
+    padding: 12px !important;
     width: 2.5rem;
     position: absolute;
     right: 8px;
-    top: 4px;
+    top: 0px;
     cursor: pointer;
+}
+
+#clearInputFieldFromButton{
+    top: 8px
 }
 
 #clearInputFieldFromButton, #clearInputFieldToButton {

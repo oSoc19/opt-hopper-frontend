@@ -9,22 +9,35 @@ let state = {
 }
 
 /**
- * [gather the input from the card and create an object. return this object]
- * @return {[input]}      [input object containing: from, to, fromName, toName and date]
+ * gather the input from the card and create an object. return this object
+ * @return {input}      input object containing: from, to, fromName, toName and date
  */
-function getInputFromCard(){
-    let input = {from: undefined, to: undefined,fromName: undefined, toName: undefined, date: undefined}
+function getInputFromCard() {
+    let input = {
+        from: undefined,
+        to: undefined,
+        fromName: undefined,
+        toName: undefined,
+        date: undefined
+    }
 
     input.from = state.location1;
     input.to = state.location2;
 
     input.fromName = state.location1Name;
     input.toName = state.location2Name;
-    
+
     var date = $('#dateInput').val(),
-    time = $('#timeInput').val()
+        time = $('#timeInput').val()
+
+    if (date.includes('-')) {
+        date = date.split('-').join('/')
+    }
+    console.log('date: ', date)
 
     input.date = new Date(date + " " + time)
+
+    console.log('date object: ', input.date)
 
     return input;
 }
@@ -32,13 +45,13 @@ function getInputFromCard(){
 let fallbackCounter = 0;
 
 /**
- * [Use 'Best' geocoder. If it fails use MapBox geocoder.]
- * [Generate typeahead for input and show the typeahead. We are using the bootstrap the bootstrap3-typeahead]
+ * Use 'Best' geocoder. If it fails use MapBox geocoder.
+ * Generate typeahead for input and show the typeahead. We are using the bootstrap the bootstrap3-typeahead
  */
 function initInputGeocoders() {
     $('.geocoder-input').typeahead({
         source: function (query, callback) {
-            if(fallbackCounter <= 4) {
+            if (fallbackCounter <= 4) {
                 $.ajax({
                     dataType: "json",
                     url: `https://best.osoc.be/v1/autocomplete?text=${query}`,
@@ -47,15 +60,15 @@ function initInputGeocoders() {
                         for (let feature in data.features) {
                             //Get region
                             let region;
-                            if(data.features[feature].properties){
+                            if (data.features[feature].properties) {
                                 region = data.features[feature].properties.localadmin
-                                if(!region){
+                                if (!region) {
                                     region = data.features[feature].properties.locality;
                                 }
-                                if(!region){
+                                if (!region) {
                                     region = data.features[feature].properties.county;
                                 }
-                                if(!region){
+                                if (!region) {
                                     region = data.features[feature].properties.region;
                                 }
                             }
@@ -70,7 +83,7 @@ function initInputGeocoders() {
                         console.warn("Best geocoding failed:", error, "\nTemporary falling back to mapbox geocoder.");
                         //Fallback to MapBox Geocoder
                         fallbackCounter++;
-                        if(fallbackCounter > 4){
+                        if (fallbackCounter > 4) {
                             console.warn("Stop using best geocoder. Falling back to Mapbox for this session.");
                         }
                         mapBoxGeoCode(query, callback);
@@ -81,7 +94,7 @@ function initInputGeocoders() {
                 mapBoxGeoCode(query, callback);
             }
         },
-        matcher: function (s) { 
+        matcher: function (s) {
             return true;
         },
         afterSelect: function (activeItem) {
@@ -109,9 +122,9 @@ function initInputGeocoders() {
 }
 
 /**
- * [use mapbox geocoder]
+ * use mapbox geocoder
  */
-function mapBoxGeoCode(query, callback){
+function mapBoxGeoCode(query, callback) {
     $.ajax({
         dataType: "json",
         url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxAccessCode}&country=be`,
@@ -122,7 +135,7 @@ function mapBoxGeoCode(query, callback){
                 let context = data.features[feature].context;
                 let place = "";
                 let i = 0;
-                while (!place && i < context.length ) {
+                while (!place && i < context.length) {
                     if (context[i].id.includes("place")) {
                         place = context[i].text;
                     }
@@ -138,7 +151,7 @@ function mapBoxGeoCode(query, callback){
         error: function (error) {
             console.warn("Mapbox geocoding request failed:", error);
             //If mapbox also fails, you probably have connection issues
-            if(fallbackCounter > 0) {
+            if (fallbackCounter > 0) {
                 fallbackCounter--;
             }
         }
@@ -146,11 +159,11 @@ function mapBoxGeoCode(query, callback){
 }
 
 /**
- * [detect when the user is entering something in the FROM input field. If empty run clearAllItineraries(), clearRoute() and showLocationsOnMap()]
- * @param  {[element]} el [the from input field]
+ * detect when the user is entering something in the FROM input field. If empty run clearAllItineraries(), clearRoute() and showLocationsOnMap()
+ * @param  {element} el the from input field
  */
 function fromFieldInputDetected(el) {
-    if(state.location1 && state.location1Name !== el.value) {
+    if (state.location1 && state.location1Name !== el.value) {
         state.location1 = null;
         clearAllItineraries();
         clearRoute();
@@ -164,11 +177,11 @@ function fromFieldInputDetected(el) {
 }
 
 /**
- * [detect when the user is entering something in the TO input field. If empty run clearAllItineraries(), clearRoute() and showLocationsOnMap()]
- * @param  {[element]} el [the to input field]
+ * detect when the user is entering something in the TO input field. If empty run clearAllItineraries(), clearRoute() and showLocationsOnMap()
+ * @param  {element} el the to input field
  */
 function toFieldInputDetected(el) {
-    if(state.location2 && state.location2Name !== el.value){
+    if (state.location2 && state.location2Name !== el.value) {
         state.location2 = null;
         clearAllItineraries();
         clearRoute();
@@ -182,7 +195,7 @@ function toFieldInputDetected(el) {
 }
 
 /**
- * [clear the from input field]
+ * clear the from input field
  */
 function clearInputFieldFrom() {
     $("#fromInput").val("");
@@ -190,7 +203,7 @@ function clearInputFieldFrom() {
 }
 
 /**
- * [clear the to input field]
+ * clear the to input field
  */
 function clearInputFieldTo() {
     $("#toInput").val("");
