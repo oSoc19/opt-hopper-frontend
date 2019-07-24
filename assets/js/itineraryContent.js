@@ -1,11 +1,15 @@
 let receivedItineraries = {};
 
-function activateProfile(profile){
-    if(!profile){
+/**
+ * activate the profile 
+ * @param  {profile} profile the profile you want to activate
+ */
+function activateProfile(profile) {
+    if (!profile) {
         console.error("No valid profile given", profile);
         return;
     }
-    if(!availableProfiles.includes(profile)){
+    if (!availableProfiles.includes(profile)) {
         console.error("This profile is not valid (or is disabled).", profile);
         return;
     }
@@ -14,12 +18,12 @@ function activateProfile(profile){
     $(".tab").removeClass("selected");
     $(`.tab[profile=${profile}]`).addClass("selected");
 
-    if(!receivedItineraries[profile] || !receivedItineraries[profile].data || !receivedItineraries[profile].journey){
+    if (!receivedItineraries[profile] || !receivedItineraries[profile].data || !receivedItineraries[profile].journey) {
         console.warn("No itinerary for this profile available yet.", profile);
         clearItinerary(profile, true);
         return;
     }
-    if(!receivedItineraries[profile].data || !receivedItineraries[profile].journey){
+    if (!receivedItineraries[profile].data || !receivedItineraries[profile].journey) {
         console.error("We received an itinerary for this profile (" + profile + "), but it doesn't make sense. Sorry.");
         clearItinerary(profile, true);
         return;
@@ -33,21 +37,30 @@ let pumpFacilityIconElement = '<img class="facilityIcon" src="assets/img/icons/p
 let summaryParkingFacilityIconElement = '<img class="summaryFacilityIconElement" src="assets/img/icons/parkingIcon.svg" alt="P"/>';
 let summaryPumpFacilityIconElement = '<img class="summaryFacilityIconElement" src="assets/img/icons/pumpIcon.svg" alt="P"/>';
 
+
+/**
+ * display the journey on the screen for the selected profile
+ * @param  {profile} profile the profile you want to display
+ * @param  {boolean} selected boolean if the profile is selected
+ * @param  {String} departure place where we departure from
+ * @param  {String} arrival place where we want to arrive
+ * @param  {journey} journey the journey we want to display
+ */
 function fillItinerary(profile, selected, departure, arrival, journey) {
 
     let minutes = journey.travelTime / 60;
     let hours = Math.floor(minutes / 60);
     minutes = Math.round(minutes - (hours * 60));
-    $(".travelTime-" + profile).html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
+    $(".travelTime-" + profile).html((hours > 0 ? hours + "h " : "") + minutes + "min");
     $(`.tab[profile=${profile}] .loaderContainer`).hide();
 
-    if(selected) {  
+    if (selected) {
         let itineraryConainer = $(".itineraryContentContainer");
         itineraryConainer.html("");
         let detailViewSummaryIcons = $(".detailViewSummaryIcons")
         detailViewSummaryIcons.html("")
 
-        $(".detailViewSummaryTotalTime").html( (hours > 0 ? hours + "h " : "") + minutes + "min" );
+        $(".detailViewSummaryTotalTime").html((hours > 0 ? hours + "h " : "") + minutes + "min");
         $(".detailViewSummaryTrains").html(journey.vehiclesTaken);
 
         //adding summaryIcons
@@ -62,7 +75,7 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
             if (myStations[firstStation].parkings.length > 0) {
                 firstStationHasParking = true;
 
-                myStations[firstStation].parkings.forEach(parking =>{
+                myStations[firstStation].parkings.forEach(parking => {
                     parking[`@graph`].forEach(graph => {
                         if (graph.amenityFeature) {
                             graph.amenityFeature.forEach(feature => {
@@ -75,12 +88,12 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                 })
             }
         }
-        
+
         detailViewSummaryIcons.append(
             (firstStationHasParking ? summaryParkingFacilityIconElement : '') +
             (firstStationHasPump ? summaryPumpFacilityIconElement : '')
         )
-            
+
         let dottedPrevious = false;
         let dottedNext = false;
 
@@ -159,15 +172,15 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
             if (i < journey.segments.length - 1) {
 
                 //Determine dotted line or solid line for next segment
-                let nextVehicle = journey.segments[i+1].vehicle;
+                let nextVehicle = journey.segments[i + 1].vehicle;
                 if (!(nextVehicle && nextVehicle.indexOf("irail") >= 0)) {
                     dottedNext = true;
                 }
 
-                let departureTimeFromThisArrivalLocation = new Date(journey.segments[i+1].departure.time);
+                let departureTimeFromThisArrivalLocation = new Date(journey.segments[i + 1].departure.time);
 
                 let stationId;
-                if(journey.segments[i].arrival.location.id.includes('irail')){
+                if (journey.segments[i].arrival.location.id.includes('irail')) {
                     stationId = journey.segments[i].arrival.location.id;
                 }
 
@@ -209,10 +222,10 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
                             </svg>
                         </td>
                         <td>
-                            ${journey.segments[i].arrival.location.name}`+
-                            (stationHasParking ? parkingFacilityIconElement : '') +
-                            (stationHasPump ? pumpFacilityIconElement : '') +
-                        `</td>
+                            ${journey.segments[i].arrival.location.name}` +
+                    (stationHasParking ? parkingFacilityIconElement : '') +
+                    (stationHasPump ? pumpFacilityIconElement : '') +
+                    `</td>
                     </tr>`
                 );
 
@@ -249,161 +262,40 @@ function formatTwoDigits(n) {
     return n < 10 ? '0' + n : n;
 }
 
-function clearAllItineraries(){
-    for(i in availableProfiles){
+/**
+ * clear all itineraries, will run clearItinerary() for all profiles
+ */
+function clearAllItineraries() {
+    for (i in availableProfiles) {
         clearItinerary(availableProfiles[i], availableProfiles[i] == selectedProfile);
     }
 }
 
+/**
+ * clear the itinerary
+ * @param  {profile} profile the profile you want to clear
+ * @param  {boolean} selected boolean if the profile is selected
+ */
 function clearItinerary(profile, selected) {
 
     //$(".travelTime-" + profile).html( profile );
 
-    if(selected) {
-        $(".detailViewSummaryTotalTime").html( "" );
-        $(".detailViewSummaryTrains").html( "" );
-        $(".detailViewSummaryTotalCyclingTime").html( "" );
-        $(".detailViewSummaryIcons").html( "" )
-        
+    if (selected) {
+        $(".detailViewSummaryTotalTime").html("");
+        $(".detailViewSummaryTrains").html("");
+        $(".detailViewSummaryTotalCyclingTime").html("");
+        $(".detailViewSummaryIcons").html("")
+
 
         //departure
-        $(".itineraryStartFieldTime").html( "" );
-        $(".itineraryStartField").html( "" );
+        $(".itineraryStartFieldTime").html("");
+        $(".itineraryStartField").html("");
 
         //segments
-        $(".itineraryContentContainer").html( "" );
+        $(".itineraryContentContainer").html("");
 
         //arrival
-        $(".itineraryFinishFieldTime").html( "" );
-        $(".itineraryFinishField").html( "" );
+        $(".itineraryFinishFieldTime").html("");
+        $(".itineraryFinishField").html("");
     }
 }
-
-/*fillItinerary("Bosa", "Stationsplein Aalst",
-    {
-        "segments": [
-            {
-                "departure": {
-                    "location": {
-                        "lat": 50.860000000000014,
-                        "lon": 4.355649,
-                        "id": "https://www.openstreetmap.org/#map=19/50.86/4.355649",
-                        "name": null,
-                        "translatedNames": {}
-                    },
-                    "time": "2019-07-04T09:44:44Z",
-                    "plannedTime": "2019-07-04T09:44:44Z",
-                    "delay": 0
-                },
-                "arrival": {
-                    "location": {
-                        "lat": 50.859662804791391,
-                        "lon": 4.3608427047729492,
-                        "id": "http://irail.be/stations/NMBS/008812005",
-                        "name": "Brussel-Noord/Bruxelles-Nord",
-                        "translatedNames": {
-                            "en": "Brussels-North",
-                            "fr": "Bruxelles-Nord",
-                            "nl": "Brussel-Noord"
-                        }
-                    },
-                    "time": "2019-07-04T09:53:17Z",
-                    "plannedTime": "2019-07-04T09:53:17Z",
-                    "delay": 0
-                },
-                "vehicle": "WALK",
-                "headsign": "WALK"
-            },
-            {
-                "departure": {
-                    "location": {
-                        "lat": 50.859662804791391,
-                        "lon": 4.3608427047729492,
-                        "id": "http://irail.be/stations/NMBS/008812005",
-                        "name": "Brussel-Noord/Bruxelles-Nord",
-                        "translatedNames": {
-                            "en": "Brussels-North",
-                            "fr": "Bruxelles-Nord",
-                            "nl": "Brussel-Noord"
-                        }
-                    },
-                    "time": "2019-07-04T10:07:00Z",
-                    "plannedTime": "2019-07-04T10:07:00Z",
-                    "delay": 0
-                },
-                "arrival": {
-                    "location": {
-                        "lat": 50.942816448359707,
-                        "lon": 4.039648175239563,
-                        "id": "http://irail.be/stations/NMBS/008895000",
-                        "name": "Aalst",
-                        "translatedNames": {
-                            "fr": "Alost"
-                        }
-                    },
-                    "time": "2019-07-04T10:46:00Z",
-                    "plannedTime": "2019-07-04T10:46:00Z",
-                    "delay": 0
-                },
-                "vehicle": "http://irail.be/vehicle/IC2233/20190704",
-                "headsign": "Gand-Saint-Pierre"
-            },
-            {
-                "departure": {
-                    "location": {
-                        "lat": 50.942816448359707,
-                        "lon": 4.039648175239563,
-                        "id": "http://irail.be/stations/NMBS/008895000",
-                        "name": "Aalst",
-                        "translatedNames": {
-                            "fr": "Alost"
-                        }
-                    },
-                    "time": "2019-07-04T10:46:00Z",
-                    "plannedTime": "2019-07-04T10:46:00Z",
-                    "delay": 0
-                },
-                "arrival": {
-                    "location": {
-                        "lat": 50.942544999999996,
-                        "lon": 4.0384469999999908,
-                        "id": "https://www.openstreetmap.org/#map=19/50.942545/4.03844699999999",
-                        "name": null,
-                        "translatedNames": {}
-                    },
-                    "time": "2019-07-04T10:48:05Z",
-                    "plannedTime": "2019-07-04T10:48:05Z",
-                    "delay": 0
-                },
-                "vehicle": "WALK",
-                "headsign": "WALK"
-            }
-        ],
-        "departure": {
-            "location": {
-                "lat": 50.860000000000014,
-                "lon": 4.355649,
-                "id": "https://www.openstreetmap.org/#map=19/50.86/4.355649",
-                "name": null,
-                "translatedNames": {}
-            },
-            "time": "2019-07-04T09:44:44Z",
-            "plannedTime": "2019-07-04T09:44:44Z",
-            "delay": 0
-        },
-        "arrival": {
-            "location": {
-                "lat": 50.942544999999996,
-                "lon": 4.0384469999999908,
-                "id": "https://www.openstreetmap.org/#map=19/50.942545/4.03844699999999",
-                "name": null,
-                "translatedNames": {}
-            },
-            "time": "2019-07-04T10:48:05Z",
-            "plannedTime": "2019-07-04T10:48:05Z",
-            "delay": 0
-        },
-        "travelTime": 3801,
-        "vehiclesTaken": 1
-    }
-);*/
