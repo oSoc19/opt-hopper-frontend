@@ -21,11 +21,12 @@ function getInputFromCard(){
     input.fromName = state.location1Name;
     input.toName = state.location2Name;
     
-    console.log()
-    
     var date = $('#dateInput').val(),
     time = $('#timeInput').val()
 
+    if (date.includes('-')) {
+        date.replace('-','/')
+    }
     console.log('date: ', date)
 
     input.date = new Date(date + " " + time)
