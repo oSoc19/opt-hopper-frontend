@@ -1,0 +1,129 @@
+/* hero */
+
+.hero {
+	background-color: #31a887 !important;
+	margin-bottom: 5rem;
+}
+
+	@media only screen and (min-width: 30em) {
+		.hero {
+			margin-bottom: 8rem;
+		}
+	}
+
+	@media only screen and (min-width: 48em) {
+		.hero {
+			margin-bottom: 8rem;
+		}
+	}
+
+	@media only screen and (min-width: 64em) {
+		.hero {
+			margin-bottom: 16rem;
+		}
+	}
+
+	@media only screen and (min-width: 75em) {
+		.hero {
+			margin-bottom: 18rem;
+		}
+	}
+
+.hero-card {
+	position: relative;
+	top: 1.5rem;
+	padding: 1rem 0.5rem 0;
+	background-color: white;
+	text-align: right;
+	box-shadow: 0 2px 20px rgba(76,95,92,0.2);
+}
+
+	@media only screen and (min-width: 30em) {
+		.hero-card {
+			top: 2rem;
+			padding: 2rem;
+		}
+	}
+
+	@media only screen and (min-width: 48em) {
+		.hero-card {
+			top: 4rem;
+			padding: 2rem;
+		}
+	}
+
+	@media only screen and (min-width: 64em) {
+		.hero-card {
+			top: 4rem;
+			padding: 3rem;
+		}
+	}
+
+	@media only screen and (min-width: 75em) {
+		.hero-card {
+			top: 5rem;
+		}
+	}
+
+	.hero-card:before {
+		content:"";
+		align-content: center;
+		display: block;
+		width: 100rem;
+		height: 10rem;
+		position: absolute;
+		z-index: -1;
+		background-size: contain;
+		background-repeat: no-repeat;
+		right: -15rem;
+		bottom: 0rem;
+		
+		
+	}
+
+		@media only screen and (min-width: 14em) {
+			.hero-card:before {
+				bottom: -20rem;
+			}
+		}
+
+.hero-title {
+	margin-bottom: 2rem;
+}
+
+.hero-intro {
+	font-size: 1.1rem;
+	line-height: 1.4;
+	font-family: "Montserrat", sans-serif;
+	color: #555;
+	margin-bottom: 1rem;
+	font-weight: 300;
+}
+
+	@media only screen and (min-width: 48em) {
+		.hero-intro {
+			font-size: 1.2rem;
+		}
+	}
+
+	.hero-intro a {
+		color: #555;
+		font-family: "Montserrat", sans-serif;
+	}
+
+	.hero-intro strong {
+		font-family: inherit;
+	}
+
+.hero .button-group {
+	margin-top: 1rem;
+	text-align: left;
+}
+
+	@media only screen and (min-width: 64em) {
+		.hero .button-group {
+			position: absolute;
+			bottom: -5rem;
+			left: 0;
+		}
+	}
