@@ -22,8 +22,12 @@ function loadMap(coords) { //long, lat
         container: 'map',
         style: mapstyleGulsen,
         center: coords,
-        zoom: 9
-    });
+        zoom: 9,
+        attributionControl: false
+    }).addControl(new mapboxgl.AttributionControl({
+        compact: true,
+        customAttribution: "<a href='https://best.osoc.be/attribution'>BEST geocoder</a>"
+    }));
 
     map.on('load', function () {
 
@@ -50,6 +54,10 @@ function loadMap(coords) { //long, lat
                 "line-width": 1
             }
         }, 'waterway-label');
+
+        let attribution = $('.mapboxgl-ctrl-bottom-right');
+        $(".pageHeader").append(attribution.html());
+        attribution.html('');
     });
 
     mapOnClick();
