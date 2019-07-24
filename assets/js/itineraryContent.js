@@ -268,7 +268,9 @@ function formatTwoDigits(n) {
 function clearAllItineraries() {
     for (i in availableProfiles) {
         clearItinerary(availableProfiles[i], availableProfiles[i] == selectedProfile);
+        
     }
+    
 }
 
 /**
