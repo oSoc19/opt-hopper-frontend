@@ -88,7 +88,6 @@ function useCurrentLocation() {
             });
         }, function (error) {
             if (error.code === error.PERMISSION_DENIED) {
-                console.log("Geolocation permission denied");
                 if (typeof (Storage) !== "undefined") {
                     localStorage.setItem("geolocation.permission.denieddate", new Date());
                 }
@@ -216,7 +215,6 @@ $(function () {
     } else {
         if (typeof (Storage) !== "undefined" && (!localStorage.getItem("geolocation.permission.denieddate") || new Date(localStorage.getItem("geolocation.permission.denieddate")).addDays(7) > new Date())) {
             setTimeout(function () {
-                console.log("using current location");
                 useCurrentLocation();
                 showLocationsOnMap()
                 $("#clearInputFieldFromButton").show();

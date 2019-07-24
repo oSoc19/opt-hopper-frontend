@@ -197,9 +197,6 @@ function displayRoute(profile, isSelected, journey) {
 
     }
 
-    console.log(pointObjects);
-
-
     let route = featureObjects;
     for (let i in route) {
         if (route[i].name === "Stop") {
@@ -451,8 +448,6 @@ function zoomToEdge(origin, destination) {
 
     } else if ($(window).width() > 992) {
 
-        console.log($('.detailViewScroller').width())
-
         map.fitBounds(bounds, {
             padding: {
                 top: $(".pageHeader").height() + 50,
@@ -514,7 +509,6 @@ function reverseGeocode(location, callback) {
             dataType: "json",
             url: `https://best.osoc.be/v1/reverse?point.lat=${lat}&point.lon=${lng}`,
             success: function (data) {
-                console.log(data);
                 if (data.features && data.features[0] && data.features[0].properties) {
                     //Get region
                     let region;
