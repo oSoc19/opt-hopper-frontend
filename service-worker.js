@@ -24,7 +24,6 @@ const PRECACHE_URLS = [
     './', // Alias for index.html
     'assets/styles/main.css',
     'assets/js/constants.js',
-    'assets/js/facilities.js',
     'assets/js/inputCard.js',
     'assets/js/itineraryContent.js',
     'assets/js/main.js',
