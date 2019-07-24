@@ -16,9 +16,9 @@ Hopper is powered by Linked Open Data and [Itinero](https://www.itinero.tech/).
 
 ## License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT [License](LICENSE.md).
 
-<h2>Authors</h2>
+## Authors
 
 - [Gulsen Guler](https://github.com/gulsenguler)
 - [François Halin](https://github.com/fhalin)
