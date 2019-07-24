@@ -7,14 +7,14 @@ Hopper is a **route-planner** that takes all those needs into account and allows
 
 Hopper is powered by Linked Open Data and [Itinero](https://www.itinero.tech/).
 
+<img src="assets/img/17923edb9be2a9aa231ef1c741dbfe62.gif" alt="Hopper gif" />
+
 ## Technologies
 - JavaScript
 - HTML
 - CSS
 
-<img src="assets/img/17923edb9be2a9aa231ef1c741dbfe62.gif" alt="Hopper logo" />
-
-## License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
 
 This project is licensed under the MIT License.
 
