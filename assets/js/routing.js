@@ -1,10 +1,9 @@
-
 const availableProfiles = ["default", "bike", "ebike", "speedy"];
 
 var profileConfigs = {
     "default": {
         backendName: "pedestrian",
-        routingProfile: "&walksGeneratorDescription=crowsflight%26maxDistance%3D20000%26speed%3D1.4",
+        routingProfile: "&walksGeneratorDescription=crowsflight%26maxDistance%3D15000%26speed%3D1.4",
         routecolor: {
             backend: true,
             color: "#5a0449"
@@ -13,7 +12,7 @@ var profileConfigs = {
     "bike": {
         backendName: "bicycle",
         routingProfile: "&inBetweenOsmProfile=crowsflight&" +
-            "inBetweenSearchDistance=500&" +
+            "inBetweenSearchDistance=0&" +
             "firstMileOsmProfile=bicycle&" +
             "firstMileSearchDistance=10000&" +
             "lastMileOsmProfile=pedestrian&" +
@@ -26,9 +25,9 @@ var profileConfigs = {
     "ebike": {
         backendName: "ebike",
         routingProfile: "&inBetweenOsmProfile=crowsflight&" +
-            "inBetweenSearchDistance=500&" +
+            "inBetweenSearchDistance=0&" +
             "firstMileOsmProfile=ebike&" +
-            "firstMileSearchDistance=30000&" +
+            "firstMileSearchDistance=20000&" +
             "lastMileOsmProfile=pedestrian&" +
             "lastMileSearchDistance=10000",
         routecolor: {
@@ -39,9 +38,9 @@ var profileConfigs = {
     "speedy": {
         backendName: "speedPedelec",
         routingProfile: "&inBetweenOsmProfile=crowsflight&" +
-            "inBetweenSearchDistance=500&" +
+            "inBetweenSearchDistance=0&" +
             "firstMileOsmProfile=speedPedelec&" +
-            "firstMileSearchDistance=50000&" +
+            "firstMileSearchDistance=20000&" +
             "lastMileOsmProfile=pedestrian&" +
             "lastMileSearchDistance=10000",
         routecolor: {
@@ -54,7 +53,10 @@ var profileConfigs = {
 let selectedProfile = "ebike";
 
 
-function calculateAllRoutes(){
+/**
+ * calculate all the routes and fill the inineraries 
+ */
+function calculateAllRoutes() {
     //TODO: Show loading icon
 
     receivedItineraries = {};
@@ -68,21 +70,21 @@ function calculateAllRoutes(){
 
     let isDeparture = true;
     let inputData = getInputFromCard();
-    if(!inputData.from || !inputData.to){
+    if (!inputData.from || !inputData.to) {
         console.warn("Trying to calculate routes while departure or arrival are not set");
         return;
     }
     const originS = swapArrayValues(inputData.from).join("%2F");
     const destinationS = swapArrayValues(inputData.to).join("%2F");
 
-    for(let key in availableProfiles) {
+    for (let key in availableProfiles) {
         const dateParam = (isDeparture ? "&departure=" : "&arrival=") + encodeURIComponent(new Date(inputData.date).toISOString());
         // get the routing profile.
         const profile = availableProfiles[key];
         const routingProfile = profileConfigs[profile].routingProfile;
 
         //*
-        const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}&multipleOptions=true`;
+        const url = `https://routing.anyways.eu/transitapi/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}`;//&multipleOptions=true`;
         /*/
         const url = `http://localhost:5000/journey?from=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${originS}&to=https%3A%2F%2Fwww.openstreetmap.org%2F%23map%3D19%2F${destinationS}${dateParam}${routingProfile}&multipleOptions=true`;
         //*/
@@ -96,7 +98,7 @@ function calculateAllRoutes(){
                 receivedItineraries[profile].to = inputData.toName;
                 receivedItineraries[profile].journey = filterItineraries(data.journeys);
 
-                if(data.journeys && receivedItineraries[profile].journey) {
+                if (data.journeys && receivedItineraries[profile].journey) {
                     getStations(receivedItineraries[profile].journey);
                     displayRoute(profile, profile === selectedProfile, receivedItineraries[profile].journey);
                     fillItinerary(profile, profile === selectedProfile, inputData.fromName, inputData.toName, receivedItineraries[profile].journey);
@@ -119,7 +121,10 @@ function calculateAllRoutes(){
     $("#clearRouteButton").removeClass("mobileHidden");
 }
 
-function clearRoute(){
+/**
+ * change the visibilty of certen elements and execute clearRoutes()
+ */
+function clearRoute() {
     $(".inputCard").removeClass("mobileHidden");
     $(".tabsContainer, .detailViewContainer").addClass("mobileHidden");
     $("#clearRouteButton").addClass("mobileHidden");
@@ -128,16 +133,20 @@ function clearRoute(){
     clearRoutes();
 }
 
-function filterItineraries(journeys){
-    if(!journeys){
+/**
+ * filter the multiple journeys we get back from Itinero to the best journey
+ * @param  {journeys} journeys the journey you want to filter
+ */
+function filterItineraries(journeys) {
+    if (!journeys) {
         return null;
     }
     let smallestScore = Number.MAX_VALUE;
     let smallestJourney = null;
 
-    for (key in journeys){
-        let score = journeys[key].travelTime * journeys[key].vehiclesTaken / (journeys[key].vehiclesTaken+1);
-        if(score < smallestScore){
+    for (key in journeys) {
+        let score = journeys[key].travelTime * journeys[key].vehiclesTaken / (journeys[key].vehiclesTaken + 1);
+        if (score < smallestScore) {
             smallestScore = score;
             smallestJourney = journeys[key];
         }

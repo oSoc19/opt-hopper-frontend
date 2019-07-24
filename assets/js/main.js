@@ -1,4 +1,3 @@
-
 // Utils
 
 /**
@@ -35,13 +34,13 @@ function getAllUrlParams(url) {
             // set parameter value (use 'true' if empty)
             //var paramValue = a[1];
             let paramValue;
-            if (typeof(a[1]) === 'undefined') {
+            if (typeof (a[1]) === 'undefined') {
                 paramValue = true;
             } else {
                 paramValue = a[1].toLowerCase();
                 //check if the value is a comma sepperated list
                 var b = paramValue.split(',');
-                paramValue = typeof(b[1]) === 'undefined' ? b[0] : b;
+                paramValue = typeof (b[1]) === 'undefined' ? b[0] : b;
             }
 
             // (optional) keep case consistent
@@ -80,24 +79,24 @@ function getAllUrlParams(url) {
  */
 function useCurrentLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position){
+        navigator.geolocation.getCurrentPosition(function (position) {
             state.location1 = [position.coords.longitude, position.coords.latitude];
             showLocationsOnMap();
             reverseGeocode(state.location1, function (address) {
                 $("#fromInput").val(address);
                 //fromFieldInputDetected(document.getElementById("fromInput"));
             });
-        }, function(error){
+        }, function (error) {
             if (error.code === error.PERMISSION_DENIED) {
                 console.log("Geolocation permission denied");
-                if (typeof(Storage) !== "undefined") {
+                if (typeof (Storage) !== "undefined") {
                     localStorage.setItem("geolocation.permission.denieddate", new Date());
                 }
             } else {
                 console.warn("Accessing geolocation failed.", error);
             }
         });
-        if(typeof(Storage) !== "undefined") {
+        if (typeof (Storage) !== "undefined") {
             localStorage.removeItem("geolocation.permission.denieddate");
         }
     } else {
@@ -105,6 +104,10 @@ function useCurrentLocation() {
     }
 }
 
+/**
+ * set the paramater in the current url
+ * @param  {String} params the parameter you want to put in the current url
+ */
 function setCurrentUrl(params) {
     currentUrl = window.location.href;
     currentUrl = currentUrl.split('?')[0] + '?';
@@ -114,7 +117,10 @@ function setCurrentUrl(params) {
     window.history.pushState("object or string", "Title", currentUrl);
 }
 
-function getCurrentLocation(centerToCurrentLocation){
+/**
+ * get the current location and center the map to it
+ */
+function getCurrentLocation(centerToCurrentLocation) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(centerToCurrentLocation);
     } else {
@@ -122,7 +128,10 @@ function getCurrentLocation(centerToCurrentLocation){
     }
 }
 
-function loadCurrentTime(){
+/**
+ * load the dateInput and timeInput to the current time
+ */
+function loadCurrentTime() {
 
     document.querySelector("#dateInput").valueAsDate = new Date();
     let today = new Date();
@@ -131,18 +140,28 @@ function loadCurrentTime(){
 
 }
 
-function getHours(hours){
+/**
+ * Utility method to change hours that are smaller than 10 to change to 09, 08, 07, ...
+ * @param {number} hours
+ * @returns number
+ */
+function getHours(hours) {
     if (hours < 10) {
         return `0${hours}`
-    }else{
+    } else {
         return hours
     }
 }
 
-function getMinutes(minutes){
+/**
+ * Utility method to change minutes that are smaller than 10 to change to 09, 08, 07, ...
+ * @param {number} minutes
+ * @returns number
+ */
+function getMinutes(minutes) {
     if (minutes < 10) {
         return `0${minutes}`
-    }else{
+    } else {
         return minutes
     }
 }
@@ -163,12 +182,15 @@ function swapArrayValues(array) {
 }*/
 
 const pxCm = 37.795276;
-$(function(){
+$(function () {
     //load map with standard coords
-    loadMap([4.3558571,50.860088]);
+    loadMap([4.3558571, 50.860088]);
 
-    $(".detailViewSummary").on("click", function(){
-        window.scrollTo({top: window.innerHeight - 100 - (4*pxCm), behavior: 'smooth'});
+    $(".detailViewSummary").on("click", function () {
+        window.scrollTo({
+            top: window.innerHeight - 100 - (4 * pxCm),
+            behavior: 'smooth'
+        });
     });
 
 
@@ -176,14 +198,14 @@ $(function(){
     loadCurrentTime()
 
     let tabs = $(".tab");
-    tabs.on("click", function(){
+    tabs.on("click", function () {
         let profile = $(this).attr("profile");
         activateProfile(profile);
         showProfileRoute(profile);
     });
 
     for (let i = 0; i < tabs.length; i++) {
-        if(!availableProfiles.includes(tabs[i].getAttribute("profile"))){
+        if (!availableProfiles.includes(tabs[i].getAttribute("profile"))) {
             tabs[i].style.display = "none"
         }
     }
@@ -192,7 +214,7 @@ $(function(){
     if (urlparams.loc1) {
         state.location1 = urlparams.loc1;
     } else {
-        if (typeof(Storage) !== "undefined" && (!localStorage.getItem("geolocation.permission.denieddate") || new Date(localStorage.getItem("geolocation.permission.denieddate")).addDays(7) > new Date())) {
+        if (typeof (Storage) !== "undefined" && (!localStorage.getItem("geolocation.permission.denieddate") || new Date(localStorage.getItem("geolocation.permission.denieddate")).addDays(7) > new Date())) {
             setTimeout(function () {
                 console.log("using current location");
                 useCurrentLocation();
@@ -221,8 +243,8 @@ $(function(){
         showLocationsOnMap();
     }
 
-    setTimeout(function(){ 
+    setTimeout(function () {
         getVeloParkData();
     }, 3000);
-    
+
 });

@@ -380,7 +380,7 @@ td .dotted line {
     transform: translate(-50%, 0);
     z-index: 1031;
     width: 40%;
-    background-color: white;
+    background-color: #ffffffcf;
     color: #28A987;
     font-family: Karla, sans-serif;
     font-style: normal;
@@ -425,6 +425,23 @@ td .dotted line {
 .tab .errorContainer svg path {
     fill: gray;
     stroke: none;
+}
+
+.pageHeader .mapboxgl-ctrl {
+    font-size: 14px;
+    position: absolute;
+    right: 15px;
+    margin: 0;
+    top: 0;
+    overflow: visible;
+    overflow-wrap: unset;
+    display: inline-block;
+}
+
+.pageHeader .mapboxgl-ctrl-attrib.mapboxgl-compact::after {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 @media (min-width: 992px) {
