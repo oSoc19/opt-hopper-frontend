@@ -1,82 +1,30 @@
-<h1>Hopper front-end</h1>
+<img src="assets/img/HOPPER.png" alt="Hopper logo" />
 
-<img src="https://zupimages.net/up/19/30/mzn0.png" alt="Hopper logo" />
-
-
-  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Route planner that combines e-bikes and public transport.
-
-<h2>About the project</h2>
-
+# Hopper
 Electric bikes enable you to travel faster & further so that you get better connections. But they also have special needs such as safe parking.
 
-Hopper is a route-planner that takes all those needs into account and allows you to combine your e-bike with train journeys. Change your commuting habits and contribute to sustainability!
+Hopper is a **route-planner** that takes all those needs into account and allows you to combine your e-bike with train journeys. Change your commuting habits and contribute to sustainability!
 
-Hopper is powered by Linked Open Data. Find out more at openhopper.be 
+Hopper is powered by Linked Open Data and [Itinero](https://www.itinero.tech/).
 
-<h2>Technologies</h2>
-Frontend : JavaScript, HTML, CSS </br>
-Backend : C#, ASP.NET, Lua </br>
-IDE : Visual Studio, Visual Studio Code, WebStorm </br>
+<img src="assets/img/17923edb9be2a9aa231ef1c741dbfe62.gif" alt="Hopper gif" />
 
-<h2>API References</h2>
-Velopark : https://velopark.ilabt.imec.be/data/catalog </br>
-Mapbox: https://docs.mapbox.com/api/ </br>
-Anyways Transit API: https://routing.anyways.eu/transitapi/swagger/index.html#/ </br>
+## Technologies
+- JavaScript
+- HTML
+- CSS
 
-<h2>Getting Started</h2>
+## License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
 
-Before starting, make sure that you have installed git tools. </br>
-If not, follow the instructions here  https://git-scm.com/downloads
+This project is licensed under the MIT [License](LICENSE.md).
 
-•	Frontend part
+## Authors
 
-On your computer make a new directory such as « projectNameFront » then clone the repository in this directory.
-```
-git clone https://github.com/oSoc19/opt-hopper-frontend.git
-```
-•	Backend part
-
-On your computer make a new directory such as « projectNameBack » then clone the repository in this directory. 
-```
-git clone https://github.com/anyways-open/itinero-transit-server.git
-```
-
-<h2>Screenshots</h2>
-
-Screenshot of the use of the application
-
-<h2>Structure of the project</h2>
-
-The structure of the project
-
-
-<h2>Running the app</h2>
-On Visual Studio: you have to install the plug-in live server and launch it.
-Then on the console/terminal:
-
-```
-//build the application
-dotnet build
-```
-
-```
-//run the application
-dotnet run
-```
-
-
-
-<h2>Deployment</h2>
-
-Add additional notes about how to deploy this on a live system
-
-<h2>Authors</h2>
-
-•	[Gulsen Guler](https://github.com/gulsenguler) </br>
-•	[François Halin](https://github.com/fhalin) </br>
-•	[Kristof Neyt](https://github.com/Fizz55) </br>
-•	[Hervé Tendayi](https://github.com/HerveKurtis) </br>
-•	[Dieter De Schrijver](https://github.com/DieterDeSchrijver) </br>
+- [Gulsen Guler](https://github.com/gulsenguler)
+- [François Halin](https://github.com/fhalin)
+-	[Kristof Neyt](https://github.com/Fizz55)
+-	[Hervé Tendayi](https://github.com/HerveKurtis)
+-	[Dieter De Schrijver](https://github.com/DieterDeSchrijver)
 
 
 

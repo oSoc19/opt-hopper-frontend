@@ -24,8 +24,8 @@ function getInputFromCard() {
     input.from = state.location1;
     input.to = state.location2;
 
-    input.fromName = state.location1Name;
-    input.toName = state.location2Name;
+    input.fromName = $('#fromInput').val();
+    input.toName = $('#toInput').val();
 
     var date = $('#dateInput').val(),
         time = $('#timeInput').val()
@@ -33,11 +33,8 @@ function getInputFromCard() {
     if (date.includes('-')) {
         date = date.split('-').join('/')
     }
-    console.log('date: ', date)
 
     input.date = new Date(date + " " + time)
-
-    console.log('date object: ', input.date)
 
     return input;
 }

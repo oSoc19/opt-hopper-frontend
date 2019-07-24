@@ -136,8 +136,6 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
             let hours = Math.floor(minutes / 60);
             minutes = Math.round(minutes - (hours * 60));
 
-            //console.log(hours, ":", minutes);
-
             let vehicle = journey.segments[i].vehicle;
             dottedPrevious = false;
             dottedNext = false;
@@ -268,7 +266,9 @@ function formatTwoDigits(n) {
 function clearAllItineraries() {
     for (i in availableProfiles) {
         clearItinerary(availableProfiles[i], availableProfiles[i] == selectedProfile);
+
     }
+
 }
 
 /**

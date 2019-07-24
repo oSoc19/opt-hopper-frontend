@@ -64,7 +64,6 @@ function displayVeloParkData() { //
  */
 function clearStations() {
     if (!$.isEmptyObject(myStations)) {
-        console.log(myStations)
         for (var prop in myStations) {
             if (myStations.hasOwnProperty(prop)) {
                 delete myStations[prop];
@@ -89,7 +88,6 @@ function getVeloParkData() {
                         let parking = p;
                         parkingRepo.parkings.push(parking)
                         if (counter === data["dcat:dataset"]["dcat:distribution"].length - 1) {
-                            console.log("Adding parkings to map now.", counter, "total; ", errorCounter, "failed.");
                             processParkings()
 
                         }
@@ -98,9 +96,7 @@ function getVeloParkData() {
                         counter++;
                         console.warn("Fetching parking data failed.", this.url, errorThrown);
                         errorCounter++;
-                        if (counter === data["dcat:dataset"]["dcat:distribution"].length - 1) {
-                            console.log("Adding parkings to map now.", counter, "total; ", errorCounter, "failed.");
-                        }
+                        if (counter === data["dcat:dataset"]["dcat:distribution"].length - 1) {}
                     });
             }
         }
@@ -231,9 +227,7 @@ function checkForNearParkings(latStation, lonStation) {
             parkingsInRange.push(p)
         }
     })
-    if (parkingsInRange.length === 0) {
-        console.log('No parkings in range.')
-    }
+    if (parkingsInRange.length === 0) {}
     return parkingsInRange;
 }
 
