@@ -14,6 +14,11 @@ Hopper is powered by Linked Open Data and [Itinero](https://www.itinero.tech/).
 - HTML
 - CSS
 
+## Installation
+Since Hopper uses vanilla Javascript, HTML and CSS, simply hosting the projects files as static files will work out of the box. 
+It will use the Anyways instance of Itinero-Transit to plan routes. You can deploy your own instance of Itinero-Transit (for example if you want to add routing profiles). 
+Itinero-Transit can be found [here](https://github.com/anyways-open/itinero-transit-server). 
+
 ## License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
 
 This project is licensed under the MIT [License](LICENSE.md).
