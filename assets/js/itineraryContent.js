@@ -142,8 +142,14 @@ function fillItinerary(profile, selected, departure, arrival, journey) {
             if (vehicle && vehicle.indexOf("irail") >= 0) {
                 vehicle = "TRAIN";
             } else if (!vehicle) {
-                vehicle = "WALK";
-                dottedPrevious = true;
+                if (profile === 'pedestrian') {
+                    vehicle = "WALK";
+                    dottedPrevious = true;
+                }else {
+                    vehicle = "BIKE";
+                    dottedPrevious = true;
+                }
+                
             }
             if (i === 0) {
                 $(".detailViewSummaryTotalCyclingTime").html((hours > 0 ? `${hours}h ` : "") + `${minutes}min`);
